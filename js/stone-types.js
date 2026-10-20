@@ -54,19 +54,33 @@
     });
   }
 
-  // 2. MOUSE-TRACKING SPECULAR GLARE ON SLAB MEDIA
+  // 2. ULTRA-SMOOTH MOUSE-TRACKING SPECULAR GLARE (RAF throttled)
   rows.forEach(function (row) {
     const media = row.querySelector(".liquid-stone-media");
     if (!media) return;
 
-    media.addEventListener("mousemove", function (e) {
-      const rect = media.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+    let ticking = false;
+    let latestX = 50;
+    let latestY = 50;
 
-      media.style.setProperty("--mouse-x", `${(x / rect.width) * 100}%`);
-      media.style.setProperty("--mouse-y", `${(y / rect.height) * 100}%`);
-    });
+    media.addEventListener(
+      "mousemove",
+      function (e) {
+        const rect = media.getBoundingClientRect();
+        latestX = ((e.clientX - rect.left) / rect.width) * 100;
+        latestY = ((e.clientY - rect.top) / rect.height) * 100;
+
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            media.style.setProperty("--mouse-x", `${latestX}%`);
+            media.style.setProperty("--mouse-y", `${latestY}%`);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
   });
 
   // 3. CLEAN MATERIAL INSPECT MODAL (ZERO TEMPERATURE / THERMAL INFO)
