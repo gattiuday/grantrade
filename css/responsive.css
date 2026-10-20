@@ -1,0 +1,358 @@
+/* ==========================================================================
+   GRAN TRADE INC. — RESPONSIVE STYLESHEET (5/5)
+   Job: Multi-device responsiveness across Mobile, Tablet, and Laptop
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. LAPTOP & LARGE SCREENS (> 1024px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+  .menu-toggle {
+    display: none !important;
+  }
+
+  .main-nav {
+    display: flex !important;
+  }
+
+  .slab-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. TABLET LANDSCAPE & COMPACT LAPTOPS (<= 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero {
+    min-height: 75vh;
+  }
+
+  .featured-viewer {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .fv-stage {
+    aspect-ratio: 16 / 9;
+  }
+
+  .applied-split,
+  .about-story-grid,
+  .contact-split,
+  .showroom-gallery {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .gallery-tall {
+    min-height: 380px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-brand {
+    grid-column: span 2;
+  }
+
+  .specs-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .yard-guide-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. TABLET PORTRAIT & MEDIUM TABLETS (<= 960px)
+   Enforces clean header without link collisions on iPad Mini / iPad Air
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .header-inner {
+    height: 66px;
+    padding-left: clamp(1rem, 3vw, 1.5rem);
+    padding-right: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Mobile/Tablet Navigation Drawer */
+  .main-nav {
+    position: fixed;
+    top: 66px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--surface);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.75rem;
+    gap: 1.75rem;
+    border-top: 1px solid var(--line);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1),
+                opacity var(--transition-normal),
+                visibility var(--transition-normal);
+    z-index: 99;
+    overflow-y: auto;
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .main-nav.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 1.15rem;
+    width: 100%;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-link.active::after {
+    display: none;
+  }
+
+  .yard-status-header {
+    display: none; /* Shown in contact page and mobile drawer instead */
+  }
+
+  /* Catalog 2-column grid on tablet portrait */
+  .slab-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .filter-controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .hero-metrics {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. MOBILE PHONES (<= 640px down to 320px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .header-inner {
+    height: 60px;
+  }
+
+  .wordmark {
+    font-size: 1.15rem;
+  }
+
+  .wordmark img {
+    height: 32px;
+  }
+
+  .fav-trigger span:not(.fav-badge) {
+    display: none; /* Icon and badge only on small phones */
+  }
+
+  .fav-trigger {
+    padding: 0.45rem 0.65rem;
+    min-height: 44px;
+    min-width: 44px;
+    justify-content: center;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 3.25rem 0 3.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 1.75rem;
+  }
+
+  /* Single column catalog on mobile phones */
+  .slab-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  /* Stacked filters on mobile */
+  .filter-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-select {
+    width: 100%;
+    min-height: 48px;
+    font-size: 16px; /* Prevents iOS Safari auto-zoom */
+  }
+
+  .fv-opts {
+    grid-template-columns: 1fr;
+  }
+
+  .fv-opt {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .gallery-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .yard-guide-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-brand {
+    grid-column: span 1;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .specs-bar {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  /* Full-width drawer on mobile */
+  .fav-drawer {
+    width: 100vw;
+  }
+
+  /* Strict touch target enforcement (>= 44px) */
+  .tab-btn,
+  .btn,
+  .filter-select,
+  .heart,
+  .drawer-close,
+  .fav-remove,
+  .menu-toggle {
+    min-height: 44px;
+  }
+
+  .heart {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Smooth category rail with hidden scrollbars */
+  .coll-tabs {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .coll-tabs::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. SAFE AREA & ACCESSIBILITY
+   -------------------------------------------------------------------------- */
+@supports (padding: max(0px)) {
+  .site-header {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  .container,
+  .container-wide {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .fav-drawer {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .open-dot {
+    animation: none !important;
+  }
+
+  .fv-stage img.fv-zoom {
+    transition: none !important;
+  }
+}

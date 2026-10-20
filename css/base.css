@@ -1,0 +1,214 @@
+/* ==========================================================================
+   GRAN TRADE INC. — BASE STYLESHEET (1/5)
+   Job: Design tokens, CSS custom properties, resets, typography, base elements
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* Color Palette — Natural Stone & Alabaster Neutrals */
+  --bg: #f6f2ec;
+  --bg-2: #efe9df;
+  --surface: #fffdf8;
+  --surface-hover: #ffffff;
+  --ink: #221d16;
+  --ink-2: #4c453a;
+  --muted: #7a7162;
+  --line: #ddd3c2;
+  --line-strong: #c2b59e;
+
+  /* Accent Accents */
+  --accent: #8a5a26;
+  --accent-hover: #a36d33;
+  --accent-light: #f4ebde;
+  --accent-ink: #ffffff;
+  --teal: #2f4f4e;
+  --teal-light: #e4eeed;
+  --chip: #ece5d6;
+  --chip-hover: #dfd6c3;
+  --success: #2e6930;
+  --danger: #9a2c2c;
+
+  /* Shadows & Glassmorphism */
+  --shadow-sm: 0 2px 6px rgba(46, 36, 22, 0.05);
+  --shadow-md: 0 10px 25px rgba(46, 36, 22, 0.08);
+  --shadow-lg: 0 18px 45px rgba(46, 36, 22, 0.14);
+  --header-bg: rgba(246, 242, 236, 0.92);
+  --hero-shade: linear-gradient(180deg, rgba(16, 20, 18, 0.32) 0%, rgba(16, 20, 18, 0.12) 38%, rgba(16, 20, 18, 0.75) 100%);
+  --modal-scrim: rgba(26, 21, 16, 0.55);
+
+  /* Typography Tokens */
+  --font-serif: "Marcellus", Georgia, "Times New Roman", serif;
+  --font-sans: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.5s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171310;
+    --bg-2: #1e1915;
+    --surface: #221c16;
+    --surface-hover: #2b231c;
+    --ink: #f0e8da;
+    --ink-2: #cfc4b0;
+    --muted: #a3967f;
+    --line: #3a3226;
+    --line-strong: #4f4435;
+
+    --accent: #d19a52;
+    --accent-hover: #e5b06a;
+    --accent-light: #2b2114;
+    --accent-ink: #1d1712;
+    --teal: #7fb3ac;
+    --teal-light: #162624;
+    --chip: #2b251d;
+    --chip-hover: #362e24;
+
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 18px 45px rgba(0, 0, 0, 0.5);
+    --header-bg: rgba(23, 19, 16, 0.92);
+    --modal-scrim: rgba(0, 0, 0, 0.75);
+  }
+}
+
+/* ---------------- CSS Reset & Fundamentals ---------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* Focus Visibility & Accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+}
+
+h4 {
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+p {
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+p.lead {
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+img, picture, svg, video {
+  max-width: 100%;
+  display: block;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Global Utilities */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.section-head {
+  margin-bottom: 2.25rem;
+}
+
+.section-head.center {
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-head h2 {
+  margin-bottom: 0.75rem;
+}
+
+.section-head p {
+  color: var(--muted);
+  font-size: 1.05rem;
+}

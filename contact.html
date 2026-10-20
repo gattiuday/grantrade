@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Contact & Yard Hours — Gran Trade Inc. | Carlstadt, NJ</title>
+  <meta name="description" content="Contact Gran Trade Inc. in Carlstadt, NJ. Warehouse hours, phone directory, driving directions, and wholesale trade inquiries." />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- CSS Split 5 Ways -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ================= SITE HEADER ================= -->
+  <header class="site-header">
+    <div class="container-wide header-inner">
+      <a href="index.html" class="wordmark" aria-label="Gran Trade Inc. Home">
+        <div class="wordmark-text">
+          GRAN TRADE
+          <span>Stone Import & Distribution</span>
+        </div>
+      </a>
+
+      <nav id="mainNav" class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="collections.html" class="nav-link">Collections</a></li>
+          <li><a href="showroom.html" class="nav-link">Showroom & Yard</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="yard-status-header">
+          <span class="open-dot"></span>
+          <span id="headerYardStatus">Checking yard hours...</span>
+        </div>
+
+        <button id="favOpen" class="fav-trigger" type="button" aria-label="Open saved favorite slabs drawer">
+          <svg style="width:16px; height:16px; color:var(--accent);" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span>Saved</span>
+          <span id="favCount" class="fav-badge" style="display:none;">0</span>
+        </button>
+
+        <button id="menuBtn" class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= CONTACT HERO & SPLIT CONTENT ================= -->
+  <main id="mainContent" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Connect With Us</span>
+        <h1>Visit or contact our Carlstadt facility</h1>
+        <p class="lead">
+          Direct wholesale support for stone fabricators, commercial contractors, interior designers, and homeowners.
+        </p>
+      </div>
+
+      <div class="contact-split">
+        <!-- LEFT: Information Panel -->
+        <div class="contact-info-panel">
+          <!-- Hours Card with Live Indicator -->
+          <div class="info-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+              <h3 style="margin-bottom:0; border-bottom:none; padding-bottom:0;">Warehouse Hours</h3>
+              <div class="open-indicator">
+                <span class="open-dot"></span>
+                <span class="open-text">Checking status...</span>
+              </div>
+            </div>
+
+            <table id="hoursTable" class="hours-table">
+              <tbody>
+                <tr data-day="1">
+                  <td>Monday</td>
+                  <td>8:00 AM – 6:00 PM</td>
+                </tr>
+                <tr data-day="2">
+                  <td>Tuesday</td>
+                  <td>8:00 AM – 6:00 PM</td>
+                </tr>
+                <tr data-day="3">
+                  <td>Wednesday</td>
+                  <td>8:00 AM – 6:00 PM</td>
+                </tr>
+                <tr data-day="4">
+                  <td>Thursday</td>
+                  <td>8:00 AM – 6:00 PM</td>
+                </tr>
+                <tr data-day="5">
+                  <td>Friday</td>
+                  <td>8:00 AM – 6:00 PM</td>
+                </tr>
+                <tr data-day="6">
+                  <td>Saturday</td>
+                  <td>9:00 AM – 2:00 PM</td>
+                </tr>
+                <tr data-day="0">
+                  <td>Sunday</td>
+                  <td>Closed</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="font-size:0.82rem; color:var(--muted); margin-top:1rem;">
+              * No appointment needed for warehouse visits during standard operating hours.
+            </p>
+          </div>
+
+          <!-- Location & Driving Directions -->
+          <div class="info-card">
+            <h3>Facility Location</h3>
+            <p style="font-size:1.05rem; font-weight:600; color:var(--ink); margin-bottom:0.35rem;">
+              Gran Trade Inc.
+            </p>
+            <p style="margin-bottom:1.25rem;">
+              178 Commerce Road<br/>
+              Carlstadt, NJ 07072<br/>
+              Bergen County, New Jersey
+            </p>
+            <p style="font-size:0.88rem; color:var(--ink-2); margin-bottom:1.5rem; line-height:1.5;">
+              Conveniently located off Paterson Plank Road, just minutes from the New Jersey Turnpike (Exit 16W), Route 3, and Route 17. Ample parking and designated A-frame truck loading bays.
+            </p>
+            <a href="https://maps.google.com/?q=178+Commerce+Road+Carlstadt+NJ+07072" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-block">
+              Open in Google Maps &rarr;
+            </a>
+          </div>
+
+          <!-- Phone Directory -->
+          <div class="info-card">
+            <h3>Direct Phone Lines</h3>
+            <div class="phone-list">
+              <div>
+                <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">Main Reception / Yard Desk</div>
+                <a href="tel:2014381888" class="phone-link">(201) 438-1888</a>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">Direct Desk Lines</div>
+                <div style="display:flex; flex-direction:column; gap:0.25rem; margin-top:0.2rem;">
+                  <a href="tel:2014389339" class="phone-link">(201) 438-9339</a>
+                  <a href="tel:2014388126" class="phone-link">(201) 438-8126</a>
+                  <a href="tel:2014381898" class="phone-link">(201) 438-1898</a>
+                </div>
+              </div>
+              <div style="margin-top:0.5rem;">
+                <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">Direct Sales Email</div>
+                <a href="mailto:sales.grantrade@gmail.com" class="phone-link" style="font-size:0.95rem;">sales.grantrade@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Wholesale & Warehouse Inquiry Form -->
+        <div class="contact-form-card">
+          <span class="eyebrow">Wholesale Inquiry</span>
+          <h2 style="font-size:1.85rem; margin-bottom:0.5rem;">Send a warehouse inquiry</h2>
+          <p style="margin-bottom:2rem; font-size:0.92rem; color:var(--ink-2);">
+            Need to confirm slab lot numbers, place a trade bundle hold, or arrange crane staging for your client walkthrough? Reach our warehouse team directly.
+          </p>
+
+          <form id="inquiryForm" action="#" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="fullName">Full Name *</label>
+                <input class="form-input" type="text" id="fullName" name="fullName" required placeholder="John Doe" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="companyName">Company / Fabricator Name</label>
+                <input class="form-input" type="text" id="companyName" name="companyName" placeholder="Granite Studio / Homeowner" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address *</label>
+                <input class="form-input" type="email" id="email" name="email" required placeholder="john@example.com" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number *</label>
+                <input class="form-input" type="tel" id="phone" name="phone" required placeholder="(201) 555-0123" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inquiryType">Inquiry Type *</label>
+              <select class="form-select" id="inquiryType" name="inquiryType" required>
+                <option value="hold">Check Slab Availability & Place Hold</option>
+                <option value="staging">Plan Crane Staging for Client Visit</option>
+                <option value="trade-account">Fabricator / Trade Account Application</option>
+                <option value="monuments">Civic / Headstone Monument Inventory</option>
+                <option value="general">General Stone Specification Question</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="stonesOfInterest">Stones of Interest / Bundle Numbers</label>
+              <input class="form-input" type="text" id="stonesOfInterest" name="stonesOfInterest" placeholder="e.g. Aquamarine Quartzite, Taj Mahal 3cm, GT 001" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Project Details / Inquiry Message *</label>
+              <textarea class="form-textarea" id="message" name="message" required placeholder="Please provide estimated square footage, number of slabs needed, or preferred date for warehouse visit..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Send Warehouse Inquiry</button>
+
+            <p class="form-privacy-note">
+              <strong>Wholesale Trade Note:</strong> Gran Trade Inc. is a slab distributor. We supply un-cut slabs to certified fabricators. Fabrication, cutting, edge profiling, and installation pricing is provided by your fabricator.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= FAVORITES DRAWER ================= -->
+  <div id="scrim" class="scrim" aria-hidden="true"></div>
+  <aside id="favDrawer" class="fav-drawer" aria-label="Saved slabs drawer" hidden>
+    <div class="drawer-header">
+      <h3>Saved Slabs</h3>
+      <button id="favClose" class="drawer-close" type="button" aria-label="Close saved slabs drawer">&times;</button>
+    </div>
+    <div id="favBody" class="drawer-body"></div>
+    <div class="drawer-footer">
+      <a href="contact.html" class="btn btn-primary btn-block">Inquire About Saved Slabs</a>
+    </div>
+  </aside>
+
+  <!-- ================= SITE FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name">GRAN TRADE INC.</div>
+        <div class="tagline">Stone Import & Distribution</div>
+        <p>Wholesale natural and engineered stone slabs, tile, and monuments imported directly from premier quarries and stocked in Carlstadt, New Jersey.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="showroom.html">Showroom & Yard</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stone Families</h4>
+        <ul class="footer-links">
+          <li><a href="collections.html">Gran Trade Quartz</a></li>
+          <li><a href="collections.html">Natural Granite</a></li>
+          <li><a href="collections.html">Fine Marble</a></li>
+          <li><a href="collections.html">Exotic Quartzite</a></li>
+          <li><a href="collections.html">Civic Monuments</a></li>
+          <li><a href="collections.html">Soapstone & Tile</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Visit Warehouse</h4>
+        <div class="footer-contact-item">
+          <span>178 Commerce Road<br/>Carlstadt, NJ 07072</span>
+        </div>
+        <div class="footer-contact-item">
+          <a href="tel:2014381888">(201) 438-1888</a>
+        </div>
+        <div class="footer-contact-item">
+          <a href="mailto:sales.grantrade@gmail.com">sales.grantrade@gmail.com</a>
+        </div>
+        <div style="margin-top:0.75rem;">
+          <div class="open-indicator">
+            <span class="open-dot"></span>
+            <span class="open-text">Yard open today</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>&copy; 2026 Gran Trade Inc. All rights reserved.</div>
+      <div>Wholesale Stone Distributor · Bergen County, New Jersey</div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/favorites.js"></script>
+</body>
+</html>

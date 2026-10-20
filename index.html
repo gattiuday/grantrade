@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Gran Trade Inc. — Wholesale Stone Importer & Distributor | Carlstadt, NJ</title>
+  <meta name="description" content="Gran Trade Inc. is a premier wholesale importer and distributor of natural and engineered stone slabs, tile, and monuments in Carlstadt, New Jersey." />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- CSS Split 5 Ways -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ================= SITE HEADER ================= -->
+  <header class="site-header">
+    <div class="container-wide header-inner">
+      <a href="index.html" class="wordmark" aria-label="Gran Trade Inc. Home">
+        <div class="wordmark-text">
+          GRAN TRADE
+          <span>Stone Import & Distribution</span>
+        </div>
+      </a>
+
+      <!-- Primary Navigation -->
+      <nav id="mainNav" class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="collections.html" class="nav-link">Collections</a></li>
+          <li><a href="showroom.html" class="nav-link">Showroom & Yard</a></li>
+          <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <div class="yard-status-header">
+          <span class="open-dot"></span>
+          <span id="headerYardStatus">Checking yard hours...</span>
+        </div>
+
+        <button id="favOpen" class="fav-trigger" type="button" aria-label="Open saved favorite slabs drawer">
+          <svg style="width:16px; height:16px; color:var(--accent);" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+          <span>Saved</span>
+          <span id="favCount" class="fav-badge" style="display:none;">0</span>
+        </button>
+
+        <button id="menuBtn" class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <main id="mainContent">
+    <section class="hero">
+      <div class="hero-shade"></div>
+      <div class="container hero-content">
+        <div class="hero-tag">
+          <span>Wholesale Warehouse & Slab Display · Carlstadt, NJ</span>
+        </div>
+        <h1>The slab is the statement.</h1>
+        <p class="lead">
+          A premier distributor of high quality stones — Gran Trade imports natural and engineered stone from trusted quarries and partners around the world, stocked and ready at our Carlstadt, New Jersey warehouse.
+        </p>
+        <div class="hero-actions">
+          <a href="collections.html" class="btn btn-primary">Browse the Collections</a>
+          <a href="showroom.html" class="btn btn-secondary">Plan a Warehouse Visit</a>
+        </div>
+
+        <div class="hero-metrics">
+          <div class="metric-item">
+            <div class="metric-val">20+</div>
+            <div class="metric-lbl">Years importing stone</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val">1,000+</div>
+            <div class="metric-lbl">Trade customers served</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-val">6+</div>
+            <div class="metric-lbl">Stone families in stock</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED 3-PICTURE STONE VIEWER ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Interactive Material Showcase</span>
+          <h2>Experience the stone from every dimension</h2>
+          <p>Inspect our premier exotic quartzite in high-resolution full slab framing, magnified surface texture, or finished residential installation.</p>
+        </div>
+
+        <div id="featuredViewer" class="featured-viewer">
+          <div class="fv-stage">
+            <img src="assets/images/products/aquamarine-quartzite.webp" alt="Aquamarine Quartzite — Slab view" loading="eager" />
+            <span class="fv-tag">Slab view</span>
+          </div>
+
+          <div class="fv-side">
+            <span class="fv-cat">Exotic Quartzite</span>
+            <h3 class="fv-name">Aquamarine Quartzite</h3>
+            <p class="fv-desc">
+              Breathtaking Brazilian natural quartzite featuring surging oceanic teal-green crystalline currents, deep mineral fissures, and sea-foam veining.
+            </p>
+
+            <div class="fv-opts">
+              <button class="fv-opt" type="button" data-view="0" aria-pressed="true">Slab View</button>
+              <button class="fv-opt" type="button" data-view="1" aria-pressed="false">Close-up Detail</button>
+              <button class="fv-opt" type="button" data-view="2" aria-pressed="false">Installed View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURED SLABS PREVIEW ================= -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <span class="eyebrow">Curated Inventory</span>
+            <h2>Featured slabs on the racks</h2>
+            <p>Hand-selected bundles available for immediate fabricator pull or homeowner walkthrough.</p>
+          </div>
+          <a href="collections.html" class="btn btn-secondary">View Complete 60-Stone Catalog &rarr;</a>
+        </div>
+
+        <div class="slab-grid">
+          <!-- Card 1 -->
+          <article class="slab-card" data-name="Aquamarine Quartzite" data-cat="quartzite" data-meta="Exotic Quartzite · Aquamarine Quartzite">
+            <div class="sc-media">
+              <span class="cat-badge">Quartzite</span>
+              <button class="heart" type="button" aria-label="Save Aquamarine Quartzite to favorites">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+              </button>
+              <img src="assets/images/products/aquamarine-quartzite.webp" alt="Aquamarine Quartzite slab" loading="lazy" />
+            </div>
+            <div class="sc-body">
+              <h3 class="sc-title">Aquamarine Quartzite</h3>
+              <div class="sc-meta">Exotic Quartzite · Brazil</div>
+              <p class="sc-desc">Oceanic teal-green field surging with crystal fissures and sea-foam veining. Gran Trade's signature exotic slab.</p>
+              <div class="sc-specs">
+                <span class="spec-pill">2 cm · 3 cm</span>
+                <span class="spec-pill">Polished</span>
+                <span class="spec-pill">Natural</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="slab-card" data-name="Arabescato" data-cat="marble" data-meta="Fine Marble · Arabescato">
+            <div class="sc-media">
+              <span class="cat-badge">Marble</span>
+              <button class="heart" type="button" aria-label="Save Arabescato to favorites">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+              </button>
+              <img src="assets/images/products/arabescato.jpg" alt="Arabescato marble slab" loading="lazy" />
+            </div>
+            <div class="sc-body">
+              <h3 class="sc-title">Arabescato</h3>
+              <div class="sc-meta">Fine Marble · Italy</div>
+              <p class="sc-desc">Prestigious brecciated Italian marble featuring dark grey ovular veining winding around bright white marble islands.</p>
+              <div class="sc-specs">
+                <span class="spec-pill">2 cm · 3 cm</span>
+                <span class="spec-pill">Polished</span>
+                <span class="spec-pill">Natural</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="slab-card" data-name="Black Forest" data-cat="granite" data-meta="Natural Granite · Black Forest">
+            <div class="sc-media">
+              <span class="cat-badge">Granite</span>
+              <button class="heart" type="button" aria-label="Save Black Forest to favorites">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+              </button>
+              <img src="assets/images/products/black-forest.jpg" alt="Black Forest granite surface" loading="lazy" />
+            </div>
+            <div class="sc-body">
+              <h3 class="sc-title">Black Forest</h3>
+              <div class="sc-meta">Natural Granite · Brazil</div>
+              <p class="sc-desc">Intense black background sweeping with wild, river-like ribbons of white and silver quartz.</p>
+              <div class="sc-specs">
+                <span class="spec-pill">2 cm · 3 cm</span>
+                <span class="spec-pill">Polished</span>
+                <span class="spec-pill">Natural</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="slab-card" data-name="Versilia" data-cat="quartz" data-meta="Gran Trade Quartz · Versilia">
+            <div class="sc-media">
+              <span class="cat-badge">Quartz</span>
+              <button class="heart" type="button" aria-label="Save Versilia to favorites">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+              </button>
+              <img src="assets/images/products/versilia.jpg" alt="Versilia engineered quartz surface" loading="lazy" />
+            </div>
+            <div class="sc-body">
+              <h3 class="sc-title">Versilia</h3>
+              <div class="sc-meta">Gran Trade Quartz · Engineered</div>
+              <p class="sc-desc">Flowing broad veining in smoky taupe and warm grey over a creamy alabaster backdrop. Non-porous stain protection.</p>
+              <div class="sc-specs">
+                <span class="spec-pill">2 cm · 3 cm</span>
+                <span class="spec-pill">Polished</span>
+                <span class="spec-pill">Engineered</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WHY GRAN TRADE (4 PILLARS) ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">The Wholesale Advantage</span>
+          <h2>Built for the trade, open to everyone</h2>
+          <p>We work directly with quarries to provide Northeast fabricators, designers, and project managers with unmatched inventory reliability.</p>
+        </div>
+
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-num">01</div>
+            <h3>Acclaimed at the source</h3>
+            <p>Our products come from premier global quarries widely acclaimed for slab clarity. Every ocean container is inspected at our Carlstadt warehouse upon arrival.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-num">02</div>
+            <h3>Fully customizable choice</h3>
+            <p>Pick from 60+ curated natural and engineered stone options — a range tailored to diverse architectural styles, high-traffic commercial spaces, and custom homes.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-num">03</div>
+            <h3>Built to perform</h3>
+            <p>Durable, cleanable, high-grade stone stocked deep in consecutive bundles so your fabricator can match veins and fulfill multi-room project requirements without batch variations.</p>
+          </div>
+
+          <div class="why-card">
+            <div class="why-num">04</div>
+            <h3>Service you can call</h3>
+            <p>We take pride in our direct customer relations. Real stone specialists answer our phones, know the current rack locations, and coordinate seamless delivery logistics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= APPLIED / FABRICATION VIGNETTE ================= -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="applied-split">
+          <div class="applied-media">
+            <img src="assets/images/applied-kitchen.jpg" alt="Finished luxury kitchen with bookmatched natural stone island" loading="lazy" />
+          </div>
+
+          <div class="applied-text">
+            <span class="eyebrow">From Slab to Space</span>
+            <h2>Where our stone ends up</h2>
+            <p class="lead">
+              Most of what leaves our Carlstadt facility is fabricated within the tri-state area — kitchens, master baths, hotel lobbies, restaurant bars, and monumental memorials.
+            </p>
+
+            <div class="applied-features">
+              <div class="applied-item">
+                <div class="applied-item-icon">&#10003;</div>
+                <div class="applied-item-text">
+                  <h4>Fabricators</h4>
+                  <p>Consistent slab thickness, true calibration, and verified resin quality slab after slab.</p>
+                </div>
+              </div>
+
+              <div class="applied-item">
+                <div class="applied-item-icon">&#10003;</div>
+                <div class="applied-item-text">
+                  <h4>Designers & Architects</h4>
+                  <p>Bookmatch sequential slabs from the same geological block for waterfall islands and full-height backsplashes.</p>
+                </div>
+              </div>
+
+              <div class="applied-item">
+                <div class="applied-item-icon">&#10003;</div>
+                <div class="applied-item-text">
+                  <h4>Homeowners</h4>
+                  <p>You are welcome to walk the warehouse and tag your dream slab in person — bring your fabricator or borrow ours.</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:2.5rem;">
+              <a href="showroom.html" class="btn btn-dark">Learn About Walking the Yard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= YARD VISIT CTA BANNER ================= -->
+    <section class="section" style="background-color: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem;">
+        <div>
+          <span class="eyebrow">Visit Carlstadt, NJ</span>
+          <h2 style="font-size:2.2rem; margin-bottom:0.5rem;">Come walk the slab yard</h2>
+          <p style="max-width:580px;">Photos sell stone short. Visit our 178 Commerce Road warehouse to see full slabs under natural and overhead staging light. No appointment needed during open hours.</p>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="contact.html" class="btn btn-primary">Check Hours & Directions</a>
+          <a href="tel:2014381888" class="btn btn-secondary">Call the Yard: (201) 438-1888</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FAVORITES DRAWER ================= -->
+  <div id="scrim" class="scrim" aria-hidden="true"></div>
+  <aside id="favDrawer" class="fav-drawer" aria-label="Saved slabs drawer" hidden>
+    <div class="drawer-header">
+      <h3>Saved Slabs</h3>
+      <button id="favClose" class="drawer-close" type="button" aria-label="Close saved slabs drawer">&times;</button>
+    </div>
+    <div id="favBody" class="drawer-body">
+      <!-- Injected by js/favorites.js -->
+    </div>
+    <div class="drawer-footer">
+      <a href="contact.html" class="btn btn-primary btn-block">Inquire About Saved Slabs</a>
+      <p style="font-size:0.75rem; color:var(--muted); text-align:center;">
+        Bring this saved list when visiting Carlstadt or share with your stone fabricator.
+      </p>
+    </div>
+  </aside>
+
+  <!-- ================= SITE FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand-name">GRAN TRADE INC.</div>
+        <div class="tagline">Stone Import & Distribution</div>
+        <p>Wholesale natural and engineered stone slabs, tile, and monuments imported directly from premier quarries and stocked in Carlstadt, New Jersey.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="showroom.html">Showroom & Yard</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Stone Families</h4>
+        <ul class="footer-links">
+          <li><a href="collections.html">Gran Trade Quartz</a></li>
+          <li><a href="collections.html">Natural Granite</a></li>
+          <li><a href="collections.html">Fine Marble</a></li>
+          <li><a href="collections.html">Exotic Quartzite</a></li>
+          <li><a href="collections.html">Civic Monuments</a></li>
+          <li><a href="collections.html">Soapstone & Tile</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Visit Warehouse</h4>
+        <div class="footer-contact-item">
+          <span>178 Commerce Road<br/>Carlstadt, NJ 07072</span>
+        </div>
+        <div class="footer-contact-item">
+          <a href="tel:2014381888">(201) 438-1888</a>
+        </div>
+        <div class="footer-contact-item">
+          <a href="mailto:sales.grantrade@gmail.com">sales.grantrade@gmail.com</a>
+        </div>
+        <div style="margin-top:0.75rem;">
+          <div class="open-indicator">
+            <span class="open-dot"></span>
+            <span class="open-text">Yard open today</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>&copy; 2026 Gran Trade Inc. All rights reserved.</div>
+      <div>Wholesale Stone Distributor · Bergen County, New Jersey</div>
+    </div>
+  </footer>
+
+  <!-- Scripts Split 5 Ways -->
+  <script src="js/nav.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/viewer.js"></script>
+</body>
+</html>
