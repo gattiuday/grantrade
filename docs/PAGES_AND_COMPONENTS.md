@@ -22,7 +22,7 @@ This document details the functional specifications, DOM hierarchy, and interact
 - **Role**: Deep dive into the company's 20+ year history and wholesale distribution philosophy.
 - **Key Sections**:
   - `about-hero`: Headline *"Premier surfaces, since 2003"* with subtitle emphasizing the Northeast tri-state corridor.
-  - `specs-bar`: 4-metric highlight strip (Year 2003, 20+ Years in business, 1,000+ Partners, 6+ Families stocked).
+  - `specs-bar`: 3-metric highlight strip (Year 2003, 20+ Years in business, 1,000+ Partners).
   - `about-story-grid`: Detailed narrative covering direct quarry relationships across Italy, Brazil, India, Spain, Greece, and US domestic quarries, alongside container check-in procedures.
   - `why-grid`: The wholesale operational model (Direct quarry sourcing, deep consecutive bundles, indoor gantry staging, rapid tri-state delivery).
   - `trade-commitment`: Clear demarcation of wholesale duties (distributor supplies slabs; fabricators provide cut/install quotes).

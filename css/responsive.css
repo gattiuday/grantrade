@@ -81,8 +81,9 @@
   }
 
   .specs-bar {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
+    padding: 2rem 1.75rem;
   }
 
   .yard-guide-grid {
@@ -304,8 +305,17 @@
 
   .specs-bar {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding: 1.5rem;
+    gap: 1.5rem;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .spec-item:not(:last-child)::after {
+    display: none;
+  }
+
+  .spec-item:not(:last-child) {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1.25rem;
   }
 
   /* Full-width drawer on mobile */
