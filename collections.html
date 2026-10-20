@@ -13,11 +13,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
   <!-- CSS Split 5 Ways -->
-  <link rel="stylesheet" href="css/base.css?v=20261020c" />
-  <link rel="stylesheet" href="css/layout.css?v=20261020c" />
-  <link rel="stylesheet" href="css/components.css?v=20261020c" />
-  <link rel="stylesheet" href="css/pages.css?v=20261020c" />
-  <link rel="stylesheet" href="css/responsive.css?v=20261020c" />
+  <link rel="stylesheet" href="css/base.css?v=20261020e" />
+  <link rel="stylesheet" href="css/layout.css?v=20261020e" />
+  <link rel="stylesheet" href="css/components.css?v=20261020e" />
+  <link rel="stylesheet" href="css/pages.css?v=20261020e" />
+  <link rel="stylesheet" href="css/responsive.css?v=20261020e" />
 </head>
 <body>
 
@@ -67,19 +67,42 @@
   <!-- ================= MAIN CATALOG CONTENT ================= -->
   <main id="mainContent" class="section">
     <div class="container">
-      <div class="section-head" style="margin-bottom: 2rem;">
+      <div class="section-head" style="margin-bottom: 1.5rem;">
         <span class="eyebrow">Inventory Catalog</span>
         <h1>The Gran Trade Collection</h1>
       </div>
 
+      <!-- ================= DEDICATED PROMINENT SEARCH HERO ================= -->
+      <div class="catalog-search-hero">
+        <form id="catalogSearchForm" class="search-hero-form" onsubmit="event.preventDefault(); window.GranTradeFilters && window.GranTradeFilters.applySearch();">
+          <div class="search-hero-box">
+            <svg class="search-hero-icon" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+            </svg>
+            <input type="search" id="catalogSearchHero" class="search-hero-input" placeholder="Search slabs by name, GT# (e.g. GT-4008), lot#, tags, material..." aria-label="Search slabs by stone name, GT number, lot number, or tags" autocomplete="off" />
+            <button type="button" id="searchHeroClearBtn" class="search-hero-clear" aria-label="Clear search" style="display:none;">&times;</button>
+            <button type="submit" class="btn btn-primary search-hero-submit">Search Slabs</button>
+          </div>
+          <div class="search-quick-tags">
+            <span class="quick-tag-label">Quick Search:</span>
+            <button type="button" class="quick-chip" data-query="GT-4008">GT-4008</button>
+            <button type="button" class="quick-chip" data-query="Aquamarine">Aquamarine</button>
+            <button type="button" class="quick-chip" data-query="Quartzite">Exotic Quartzite</button>
+            <button type="button" class="quick-chip" data-query="LOT #59108">LOT #59108</button>
+            <button type="button" class="quick-chip" data-query="Polished">Polished</button>
+            <button type="button" class="quick-chip" data-query="2 cm">2 cm</button>
+            <button type="button" class="quick-chip" data-query="3 cm">3 cm</button>
+          </div>
+        </form>
+      </div>
 
       <!-- ================= CATEGORY TABS RAIL ================= -->
       <div class="coll-tabs" role="tablist" aria-label="Stone Family Categories">
         <button class="tab-btn" type="button" data-category="all" aria-pressed="true">All Stones</button>
+        <button class="tab-btn" type="button" data-category="quartzite" aria-pressed="false">Exotic Quartzite</button>
         <button class="tab-btn" type="button" data-category="quartz" aria-pressed="false">Gran Trade Quartz</button>
         <button class="tab-btn" type="button" data-category="granite" aria-pressed="false">Natural Granite</button>
         <button class="tab-btn" type="button" data-category="marble" aria-pressed="false">Fine Marble</button>
-        <button class="tab-btn" type="button" data-category="quartzite" aria-pressed="false">Exotic Quartzite</button>
         <button class="tab-btn" type="button" data-category="monuments" aria-pressed="false">Monuments</button>
         <button class="tab-btn" type="button" data-category="semi" aria-pressed="false">Semi Precious</button>
         <button class="tab-btn" type="button" data-category="soapstone" aria-pressed="false">Soapstone</button>
@@ -93,13 +116,13 @@
           <label class="visually-hidden" for="filterColor">Filter by color</label>
           <select id="filterColor" class="filter-select">
             <option value="all">Color: All Colors</option>
+            <option value="blue">Blue / Teal</option>
+            <option value="green">Green</option>
             <option value="white">White</option>
             <option value="grey">Grey</option>
             <option value="black">Black</option>
-            <option value="blue">Blue</option>
             <option value="gold">Gold / Amber</option>
             <option value="cream">Cream / Beige</option>
-            <option value="green">Green</option>
             <option value="brown">Brown</option>
             <option value="red">Red</option>
           </select>
@@ -138,6 +161,7 @@
             <option value="featured">Sort: Featured First</option>
             <option value="name-az">Name: A to Z</option>
             <option value="name-za">Name: Z to A</option>
+            <option value="gt-asc">GT Number: Low to High</option>
             <option value="thick-desc">Thickness: Thickest First</option>
             <option value="thick-asc">Thickness: Thinnest First</option>
             <option value="cat-az">Category: A to Z</option>
@@ -147,720 +171,82 @@
 
       <!-- Meta Bar -->
       <div class="filter-meta-bar">
-        <div id="collCount" class="result-count">Showing all 60 stone slabs</div>
+        <div id="collCount" class="result-count">Showing 1 stone slab</div>
         <div id="resultCount" style="font-size:0.85rem; color:var(--muted);"></div>
       </div>
 
       <!-- ================= COMPREHENSIVE SLAB GRID ================= -->
       <div id="slabGrid" class="slab-grid">
 
-        <!-- 1. Calacatta Alps -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white grey" data-finish="polished" data-thickness="2 3" data-name="Calacatta Alps" data-meta="Gran Trade Quartz · Calacatta Alps">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Calacatta Alps to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/calacatta-alps.jpg" alt="Calacatta Alps engineered quartz" loading="lazy" />
+        <!-- 1. Aquamarine Quartzite (Featured Live Post) -->
+        <article class="slab-card" 
+          data-id="aquamarine-quartzite"
+          data-cat="quartzite" 
+          data-type="natural" 
+          data-color="blue green grey" 
+          data-finish="polished" 
+          data-thickness="2 3" 
+          data-name="Aquamarine Quartzite" 
+          data-gt="GT-4008"
+          data-lot="LOT #59108"
+          data-meta="Exotic Quartzite · Aquamarine Quartzite"
+          data-tags="aquamarine quartzite exotic blue teal emerald green crystalline natural brazil bahia polished 2cm 3cm gt-4008 59108 island kitchen statement luxury rare slab">
+          
+          <!-- Hidden Custom Tags in Post (Visually hidden, indexed by search and sort filter engine) -->
+          <div class="sc-tags-hidden" aria-hidden="true" style="display:none;">
+            aquamarine, quartzite, exotic quartzite, brazilian stone, bahia quarry, oceanic teal, turquoise, 
+            emerald green, crystalline quartz veins, polished, calibrated, 2cm, 3cm, GT-4008, LOT #59108, 
+            128x76, luxury waterfall island, kitchen countertop, backlit showpiece, bookmatched
           </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Calacatta Alps</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Crisp white background crossed with soft, sweeping alpine grey veining. Non-porous surface.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
 
-        <!-- 2. Calacatta Gold -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white gold grey" data-finish="polished" data-thickness="2 3" data-name="Calacatta Gold" data-meta="Gran Trade Quartz · Calacatta Gold">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Calacatta Gold to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/calacatta-gold.jpg" alt="Calacatta Gold engineered quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Calacatta Gold</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Luminous milky backdrop with warm amber and subtle graphite veins emulating prestigious Italian marble.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
+          <!-- Card links directly to slab.html in a new tab -->
+          <a href="slab.html?id=aquamarine-quartzite" target="_blank" rel="noopener noreferrer" class="sc-link-wrap" aria-label="Inspect Aquamarine Quartzite slab in new tab" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%;">
+            <div class="sc-media">
+              <span class="cat-badge">Exotic Quartzite</span>
+              <button class="heart" type="button" aria-label="Save Aquamarine Quartzite to favorites" onclick="event.preventDefault(); event.stopPropagation();"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
+              <img src="assets/images/aquamarine-slab-1.jpg" alt="Aquamarine Quartzite full upright slab" loading="lazy" />
+              <div class="sc-newtab-hint">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                <span>Opens in New Tab</span>
+              </div>
+            </div>
+            <div class="sc-body">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.35rem;">
+                <h3 class="sc-title" style="margin-bottom:0;">Aquamarine Quartzite</h3>
+                <span class="stock-badge" style="font-size:0.75rem; color:#2b7a4b; font-weight:700; background:rgba(43,122,75,0.12); padding:3px 9px; border-radius:999px;">● In Stock</span>
+              </div>
+              <div class="sc-meta">Exotic Quartzite · Bahia, Brazil</div>
+              
+              <!-- Direct Slab Details Specifications Box (GT#, Lot#, Thickness, Size) -->
+              <div class="slab-key-specs" style="margin:0.85rem 0; padding:0.75rem; background:var(--bg); border:1px solid var(--line); border-radius:var(--radius-sm); display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-size:0.78rem;">
+                <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">GT Number</span><strong style="color:var(--accent); font-size:0.95rem;">GT-4008</strong></div>
+                <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Lot Number</span><strong style="color:var(--ink); font-size:0.95rem;">LOT #59108</strong></div>
+                <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Thickness</span><strong style="color:var(--ink);">2 cm · 3 cm</strong></div>
+                <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Size</span><strong style="color:var(--ink);">128" × 76" · 67.5 sq. ft.</strong></div>
+              </div>
 
-        <!-- 3. Calacatta Panda -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white black" data-finish="polished" data-thickness="2 3" data-name="Calacatta Panda" data-meta="Gran Trade Quartz · Calacatta Panda">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Calacatta Panda to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/calacatta-panda.jpg" alt="Calacatta Panda engineered quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Calacatta Panda</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Stark contrast statement piece featuring bold charcoal-black ribbons coursing through an immaculate white field.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
+              <p class="sc-desc">Surging oceanic teal-green crystalline currents, deep mineral fissures, and sea-foam veining. High acid-resistance and superior hardness.</p>
+              
+              <div class="sc-specs" style="margin-top:auto; padding-top:0.5rem;">
+                <span class="spec-pill">Polished</span>
+                <span class="spec-pill">Natural Quartzite</span>
+                <span class="spec-pill">2 Pictures in Post</span>
+              </div>
 
-        <!-- 4. Calacatta Tuscany -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white gold" data-finish="polished" data-thickness="2 3" data-name="Calacatta Tuscany" data-meta="Gran Trade Quartz · Calacatta Tuscany">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Calacatta Tuscany to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/calacatta-tuscany.jpg" alt="Calacatta Tuscany engineered quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Calacatta Tuscany</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Soft ivory base highlighted by layered honey-tinted veining, balancing warmth with contemporary durability.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
-
-        <!-- 5. Calacatta Vega -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white grey" data-finish="polished" data-thickness="2 3" data-name="Calacatta Vega" data-meta="Gran Trade Quartz · Calacatta Vega">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Calacatta Vega to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/calacatta-vega.jpg" alt="Calacatta Vega engineered quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Calacatta Vega</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Refined linear grey veining patterned in balanced rhythms across a clear porcelain-white surface.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
-
-        <!-- 6. Nero Marquina Quartz -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="black white" data-finish="polished" data-thickness="2 3" data-name="Nero Marquina" data-meta="Gran Trade Quartz · Nero Marquina">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Nero Marquina to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/nero-marquina.jpg" alt="Nero Marquina engineered quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Nero Marquina</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Deep obsidian field electrified by fine, erratic white lightning streaks. Engineered for zero oil-staining.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
-
-        <!-- 7. Organic White -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white cream" data-finish="polished" data-thickness="2 3" data-name="Organic White" data-meta="Gran Trade Quartz · Organic White">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Organic White to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/organic-white.jpg" alt="Organic White engineered quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Organic White</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Subtle multi-toned off-white surface featuring fine mineral movement for an understated organic ambiance.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
-
-        <!-- 8. Carrara White Quartz -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white grey" data-finish="polished" data-thickness="2 3" data-name="Carrara White Quartz" data-meta="Gran Trade Quartz · Carrara White Quartz">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Carrara White Quartz to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/carrara-white-quartz.jpg" alt="Carrara White Quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Carrara White Quartz</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Traditional Carrara marbling rendered in stain-resistant engineered quartz. Feathery grey misting on white.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
-
-        <!-- 9. Black Crystal Quartz -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="black" data-finish="polished" data-thickness="2 3" data-name="Black Crystal Quartz" data-meta="Gran Trade Quartz · Black Crystal Quartz">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Black Crystal Quartz to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/black-crystal-quartz.jpg" alt="Black Crystal Quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Black Crystal Quartz</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Uniform jet-black foundation studded with reflective micro-crystals that catch ambient overhead lighting.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
-
-        <!-- 10. Zermatt -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white grey" data-finish="polished" data-thickness="2 3" data-name="Zermatt" data-meta="Gran Trade Quartz · Zermatt">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Zermatt to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/zermatt.jpg" alt="Zermatt engineered quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Zermatt</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Pristine white stone inspired by Swiss mountain glaciers, featuring ultra-fine cool grey undertones.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
-
-        <!-- 11. Versilia -->
-        <article class="slab-card" data-cat="quartz" data-type="engineered" data-color="white grey cream" data-finish="polished" data-thickness="2 3" data-name="Versilia" data-meta="Gran Trade Quartz · Versilia">
-          <div class="sc-media">
-            <span class="cat-badge">Quartz</span>
-            <button class="heart" type="button" aria-label="Save Versilia to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/versilia.jpg" alt="Versilia engineered quartz" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Versilia</h3>
-            <div class="sc-meta">Gran Trade Quartz · Engineered</div>
-            <p class="sc-desc">Flowing broad veining in smoky taupe and warm grey over a creamy alabaster backdrop.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Engineered</span></div>
-          </div>
-        </article>
-
-        <!-- 12. Absolute Black Polished -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="black" data-finish="polished" data-thickness="2 3" data-name="Absolute Black Polished" data-meta="Granite · Absolute Black Polished">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Absolute Black Polished to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/absolute-black-polished.jpg" alt="Absolute Black Polished granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Absolute Black Polished</h3>
-            <div class="sc-meta">Natural Granite · India</div>
-            <p class="sc-desc">Uniform deep black igneous granite with dense grain structure. Supreme hardness and weather resistance.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 13. Black Galaxy -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="black gold" data-finish="polished" data-thickness="2 3" data-name="Black Galaxy" data-meta="Granite · Black Galaxy">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Black Galaxy to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/black-galaxy.jpg" alt="Black Galaxy granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Black Galaxy</h3>
-            <div class="sc-meta">Natural Granite · India</div>
-            <p class="sc-desc">Famous natural granite shimmering with bronzite and golden metallic flecks across an obsidian matrix.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 14. Blue Pearl -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="blue grey" data-finish="polished" data-thickness="2 3" data-name="Blue Pearl" data-meta="Granite · Blue Pearl">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Blue Pearl to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/blue-pearl.jpg" alt="Blue Pearl granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Blue Pearl</h3>
-            <div class="sc-meta">Natural Granite · Norway</div>
-            <p class="sc-desc">Prized Norwegian larvikite displaying iridescent silver-blue feldspar crystals that reflect ambient light.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 15. Colonial White -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="white grey cream" data-finish="polished" data-thickness="2 3" data-name="Colonial White" data-meta="Granite · Colonial White">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Colonial White to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/colonial-white.jpg" alt="Colonial White granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Colonial White</h3>
-            <div class="sc-meta">Natural Granite · India</div>
-            <p class="sc-desc">Creamy white background accented with soft smoky patches, silver mica, and small garnet flecks.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 16. Kashmir White Leather -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="white grey" data-finish="leather" data-thickness="2 3" data-name="Kashmir White Leather" data-meta="Granite · Kashmir White Leather">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Kashmir White Leather to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/kashmir-white-leather.jpg" alt="Kashmir White Leather granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Kashmir White Leather</h3>
-            <div class="sc-meta">Natural Granite · India</div>
-            <p class="sc-desc">Soft white granite treated with diamond-tipped leathering brushes to yield a velvety matte relief.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Leathered</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 17. New Venetian Gold -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="gold cream brown" data-finish="polished" data-thickness="2 3" data-name="New Venetian Gold" data-meta="Granite · New Venetian Gold">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save New Venetian Gold to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/new-venetian-gold.jpg" alt="New Venetian Gold granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">New Venetian Gold</h3>
-            <div class="sc-meta">Natural Granite · Brazil</div>
-            <p class="sc-desc">Classic warm beige and golden honey granite interspersed with deep amber, brown, and garnet crystals.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 18. Ruby Red -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="red black" data-finish="polished" data-thickness="2 3" data-name="Ruby Red" data-meta="Granite · Ruby Red">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Ruby Red to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/ruby-red.jpg" alt="Ruby Red granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Ruby Red</h3>
-            <div class="sc-meta">Natural Granite · India</div>
-            <p class="sc-desc">Rich crimson red granite mottled with micro-black quartz crystals. High frost resilience.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 19. Steel Grey Leather -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="grey black" data-finish="leather" data-thickness="2 3" data-name="Steel Grey – Leather" data-meta="Granite · Steel Grey – Leather">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Steel Grey Leather to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/steel-grey-leather.jpg" alt="Steel Grey Leather granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Steel Grey – Leather</h3>
-            <div class="sc-meta">Natural Granite · India</div>
-            <p class="sc-desc">Mid-to-dark grey stone with undulating textural valleys from specialized leathered surface machining.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Leathered</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 20. Tan Brown -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="brown black" data-finish="polished" data-thickness="2 3" data-name="Tan Brown" data-meta="Granite · Tan Brown">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Tan Brown to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/tan-brown.jpg" alt="Tan Brown granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Tan Brown</h3>
-            <div class="sc-meta">Natural Granite · India</div>
-            <p class="sc-desc">Dense floral pattern of rich chocolate, copper-tan, and dark grey clusters on black feldspar.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 21. Emerald Pearl -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="green black" data-finish="polished" data-thickness="2 3" data-name="Emerald Pearl" data-meta="Granite · Emerald Pearl">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Emerald Pearl to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/emerald-pearl.jpg" alt="Emerald Pearl granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Emerald Pearl</h3>
-            <div class="sc-meta">Natural Granite · Norway</div>
-            <p class="sc-desc">Dark forest green to black stone filled with large, reflective pearlescent crystals.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 22. Black Forest -->
-        <article class="slab-card" data-cat="granite" data-type="natural" data-color="black white grey" data-finish="polished" data-thickness="2 3" data-name="Black Forest" data-meta="Granite · Black Forest">
-          <div class="sc-media">
-            <span class="cat-badge">Granite</span>
-            <button class="heart" type="button" aria-label="Save Black Forest to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/black-forest.jpg" alt="Black Forest granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Black Forest</h3>
-            <div class="sc-meta">Natural Granite · Brazil</div>
-            <p class="sc-desc">Intense black background sweeping with wild, river-like ribbons of white and silver quartz.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 23. Bianco Carrara -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="white grey" data-finish="polished" data-thickness="2 3" data-name="Bianco Carrara" data-meta="Marble · Bianco Carrara">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Bianco Carrara to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/bianco-carrara.jpg" alt="Bianco Carrara marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Bianco Carrara</h3>
-            <div class="sc-meta">Fine Marble · Italy</div>
-            <p class="sc-desc">The quintessential Italian white marble quarried in Tuscany. Feathery smoky grey veining over soft white.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 24. Bianco Carrara Honed -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="white grey" data-finish="honed" data-thickness="2 3" data-name="Bianco Carrara Honed" data-meta="Marble · Bianco Carrara Honed">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Bianco Carrara Honed to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/bianco-carrara-honed.jpg" alt="Bianco Carrara Honed marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Bianco Carrara Honed</h3>
-            <div class="sc-meta">Fine Marble · Italy</div>
-            <p class="sc-desc">Satin-smooth matte finish highlighting natural mineral veining while reducing visible glare.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Honed</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 25. Bianco Rhino -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="white cream grey" data-finish="polished" data-thickness="2 3" data-name="Bianco Rhino" data-meta="Marble · Bianco Rhino">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Bianco Rhino to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/bianco-rhino.jpg" alt="Bianco Rhino marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Bianco Rhino</h3>
-            <div class="sc-meta">Fine Marble · Namibia</div>
-            <p class="sc-desc">Extraordinary white marble renowned for serene milky clarity and gentle whisper of warm veining.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 26. Calacatta Zambia -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="white grey green" data-finish="polished" data-thickness="2 3" data-name="Calacatta Zambia" data-meta="Marble · Calacatta Zambia">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Calacatta Zambia to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/calacatta-zambia.jpg" alt="Calacatta Zambia marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Calacatta Zambia</h3>
-            <div class="sc-meta">Fine Marble · Zambia</div>
-            <p class="sc-desc">Luminous white background marked with organic jade-tinged and charcoal veins across broad slabs.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 27. Crema Marfil -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="cream gold" data-finish="polished" data-thickness="2 3" data-name="Crema Marfil" data-meta="Marble · Crema Marfil">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Crema Marfil to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/crema-marfil.jpg" alt="Crema Marfil marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Crema Marfil</h3>
-            <div class="sc-meta">Fine Marble · Spain</div>
-            <p class="sc-desc">Warm Spanish beige marble celebrated for uniform cream coloration and subtle cinnamon veining.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 28. Dark Emperador -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="brown gold" data-finish="polished" data-thickness="2 3" data-name="Dark Emperador" data-meta="Marble · Dark Emperador">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Dark Emperador to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/dark-emperador.jpg" alt="Dark Emperador marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Dark Emperador</h3>
-            <div class="sc-meta">Fine Marble · Spain</div>
-            <p class="sc-desc">Rich espresso-brown marble webbed with intricate crystalline calcite fissures in pale gold.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 29. Dover White -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="white grey cream" data-finish="polished" data-thickness="2 3" data-name="Dover White" data-meta="Marble · Dover White">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Dover White to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/dover-white.jpg" alt="Dover White marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Dover White</h3>
-            <div class="sc-meta">Fine Marble · Italy</div>
-            <p class="sc-desc">Bold brecciated marble displaying translucent quartz pockets bordered by soft silver-grey boundaries.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 30. Forest Brown -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="brown green gold" data-finish="polished" data-thickness="2 3" data-name="Forest Brown" data-meta="Marble · Forest Brown">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Forest Brown to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/forest-brown.jpg" alt="Forest Brown marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Forest Brown</h3>
-            <div class="sc-meta">Fine Marble · India</div>
-            <p class="sc-desc">Intricate serpentine marble resembling tree root systems with bronze, olive, and burgundy veins.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 31. Nero Marquina Marble -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="black white" data-finish="polished" data-thickness="2 3" data-name="Nero Marquina Marble" data-meta="Marble · Nero Marquina Marble">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Nero Marquina Marble to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/nero-marquina-marble.jpg" alt="Nero Marquina Marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Nero Marquina Marble</h3>
-            <div class="sc-meta">Fine Marble · Spain</div>
-            <p class="sc-desc">Authentic Basque black marble exhibiting stark white calcitic veins across a velvety pitch-black base.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 32. Sahara Beige Marble -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="cream gold" data-finish="polished" data-thickness="2 3" data-name="Sahara Beige Marble" data-meta="Marble · Sahara Beige Marble">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Sahara Beige Marble to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/sahara-beige-marble.jpg" alt="Sahara Beige Marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Sahara Beige Marble</h3>
-            <div class="sc-meta">Fine Marble · Turkey</div>
-            <p class="sc-desc">Warm sandy beige background adorned with light fossil markings and golden undertones.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 33. Arabescato -->
-        <article class="slab-card" data-cat="marble" data-type="natural" data-color="white grey" data-finish="polished" data-thickness="2 3" data-name="Arabescato" data-meta="Marble · Arabescato">
-          <div class="sc-media">
-            <span class="cat-badge">Marble</span>
-            <button class="heart" type="button" aria-label="Save Arabescato to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/arabescato.jpg" alt="Arabescato marble" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Arabescato</h3>
-            <div class="sc-meta">Fine Marble · Italy</div>
-            <p class="sc-desc">Prestigous brecciated Italian marble featuring dark grey ovular veining winding around bright white marble islands.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 34-43. Monuments GT 001 - GT 010 -->
-        <article class="slab-card" data-cat="monuments" data-type="natural" data-color="black grey" data-finish="polished" data-thickness="3" data-name="GT 001" data-meta="Monuments · GT 001">
-          <div class="sc-media">
-            <span class="cat-badge">Monuments</span>
-            <button class="heart" type="button" aria-label="Save GT 001 to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/gt-001.png" alt="GT 001 monument granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">GT 001</h3>
-            <div class="sc-meta">Monuments · Structural Granite</div>
-            <p class="sc-desc">Fine-grain premium dense black granite monument stone fabricated for permanent outdoor longevity.</p>
-            <div class="sc-specs"><span class="spec-pill">3 cm · Custom</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <article class="slab-card" data-cat="monuments" data-type="natural" data-color="black grey" data-finish="polished" data-thickness="3" data-name="GT 002" data-meta="Monuments · GT 002">
-          <div class="sc-media">
-            <span class="cat-badge">Monuments</span>
-            <button class="heart" type="button" aria-label="Save GT 002 to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/gt-002.png" alt="GT 002 monument granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">GT 002</h3>
-            <div class="sc-meta">Monuments · Structural Granite</div>
-            <p class="sc-desc">Laser-etched capable structural granite slab offering deep contrast and weather-sealed finish.</p>
-            <div class="sc-specs"><span class="spec-pill">3 cm · Custom</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <article class="slab-card" data-cat="monuments" data-type="natural" data-color="grey black" data-finish="polished" data-thickness="3" data-name="GT 003" data-meta="Monuments · GT 003">
-          <div class="sc-media">
-            <span class="cat-badge">Monuments</span>
-            <button class="heart" type="button" aria-label="Save GT 003 to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/gt-003.png" alt="GT 003 monument granite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">GT 003</h3>
-            <div class="sc-meta">Monuments · Structural Granite</div>
-            <p class="sc-desc">Consistent medium grey granite featuring tight grain boundaries suitable for precision carving.</p>
-            <div class="sc-specs"><span class="spec-pill">3 cm · Custom</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 44. Casablanca Quartzite -->
-        <article class="slab-card" data-cat="quartzite" data-type="natural" data-color="white grey cream" data-finish="polished" data-thickness="2 3" data-name="Casablanca" data-meta="Quartzite · Casablanca">
-          <div class="sc-media">
-            <span class="cat-badge">Quartzite</span>
-            <button class="heart" type="button" aria-label="Save Casablanca to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/casablanca.jpg" alt="Casablanca quartzite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Casablanca</h3>
-            <div class="sc-meta">Exotic Quartzite · Brazil</div>
-            <p class="sc-desc">Dramatic Brazilian quartzite showcasing flowing charcoal streams across an ivory crystalline field.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 45. Crystallo -->
-        <article class="slab-card" data-cat="quartzite" data-type="natural" data-color="white gold cream" data-finish="polished" data-thickness="2 3" data-name="Crystallo" data-meta="Quartzite · Crystallo">
-          <div class="sc-media">
-            <span class="cat-badge">Quartzite</span>
-            <button class="heart" type="button" aria-label="Save Crystallo to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/crystallo.jpg" alt="Crystallo quartzite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Crystallo</h3>
-            <div class="sc-meta">Exotic Quartzite · Brazil</div>
-            <p class="sc-desc">Semi-translucent crystalline quartzite with warm golden veining. Translucent when backlit.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 46. Deep Blue -->
-        <article class="slab-card" data-cat="quartzite" data-type="natural" data-color="blue grey" data-finish="polished" data-thickness="2 3" data-name="Deep Blue" data-meta="Quartzite · Deep Blue">
-          <div class="sc-media">
-            <span class="cat-badge">Quartzite</span>
-            <button class="heart" type="button" aria-label="Save Deep Blue to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/deep-blue.jpg" alt="Deep Blue quartzite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Deep Blue</h3>
-            <div class="sc-meta">Exotic Quartzite · Brazil</div>
-            <p class="sc-desc">Rare oceanic blue quartzite featuring undulating indigo and steel currents interwoven with quartz.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 47. Fantasy Brown -->
-        <article class="slab-card" data-cat="quartzite" data-type="natural" data-color="brown grey cream" data-finish="polished" data-thickness="2 3" data-name="Fantasy Brown" data-meta="Quartzite · Fantasy Brown">
-          <div class="sc-media">
-            <span class="cat-badge">Quartzite</span>
-            <button class="heart" type="button" aria-label="Save Fantasy Brown to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/fantasy-brown.jpg" alt="Fantasy Brown quartzite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Fantasy Brown</h3>
-            <div class="sc-meta">Exotic Quartzite · India</div>
-            <p class="sc-desc">Dynamic geological fusion of apricot, pewter, and cream wave patterns with marble aesthetic.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 48. Taj Mahal -->
-        <article class="slab-card" data-cat="quartzite" data-type="natural" data-color="cream gold white" data-finish="polished" data-thickness="2 3" data-name="Taj Mahal" data-meta="Quartzite · Taj Mahal">
-          <div class="sc-media">
-            <span class="cat-badge">Quartzite</span>
-            <button class="heart" type="button" aria-label="Save Taj Mahal to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/taj-mahal.jpg" alt="Taj Mahal quartzite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Taj Mahal</h3>
-            <div class="sc-meta">Exotic Quartzite · Brazil</div>
-            <p class="sc-desc">The #1 sought-after luxury stone worldwide. Warm champagne layers that resist lemon and wine etching.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 49. Aquamarine Quartzite -->
-        <article class="slab-card" data-cat="quartzite" data-type="natural" data-color="blue green grey" data-finish="polished" data-thickness="2 3" data-name="Aquamarine Quartzite" data-meta="Quartzite · Aquamarine Quartzite">
-          <div class="sc-media">
-            <span class="cat-badge">Quartzite</span>
-            <button class="heart" type="button" aria-label="Save Aquamarine Quartzite to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/aquamarine-quartzite.webp" alt="Aquamarine Quartzite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Aquamarine Quartzite</h3>
-            <div class="sc-meta">Exotic Quartzite · Brazil</div>
-            <p class="sc-desc">Breathtaking oceanic teal-green field surging with crystal fissures and sea-foam veining.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 50. Blue Fusion -->
-        <article class="slab-card" data-cat="quartzite" data-type="natural" data-color="blue grey cream" data-finish="polished" data-thickness="2 3" data-name="Blue Fusion" data-meta="Quartzite · Blue Fusion">
-          <div class="sc-media">
-            <span class="cat-badge">Quartzite</span>
-            <button class="heart" type="button" aria-label="Save Blue Fusion to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/blue-fusion.jpg" alt="Blue Fusion quartzite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Blue Fusion</h3>
-            <div class="sc-meta">Exotic Quartzite · Brazil</div>
-            <p class="sc-desc">Smoky blue, slate grey, and cream currents swirl in painterly geological harmony.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 51. Semi Precious Blue Agate -->
-        <article class="slab-card" data-cat="semi" data-type="natural" data-color="blue gold" data-finish="polished" data-thickness="2" data-name="Semi Precious Stone – Blue Agate" data-meta="Semi Precious Stone · Blue Agate">
-          <div class="sc-media">
-            <span class="cat-badge">Semi Precious</span>
-            <button class="heart" type="button" aria-label="Save Semi Precious Stone to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/semi-precious-stone.jpg" alt="Semi Precious Stone Blue Agate" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Semi Precious Blue Agate</h3>
-            <div class="sc-meta">Semi Precious Stone · Madagascar</div>
-            <p class="sc-desc">Hand-assembled mosaic of genuine natural blue agate geode slices bound in optical resin.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 52. Graphite Soapstone -->
-        <article class="slab-card" data-cat="soapstone" data-type="natural" data-color="black grey" data-finish="honed" data-thickness="3" data-name="Graphite" data-meta="Soapstone · Graphite">
-          <div class="sc-media">
-            <span class="cat-badge">Soapstone</span>
-            <button class="heart" type="button" aria-label="Save Graphite Soapstone to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/graphite.webp" alt="Graphite soapstone" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Graphite Soapstone</h3>
-            <div class="sc-meta">Natural Soapstone · USA / Brazil</div>
-            <p class="sc-desc">Silky matte charcoal soapstone impervious to kitchen acids, oils, and intense heat.</p>
-            <div class="sc-specs"><span class="spec-pill">3 cm</span><span class="spec-pill">Honed</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 53. Verde Ondine -->
-        <article class="slab-card" data-cat="quartzite" data-type="natural" data-color="green grey white" data-finish="polished" data-thickness="2 3" data-name="Verde Ondine" data-meta="Quartzite · Verde Ondine">
-          <div class="sc-media">
-            <span class="cat-badge">Quartzite</span>
-            <button class="heart" type="button" aria-label="Save Verde Ondine to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/verde-ondine.jpg" alt="Verde Ondine quartzite" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Verde Ondine</h3>
-            <div class="sc-meta">Exotic Quartzite · Brazil</div>
-            <p class="sc-desc">Layers of sea-green sediment undulating across cool white quartz crystals, reminiscent of frozen sea waves.</p>
-            <div class="sc-specs"><span class="spec-pill">2 cm · 3 cm</span><span class="spec-pill">Polished</span><span class="spec-pill">Natural</span></div>
-          </div>
-        </article>
-
-        <!-- 54. Travertino Classico Tile -->
-        <article class="slab-card" data-cat="tile" data-type="natural" data-color="cream gold" data-finish="honed" data-thickness="tile" data-name="Travertino Classico" data-meta="Tile · Travertino Classico">
-          <div class="sc-media">
-            <span class="cat-badge">Tile</span>
-            <button class="heart" type="button" aria-label="Save Travertino Classico to favorites"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg></button>
-            <img src="assets/images/products/travertino-classico.webp" alt="Travertino Classico tile" loading="lazy" />
-          </div>
-          <div class="sc-body">
-            <h3 class="sc-title">Travertino Classico</h3>
-            <div class="sc-meta">Architectural Tile · Italy</div>
-            <p class="sc-desc">Warm Roman travertine tile celebrating natural open cavities and timeless earth tones.</p>
-            <div class="sc-specs"><span class="spec-pill">1.2 cm Tile</span><span class="spec-pill">Honed</span><span class="spec-pill">Natural</span></div>
-          </div>
+              <div style="margin-top:1rem;">
+                <span class="btn btn-sm btn-primary btn-block" style="display:flex; align-items:center; justify-content:center; gap:0.4rem;">
+                  <span>Inspect Slab & 2 Pictures in New Tab</span>
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                </span>
+              </div>
+            </div>
+          </a>
         </article>
 
         <!-- Empty State Container -->
         <div id="slabEmpty" class="empty-box" style="display:none; grid-column:1 / -1;">
           <h3>No matching slabs found</h3>
-          <p>We couldn't find any stone matching your specific filter criteria. Try clearing some filters or browse all stone families.</p>
+          <p>We couldn't find any stone matching your specific filter criteria. Try clearing some filters or search query.</p>
           <button id="resetFiltersBtn" class="btn btn-primary" type="button">Reset All Filters</button>
         </div>
 

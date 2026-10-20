@@ -39,9 +39,9 @@
       if (!countDisplay) return;
       const activeCat = this.getActiveCategory();
       if (activeCat === "all") {
-        countDisplay.textContent = `Showing all ${totalCount} stone slabs`;
+        countDisplay.textContent = totalCount === 1 ? "Showing 1 stone slab" : `Showing all ${totalCount} stone slabs`;
       } else {
-        countDisplay.textContent = `Showing ${visibleCount} of ${totalCount} slabs`;
+        countDisplay.textContent = visibleCount === 1 ? `Showing 1 of ${totalCount} slabs` : `Showing ${visibleCount} of ${totalCount} slabs`;
       }
     },
   };
