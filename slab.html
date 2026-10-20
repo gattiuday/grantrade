@@ -72,40 +72,99 @@
       gap: 1.25rem;
     }
 
-    .post-view-toggles {
+    /* Floating Zoom In, Zoom Out, Reset, and Fullscreen Controls on Picture */
+    .stage-controls-overlay {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      background-color: var(--surface);
-      padding: 0.35rem;
-      border: 1px solid var(--line);
+      gap: 0.35rem;
+      background: rgba(22, 18, 14, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0.35rem 0.5rem;
       border-radius: var(--radius-pill);
-      align-self: flex-start;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      z-index: 10;
     }
 
-    .view-toggle-btn {
+    .stage-ctrl-btn {
       background: transparent;
       border: none;
-      color: var(--muted);
+      color: #ffffff;
       font-family: inherit;
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.75rem;
       border-radius: var(--radius-pill);
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
       transition: all var(--transition-fast);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .stage-ctrl-btn * {
+      pointer-events: none;
+    }
+
+    .stage-ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .stage-ctrl-btn.highlight {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .stage-ctrl-btn.highlight:hover {
+      background: #c99718;
+    }
+
+    .stage-ctrl-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Picture Nav Arrows on Stage (Prev / Next) */
+    .stage-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(22, 18, 14, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 9;
+      backdrop-filter: blur(6px);
+      transition: all var(--transition-fast);
+      opacity: 0.85;
     }
 
-    .view-toggle-btn:hover {
-      color: var(--ink);
+    .stage-nav-arrow:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      opacity: 1;
+      transform: translateY(-50%) scale(1.08);
     }
 
-    .view-toggle-btn.active {
-      background-color: var(--ink);
-      color: var(--bg);
+    .stage-prev {
+      left: 1rem;
+    }
+
+    .stage-next {
+      right: 1rem;
     }
 
     /* Dual Pictures Stage */
@@ -122,13 +181,20 @@
       justify-content: center;
     }
 
-    /* Single view stage */
+    /* Single view stage with interactive Zoom & Pan */
     .stage-single {
       width: 100%;
       height: 100%;
       position: relative;
       aspect-ratio: 16 / 11;
       max-height: 560px;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .stage-single.grabbing {
+      cursor: grabbing;
     }
 
     .stage-single img {
@@ -136,11 +202,61 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center center;
+      transition: transform 0.2s ease-out;
+      pointer-events: none;
     }
 
-    .stage-single:hover img {
-      transform: scale(1.02);
+    /* Fullscreen state (Native API + Universal Fallback) */
+    .post-stage:fullscreen,
+    .post-stage:-webkit-full-screen,
+    .post-stage.is-fallback-fullscreen {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-height: 100vh !important;
+      border-radius: 0 !important;
+      border: none !important;
+      background-color: #0b0908 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      z-index: 999999 !important;
+      margin: 0 !important;
+    }
+
+    .post-stage:fullscreen img,
+    .post-stage:-webkit-full-screen img,
+    .post-stage.is-fallback-fullscreen img {
+      max-width: 96vw;
+      max-height: 92vh;
+      object-fit: contain;
+    }
+
+    .post-stage:fullscreen .stage-controls-overlay,
+    .post-stage:-webkit-full-screen .stage-controls-overlay,
+    .post-stage.is-fallback-fullscreen .stage-controls-overlay {
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 1000000;
+    }
+
+    .post-stage:fullscreen .stage-tag,
+    .post-stage:-webkit-full-screen .stage-tag,
+    .post-stage.is-fallback-fullscreen .stage-tag {
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 1000000;
+    }
+
+    .post-stage:fullscreen .stage-nav-arrow,
+    .post-stage:-webkit-full-screen .stage-nav-arrow,
+    .post-stage.is-fallback-fullscreen .stage-nav-arrow {
+      z-index: 1000000;
     }
 
     .stage-tag {
@@ -527,51 +643,54 @@
         <!-- Left: 2 Pictures In Post -->
         <div class="slab-post-viewer">
           
-          <!-- View Toggles: Picture 1 / Picture 2 / Dual -->
-          <div class="post-view-toggles" role="tablist" aria-label="Picture View Switcher">
-            <button id="togglePic1" class="view-toggle-btn active" type="button" data-view="1" aria-pressed="true">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-              <span>Picture 1: Full Slab</span>
-            </button>
-            <button id="togglePic2" class="view-toggle-btn" type="button" data-view="2" aria-pressed="false">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <span>Picture 2: Close-up Detail</span>
-            </button>
-            <button id="toggleDual" class="view-toggle-btn" type="button" data-view="dual" aria-pressed="false">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="9" height="18" rx="1"/><rect x="13" y="3" width="9" height="18" rx="1"/></svg>
-              <span>Both Pictures</span>
-            </button>
-          </div>
-
-          <!-- Main Stage Single View -->
-          <div id="mainStageSingle" class="post-stage stage-single">
+          <!-- Main Stage Single View with Zoom In, Zoom Out, Fullscreen, and Image Navigation -->
+          <div id="mainStageSingle" class="post-stage stage-single" title="Drag to pan when zoomed · Double-click to zoom · Scroll to zoom">
             <span id="stageTag" class="stage-tag">Picture 1 · Full Slab Upright View</span>
-            <img id="mainStageImg" src="assets/images/stone-types/quartzite.jpg" alt="Full Slab View" loading="eager" />
-          </div>
 
-          <!-- Dual Stage View (Side-by-Side) -->
-          <div id="mainStageDual" class="post-stage stage-dual">
-            <div class="dual-card">
-              <span class="stage-tag" style="top:0.75rem; left:0.75rem;">1 · Full Slab</span>
-              <img id="dualImg1" src="assets/images/stone-types/quartzite.jpg" alt="Picture 1 — Full Slab" loading="lazy" />
+            <!-- Zoom & Full Screen Floating Controls on the Picture -->
+            <div class="stage-controls-overlay" role="toolbar" aria-label="Image Zoom and Fullscreen Controls">
+              <button id="zoomInBtn" class="stage-ctrl-btn" type="button" title="Zoom In" aria-label="Zoom in" onclick="window.slabViewer && window.slabViewer.zoomIn()">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+                <span>Zoom In</span>
+              </button>
+              <button id="zoomOutBtn" class="stage-ctrl-btn" type="button" title="Zoom Out" aria-label="Zoom out" onclick="window.slabViewer && window.slabViewer.zoomOut()" disabled>
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M8 11h6"/></svg>
+                <span>Zoom Out</span>
+              </button>
+              <button id="zoomResetBtn" class="stage-ctrl-btn" type="button" title="Reset Zoom to 100%" aria-label="Reset zoom" onclick="window.slabViewer && window.slabViewer.resetZoom()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+                <span id="zoomLevelText">100%</span>
+              </button>
+              <button id="fullscreenBtn" class="stage-ctrl-btn highlight" type="button" title="Full Screen View" aria-label="Toggle full screen" onclick="window.slabViewer && window.slabViewer.toggleFullscreen()">
+                <svg id="fsIconExpand" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
+                <svg id="fsIconCompress" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"/></svg>
+                <span id="fsText">Full Screen</span>
+              </button>
             </div>
-            <div class="dual-card">
-              <span class="stage-tag" style="top:0.75rem; left:0.75rem;">2 · Close-Up Detail</span>
-              <img id="dualImg2" src="assets/images/stone-types/quartzite.jpg" alt="Picture 2 — Detail" loading="lazy" />
-            </div>
+
+            <!-- Previous / Next picture arrows -->
+            <button id="stagePrevBtn" class="stage-nav-arrow stage-prev" type="button" title="Previous Picture (Full Slab / Vein Detail)" aria-label="Previous picture">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+            </button>
+            <button id="stageNextBtn" class="stage-nav-arrow stage-next" type="button" title="Next Picture (Full Slab / Vein Detail)" aria-label="Next picture">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+            </button>
+
+            <!-- Image with zoom transform -->
+            <img id="mainStageImg" src="assets/images/aquamarine-slab-1.jpg" alt="Aquamarine Quartzite Full Slab View" loading="eager" />
           </div>
 
           <!-- 2 Pictures Thumbnails Selector -->
           <div class="post-thumbs">
             <button id="thumb1" class="thumb-btn active" type="button">
-              <img id="thumbImg1" src="assets/images/stone-types/quartzite.jpg" alt="Picture 1 Thumbnail" />
+              <img id="thumbImg1" src="assets/images/aquamarine-slab-1.jpg" alt="Picture 1 Thumbnail" />
               <div class="thumb-info">
                 <span class="thumb-num">Picture 1</span>
                 <span class="thumb-label">Full Slab A-Frame</span>
               </div>
             </button>
             <button id="thumb2" class="thumb-btn" type="button">
-              <img id="thumbImg2" src="assets/images/stone-types/quartzite.jpg" alt="Picture 2 Thumbnail" />
+              <img id="thumbImg2" src="assets/images/aquamarine-slab-2.jpg" alt="Picture 2 Thumbnail" />
               <div class="thumb-info">
                 <span class="thumb-num">Picture 2</span>
                 <span class="thumb-label">Vein & Mineral Detail</span>
@@ -803,70 +922,282 @@
 
       const mainStageImg = document.getElementById("mainStageImg");
       const stageTag = document.getElementById("stageTag");
-      const dualImg1 = document.getElementById("dualImg1");
-      const dualImg2 = document.getElementById("dualImg2");
+      const stageSingle = document.getElementById("mainStageSingle");
+      const thumb1 = document.getElementById("thumb1");
+      const thumb2 = document.getElementById("thumb2");
       const thumbImg1 = document.getElementById("thumbImg1");
       const thumbImg2 = document.getElementById("thumbImg2");
+      const stagePrevBtn = document.getElementById("stagePrevBtn");
+      const stageNextBtn = document.getElementById("stageNextBtn");
 
-      mainStageImg.src = pic1Url;
-      mainStageImg.alt = `${stone.name} — Picture 1 (Full Slab View)`;
-      dualImg1.src = pic1Url;
-      dualImg1.alt = `${stone.name} — Picture 1 (Full Slab View)`;
-      dualImg2.src = pic2Url;
-      dualImg2.alt = `${stone.name} — Picture 2 (Close-Up Detail View)`;
-      thumbImg1.src = pic1Url;
-      thumbImg2.src = pic2Url;
+      // Zoom & Full Screen Controls
+      const zoomInBtn = document.getElementById("zoomInBtn");
+      const zoomOutBtn = document.getElementById("zoomOutBtn");
+      const zoomResetBtn = document.getElementById("zoomResetBtn");
+      const zoomLevelText = document.getElementById("zoomLevelText");
+      const fullscreenBtn = document.getElementById("fullscreenBtn");
+      const fsIconExpand = document.getElementById("fsIconExpand");
+      const fsIconCompress = document.getElementById("fsIconCompress");
+      const fsText = document.getElementById("fsText");
+
+      if (thumbImg1) thumbImg1.src = pic1Url;
+      if (thumbImg2) thumbImg2.src = pic2Url;
 
       // Handle Image fallback error
       const fallbackUrl = `assets/images/stone-types/${stone.category}.jpg`;
-      [mainStageImg, dualImg1, dualImg2, thumbImg1, thumbImg2].forEach(img => {
+      [mainStageImg, thumbImg1, thumbImg2].forEach(img => {
+        if (!img) return;
         img.onerror = function () {
           this.onerror = null;
           this.src = fallbackUrl;
         };
       });
 
-      // View switching logic (Picture 1 vs Picture 2 vs Dual)
-      const stageSingle = document.getElementById("mainStageSingle");
-      const stageDual = document.getElementById("mainStageDual");
-      const togglePic1 = document.getElementById("togglePic1");
-      const togglePic2 = document.getElementById("togglePic2");
-      const toggleDual = document.getElementById("toggleDual");
-      const thumb1 = document.getElementById("thumb1");
-      const thumb2 = document.getElementById("thumb2");
+      // ================= 1. INTERACTIVE ZOOM ENGINE =================
+      let zoomLevel = 1;
+      const minZoom = 1;
+      const maxZoom = 4;
+      const zoomStep = 0.35;
+      let panX = 0;
+      let panY = 0;
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
 
-      function setView(mode) {
-        // mode: 1 = Picture 1, 2 = Picture 2, 'dual' = Both
-        [togglePic1, togglePic2, toggleDual, thumb1, thumb2].forEach(b => b.classList.remove("active"));
+      function updateZoomTransform() {
+        if (zoomLevel <= 1) {
+          panX = 0;
+          panY = 0;
+          if (stageSingle) stageSingle.classList.remove("grabbing");
+        }
+        if (mainStageImg) {
+          mainStageImg.style.transform = `scale(${zoomLevel}) translate(${panX}px, ${panY}px)`;
+        }
+        if (zoomLevelText) zoomLevelText.textContent = `${Math.round(zoomLevel * 100)}%`;
+        if (zoomOutBtn) zoomOutBtn.disabled = zoomLevel <= minZoom;
+        if (zoomInBtn) zoomInBtn.disabled = zoomLevel >= maxZoom;
+      }
 
-        if (mode === 1) {
-          stageSingle.style.display = "block";
-          stageDual.style.display = "none";
-          mainStageImg.src = pic1Url;
-          mainStageImg.alt = `${stone.name} — Picture 1 (Full Slab Upright View)`;
-          stageTag.textContent = "Picture 1 · Full Slab Upright View";
-          togglePic1.classList.add("active");
-          thumb1.classList.add("active");
-        } else if (mode === 2) {
-          stageSingle.style.display = "block";
-          stageDual.style.display = "none";
-          mainStageImg.src = pic2Url;
-          mainStageImg.alt = `${stone.name} — Picture 2 (Close-up Texture & Detail View)`;
-          stageTag.textContent = "Picture 2 · Close-up Texture & Detail View";
-          togglePic2.classList.add("active");
-          thumb2.classList.add("active");
-        } else if (mode === "dual") {
-          stageSingle.style.display = "none";
-          stageDual.style.display = "grid";
-          toggleDual.classList.add("active");
+      function zoomIn() {
+        zoomLevel = Math.min(maxZoom, Math.round((zoomLevel + zoomStep) * 100) / 100);
+        updateZoomTransform();
+      }
+
+      function zoomOut() {
+        zoomLevel = Math.max(minZoom, Math.round((zoomLevel - zoomStep) * 100) / 100);
+        updateZoomTransform();
+      }
+
+      function resetZoom() {
+        zoomLevel = 1;
+        panX = 0;
+        panY = 0;
+        updateZoomTransform();
+      }
+
+      if (zoomInBtn) {
+        zoomInBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          zoomIn();
+        });
+      }
+
+      if (zoomOutBtn) {
+        zoomOutBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          zoomOut();
+        });
+      }
+
+      if (zoomResetBtn) {
+        zoomResetBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          resetZoom();
+        });
+      }
+
+      // Drag to pan when zoomed
+      if (stageSingle) {
+        stageSingle.addEventListener("mousedown", (e) => {
+          if (zoomLevel <= 1 || e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
+          isDragging = true;
+          startX = e.clientX - panX * zoomLevel;
+          startY = e.clientY - panY * zoomLevel;
+          stageSingle.classList.add("grabbing");
+        });
+
+        window.addEventListener("mousemove", (e) => {
+          if (!isDragging) return;
+          panX = (e.clientX - startX) / zoomLevel;
+          panY = (e.clientY - startY) / zoomLevel;
+          updateZoomTransform();
+        });
+
+        window.addEventListener("mouseup", () => {
+          if (isDragging) {
+            isDragging = false;
+            stageSingle.classList.remove("grabbing");
+          }
+        });
+
+        // Mouse wheel zoom
+        stageSingle.addEventListener("wheel", (e) => {
+          if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
+          e.preventDefault();
+          if (e.deltaY < 0) {
+            zoomIn();
+          } else {
+            zoomOut();
+          }
+        }, { passive: false });
+
+        // Double-click to quick zoom / reset
+        stageSingle.addEventListener("dblclick", (e) => {
+          if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
+          if (zoomLevel > 1) {
+            resetZoom();
+          } else {
+            zoomLevel = 2.2;
+            updateZoomTransform();
+          }
+        });
+      }
+
+      // ================= 2. FULLSCREEN SYSTEM (NATIVE + FALLBACK) =================
+      function isFullscreen() {
+        return Boolean(
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          (stageSingle && stageSingle.classList.contains("is-fallback-fullscreen"))
+        );
+      }
+
+      function updateFullscreenUI() {
+        const isFS = isFullscreen();
+        if (fsIconExpand) fsIconExpand.style.display = isFS ? "none" : "block";
+        if (fsIconCompress) fsIconCompress.style.display = isFS ? "block" : "none";
+        if (fsText) fsText.textContent = isFS ? "Exit" : "Full Screen";
+      }
+
+      function enterFullscreen() {
+        if (!stageSingle) return;
+        stageSingle.classList.add("is-fallback-fullscreen");
+        document.body.style.overflow = "hidden";
+        updateFullscreenUI();
+
+        try {
+          const req = stageSingle.requestFullscreen || stageSingle.webkitRequestFullscreen || stageSingle.webkitRequestFullScreen;
+          if (req) {
+            const p = req.call(stageSingle);
+            if (p && typeof p.catch === "function") {
+              p.catch(() => {});
+            }
+          }
+        } catch (err) {}
+      }
+
+      function exitFullscreen() {
+        if (stageSingle) {
+          stageSingle.classList.remove("is-fallback-fullscreen");
+        }
+        document.body.style.overflow = "";
+        updateFullscreenUI();
+
+        try {
+          if (document.fullscreenElement || document.webkitFullscreenElement) {
+            const exit = document.exitFullscreen || document.webkitExitFullscreen || document.webkitCancelFullScreen;
+            if (exit) {
+              exit.call(document);
+            }
+          }
+        } catch (err) {}
+      }
+
+      function toggleFullscreen() {
+        if (isFullscreen()) {
+          exitFullscreen();
+        } else {
+          enterFullscreen();
         }
       }
 
-      togglePic1.addEventListener("click", () => setView(1));
-      togglePic2.addEventListener("click", () => setView(2));
-      toggleDual.addEventListener("click", () => setView("dual"));
-      thumb1.addEventListener("click", () => setView(1));
-      thumb2.addEventListener("click", () => setView(2));
+      // Export globally for inline onclick handlers and direct access
+      window.slabViewer = {
+        zoomIn,
+        zoomOut,
+        resetZoom,
+        toggleFullscreen,
+        enterFullscreen,
+        exitFullscreen,
+        getZoomLevel: () => zoomLevel,
+        isFullscreen
+      };
+
+      if (fullscreenBtn) {
+        fullscreenBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleFullscreen();
+        });
+      }
+
+      document.addEventListener("fullscreenchange", updateFullscreenUI);
+      document.addEventListener("webkitfullscreenchange", updateFullscreenUI);
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && stageSingle && stageSingle.classList.contains("is-fallback-fullscreen")) {
+          exitFullscreen();
+        }
+      });
+
+      // ================= 3. PICTURE SWITCHING =================
+      let activePicture = 1;
+
+      function setPicture(picNum) {
+        activePicture = picNum;
+        resetZoom();
+
+        if (picNum === 1) {
+          if (mainStageImg) {
+            mainStageImg.src = pic1Url;
+            mainStageImg.alt = `${stone.name} — Picture 1 (Full Slab Upright View)`;
+          }
+          if (stageTag) stageTag.textContent = "Picture 1 · Full Slab Upright View";
+          if (thumb1) thumb1.classList.add("active");
+          if (thumb2) thumb2.classList.remove("active");
+        } else {
+          if (mainStageImg) {
+            mainStageImg.src = pic2Url;
+            mainStageImg.alt = `${stone.name} — Picture 2 (Close-up Vein & Mineral Detail View)`;
+          }
+          if (stageTag) stageTag.textContent = "Picture 2 · Close-up Vein & Mineral Detail";
+          if (thumb1) thumb1.classList.remove("active");
+          if (thumb2) thumb2.classList.add("active");
+        }
+      }
+
+      if (thumb1) thumb1.addEventListener("click", () => setPicture(1));
+      if (thumb2) thumb2.addEventListener("click", () => setPicture(2));
+
+      if (stagePrevBtn) {
+        stagePrevBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setPicture(activePicture === 1 ? 2 : 1);
+        });
+      }
+      if (stageNextBtn) {
+        stageNextBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setPicture(activePicture === 1 ? 2 : 1);
+        });
+      }
+
+      // Initial picture display
+      setPicture(1);
 
       // 5. Connect Favorites on this page
       const detailFavBtn = document.getElementById("detailFavBtn");

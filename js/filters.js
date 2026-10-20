@@ -62,7 +62,14 @@
     const qLower = (val || "").trim().toLowerCase();
     quickChips.forEach((chip) => {
       const chipVal = (chip.getAttribute("data-query") || chip.textContent).trim().toLowerCase();
-      chip.classList.toggle("active", Boolean(qLower && chipVal === qLower));
+      const isActive = Boolean(
+        qLower && (
+          chipVal === qLower ||
+          (qLower.length >= 3 && chipVal.includes(qLower)) ||
+          (chipVal.length >= 3 && qLower.includes(chipVal))
+        )
+      );
+      chip.classList.toggle("active", isActive);
     });
   }
 
