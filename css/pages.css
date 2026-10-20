@@ -34,7 +34,123 @@
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 860px;
+  width: 100%;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center;
+  width: 100%;
+}
+
+.hero-left {
+  max-width: 800px;
+}
+
+.hero-visualizer {
+  position: relative;
+  perspective: 1000px;
+}
+
+.hero-slab-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  background: rgba(23, 19, 16, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform: rotateY(-5deg) rotateX(3deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.hero-slab-card:hover {
+  transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+  box-shadow: 0 35px 85px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(209, 154, 82, 0.5);
+}
+
+.hero-slab-media {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+}
+
+.hero-slab-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-slab-card:hover .hero-slab-media img {
+  transform: scale(1.05);
+}
+
+.hero-slab-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+}
+
+.hero-slab-meta {
+  padding: 1.25rem 1.5rem;
+  background: rgba(18, 15, 12, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-slab-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-bottom: 0.2rem;
+}
+
+.hero-slab-sub {
+  font-size: 0.78rem;
+  color: rgba(240, 232, 218, 0.75);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero-stone-switcher {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-stone-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #f0e8da;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hero-stone-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.hero-stone-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
 }
 
 .hero-tag {
@@ -397,4 +513,612 @@
   color: var(--muted);
   line-height: 1.5;
   margin-top: 1rem;
+}
+
+/* ==========================================================================
+   LIQUID FLOW STONE CATALOG & SCROLL POPUP SYSTEM
+   ========================================================================== */
+
+/* Liquid Floating Keyframes */
+@keyframes liquidBlobMove1 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  33% { transform: translate(60px, -40px) scale(1.15) rotate(45deg); border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  66% { transform: translate(-40px, 30px) scale(0.9) rotate(-30deg); border-radius: 70% 30% 50% 50% / 30% 40% 60% 70%; }
+}
+
+@keyframes liquidBlobMove2 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; }
+  50% { transform: translate(-70px, 50px) scale(1.2) rotate(-60deg); border-radius: 60% 40% 30% 70% / 70% 30% 50% 50%; }
+}
+
+@keyframes liquidPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+/* Liquid Section Container */
+.liquid-flow-section {
+  position: relative;
+  background-color: var(--bg);
+  border-top: 1px solid var(--line);
+  padding: clamp(4rem, 7vw, 7.5rem) 0;
+  overflow: hidden;
+}
+
+/* Liquid Ambient Background Orbs */
+.liquid-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.liquid-orb {
+  position: absolute;
+  filter: blur(90px);
+  opacity: 0.35;
+  transition: opacity 0.5s ease;
+}
+
+.liquid-orb-1 {
+  width: 550px;
+  height: 550px;
+  top: 5%;
+  left: -100px;
+  background: radial-gradient(circle, rgba(138, 90, 38, 0.45) 0%, rgba(209, 154, 82, 0.15) 60%, transparent 80%);
+  animation: liquidBlobMove1 22s infinite ease-in-out;
+}
+
+.liquid-orb-2 {
+  width: 650px;
+  height: 650px;
+  bottom: 0%;
+  right: -150px;
+  background: radial-gradient(circle, rgba(47, 79, 78, 0.4) 0%, rgba(127, 179, 172, 0.15) 60%, transparent 80%);
+  animation: liquidBlobMove2 26s infinite ease-in-out;
+}
+
+.liquid-orb-3 {
+  width: 450px;
+  height: 450px;
+  top: 45%;
+  left: 45%;
+  background: radial-gradient(circle, rgba(209, 154, 82, 0.25) 0%, transparent 70%);
+  animation: liquidBlobMove1 18s infinite ease-in-out reverse;
+}
+
+@media (prefers-color-scheme: dark) {
+  .liquid-orb {
+    opacity: 0.22;
+  }
+}
+
+/* Liquid Section Header */
+.liquid-head-wrap {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 2rem;
+}
+
+/* Liquid Filter Pills Nav */
+.liquid-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.liquid-filter-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+}
+
+.liquid-pill {
+  appearance: none;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink-2);
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.liquid-pill:hover {
+  color: var(--ink);
+  background: var(--bg-2);
+  transform: translateY(-1px);
+}
+
+.liquid-pill.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px rgba(138, 90, 38, 0.3);
+  transform: scale(1.03);
+}
+
+.liquid-pill-badge {
+  font-size: 0.72rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.liquid-pill.active .liquid-pill-badge {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* ================= VERTICAL LIQUID FLOW CATALOG ================= */
+@keyframes liquidVerticalPop {
+  0% {
+    opacity: 0;
+    transform: translateY(65px) scale(0.94);
+    filter: blur(5px);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.015);
+    filter: blur(0px);
+  }
+  85% {
+    transform: translateY(2px) scale(0.998);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes liquidRippleAura {
+  0% {
+    transform: scale(0.94);
+    opacity: 0.85;
+    border-color: var(--accent);
+  }
+  60% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1.06);
+    opacity: 0;
+    border-color: rgba(209, 154, 82, 0);
+  }
+}
+
+.liquid-vertical-flow {
+  position: relative;
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 7vw, 6.5rem);
+}
+
+.liquid-stone-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  transform: translateY(65px) scale(0.94);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.liquid-stone-row.liquid-flow-in {
+  opacity: 1;
+  animation: liquidVerticalPop 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.liquid-stone-row:nth-child(even) {
+  grid-template-columns: 1fr 1.15fr;
+}
+
+.liquid-stone-row:nth-child(even) .liquid-stone-media {
+  order: 2;
+}
+
+.liquid-stone-row:nth-child(even) .liquid-stone-info {
+  order: 1;
+}
+
+.liquid-stone-row.is-hidden {
+  display: none !important;
+}
+
+/* Liquid Media Framing */
+.liquid-stone-media {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+  background-color: var(--bg-2);
+  box-shadow: 0 20px 50px rgba(46, 36, 22, 0.12), 0 0 0 1px rgba(209, 154, 82, 0.22);
+  user-select: none;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease;
+}
+
+.liquid-stone-media::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 32px;
+  border: 2px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.liquid-stone-row.liquid-flow-in .liquid-stone-media::after {
+  animation: liquidRippleAura 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.liquid-stone-media:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 70px rgba(138, 90, 38, 0.22), 0 0 0 1px var(--accent);
+}
+
+.liquid-stone-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-stone-media:hover img {
+  transform: scale(1.06);
+}
+
+.liquid-card-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.4) 0%, transparent 60%);
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.liquid-stone-media:hover .liquid-card-glare {
+  opacity: 1;
+}
+
+.liquid-media-badges {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.liquid-badge {
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.liquid-badge.natural {
+  background: rgba(30, 25, 20, 0.84);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.liquid-badge.engineered {
+  background: rgba(138, 90, 38, 0.92);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.liquid-origin-badge {
+  background: rgba(255, 255, 255, 0.94);
+  color: #221d16;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  .liquid-origin-badge {
+    background: rgba(23, 19, 16, 0.92);
+    color: #f0e8da;
+    border: 1px solid var(--line);
+  }
+}
+
+.liquid-quick-view-btn {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: rgba(23, 19, 16, 0.88);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 4;
+}
+
+.liquid-stone-media:hover .liquid-quick-view-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.liquid-quick-view-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
+/* Liquid Stone Info Column */
+.liquid-stone-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.liquid-geology-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.liquid-glow-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: liquidPulse 2s infinite ease-in-out;
+}
+
+.liquid-geology {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.liquid-stone-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0;
+}
+
+.liquid-stone-desc {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+.liquid-stone-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.25rem 1.45rem;
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.liquid-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.liquid-detail-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.liquid-detail-value {
+  font-size: 0.88rem;
+  color: var(--ink);
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.liquid-stone-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 960px) {
+  .liquid-stone-row,
+  .liquid-stone-row:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .liquid-stone-row:nth-child(even) .liquid-stone-media {
+    order: 1;
+  }
+  .liquid-stone-row:nth-child(even) .liquid-stone-info {
+    order: 2;
+  }
+  .liquid-quick-view-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= Liquid Pop-Up Modal ================= */
+.liquid-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--modal-scrim);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.liquid-modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.liquid-modal-dialog {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  max-width: 920px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+  position: relative;
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+}
+
+.liquid-modal-backdrop.is-open .liquid-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.liquid-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: var(--chip);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  z-index: 5;
+  transition: all var(--transition-fast);
+}
+
+.liquid-modal-close:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.liquid-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.liquid-modal-media {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  aspect-ratio: 4 / 3;
+  background-color: var(--bg-2);
+}
+
+.liquid-modal-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.liquid-modal-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin: 1.25rem 0;
+  padding: 1.15rem;
+  background-color: var(--bg-2);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+}
+
+.liquid-modal-spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.liquid-modal-spec-lbl {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.liquid-modal-spec-val {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .liquid-modal-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .liquid-modal-specs {
+    grid-template-columns: 1fr;
+  }
 }

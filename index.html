@@ -68,37 +68,532 @@
 
   <!-- ================= HERO SECTION ================= -->
   <main id="mainContent">
+    <!-- ================= HERO SECTION WITH 3D LIVE SLAB VISUALIZER ================= -->
     <section class="hero">
+      <img src="assets/images/stone-types/granite.jpg" alt="Gran Trade wholesale stone showroom display" class="hero-bg" />
       <div class="hero-shade"></div>
       <div class="container hero-content">
-        <div class="hero-tag">
-          <span>Wholesale Warehouse & Slab Display · Carlstadt, NJ</span>
-        </div>
-        <h1>The slab is the statement.</h1>
-        <p class="lead">
-          A premier distributor of high quality stones — Gran Trade imports natural and engineered stone from trusted quarries and partners around the world, stocked and ready at our Carlstadt, New Jersey warehouse.
-        </p>
-        <div class="hero-actions">
-          <a href="collections.html" class="btn btn-primary">Browse the Collections</a>
-          <a href="showroom.html" class="btn btn-secondary">Plan a Warehouse Visit</a>
-        </div>
+        <div class="hero-grid">
+          <!-- Left: Hero Text & Metrics -->
+          <div class="hero-left">
+            <div class="hero-tag">
+              <span>Wholesale Warehouse & Slab Display · Carlstadt, NJ</span>
+            </div>
+            <h1>The slab is the statement.</h1>
+            <p class="lead">
+              A premier distributor of high quality stones — Gran Trade imports natural and engineered stone from trusted quarries and partners around the world, stocked and ready at our Carlstadt, New Jersey warehouse.
+            </p>
+            <div class="hero-actions">
+              <a href="collections.html" class="btn btn-primary">Browse the Collections</a>
+              <a href="showroom.html" class="btn btn-secondary">Plan a Warehouse Visit</a>
+            </div>
 
-        <div class="hero-metrics">
-          <div class="metric-item">
-            <div class="metric-val">20+</div>
-            <div class="metric-lbl">Years importing stone</div>
+            <div class="hero-metrics">
+              <div class="metric-item">
+                <div class="metric-val">20+</div>
+                <div class="metric-lbl">Years importing stone</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-val">1,000+</div>
+                <div class="metric-lbl">Trade customers served</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-val">8</div>
+                <div class="metric-lbl">Stone families in stock</div>
+              </div>
+            </div>
           </div>
-          <div class="metric-item">
-            <div class="metric-val">1,000+</div>
-            <div class="metric-lbl">Trade customers served</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-val">6+</div>
-            <div class="metric-lbl">Stone families in stock</div>
+
+          <!-- Right: Interactive 3D Slab Visualizer -->
+          <div class="hero-visualizer">
+            <div id="heroSlabCard" class="hero-slab-card">
+              <div class="hero-slab-media">
+                <img id="heroSlabImg" src="assets/images/stone-types/quartzite.jpg" alt="Aquamarine Quartzite live slab preview" />
+                <div class="hero-slab-glare"></div>
+              </div>
+              <div class="hero-slab-meta">
+                <div>
+                  <div id="heroSlabTitle" class="hero-slab-title">Aquamarine Quartzite</div>
+                  <div id="heroSlabSub" class="hero-slab-sub">Exotic Quartzite · Brazil · 2 cm / 3 cm</div>
+                </div>
+                <a href="collections.html?category=quartzite" class="btn btn-primary" style="padding:0.45rem 1rem; font-size:0.8rem;">Inspect Slab &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Quick Stone Swatch Switcher -->
+            <div class="hero-stone-switcher" aria-label="Quick stone preview switcher">
+              <button class="hero-stone-btn active" type="button" data-stone="quartzite">Quartzite</button>
+              <button class="hero-stone-btn" type="button" data-stone="marble">Marble</button>
+              <button class="hero-stone-btn" type="button" data-stone="granite">Granite</button>
+              <button class="hero-stone-btn" type="button" data-stone="quartz">Quartz</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ================= LIQUID FLOW STONE CATALOG & SCROLL POPUP SYSTEM ================= -->
+    <section id="liquidFlowSection" class="liquid-flow-section" aria-label="Liquid Flow Stone Catalog">
+      <!-- Animated Ambient Fluid Orbs -->
+      <div class="liquid-ambient" aria-hidden="true">
+        <div class="liquid-orb liquid-orb-1"></div>
+        <div class="liquid-orb liquid-orb-2"></div>
+        <div class="liquid-orb liquid-orb-3"></div>
+      </div>
+
+      <div class="container" style="position:relative; z-index:2;">
+        <!-- Header -->
+        <div class="liquid-head-wrap">
+          <div class="section-head center" style="margin-bottom:0;">
+            <span class="eyebrow">Wholesale Material Taxonomy</span>
+            <h2>The Types of Stone We Carry</h2>
+            <p class="lead" style="margin: 0 auto; max-width: 760px;">
+              Direct from premier quarries across Brazil, Italy, India, and the United States to our Carlstadt, NJ warehouse. Scroll down through our vertical liquid flow catalog to inspect geological formation, natural veining, and architectural applications.
+            </p>
+          </div>
+        </div>
+
+        <!-- Filter Nav Bar -->
+        <div class="liquid-nav-bar">
+          <div class="liquid-filter-pills" role="tablist" aria-label="Filter stone catalog">
+            <button class="liquid-pill active" type="button" data-type="all" aria-pressed="true">
+              <span>All Stone Families</span>
+              <span class="liquid-pill-badge">8</span>
+            </button>
+            <button class="liquid-pill" type="button" data-type="natural" aria-pressed="false">
+              <span>Natural Stone</span>
+              <span class="liquid-pill-badge">7</span>
+            </button>
+            <button class="liquid-pill" type="button" data-type="engineered" aria-pressed="false">
+              <span>Engineered Surfacing</span>
+              <span class="liquid-pill-badge">1</span>
+            </button>
+            <button class="liquid-pill" type="button" data-type="heavy" aria-pressed="false">
+              <span>Chef & Heavy-Duty</span>
+              <span class="liquid-pill-badge">3</span>
+            </button>
+            <button class="liquid-pill" type="button" data-type="translucent" aria-pressed="false">
+              <span>Translucent / Backlit</span>
+              <span class="liquid-pill-badge">2</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Vertical Liquid Flow (Scroll-Triggered Liquid Popups) -->
+        <div class="liquid-vertical-flow">
+
+          <!-- 1. Exotic Quartzite -->
+          <article class="liquid-stone-row" data-stone-type="natural" data-family="quartzite">
+            <div class="liquid-stone-media">
+              <div class="liquid-media-badges">
+                <span class="liquid-badge natural">Natural Stone</span>
+                <span class="liquid-origin-badge">Brazil (Bahia & Espirito Santo)</span>
+              </div>
+              <img src="assets/images/stone-types/quartzite.jpg" alt="Authentic Brazilian exotic quartzite slab on warehouse A-frame" loading="lazy" />
+              <div class="liquid-card-glare"></div>
+              <button class="liquid-quick-view-btn" type="button">Quick Inspect</button>
+            </div>
+            <div class="liquid-stone-info">
+              <div class="liquid-geology-wrap">
+                <span class="liquid-glow-dot"></span>
+                <span class="liquid-geology">Metamorphic Quartz Sandstone</span>
+              </div>
+              <h3 class="liquid-stone-title">Exotic Quartzite</h3>
+              <p class="liquid-stone-desc">
+                Nature's ultimate metamorphic masterpiece. Born from pure quartz sandstone recrystallized under colossal tectonic pressure, quartzite pairs the ethereal crystalline luminescence of fine marble with extraordinary mineral density. Naturally impervious to etching from wine or citrus juices, knife scratches, and daily kitchen wear.
+              </p>
+              <div class="liquid-stone-details">
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Formats & Thickness</span>
+                  <span class="liquid-detail-value">2 cm & 3 cm Bookmatched Consecutive Bundles</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Available Textures</span>
+                  <span class="liquid-detail-value">Polished Mirror · Leathered Satin · Honed Velvet</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Ideal Applications</span>
+                  <span class="liquid-detail-value">Waterfall Kitchen Islands · Backlit Feature Walls · Luxury Vanities</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Popular On The Racks</span>
+                  <span class="liquid-detail-value">Taj Mahal · Aquamarine Quartzite · Cristallo · Perla Venata</span>
+                </div>
+              </div>
+              <div class="liquid-stone-actions">
+                <a href="collections.html?category=quartzite" class="btn btn-primary">Browse Quartzite Collection &rarr;</a>
+                <a href="contact.html" class="btn btn-secondary">Inquire About Bundles</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. Fine Marble -->
+          <article class="liquid-stone-row" data-stone-type="natural" data-family="marble">
+            <div class="liquid-stone-media">
+              <div class="liquid-media-badges">
+                <span class="liquid-badge natural">Natural Stone</span>
+                <span class="liquid-origin-badge">Italy (Carrara) & Greece</span>
+              </div>
+              <img src="assets/images/stone-types/marble.jpg" alt="Fine Italian Arabescato Carrara marble slab with brecciated veining" loading="lazy" />
+              <div class="liquid-card-glare"></div>
+              <button class="liquid-quick-view-btn" type="button">Quick Inspect</button>
+            </div>
+            <div class="liquid-stone-info">
+              <div class="liquid-geology-wrap">
+                <span class="liquid-glow-dot"></span>
+                <span class="liquid-geology">Metamorphic Recrystallized Limestone</span>
+              </div>
+              <h3 class="liquid-stone-title">Fine Marble</h3>
+              <p class="liquid-stone-desc">
+                The timeless benchmark of classical and contemporary luxury architecture. Quarried from the renowned Apuan Alps of Tuscany, imported natural marble showcases dramatic brecciated veining, subtle translucency, and cool tactile stone warmth. Consecutive sequence bundles enable mirrored bookmatched fireplace mantels and island showpieces.
+              </p>
+              <div class="liquid-stone-details">
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Formats & Thickness</span>
+                  <span class="liquid-detail-value">2 cm & 3 cm Calibrated Full Slabs</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Available Textures</span>
+                  <span class="liquid-detail-value">Polished High Gloss · Honed Matte · Satin Silk</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Ideal Applications</span>
+                  <span class="liquid-detail-value">Showcase Kitchen Islands · Master En-Suites · Fireplace Surrounds</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Popular On The Racks</span>
+                  <span class="liquid-detail-value">Arabescato · Calacatta Monet · Statuario · Carrara Gioia</span>
+                </div>
+              </div>
+              <div class="liquid-stone-actions">
+                <a href="collections.html?category=marble" class="btn btn-primary">Browse Marble Collection &rarr;</a>
+                <a href="contact.html" class="btn btn-secondary">Inquire About Bundles</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Natural Granite -->
+          <article class="liquid-stone-row" data-stone-type="natural" data-family="granite">
+            <div class="liquid-stone-media">
+              <div class="liquid-media-badges">
+                <span class="liquid-badge natural">Natural Stone</span>
+                <span class="liquid-origin-badge">Brazil, India & Norway</span>
+              </div>
+              <img src="assets/images/stone-types/granite.jpg" alt="Natural Black Forest granite architectural installation" loading="lazy" />
+              <div class="liquid-card-glare"></div>
+              <button class="liquid-quick-view-btn" type="button">Quick Inspect</button>
+            </div>
+            <div class="liquid-stone-info">
+              <div class="liquid-geology-wrap">
+                <span class="liquid-glow-dot"></span>
+                <span class="liquid-geology">Igneous Intrusive Magma</span>
+              </div>
+              <h3 class="liquid-stone-title">Natural Granite</h3>
+              <p class="liquid-stone-desc">
+                Pure volcanic fortitude formed by molten magma slowly crystallizing miles beneath the continental crust. Interlocked quartz, feldspar, and mica crystals produce unmatched structural strength, deep chromatic depth, and enduring resilience against heavy culinary prep, outdoor UV exposure, and all-weather cycles.
+              </p>
+              <div class="liquid-stone-details">
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Formats & Thickness</span>
+                  <span class="liquid-detail-value">2 cm & 3 cm Heavy-Duty Slabs</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Available Textures</span>
+                  <span class="liquid-detail-value">Polished · Leathered Tactile · Flamed · Honed</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Ideal Applications</span>
+                  <span class="liquid-detail-value">Chef's Working Kitchens · Outdoor BBQ Islands · Commercial Bars</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Popular On The Racks</span>
+                  <span class="liquid-detail-value">Black Forest · Steel Grey · Blue Pearl · Titanium Black</span>
+                </div>
+              </div>
+              <div class="liquid-stone-actions">
+                <a href="collections.html?category=granite" class="btn btn-primary">Browse Granite Collection &rarr;</a>
+                <a href="contact.html" class="btn btn-secondary">Inquire About Bundles</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Gran Trade Quartz -->
+          <article class="liquid-stone-row" data-stone-type="engineered" data-family="quartz">
+            <div class="liquid-stone-media">
+              <div class="liquid-media-badges">
+                <span class="liquid-badge engineered">Engineered Surfacing</span>
+                <span class="liquid-origin-badge">USA & Global Surfacing</span>
+              </div>
+              <img src="assets/images/stone-types/quartz.jpg" alt="Gran Trade Calacatta quartz countertop with mitered waterfall edge" loading="lazy" />
+              <div class="liquid-card-glare"></div>
+              <button class="liquid-quick-view-btn" type="button">Quick Inspect</button>
+            </div>
+            <div class="liquid-stone-info">
+              <div class="liquid-geology-wrap">
+                <span class="liquid-glow-dot"></span>
+                <span class="liquid-geology">93% Pure Quartz Composite</span>
+              </div>
+              <h3 class="liquid-stone-title">Gran Trade Quartz</h3>
+              <p class="liquid-stone-desc">
+                Advanced architectural surfacing engineered for contemporary family living and high-traffic commercial environments. Composed of 93% pure crushed natural quartz crystal fused with advanced polymer resins. Zero porosity ensures liquids and oils never penetrate, requiring zero sealing or chemical conditioning over its lifespan.
+              </p>
+              <div class="liquid-stone-details">
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Formats & Thickness</span>
+                  <span class="liquid-detail-value">Jumbo Slabs (63" x 128") · 2 cm & 3 cm</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Available Textures</span>
+                  <span class="liquid-detail-value">High Polish Brilliant · Soft Touch Matte (Honed)</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Ideal Applications</span>
+                  <span class="liquid-detail-value">Modern Family Kitchens · Multi-Unit Developments · Hospitality Suites</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Popular On The Racks</span>
+                  <span class="liquid-detail-value">Calacatta Alps · Versilia · Calacatta Gold · Pure Arctic White</span>
+                </div>
+              </div>
+              <div class="liquid-stone-actions">
+                <a href="collections.html?category=quartz" class="btn btn-primary">Browse Quartz Collection &rarr;</a>
+                <a href="contact.html" class="btn btn-secondary">Inquire About Bundles</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Natural Soapstone -->
+          <article class="liquid-stone-row" data-stone-type="natural" data-family="soapstone">
+            <div class="liquid-stone-media">
+              <div class="liquid-media-badges">
+                <span class="liquid-badge natural">Natural Stone</span>
+                <span class="liquid-origin-badge">Brazil & Virginia, USA</span>
+              </div>
+              <img src="assets/images/stone-types/soapstone.jpg" alt="Natural Soapstone matte artisanal kitchen surface with organic veining" loading="lazy" />
+              <div class="liquid-card-glare"></div>
+              <button class="liquid-quick-view-btn" type="button">Quick Inspect</button>
+            </div>
+            <div class="liquid-stone-info">
+              <div class="liquid-geology-wrap">
+                <span class="liquid-glow-dot"></span>
+                <span class="liquid-geology">Metamorphic Steatite Talc Rock</span>
+              </div>
+              <h3 class="liquid-stone-title">Natural Soapstone</h3>
+              <p class="liquid-stone-desc">
+                An authentic artisanal heritage stone prized for its silky, velvety tactile touch. Naturally non-porous and chemically inert, making it completely impervious to lemon juice, vinegar, red wine, and harsh acids without requiring sealers. Gradually develops an organic, rich charcoal patina when seasoned with food-safe mineral oil.
+              </p>
+              <div class="liquid-stone-details">
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Formats & Thickness</span>
+                  <span class="liquid-detail-value">3 cm Heavy Architectural Slabs</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Available Textures</span>
+                  <span class="liquid-detail-value">Honed Silky Matte</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Ideal Applications</span>
+                  <span class="liquid-detail-value">Artisanal & Farmhouse Kitchens · Fireplace Hearths · Chemistry Benches</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Popular On The Racks</span>
+                  <span class="liquid-detail-value">Churchill Soapstone · Barroca Black · Mariana Grey</span>
+                </div>
+              </div>
+              <div class="liquid-stone-actions">
+                <a href="collections.html?category=soapstone" class="btn btn-primary">Browse Soapstone Collection &rarr;</a>
+                <a href="contact.html" class="btn btn-secondary">Inquire About Bundles</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. Semi-Precious Gemstone -->
+          <article class="liquid-stone-row" data-stone-type="natural" data-family="semi">
+            <div class="liquid-stone-media">
+              <div class="liquid-media-badges">
+                <span class="liquid-badge natural">Gemstone Slab</span>
+                <span class="liquid-origin-badge">Brazil & Madagascar</span>
+              </div>
+              <img src="assets/images/stone-types/semi-precious.jpg" alt="Illuminated blue agate semi-precious stone architectural feature" loading="lazy" />
+              <div class="liquid-card-glare"></div>
+              <button class="liquid-quick-view-btn" type="button">Quick Inspect</button>
+            </div>
+            <div class="liquid-stone-info">
+              <div class="liquid-geology-wrap">
+                <span class="liquid-glow-dot"></span>
+                <span class="liquid-geology">Handcrafted Natural Agate & Crystal Geode</span>
+              </div>
+              <h3 class="liquid-stone-title">Semi-Precious Gemstone</h3>
+              <p class="liquid-stone-desc">
+                The apex of architectural opulence and lapidary mastery. Skilled artisans hand-select and assemble individual cross-sections of genuine translucent agate, petrified wood, and crystal geode. Designed specifically for dramatic rear-illumination with LED light panels to produce glowing, jewel-like feature installations.
+              </p>
+              <div class="liquid-stone-details">
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Formats & Thickness</span>
+                  <span class="liquid-detail-value">2 cm Solid & Reinforced Composite Slabs</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Available Textures</span>
+                  <span class="liquid-detail-value">Mirror Polished Gemstone Surface</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Ideal Applications</span>
+                  <span class="liquid-detail-value">Backlit Luxury Cocktail Bars · Powder Room Statement Walls · VIP Foyers</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Popular On The Racks</span>
+                  <span class="liquid-detail-value">Blue Agate · Wild Agate · Amethyst · Crystal Quartz</span>
+                </div>
+              </div>
+              <div class="liquid-stone-actions">
+                <a href="collections.html?category=semi" class="btn btn-primary">Browse Semi-Precious Collection &rarr;</a>
+                <a href="contact.html" class="btn btn-secondary">Inquire About Bundles</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7. Civic Monuments -->
+          <article class="liquid-stone-row" data-stone-type="natural" data-family="monuments">
+            <div class="liquid-stone-media">
+              <div class="liquid-media-badges">
+                <span class="liquid-badge natural">Structural Granite</span>
+                <span class="liquid-origin-badge">North America & India</span>
+              </div>
+              <img src="assets/images/stone-types/monuments.jpg" alt="Wholesale structural granite blocks and monument blanks in distribution yard" loading="lazy" />
+              <div class="liquid-card-glare"></div>
+              <button class="liquid-quick-view-btn" type="button">Quick Inspect</button>
+            </div>
+            <div class="liquid-stone-info">
+              <div class="liquid-geology-wrap">
+                <span class="liquid-glow-dot"></span>
+                <span class="liquid-geology">Certified Structural Granite</span>
+              </div>
+              <h3 class="liquid-stone-title">Civic Monuments</h3>
+              <p class="liquid-stone-desc">
+                Certified structural-grade natural granites quarried for multi-generational outdoor permanence. Dense, uniform crystalline matrix withstands severe Northeastern freeze-thaw cycles, heavy precipitation, and atmospheric weathering without surface degradation. Provides high contrast for diamond sandblasting and precision laser engraving.
+              </p>
+              <div class="liquid-stone-details">
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Formats & Thickness</span>
+                  <span class="liquid-detail-value">Custom Architectural Blanks · Bases · Dies · Slants</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Available Textures</span>
+                  <span class="liquid-detail-value">Polished Face · Rock Pitch · Thermal Stipple</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Ideal Applications</span>
+                  <span class="liquid-detail-value">Civic Memorials · Public Plazas · Architectural Historic Markers</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Popular On The Racks</span>
+                  <span class="liquid-detail-value">Barre Gray · Jet Black · American Black · GT Memorial Blanks</span>
+                </div>
+              </div>
+              <div class="liquid-stone-actions">
+                <a href="collections.html?category=monuments" class="btn btn-primary">Browse Monument Inventory &rarr;</a>
+                <a href="contact.html" class="btn btn-secondary">Inquire About Bundles</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8. Architectural Tile -->
+          <article class="liquid-stone-row" data-stone-type="natural" data-family="tile">
+            <div class="liquid-stone-media">
+              <div class="liquid-media-badges">
+                <span class="liquid-badge natural">Natural Formats</span>
+                <span class="liquid-origin-badge">Italy & Turkey</span>
+              </div>
+              <img src="assets/images/stone-types/tile.jpg" alt="Seamless luxury Mediterranean villa French-pattern travertine stone tile flooring" loading="lazy" />
+              <div class="liquid-card-glare"></div>
+              <button class="liquid-quick-view-btn" type="button">Quick Inspect</button>
+            </div>
+            <div class="liquid-stone-info">
+              <div class="liquid-geology-wrap">
+                <span class="liquid-glow-dot"></span>
+                <span class="liquid-geology">Calibrated Travertine & Natural Marble</span>
+              </div>
+              <h3 class="liquid-stone-title">Architectural Tile</h3>
+              <p class="liquid-stone-desc">
+                Precision-calibrated natural stone tiles crafted to provide seamless aesthetic continuity across interior floors, bathrooms, and exterior living spaces. Available in interlocking French patterns, large-format rectangles, and modular squares. Tumbled, brushed, and honed textures deliver timeless warmth with safe foot traction.
+              </p>
+              <div class="liquid-stone-details">
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Formats & Thickness</span>
+                  <span class="liquid-detail-value">French Pattern Sets · 12"x24" · 24"x24" · 1/2" Calibrated</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Available Textures</span>
+                  <span class="liquid-detail-value">Tumbled · Brushed · Honed · Pillowed Edge</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Ideal Applications</span>
+                  <span class="liquid-detail-value">Master Shower Enclosures · Foyer Flooring · Covered Loggias & Patios</span>
+                </div>
+                <div class="liquid-detail-item">
+                  <span class="liquid-detail-label">Popular On The Racks</span>
+                  <span class="liquid-detail-value">French Pattern Travertine · Honed Carrara Tile · Quartzite Pavers</span>
+                </div>
+              </div>
+              <div class="liquid-stone-actions">
+                <a href="collections.html?category=tile" class="btn btn-primary">Browse Architectural Tile &rarr;</a>
+                <a href="contact.html" class="btn btn-secondary">Inquire About Bundles</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LIQUID QUICK INSPECT POP-UP MODAL ================= -->
+    <div id="liquidModal" class="liquid-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="liquidModalTitle">
+      <div class="liquid-modal-dialog">
+        <button id="liquidModalClose" class="liquid-modal-close" type="button" aria-label="Close dialog">&times;</button>
+        <div class="liquid-modal-grid">
+          <div class="liquid-modal-media">
+            <img id="liquidModalImg" src="assets/images/stone-types/quartzite.jpg" alt="Selected stone full slab preview" />
+          </div>
+          <div>
+            <span id="liquidModalGeology" class="liquid-geology">Metamorphic Quartz Sandstone</span>
+            <h2 id="liquidModalTitle" style="font-family:var(--font-serif); font-size:2rem; margin-bottom:0.25rem;">Exotic Quartzite</h2>
+            <div id="liquidModalOrigin" style="font-size:0.8rem; font-weight:600; color:var(--muted); margin-bottom:1rem;">Brazil (Bahia & Espirito Santo)</div>
+            <p id="liquidModalDesc" style="font-size:0.9rem; line-height:1.6; color:var(--ink-2); margin-bottom:1.25rem;">
+              Nature's most resilient masterpiece. Metamorphosed under intense tectonic pressure from pure quartz sandstone.
+            </p>
+
+            <div class="liquid-modal-specs">
+              <div class="liquid-modal-spec-item">
+                <span class="liquid-modal-spec-lbl">Material Category</span>
+                <span id="liquidModalCategory" class="liquid-modal-spec-val">Natural Metamorphic</span>
+              </div>
+              <div class="liquid-modal-spec-item">
+                <span class="liquid-modal-spec-lbl">Warehouse Thickness</span>
+                <span id="liquidModalThickness" class="liquid-modal-spec-val">2 cm / 3 cm Consecutive Slabs</span>
+              </div>
+              <div class="liquid-modal-spec-item">
+                <span class="liquid-modal-spec-lbl">Available Finishes</span>
+                <span id="liquidModalFinishes" class="liquid-modal-spec-val">Polished, Leathered, Honed</span>
+              </div>
+              <div class="liquid-modal-spec-item">
+                <span class="liquid-modal-spec-lbl">Carlstadt, NJ Yard</span>
+                <span id="liquidModalAvailability" class="liquid-modal-spec-val">In Stock · Ready for Inspection</span>
+              </div>
+            </div>
+
+            <div style="font-size:0.82rem; margin-bottom:1.75rem;">
+              <strong style="color:var(--ink); display:block; margin-bottom:0.25rem; text-transform:uppercase; font-size:0.72rem; letter-spacing:0.05em;">Best Applications:</strong>
+              <span id="liquidModalApps" style="color:var(--ink-2);">Waterfall Islands · Backlit Walls · High-End Kitchen Countertops</span>
+            </div>
+
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+              <a id="liquidModalCatalogLink" href="collections.html?category=quartzite" class="btn btn-primary">Browse All Matching Slabs</a>
+              <a href="contact.html" class="btn btn-secondary">Inquire About Consecutive Bundles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- ================= FEATURED 3-PICTURE STONE VIEWER ================= -->
     <section class="section">
@@ -416,5 +911,6 @@
   <script src="js/nav.js"></script>
   <script src="js/favorites.js"></script>
   <script src="js/viewer.js"></script>
+  <script src="js/stone-types.js"></script>
 </body>
 </html>

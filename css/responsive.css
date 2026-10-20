@@ -15,6 +15,18 @@
     display: flex !important;
   }
 
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .st-studio {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .stone-types-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
   .slab-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
@@ -26,6 +38,16 @@
 @media (max-width: 1024px) {
   .hero {
     min-height: 75vh;
+  }
+
+  .hero-grid,
+  .st-studio {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .stone-types-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .featured-viewer {

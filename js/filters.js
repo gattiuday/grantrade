@@ -157,6 +157,19 @@
     resetBtn.addEventListener("click", window.GranTradeFilters.resetAll);
   }
 
-  // Initial run
-  applyFiltersAndSort();
+  // Initial run — inspect URL query param or hash for category
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramCategory = urlParams.get("category") || window.location.hash.replace("#", "");
+  const validCategories = ["quartz", "granite", "marble", "quartzite", "monuments", "semi", "soapstone", "tile"];
+
+  if (paramCategory && validCategories.includes(paramCategory)) {
+    if (window.GranTradeTabs && typeof window.GranTradeTabs.setCategory === "function") {
+      window.GranTradeTabs.setCategory(paramCategory);
+    } else {
+      currentCategory = paramCategory;
+      applyFiltersAndSort();
+    }
+  } else {
+    applyFiltersAndSort();
+  }
 })();

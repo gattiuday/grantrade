@@ -6,7 +6,7 @@
 /* ---------------- Container System ---------------- */
 .container {
   width: 100%;
-  max-width: 1280px;
+  max-width: min(1560px, 94vw);
   margin-left: auto;
   margin-right: auto;
   padding-left: clamp(1rem, 3.5vw, 2.5rem);
@@ -15,7 +15,7 @@
 
 .container-wide {
   width: 100%;
-  max-width: 1440px;
+  max-width: min(1760px, 96vw);
   margin-left: auto;
   margin-right: auto;
   padding-left: clamp(1rem, 3.5vw, 2.5rem);
