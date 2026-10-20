@@ -16,7 +16,6 @@
   if (!section) return;
 
   const rows = Array.from(section.querySelectorAll(".liquid-stone-row"));
-  const filterPills = Array.from(section.querySelectorAll(".liquid-pill"));
   const modal = document.getElementById("liquidModal");
   const modalClose = document.getElementById("liquidModalClose");
   const modalImg = document.getElementById("liquidModalImg");
@@ -70,46 +69,7 @@
     });
   });
 
-  // 3. CATEGORY FILTER PILLS
-  filterPills.forEach(function (pill) {
-    pill.addEventListener("click", function () {
-      const filterType = pill.getAttribute("data-type");
-
-      filterPills.forEach((p) => {
-        p.classList.remove("active");
-        p.setAttribute("aria-pressed", "false");
-      });
-      pill.classList.add("active");
-      pill.setAttribute("aria-pressed", "true");
-
-      let visibleIdx = 0;
-      rows.forEach(function (row) {
-        const stoneType = row.getAttribute("data-stone-type");
-        const family = row.getAttribute("data-family");
-
-        const isMatch =
-          filterType === "all" ||
-          (filterType === "natural" && stoneType === "natural") ||
-          (filterType === "engineered" && stoneType === "engineered") ||
-          (filterType === "heavy" && ["quartzite", "granite", "quartz"].includes(family)) ||
-          (filterType === "translucent" && ["quartzite", "semi"].includes(family));
-
-        if (isMatch) {
-          row.classList.remove("is-hidden");
-          row.classList.remove("liquid-flow-in");
-          setTimeout(function () {
-            row.classList.add("liquid-flow-in");
-          }, visibleIdx * 90);
-          visibleIdx++;
-        } else {
-          row.classList.add("is-hidden");
-          row.classList.remove("liquid-flow-in");
-        }
-      });
-    });
-  });
-
-  // 4. CLEAN MATERIAL INSPECT MODAL (ZERO TEMPERATURE / THERMAL INFO)
+  // 3. CLEAN MATERIAL INSPECT MODAL (ZERO TEMPERATURE / THERMAL INFO)
   const stoneData = {
     quartzite: {
       title: "Exotic Quartzite",
