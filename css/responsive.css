@@ -81,9 +81,7 @@
   }
 
   .specs-bar {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    padding: 2rem 1.75rem;
+    padding: 2rem 1.5rem;
   }
 
   .yard-guide-grid {
@@ -304,9 +302,14 @@
   }
 
   .specs-bar {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 1.5rem;
     padding: 1.75rem 1.5rem;
+  }
+
+  .spec-item {
+    width: 100%;
+    padding: 0;
   }
 
   .spec-item:not(:last-child)::after {
