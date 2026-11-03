@@ -108,7 +108,7 @@
         <div class="pane-header-bar">
           <div>
             <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.25rem;">Wholesale Inventory Catalog</h2>
-            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Manage GT numbers, lot codes, calibrated dimensions, and live stock statuses.</p>
+            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Manage GT numbers, lot codes, calibrated dimensions, and stone specifications.</p>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
             <button id="btnExportJson" class="btn btn-sm btn-secondary" type="button">Download JSON</button>
@@ -145,7 +145,6 @@
                 <th>Lot Number</th>
                 <th>Thickness</th>
                 <th>Dimensions</th>
-                <th>Status</th>
                 <th style="text-align:right;">Actions</th>
               </tr>
             </thead>
@@ -337,11 +336,6 @@
           <div>
             <label for="fieldDesc" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Geological & Architectural Description</label>
             <textarea id="fieldDesc" class="admin-textarea" rows="3" placeholder="Describe natural veining, mineral content, and ideal applications..."></textarea>
-          </div>
-
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <input type="checkbox" id="fieldInStock" style="width:18px; height:18px; accent-color:var(--accent);" />
-            <label for="fieldInStock" style="font-size:0.85rem; font-weight:600; cursor:pointer;">Mark Slab as Available In Stock at Carlstadt Yard</label>
           </div>
         </div>
 

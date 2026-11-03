@@ -713,10 +713,6 @@
           <div class="slab-header-block">
             <div class="slab-eyebrow-row">
               <span id="slabCatBadge" class="slab-cat-badge">Exotic Quartzite</span>
-              <div class="slab-stock-status">
-                <span class="slab-stock-dot"></span>
-                <span>In Stock at Carlstadt Yard</span>
-              </div>
             </div>
             <h1 id="slabName" class="slab-title">Aquamarine Quartzite</h1>
           </div>
@@ -794,7 +790,7 @@
         <div class="related-head">
           <div>
             <span class="eyebrow" id="relatedEyebrow">Stone Family</span>
-            <h2 id="relatedTitle">More Slabs in Stock</h2>
+            <h2 id="relatedTitle">Related Slabs</h2>
           </div>
           <a href="collections.html" class="btn btn-secondary">Back to Full Catalog &rarr;</a>
         </div>
@@ -1430,7 +1426,7 @@
       if (relatedGrid) {
         const related = catalog.all.filter(s => s.category === stone.category && s.id !== stone.id).slice(0, 3);
         document.getElementById("relatedEyebrow").textContent = stone.categoryLabel;
-        document.getElementById("relatedTitle").textContent = `More ${stone.categoryLabel} in Stock`;
+        document.getElementById("relatedTitle").textContent = `More ${stone.categoryLabel} Slabs`;
 
         related.forEach(rel => {
           const card = document.createElement("article");

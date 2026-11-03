@@ -128,30 +128,6 @@
   text-transform: uppercase;
 }
 
-.stock-pill {
-  background: rgba(43, 122, 75, 0.92);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: #ffffff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  padding: 4px 9px;
-  border-radius: var(--radius-pill);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.stock-pill::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #7bf1a8;
-}
-
 /* Heart Favorite Button */
 .heart {
   position: absolute;

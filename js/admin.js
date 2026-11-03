@@ -160,11 +160,6 @@
         <td><code>${s.lotNumber || '—'}</code></td>
         <td>${s.thickness || '2 cm · 3 cm'}</td>
         <td>${s.size || 'Full Slab'}</td>
-        <td>
-          <button class="btn btn-sm ${s.inStock !== false ? 'btn-secondary' : 'btn-dark'}" onclick="window.GranTradeAdmin.toggleStock('${s.id}', ${!(s.inStock !== false)})">
-            ${s.inStock !== false ? '🟢 In Stock' : '🔴 Out of Stock'}
-          </button>
-        </td>
         <td style="text-align:right;">
           <button class="btn btn-sm btn-secondary" onclick="window.GranTradeAdmin.openEditModal('${s.id}')">Edit</button>
           <button class="btn btn-sm" style="color:var(--danger); border:1px solid var(--line);" onclick="window.GranTradeAdmin.deleteStone('${s.id}')">Delete</button>
@@ -197,13 +192,15 @@
       document.getElementById("fieldOrigin").value = stone.origin || "";
       document.getElementById("fieldImage1").value = stone.image1 || "";
       document.getElementById("fieldDesc").value = stone.description || "";
-      document.getElementById("fieldInStock").checked = stone.inStock !== false;
+      const stockEl = document.getElementById("fieldInStock");
+      if (stockEl) stockEl.checked = stone.inStock !== false;
     } else {
       modalTitle.textContent = "Add New Inventory Slab";
       document.getElementById("fieldId").value = "";
       document.getElementById("fieldCategory").value = "quartzite";
       document.getElementById("fieldType").value = "natural";
-      document.getElementById("fieldInStock").checked = true;
+      const stockEl = document.getElementById("fieldInStock");
+      if (stockEl) stockEl.checked = true;
     }
 
     stoneModal.style.display = "flex";
@@ -238,7 +235,7 @@
         image1: document.getElementById("fieldImage1").value.trim() || `assets/images/stone-types/${document.getElementById("fieldCategory").value}.jpg`,
         image2: document.getElementById("fieldImage1").value.trim(),
         description: document.getElementById("fieldDesc").value.trim(),
-        inStock: document.getElementById("fieldInStock").checked,
+        inStock: document.getElementById("fieldInStock") ? document.getElementById("fieldInStock").checked : true,
       };
 
       try {
