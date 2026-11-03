@@ -59,9 +59,9 @@
   });
 
   // ---------------- 3. Live Yard Open-Now Indicator (America/New_York) ----------------
-  // Schedule: 0=Sun (Closed), 1-5=Mon-Fri (8:00 - 18:00), 6=Sat (9:00 - 14:00)
+  // Schedule: 0=Sun (10:00 - 14:00), 1-5=Mon-Fri (8:00 - 18:00), 6=Sat (9:00 - 14:00)
   const SCHEDULE = {
-    0: null,
+    0: [10, 14],
     1: [8, 18],
     2: [8, 18],
     3: [8, 18],

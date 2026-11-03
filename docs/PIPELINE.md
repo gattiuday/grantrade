@@ -94,7 +94,7 @@ Verify responsive fidelity, interactive functionality, timezone accuracy, and ac
   - Mobile (iOS Safari, Android Chrome) at 360px, 390px, 414px.
   - Tablet (iPad Safari) at 768px, 820px, 1024px.
   - Desktop (Chrome, Safari, Firefox, Edge) at 1280px, 1440px, 1920px.
-- **Timezone Verification**: Tested `js/nav.js` against America/New_York schedule boundaries (e.g. 7:59 AM vs 8:01 AM Mon-Fri, Saturday 2:01 PM closing, Sunday closed label).
+- **Timezone Verification**: Tested `js/nav.js` against America/New_York schedule boundaries (e.g. 7:59 AM vs 8:01 AM Mon-Fri, Saturday 9:00 AM – 2:00 PM, Sunday 10:00 AM – 2:00 PM).
 - **Interactive Verification**:
   - Multi-facet filters: Combining category + color + finish + thickness correctly filters cards and updates the count badge.
   - Favorites: Saving stones persists across page navigation via `localStorage`, updates navigation badge counter, and syncs heart icons.
