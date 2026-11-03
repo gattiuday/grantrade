@@ -55,3 +55,4 @@ Before considering frontend code complete:
 3. **Interactive Completeness**: Every button, card, and tab must have distinct hover, focus-visible, and active feedback states.
 4. **Media Resilience**: All images must feature fallback handlers (`onerror`) to prevent broken image icons.
 5. **Reduced Motion**: Respect `@media (prefers-reduced-motion: reduce)` by disabling non-essential transitions.
+
