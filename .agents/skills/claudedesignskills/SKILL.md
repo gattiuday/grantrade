@@ -49,3 +49,4 @@ description: >-
      ```
 3. **Clean Vanilla & Zero Bloat**:
    - Favor native CSS custom properties and standard Web APIs (Web Animations API, Intersection Observer, Resize Observer) over heavy external dependencies when possible.
+

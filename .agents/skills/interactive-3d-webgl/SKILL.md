@@ -21,3 +21,4 @@ description: >-
 3. **Resilience & Graceful Degradation**:
    - Detect WebGL support via `WebGLRenderingContext`.
    - If WebGL is unavailable or fails, automatically fallback to responsive picture elements with high-res 2.3x CSS pan/zoom.
+

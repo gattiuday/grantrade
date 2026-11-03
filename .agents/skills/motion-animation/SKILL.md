@@ -24,3 +24,4 @@ description: >-
 3. **Scroll Choreography (ScrollTrigger Patterns)**:
    - Use `IntersectionObserver` to trigger `.in-view` state classes rather than listening directly to raw `scroll` events.
    - Separate pin targets from animating child layers to prevent layout jitter.
+
