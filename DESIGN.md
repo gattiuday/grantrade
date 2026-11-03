@@ -55,3 +55,12 @@ Gran Trade Inc.'s aesthetic reflects **monumental geology and architectural perm
 - ❌ **No Dead Images**: Every stone media element must have an automatic fallback to its family stone photograph (`assets/images/stone-types/<family>.jpg`).
 - ❌ **No Retail CTAs**: Never insert "Request an instant quote" or retail cart widgets.
 - ❌ **No Broken Search**: All 50 inventory stones must be searchable by name, GT#, lot#, and category.
+
+## 6. Taste Skill Parameters (`Leonxlnx/taste-skill`)
+- **Archetype**: *Luxury Monumental & Raw Mineral*
+- **Design Read**: High-end architectural stone distributor; authentic, physical, authoritative, tactile, trade-focused.
+- **`DESIGN_VARIANCE` (5 / 10)**: Structural balance combining symmetrical catalog grids with asymmetric hero viewers and multi-height gallery compositions.
+- **`MOTION_INTENSITY` (3 / 10)**: Subtle, physics-grounded transitions (0.15s–0.25s), smooth drawer choreography, zero gratuitous scroll-jacking, fully reduced-motion compliant.
+- **`VISUAL_DENSITY` (6 / 10)**: Balanced trade catalog density; technical specifications (GT#, Lot#, size, thickness) formatted cleanly without visual crowding.
+
+

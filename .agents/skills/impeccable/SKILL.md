@@ -35,3 +35,4 @@ Impeccable steers coding agents toward award-winning, production-grade frontend 
 - `/impeccable animate` — Add subtle, purposeful transitions and tactile micro-interactions.
 - `/impeccable harden` — Handle edge cases, empty states, long text strings, and offline fallbacks.
 - `/impeccable adapt` — Perfect responsive behavior across mobile, tablet, and wide desktop screens.
+

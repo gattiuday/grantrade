@@ -25,3 +25,4 @@
 - **Comprehensive 50-Stone Live Inventory**: Filterable by Stone Family, Type (Natural vs. Engineered), Color, Finish (Polished, Honed, Leathered), Thickness (2cm, 3cm), GT#, and Lot#.
 - **Dedicated Slab Inspector (`slab.html`)**: Multi-angle visual inspection (full slab view, 2.3x macro zoom, room installation view).
 - **Client-Side Saved Slabs Drawer**: Persistent client-side favorites (`localStorage`) so trade pros can tag slabs while walking the yard or browsing the site.
+
