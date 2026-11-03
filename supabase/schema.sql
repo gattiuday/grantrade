@@ -130,3 +130,4 @@ drop trigger if exists set_stones_updated_at on public.stones;
 create trigger set_stones_updated_at
   before update on public.stones
   for each row execute function public.handle_updated_at();
+

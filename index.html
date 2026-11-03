@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
-  <title>Gran Trade Inc. — Wholesale Stone Importer & Distributor | Carlstadt, NJ</title>
+  <title>Gran Trade Inc. | Wholesale Stone Importer & Distributor · Carlstadt, NJ</title>
   <meta name="description" content="Gran Trade Inc. is a premier wholesale importer and distributor of natural and engineered stone slabs, tile, and monuments in Carlstadt, New Jersey." />
 
   <!-- Typography -->
@@ -81,7 +81,7 @@
             </div>
             <h1>The slab is the statement.</h1>
             <p class="lead">
-              A premier distributor of high quality stones — Gran Trade imports natural and engineered stone from trusted quarries and partners around the world, stocked and ready at our Carlstadt, New Jersey warehouse.
+              A premier distributor of architectural stones. Gran Trade imports natural quartzite, fine marble, durable granite, and engineered quartz from trusted quarries worldwide, stocked and ready at our Carlstadt, New Jersey warehouse.
             </p>
             <div class="hero-actions">
               <a href="collections.html" class="btn btn-primary">Browse the Collections</a>
@@ -97,6 +97,31 @@
                 <div class="metric-val">1,000+</div>
                 <div class="metric-lbl">Trade customers served</div>
               </div>
+            </div>
+          </div>
+
+          <!-- Right: 3D Interactive Hero Slab Visualizer (Claude Design Skills & Taste Skill) -->
+          <div class="hero-visualizer" id="heroVisualizer">
+            <div class="hero-slab-card" id="heroSlabCard">
+              <div class="hero-slab-media">
+                <img id="heroSlabImg" src="assets/images/aquamarine-slab-1.jpg" alt="Featured Aquamarine Quartzite Slab" loading="eager" onerror="this.onerror=null; this.src='assets/images/stone-types/quartzite.jpg';" />
+                <div class="hero-slab-glare" id="heroSlabGlare"></div>
+              </div>
+              <div class="hero-slab-meta">
+                <div>
+                  <div class="hero-slab-title" id="heroSlabTitle">Aquamarine Quartzite</div>
+                  <div class="hero-slab-sub" id="heroSlabSub">GT-4008 · LOT #59108 · 2 cm / 3 cm</div>
+                </div>
+                <a href="slab.html?id=aquamarine-quartzite" class="btn btn-sm btn-primary" id="heroSlabLink">Inspect Slab &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Quick Interactive Stone Switcher -->
+            <div class="hero-stone-switcher" role="tablist" aria-label="Featured Slab Switcher">
+              <button type="button" class="hero-stone-btn active" data-img="assets/images/aquamarine-slab-1.jpg" data-title="Aquamarine Quartzite" data-sub="GT-4008 · LOT #59108 · Exotic Quartzite" data-link="slab.html?id=aquamarine-quartzite">Aquamarine</button>
+              <button type="button" class="hero-stone-btn" data-img="assets/images/stone-types/marble.jpg" data-title="Arabescato Carrara" data-sub="GT-2004 · LOT #78102 · Fine Marble" data-link="collections.html?category=marble">Arabescato</button>
+              <button type="button" class="hero-stone-btn" data-img="assets/images/stone-types/granite.jpg" data-title="Black Forest Granite" data-sub="GT-3001 · LOT #44091 · Natural Granite" data-link="collections.html?category=granite">Black Forest</button>
+              <button type="button" class="hero-stone-btn" data-img="assets/images/stone-types/quartz.jpg" data-title="Calacatta Alps Quartz" data-sub="GT-1001 · LOT #84920 · Engineered Quartz" data-link="collections.html?category=quartz">Calacatta Alps</button>
             </div>
           </div>
         </div>
@@ -853,10 +878,62 @@
     </div>
   </footer>
 
-  <!-- Scripts Split 5 Ways -->
+  <!-- Scripts Split 5 Ways & Interactive 3D Visualizer -->
   <script src="js/nav.js"></script>
   <script src="js/favorites.js"></script>
   <script src="js/viewer.js"></script>
   <script src="js/stone-types.js"></script>
+  <script>
+    (function () {
+      const card = document.getElementById("heroSlabCard");
+      const glare = document.getElementById("heroSlabGlare");
+      const img = document.getElementById("heroSlabImg");
+      const title = document.getElementById("heroSlabTitle");
+      const sub = document.getElementById("heroSlabSub");
+      const link = document.getElementById("heroSlabLink");
+      const btns = document.querySelectorAll(".hero-stone-btn");
+
+      if (card) {
+        card.addEventListener("mousemove", function (e) {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+          if (glare) {
+            glare.style.background = `radial-gradient(circle at ${(x / rect.width * 100).toFixed(1)}% ${(y / rect.height * 100).toFixed(1)}%, rgba(255,255,255,0.45) 0%, transparent 60%)`;
+          }
+        });
+
+        card.addEventListener("mouseleave", function () {
+          card.style.transform = "perspective(1000px) rotateX(3deg) rotateY(-5deg) scale3d(1, 1, 1)";
+          if (glare) {
+            glare.style.background = "radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 60%)";
+          }
+        });
+      }
+
+      btns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          btns.forEach((b) => b.classList.remove("active"));
+          this.classList.add("active");
+
+          const newImg = this.getAttribute("data-img");
+          const newTitle = this.getAttribute("data-title");
+          const newSub = this.getAttribute("data-sub");
+          const newLink = this.getAttribute("data-link");
+
+          if (img) img.src = newImg;
+          if (title) title.textContent = newTitle;
+          if (sub) sub.textContent = newSub;
+          if (link) link.href = newLink;
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

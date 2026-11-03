@@ -305,3 +305,4 @@
 
   global.GranTradeDB = GranTradeDB;
 })(typeof window !== "undefined" ? window : this);
+
