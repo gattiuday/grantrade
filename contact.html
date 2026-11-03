@@ -265,6 +265,7 @@
           <li><a href="collections.html">Collections</a></li>
           <li><a href="showroom.html">Showroom & Yard</a></li>
           <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="admin.html" style="opacity:0.75;">Admin Portal &rarr;</a></li>
         </ul>
       </div>
 
@@ -306,7 +307,59 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/favorites.js"></script>
+  <script>
+    (function() {
+      const form = document.getElementById("inquiryForm");
+      if (!form) return;
+
+      form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const submitBtn = form.querySelector("button[type='submit']");
+        const originalText = submitBtn ? submitBtn.textContent : "Send Inquiry";
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Sending to Yard...";
+        }
+
+        const payload = {
+          name: document.getElementById("fullName").value.trim(),
+          company: document.getElementById("companyName").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          phone: document.getElementById("phone").value.trim(),
+          role: document.getElementById("inquiryType").value,
+          stone: document.getElementById("stonesOfInterest").value.trim(),
+          message: document.getElementById("message").value.trim()
+        };
+
+        try {
+          if (window.GranTradeDB) {
+            await window.GranTradeDB.submitInquiry(payload);
+          }
+          form.innerHTML = `
+            <div style="background:var(--teal-light); border:1px solid var(--teal); border-radius:var(--radius-md); padding:2rem; text-align:center;">
+              <svg style="width:48px; height:48px; color:var(--teal); margin:0 auto 1rem; display:block;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin-bottom:0.5rem; color:var(--ink);">Inquiry Received</h3>
+              <p style="color:var(--ink-2); font-size:0.92rem; max-width:440px; margin:0 auto 1.5rem;">
+                Thank you, <strong>${payload.name}</strong>. Your warehouse inquiry regarding <em>${payload.stone || "our collection"}</em> has been routed directly to our Carlstadt yard coordinators. We will follow up with you promptly.
+              </p>
+              <a href="collections.html" class="btn btn-secondary">Browse More Inventory &rarr;</a>
+            </div>
+          `;
+        } catch (err) {
+          alert("Submission error: " + err.message);
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

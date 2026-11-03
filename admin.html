@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Admin Portal & File Manager — Gran Trade Inc.</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/base.css?v=20261020b" />
+  <link rel="stylesheet" href="css/components.css?v=20261020b" />
+  <link rel="stylesheet" href="css/admin.css?v=20261020b" />
+
+  <!-- Supabase JS Library (Cloud Database & Storage) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-body">
+
+  <!-- ================= AUTHENTICATION SECURITY GATE ================= -->
+  <div id="authGate" class="auth-gate">
+    <div class="auth-card">
+      <picture>
+        <source srcset="assets/images/logo-white.png" media="(prefers-color-scheme: dark)" />
+        <img src="assets/images/logo.png" alt="Gran Trade Inc." class="auth-logo" />
+      </picture>
+      <h2>Admin Portal Access</h2>
+      <p>Enter the security passcode to manage the live stone catalog, media assets, and cloud database.</p>
+      
+      <form id="authForm" style="display:flex; flex-direction:column; gap:1rem;">
+        <div>
+          <label for="authPass" class="visually-hidden">Passcode</label>
+          <input type="password" id="authPass" class="admin-input" placeholder="Enter admin passcode..." required autocomplete="current-password" />
+        </div>
+        <div id="authError" style="display:none; color:var(--danger); font-size:0.82rem; font-weight:600;">
+          Incorrect passcode. Please try again.
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Unlock Dashboard &rarr;</button>
+      </form>
+      <div style="margin-top:1.25rem; font-size:0.75rem; color:var(--muted);">
+        Default passcode: <code>grantrade2026</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN ADMIN APP SHELL ================= -->
+  <div class="admin-shell">
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a href="admin.html" class="sidebar-brand">
+          <svg style="width:20px; height:20px; color:var(--accent);" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span>Gran Trade OS</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" type="button" data-pane="paneInventory">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+          <span>Stone Inventory</span>
+        </button>
+
+        <button class="nav-item" type="button" data-pane="paneMedia">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+          <span>File Manager</span>
+        </button>
+
+        <button class="nav-item" type="button" data-pane="paneLeads">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          <span>Leads & Inquiries</span>
+          <span id="leadsCountBadge" class="stock-badge" style="margin-left:auto; font-size:0.7rem; padding:2px 7px;">0</span>
+        </button>
+
+        <button class="nav-item" type="button" data-pane="paneSettings">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 5.625c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
+          <span>Cloud Database</span>
+        </button>
+
+        <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--line);">
+          <a href="index.html" target="_blank" class="nav-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+            <span>View Public Website</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div style="font-size:0.78rem; color:var(--muted);">
+          <span>Carlstadt, NJ Yard</span>
+        </div>
+        <button id="logoutBtn" class="btn btn-sm" style="border:1px solid var(--line); padding:0.4rem 0.8rem;" type="button">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+
+      <!-- ================= PANE 1: INVENTORY CATALOG (ONLINE EDITOR) ================= -->
+      <section id="paneInventory" class="admin-pane active">
+        <div class="pane-header-bar">
+          <div>
+            <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.25rem;">Wholesale Inventory Catalog</h2>
+            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Manage GT numbers, lot codes, calibrated dimensions, and live stock statuses.</p>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button id="btnExportJson" class="btn btn-sm btn-secondary" type="button">Download JSON</button>
+            <button id="btnSyncCloud" class="btn btn-sm btn-secondary" type="button">Sync to Cloud DB</button>
+            <button id="btnNewStone" class="btn btn-sm btn-primary" type="button">+ Add New Slab</button>
+          </div>
+        </div>
+
+        <!-- Search & Category Filters -->
+        <div class="pane-header-bar" style="background:var(--surface); padding:1rem; border-radius:var(--radius-md); border:1px solid var(--line);">
+          <div class="search-filter-row" style="flex:1;">
+            <input type="search" id="stoneSearchInput" class="admin-input" placeholder="Search slabs by stone name, GT#, lot#, or origin..." style="max-width:360px;" />
+            <select id="stoneCatFilter" class="admin-select" style="max-width:200px;">
+              <option value="all">All Stone Families</option>
+              <option value="quartzite">Exotic Quartzite</option>
+              <option value="quartz">Gran Trade Quartz</option>
+              <option value="granite">Natural Granite</option>
+              <option value="marble">Fine Marble</option>
+              <option value="monuments">Monuments</option>
+              <option value="semi">Semi Precious</option>
+              <option value="soapstone">Soapstone</option>
+              <option value="tile">Tile</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Inventory Table -->
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Stone Slab</th>
+                <th>GT Number</th>
+                <th>Lot Number</th>
+                <th>Thickness</th>
+                <th>Dimensions</th>
+                <th>Status</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="stonesTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= PANE 2: MEDIA & FILE MANAGER ================= -->
+      <section id="paneMedia" class="admin-pane">
+        <div class="pane-header-bar">
+          <div>
+            <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.25rem;">Media & File Manager</h2>
+            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Upload high-resolution slab photos, bundle sequences, and showroom imagery.</p>
+          </div>
+        </div>
+
+        <!-- Drag & Drop Zone -->
+        <div id="dropzone" class="dropzone-box">
+          <input type="file" id="fileInput" multiple accept="image/*" style="display:none;" />
+          <svg style="width:44px; height:44px; color:var(--accent); margin:0 auto 12px; display:block;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+          </svg>
+          <h3 style="font-size:1.1rem; margin-bottom:0.35rem;">Drag & drop slab photography here</h3>
+          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:1rem;">Supports JPG, PNG, WebP up to 25MB each</p>
+          <button type="button" class="btn btn-sm btn-secondary">Select Files from Computer</button>
+        </div>
+
+        <div id="mediaLoading" style="display:none; text-align:center; padding:1.5rem; color:var(--muted);">Loading storage assets...</div>
+
+        <!-- Asset Grid -->
+        <div id="mediaGrid" class="media-grid">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- ================= PANE 3: LEADS & INQUIRIES ================= -->
+      <section id="paneLeads" class="admin-pane">
+        <div class="pane-header-bar">
+          <div>
+            <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.25rem;">Wholesale Inquiries & Holds</h2>
+            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Incoming leads, fabricator bundle holds, and yard walkthrough requests.</p>
+          </div>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Customer / Company</th>
+                <th>Contact Details</th>
+                <th>Stone Interest</th>
+                <th>Message / Details</th>
+                <th>Status</th>
+                <th>Received</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= PANE 4: DATABASE & CLOUD SETTINGS ================= -->
+      <section id="paneSettings" class="admin-pane">
+        <div class="pane-header-bar">
+          <div>
+            <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.25rem;">Cloud Database & Security Settings</h2>
+            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Configure Supabase PostgreSQL database credentials and file storage buckets.</p>
+          </div>
+          <div id="connStatusBadge"></div>
+        </div>
+
+        <div style="background:var(--surface); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--line); max-width:700px; box-shadow:var(--shadow-sm);">
+          <form id="settingsForm" style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div>
+              <label for="supabaseUrlInput" style="font-weight:600; font-size:0.85rem; display:block; margin-bottom:0.4rem;">Supabase Project URL</label>
+              <input type="url" id="supabaseUrlInput" class="admin-input" placeholder="https://your-project-id.supabase.co" />
+              <span style="font-size:0.75rem; color:var(--muted); margin-top:0.25rem; display:block;">Found in your Supabase Dashboard &rarr; Project Settings &rarr; API.</span>
+            </div>
+
+            <div>
+              <label for="supabaseKeyInput" style="font-weight:600; font-size:0.85rem; display:block; margin-bottom:0.4rem;">Supabase Anon / Public API Key</label>
+              <input type="text" id="supabaseKeyInput" class="admin-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." />
+              <span style="font-size:0.75rem; color:var(--muted); margin-top:0.25rem; display:block;">The `anon` public key safely permits browser-side reads and inquiry inserts protected by Row Level Security (RLS).</span>
+            </div>
+
+            <div style="display:flex; gap:0.75rem; align-items:center; margin-top:0.5rem;">
+              <button type="submit" class="btn btn-primary">Save Cloud Credentials</button>
+              <button type="button" id="btnTestConnection" class="btn btn-secondary">Test Connection</button>
+            </div>
+          </form>
+
+          <hr style="border:0; border-top:1px solid var(--line); margin:2rem 0;" />
+
+          <h3 style="font-family:var(--font-serif); font-size:1.15rem; margin-bottom:0.5rem;">Database Schema & Initial Setup</h3>
+          <p style="font-size:0.85rem; color:var(--muted); margin-bottom:1rem;">
+            To create the required PostgreSQL tables and file storage bucket, open your Supabase Dashboard's <strong>SQL Editor</strong> and execute the script located in:
+          </p>
+          <pre style="background:var(--bg); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--line); font-size:0.8rem; overflow-x:auto;">supabase/schema.sql</pre>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= SLAB EDIT / ADD MODAL ================= -->
+  <div id="stoneModal" class="admin-modal" style="display:none;">
+    <div class="admin-modal-content">
+      <div class="admin-modal-head">
+        <h3 id="modalTitle">Edit Slab</h3>
+        <button id="modalCloseBtn" type="button" class="drawer-close">&times;</button>
+      </div>
+
+      <form id="stoneForm">
+        <input type="hidden" id="fieldId" />
+
+        <div class="admin-modal-body">
+          <div class="form-grid-2">
+            <div>
+              <label for="fieldName" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Stone Name *</label>
+              <input type="text" id="fieldName" class="admin-input" placeholder="e.g. Taj Mahal Quartzite" required />
+            </div>
+            <div>
+              <label for="fieldCategory" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Stone Family *</label>
+              <select id="fieldCategory" class="admin-select">
+                <option value="quartzite">Exotic Quartzite</option>
+                <option value="quartz">Gran Trade Quartz</option>
+                <option value="granite">Natural Granite</option>
+                <option value="marble">Fine Marble</option>
+                <option value="monuments">Monuments</option>
+                <option value="semi">Semi Precious</option>
+                <option value="soapstone">Soapstone</option>
+                <option value="tile">Tile</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div>
+              <label for="fieldGt" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">GT Inventory Number</label>
+              <input type="text" id="fieldGt" class="admin-input" placeholder="e.g. GT-4008" />
+            </div>
+            <div>
+              <label for="fieldLot" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Lot Number</label>
+              <input type="text" id="fieldLot" class="admin-input" placeholder="e.g. LOT #59108" />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div>
+              <label for="fieldType" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Material Type</label>
+              <select id="fieldType" class="admin-select">
+                <option value="natural">Natural Stone</option>
+                <option value="engineered">Engineered Quartz</option>
+              </select>
+            </div>
+            <div>
+              <label for="fieldFinish" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Surface Finish</label>
+              <input type="text" id="fieldFinish" class="admin-input" placeholder="e.g. Polished / Honed / Leathered" />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div>
+              <label for="fieldThickness" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Thickness</label>
+              <input type="text" id="fieldThickness" class="admin-input" placeholder="e.g. 2 cm · 3 cm Calibrated" />
+            </div>
+            <div>
+              <label for="fieldSize" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Slab Dimensions</label>
+              <input type="text" id="fieldSize" class="admin-input" placeholder="e.g. 128&quot; × 76&quot; · 67.5 sq. ft." />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div>
+              <label for="fieldOrigin" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Quarry Origin</label>
+              <input type="text" id="fieldOrigin" class="admin-input" placeholder="e.g. Bahia, Brazil" />
+            </div>
+            <div>
+              <label for="fieldImage1" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Image URL / File Path</label>
+              <input type="text" id="fieldImage1" class="admin-input" placeholder="assets/images/... or https://..." />
+            </div>
+          </div>
+
+          <div>
+            <label for="fieldDesc" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Geological & Architectural Description</label>
+            <textarea id="fieldDesc" class="admin-textarea" rows="3" placeholder="Describe natural veining, mineral content, and ideal applications..."></textarea>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <input type="checkbox" id="fieldInStock" style="width:18px; height:18px; accent-color:var(--accent);" />
+            <label for="fieldInStock" style="font-size:0.85rem; font-weight:600; cursor:pointer;">Mark Slab as Available In Stock at Carlstadt Yard</label>
+          </div>
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" id="modalCancelBtn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Slab Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/stone-catalog-data.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
