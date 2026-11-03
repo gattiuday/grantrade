@@ -28,7 +28,6 @@
   const modalFinishes = document.getElementById("liquidModalFinishes");
   const modalAvailability = document.getElementById("liquidModalAvailability");
   const modalApps = document.getElementById("liquidModalApps");
-  const modalCatalogLink = document.getElementById("liquidModalCatalogLink");
 
   // 1. SCROLL-TRIGGERED VERTICAL LIQUID POPUP (IntersectionObserver)
   if ("IntersectionObserver" in window) {
@@ -205,7 +204,6 @@
     if (modalFinishes) modalFinishes.textContent = data.finishes;
     if (modalAvailability) modalAvailability.textContent = data.availability;
     if (modalApps) modalApps.textContent = data.apps;
-    if (modalCatalogLink) modalCatalogLink.href = `collections.html?category=${data.catalogCategory}`;
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");

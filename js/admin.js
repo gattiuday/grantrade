@@ -139,7 +139,7 @@
     });
 
     if (filtered.length === 0) {
-      stonesTableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--muted);">No matching stone slabs found.</td></tr>`;
+      stonesTableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--muted);">No stone slabs found.</td></tr>`;
       return;
     }
 

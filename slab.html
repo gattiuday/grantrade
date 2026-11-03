@@ -189,12 +189,18 @@
       aspect-ratio: 16 / 11;
       max-height: 560px;
       overflow: hidden;
-      cursor: grab;
+      cursor: zoom-in;
       user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    .stage-single.is-zoomed {
+      cursor: grab;
     }
 
     .stage-single.grabbing {
-      cursor: grabbing;
+      cursor: grabbing !important;
     }
 
     .stage-single img {
@@ -203,8 +209,9 @@
       object-fit: cover;
       display: block;
       transform-origin: center center;
-      transition: transform 0.2s ease-out;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
+      will-change: transform;
     }
 
     /* Fullscreen state (Native API + Universal Fallback) */
@@ -644,24 +651,24 @@
         <div class="slab-post-viewer">
           
           <!-- Main Stage Single View with Zoom In, Zoom Out, Fullscreen, and Image Navigation -->
-          <div id="mainStageSingle" class="post-stage stage-single" title="Drag to pan when zoomed · Double-click to zoom · Scroll to zoom">
+          <div id="mainStageSingle" class="post-stage stage-single" title="Drag to pan · Double-click to zoom · Scroll to zoom · Pinch on mobile">
             <span id="stageTag" class="stage-tag">Picture 1 · Full Slab Upright View</span>
 
             <!-- Zoom & Full Screen Floating Controls on the Picture -->
             <div class="stage-controls-overlay" role="toolbar" aria-label="Image Zoom and Fullscreen Controls">
-              <button id="zoomInBtn" class="stage-ctrl-btn" type="button" title="Zoom In" aria-label="Zoom in" onclick="window.slabViewer && window.slabViewer.zoomIn()">
+              <button id="zoomInBtn" class="stage-ctrl-btn" type="button" title="Zoom In (+ / =)" aria-label="Zoom in">
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
                 <span>Zoom In</span>
               </button>
-              <button id="zoomOutBtn" class="stage-ctrl-btn" type="button" title="Zoom Out" aria-label="Zoom out" onclick="window.slabViewer && window.slabViewer.zoomOut()" disabled>
+              <button id="zoomOutBtn" class="stage-ctrl-btn" type="button" title="Zoom Out (-)" aria-label="Zoom out" disabled>
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M8 11h6"/></svg>
                 <span>Zoom Out</span>
               </button>
-              <button id="zoomResetBtn" class="stage-ctrl-btn" type="button" title="Reset Zoom to 100%" aria-label="Reset zoom" onclick="window.slabViewer && window.slabViewer.resetZoom()">
+              <button id="zoomResetBtn" class="stage-ctrl-btn" type="button" title="Reset Zoom to 100% (0 / R)" aria-label="Reset zoom">
                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
                 <span id="zoomLevelText">100%</span>
               </button>
-              <button id="fullscreenBtn" class="stage-ctrl-btn highlight" type="button" title="Full Screen View" aria-label="Toggle full screen" onclick="window.slabViewer && window.slabViewer.toggleFullscreen()">
+              <button id="fullscreenBtn" class="stage-ctrl-btn highlight" type="button" title="Full Screen View (Esc to exit)" aria-label="Toggle full screen">
                 <svg id="fsIconExpand" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
                 <svg id="fsIconCompress" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"/></svg>
                 <span id="fsText">Full Screen</span>
@@ -953,48 +960,116 @@
         };
       });
 
-      // ================= 1. INTERACTIVE ZOOM ENGINE =================
-      let zoomLevel = 1;
-      const minZoom = 1;
-      const maxZoom = 4;
+      // ================= 1. PRECISION INTERACTIVE ZOOM & PAN ENGINE =================
+      let zoomLevel = 1.0;
+      const minZoom = 1.0;
+      const maxZoom = 4.0;
       const zoomStep = 0.35;
       let panX = 0;
       let panY = 0;
-      let isDragging = false;
-      let startX = 0;
-      let startY = 0;
 
-      function updateZoomTransform() {
-        if (zoomLevel <= 1) {
+      // Mouse drag state
+      let isDragging = false;
+      let startMouseX = 0;
+      let startMouseY = 0;
+      let startPanX = 0;
+      let startPanY = 0;
+
+      // Touch gesture state (pinch zoom + single finger pan + double tap)
+      let isPinching = false;
+      let initialPinchDistance = 0;
+      let initialPinchZoom = 1.0;
+      let pinchFocalX = 0;
+      let pinchFocalY = 0;
+      let lastTapTime = 0;
+
+      function getPanBounds(zoom) {
+        if (!stageSingle || zoom <= 1.001) return { maxX: 0, maxY: 0 };
+        const rect = stageSingle.getBoundingClientRect();
+        // Clamping bounds: slab edges cannot be dragged beyond stage viewport
+        const maxX = Math.max(0, (rect.width * (zoom - 1)) / 2);
+        const maxY = Math.max(0, (rect.height * (zoom - 1)) / 2);
+        return { maxX, maxY };
+      }
+
+      function clampPan(x, y, zoom) {
+        const bounds = getPanBounds(zoom);
+        return {
+          x: Math.max(-bounds.maxX, Math.min(bounds.maxX, x)),
+          y: Math.max(-bounds.maxY, Math.min(bounds.maxY, y))
+        };
+      }
+
+      function updateZoomTransform(animate = true) {
+        if (zoomLevel <= 1.001) {
+          zoomLevel = 1.0;
           panX = 0;
           panY = 0;
-          if (stageSingle) stageSingle.classList.remove("grabbing");
+        } else {
+          const clamped = clampPan(panX, panY, zoomLevel);
+          panX = clamped.x;
+          panY = clamped.y;
         }
+
         if (mainStageImg) {
-          mainStageImg.style.transform = `scale(${zoomLevel}) translate(${panX}px, ${panY}px)`;
+          mainStageImg.style.transition = animate ? "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)" : "none";
+          mainStageImg.style.transform = `translate3d(${panX.toFixed(2)}px, ${panY.toFixed(2)}px, 0) scale(${zoomLevel.toFixed(3)})`;
         }
-        if (zoomLevelText) zoomLevelText.textContent = `${Math.round(zoomLevel * 100)}%`;
-        if (zoomOutBtn) zoomOutBtn.disabled = zoomLevel <= minZoom;
-        if (zoomInBtn) zoomInBtn.disabled = zoomLevel >= maxZoom;
+
+        if (stageSingle) {
+          stageSingle.classList.toggle("is-zoomed", zoomLevel > 1.01);
+          if (zoomLevel <= 1.01) stageSingle.classList.remove("grabbing");
+        }
+
+        if (zoomLevelText) {
+          zoomLevelText.textContent = `${Math.round(zoomLevel * 100)}%`;
+        }
+        if (zoomOutBtn) {
+          zoomOutBtn.disabled = zoomLevel <= minZoom + 0.01;
+        }
+        if (zoomInBtn) {
+          zoomInBtn.disabled = zoomLevel >= maxZoom - 0.01;
+        }
+      }
+
+      function setZoomAt(newZoom, focalClientX, focalClientY, animate = true) {
+        const targetZoom = Math.max(minZoom, Math.min(maxZoom, Math.round(newZoom * 100) / 100));
+        if (Math.abs(targetZoom - zoomLevel) < 0.001 && targetZoom === 1) return;
+
+        if (focalClientX !== undefined && focalClientY !== undefined && stageSingle) {
+          const rect = stageSingle.getBoundingClientRect();
+          const focalX = focalClientX - (rect.left + rect.width / 2);
+          const focalY = focalClientY - (rect.top + rect.height / 2);
+          const scaleRatio = targetZoom / zoomLevel;
+          panX = panX - (focalX - panX) * (scaleRatio - 1);
+          panY = panY - (focalY - panY) * (scaleRatio - 1);
+        } else {
+          // Centered zoom
+          const scaleRatio = targetZoom / (zoomLevel || 1);
+          panX = panX * scaleRatio;
+          panY = panY * scaleRatio;
+        }
+
+        zoomLevel = targetZoom;
+        updateZoomTransform(animate);
       }
 
       function zoomIn() {
-        zoomLevel = Math.min(maxZoom, Math.round((zoomLevel + zoomStep) * 100) / 100);
-        updateZoomTransform();
+        setZoomAt(zoomLevel + zoomStep, undefined, undefined, true);
       }
 
       function zoomOut() {
-        zoomLevel = Math.max(minZoom, Math.round((zoomLevel - zoomStep) * 100) / 100);
-        updateZoomTransform();
+        setZoomAt(zoomLevel - zoomStep, undefined, undefined, true);
       }
 
       function resetZoom() {
-        zoomLevel = 1;
+        zoomLevel = 1.0;
         panX = 0;
         panY = 0;
-        updateZoomTransform();
+        updateZoomTransform(true);
       }
 
+      // Button Click Listeners
       if (zoomInBtn) {
         zoomInBtn.addEventListener("click", (e) => {
           e.preventDefault();
@@ -1019,52 +1094,183 @@
         });
       }
 
-      // Drag to pan when zoomed
+      // Mouse Drag & Pan Interactions
       if (stageSingle) {
         stageSingle.addEventListener("mousedown", (e) => {
-          if (zoomLevel <= 1 || e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
+          if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
+          if (zoomLevel <= 1.01) return;
+
           isDragging = true;
-          startX = e.clientX - panX * zoomLevel;
-          startY = e.clientY - panY * zoomLevel;
+          startMouseX = e.clientX;
+          startMouseY = e.clientY;
+          startPanX = panX;
+          startPanY = panY;
           stageSingle.classList.add("grabbing");
+          if (mainStageImg) mainStageImg.style.transition = "none";
+          e.preventDefault();
         });
 
         window.addEventListener("mousemove", (e) => {
           if (!isDragging) return;
-          panX = (e.clientX - startX) / zoomLevel;
-          panY = (e.clientY - startY) / zoomLevel;
-          updateZoomTransform();
+          const dx = e.clientX - startMouseX;
+          const dy = e.clientY - startMouseY;
+          const clamped = clampPan(startPanX + dx, startPanY + dy, zoomLevel);
+          panX = clamped.x;
+          panY = clamped.y;
+          if (mainStageImg) {
+            mainStageImg.style.transform = `translate3d(${panX.toFixed(2)}px, ${panY.toFixed(2)}px, 0) scale(${zoomLevel.toFixed(3)})`;
+          }
         });
 
         window.addEventListener("mouseup", () => {
           if (isDragging) {
             isDragging = false;
-            stageSingle.classList.remove("grabbing");
+            if (stageSingle) stageSingle.classList.remove("grabbing");
+            if (mainStageImg) {
+              mainStageImg.style.transition = "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)";
+            }
           }
         });
 
-        // Mouse wheel zoom
+        // Mouse Wheel: Zoom towards cursor position
         stageSingle.addEventListener("wheel", (e) => {
           if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
           e.preventDefault();
-          if (e.deltaY < 0) {
-            zoomIn();
+          const delta = e.deltaY;
+          const zoomDelta = -Math.sign(delta) * (Math.abs(delta) > 50 ? 0.3 : 0.18);
+          setZoomAt(zoomLevel + zoomDelta, e.clientX, e.clientY, true);
+        }, { passive: false });
+
+        // Double Click: Toggle quick zoom (2.4x) / reset to 100%
+        stageSingle.addEventListener("dblclick", (e) => {
+          if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
+          e.preventDefault();
+          if (zoomLevel > 1.01) {
+            resetZoom();
           } else {
-            zoomOut();
+            setZoomAt(2.4, e.clientX, e.clientY, true);
+          }
+        });
+
+        // Touch Gestures: Pinch-to-zoom, single finger drag, double-tap
+        stageSingle.addEventListener("touchstart", (e) => {
+          if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
+
+          if (e.touches.length === 1) {
+            const now = Date.now();
+            if (now - lastTapTime < 320) {
+              // Double tap detected!
+              e.preventDefault();
+              if (zoomLevel > 1.01) {
+                resetZoom();
+              } else {
+                setZoomAt(2.4, e.touches[0].clientX, e.touches[0].clientY, true);
+              }
+              lastTapTime = 0;
+              return;
+            }
+            lastTapTime = now;
+
+            if (zoomLevel > 1.01) {
+              isDragging = true;
+              startMouseX = e.touches[0].clientX;
+              startMouseY = e.touches[0].clientY;
+              startPanX = panX;
+              startPanY = panY;
+              stageSingle.classList.add("grabbing");
+              if (mainStageImg) mainStageImg.style.transition = "none";
+            }
+          } else if (e.touches.length === 2) {
+            // Pinch-to-zoom starts
+            isDragging = false;
+            isPinching = true;
+            initialPinchDistance = Math.hypot(
+              e.touches[0].clientX - e.touches[1].clientX,
+              e.touches[0].clientY - e.touches[1].clientY
+            );
+            initialPinchZoom = zoomLevel;
+            pinchFocalX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+            pinchFocalY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+            if (mainStageImg) mainStageImg.style.transition = "none";
+            e.preventDefault();
           }
         }, { passive: false });
 
-        // Double-click to quick zoom / reset
-        stageSingle.addEventListener("dblclick", (e) => {
-          if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
-          if (zoomLevel > 1) {
-            resetZoom();
-          } else {
-            zoomLevel = 2.2;
-            updateZoomTransform();
+        stageSingle.addEventListener("touchmove", (e) => {
+          if (isPinching && e.touches.length === 2) {
+            e.preventDefault();
+            const currentDist = Math.hypot(
+              e.touches[0].clientX - e.touches[1].clientX,
+              e.touches[0].clientY - e.touches[1].clientY
+            );
+            if (initialPinchDistance > 0) {
+              const pinchRatio = currentDist / initialPinchDistance;
+              const newZoom = Math.max(minZoom, Math.min(maxZoom, initialPinchZoom * pinchRatio));
+              setZoomAt(newZoom, pinchFocalX, pinchFocalY, false);
+            }
+          } else if (isDragging && e.touches.length === 1 && zoomLevel > 1.01) {
+            e.preventDefault();
+            const dx = e.touches[0].clientX - startMouseX;
+            const dy = e.touches[0].clientY - startMouseY;
+            const clamped = clampPan(startPanX + dx, startPanY + dy, zoomLevel);
+            panX = clamped.x;
+            panY = clamped.y;
+            if (mainStageImg) {
+              mainStageImg.style.transform = `translate3d(${panX.toFixed(2)}px, ${panY.toFixed(2)}px, 0) scale(${zoomLevel.toFixed(3)})`;
+            }
+          }
+        }, { passive: false });
+
+        stageSingle.addEventListener("touchend", (e) => {
+          if (isPinching && e.touches.length < 2) {
+            isPinching = false;
+            updateZoomTransform(true);
+          }
+          if (isDragging && e.touches.length === 0) {
+            isDragging = false;
+            if (stageSingle) stageSingle.classList.remove("grabbing");
+            updateZoomTransform(true);
           }
         });
+
+        stageSingle.addEventListener("touchcancel", () => {
+          isPinching = false;
+          isDragging = false;
+          if (stageSingle) stageSingle.classList.remove("grabbing");
+          updateZoomTransform(true);
+        });
       }
+
+      // Keyboard Controls: +, -, 0, R, and Arrow keys
+      window.addEventListener("keydown", (e) => {
+        if (["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName)) return;
+
+        if (e.key === "+" || e.key === "=") {
+          e.preventDefault();
+          zoomIn();
+        } else if (e.key === "-" || e.key === "_") {
+          e.preventDefault();
+          zoomOut();
+        } else if (e.key === "0" || e.key === "r" || e.key === "R") {
+          e.preventDefault();
+          resetZoom();
+        } else if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key) && zoomLevel > 1.01) {
+          e.preventDefault();
+          const step = 50;
+          if (e.key === "ArrowUp") panY += step;
+          if (e.key === "ArrowDown") panY -= step;
+          if (e.key === "ArrowLeft") panX += step;
+          if (e.key === "ArrowRight") panX -= step;
+          updateZoomTransform(true);
+        }
+      });
+
+      // Recalculate zoom and clamp on window resize
+      window.addEventListener("resize", () => {
+        if (zoomLevel > 1.01) {
+          updateZoomTransform(false);
+        }
+      });
 
       // ================= 2. FULLSCREEN SYSTEM (NATIVE + FALLBACK) =================
       function isFullscreen() {
@@ -1080,6 +1286,11 @@
         if (fsIconExpand) fsIconExpand.style.display = isFS ? "none" : "block";
         if (fsIconCompress) fsIconCompress.style.display = isFS ? "block" : "none";
         if (fsText) fsText.textContent = isFS ? "Exit" : "Full Screen";
+        if (stageSingle) stageSingle.setAttribute("aria-fullscreen", isFS ? "true" : "false");
+        // Recalculate pan bounds after entering/exiting fullscreen
+        setTimeout(() => {
+          if (zoomLevel > 1.01) updateZoomTransform(false);
+        }, 60);
       }
 
       function enterFullscreen() {
@@ -1124,11 +1335,12 @@
         }
       }
 
-      // Export globally for inline onclick handlers and direct access
+      // Export globally for direct programmatic access
       window.slabViewer = {
         zoomIn,
         zoomOut,
         resetZoom,
+        setZoomAt,
         toggleFullscreen,
         enterFullscreen,
         exitFullscreen,

@@ -83,6 +83,8 @@
     let currentStone = null;
     let currentView = 0; // 0=slab, 1=closeup (zoom), 2=installed
 
+    const stageEl = root.querySelector(".fv-stage");
+
     function render() {
       if (!currentStone || !imgEl) return;
 
@@ -93,8 +95,16 @@
         imgEl.src = currentStone.img;
       }
 
-      // Handle close-up zoom transform
-      imgEl.classList.toggle("fv-zoom", currentView === 1);
+      // Handle close-up zoom transform & cursor state
+      const isZoomed = currentView === 1;
+      imgEl.classList.toggle("fv-zoom", isZoomed);
+      if (stageEl) {
+        stageEl.classList.toggle("is-zoomed", isZoomed);
+      }
+      if (!isZoomed && imgEl) {
+        imgEl.style.transformOrigin = "center center";
+      }
+
       imgEl.alt = `${currentStone.name} — ${VIEW_LABELS[currentView]}`;
 
       if (tagEl) tagEl.textContent = VIEW_LABELS[currentView];
@@ -117,11 +127,26 @@
     });
 
     // Touch/click directly on stage toggles zoom macro view
-    const stageEl = root.querySelector(".fv-stage");
     if (stageEl) {
       stageEl.addEventListener("click", function () {
         currentView = currentView === 1 ? 0 : 1;
         render();
+      });
+
+      // Smooth cursor-following macro zoom on hover
+      stageEl.addEventListener("mousemove", function (e) {
+        if (currentView !== 1 || !imgEl) return;
+        const rect = stageEl.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+        const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+        const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+        imgEl.style.transformOrigin = `${x.toFixed(1)}% ${y.toFixed(1)}%`;
+      });
+
+      stageEl.addEventListener("mouseleave", function () {
+        if (imgEl) {
+          imgEl.style.transformOrigin = "center center";
+        }
       });
     }
 
