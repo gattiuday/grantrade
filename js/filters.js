@@ -10,6 +10,101 @@
   const slabGrid = document.getElementById("slabGrid");
   if (!slabGrid) return;
 
+  // Dynamically populate all 50 catalog stones from GRAN_TRADE_CATALOG into the DOM grid
+  if (window.GRAN_TRADE_CATALOG && Array.isArray(window.GRAN_TRADE_CATALOG.all)) {
+    const emptyEl = document.getElementById("slabEmpty");
+    window.GRAN_TRADE_CATALOG.all.forEach(function (s) {
+      if (slabGrid.querySelector(`[data-id="${s.id}"]`)) return; // already present
+
+      const thicknessVal = (s.thickness && s.thickness.includes("3") && s.thickness.includes("2")) 
+        ? "2 3" 
+        : (s.thickness && s.thickness.includes("3") ? "3" : (s.thickness && s.thickness.includes("tile") ? "tile" : "2"));
+      const typeVal = s.type || (s.category === "quartz" ? "engineered" : "natural");
+      const finishVal = (s.finish || "polished").toLowerCase();
+      const colorsVal = Array.isArray(s.colors) ? s.colors.join(" ") : (s.colors || "white");
+      const tagsVal = [
+        s.name,
+        s.gtNumber,
+        s.lotNumber,
+        s.category,
+        s.categoryLabel,
+        s.typeLabel,
+        s.origin,
+        colorsVal,
+        finishVal,
+        s.application
+      ].filter(Boolean).join(" ").toLowerCase();
+
+      const card = document.createElement("article");
+      card.className = "slab-card";
+      card.setAttribute("data-id", s.id);
+      card.setAttribute("data-cat", s.category);
+      card.setAttribute("data-type", typeVal);
+      card.setAttribute("data-color", colorsVal);
+      card.setAttribute("data-finish", finishVal);
+      card.setAttribute("data-thickness", thicknessVal);
+      card.setAttribute("data-name", s.name);
+      card.setAttribute("data-gt", s.gtNumber || "");
+      card.setAttribute("data-lot", s.lotNumber || "");
+      card.setAttribute("data-meta", `${s.categoryLabel || s.category} · ${s.name}`);
+      card.setAttribute("data-tags", tagsVal);
+
+      card.innerHTML = `
+        <div class="sc-tags-hidden" aria-hidden="true" style="display:none;">
+          ${s.name}, ${s.categoryLabel || s.category}, ${s.gtNumber || ""}, ${s.lotNumber || ""}, ${s.origin || ""}, ${colorsVal}, ${s.finish || ""}, ${s.thickness || ""}, ${s.application || ""}
+        </div>
+        <a href="slab.html?id=${encodeURIComponent(s.id)}" target="_blank" rel="noopener noreferrer" class="sc-link-wrap" aria-label="Inspect ${s.name} slab in new tab" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%;">
+          <div class="sc-media">
+            <span class="cat-badge">${s.categoryLabel || s.category}</span>
+            <button class="heart" type="button" aria-label="Save ${s.name} to favorites" onclick="event.preventDefault(); event.stopPropagation();">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+            </button>
+            <img src="${s.image1 || ('assets/images/stone-types/' + s.category + '.jpg')}" alt="${s.name} wholesale stone slab" loading="lazy" onerror="this.onerror=null; this.src='assets/images/stone-types/${s.category}.jpg';" />
+            <div class="sc-newtab-hint">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+              <span>Opens in New Tab</span>
+            </div>
+          </div>
+          <div class="sc-body">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.35rem;">
+              <h3 class="sc-title" style="margin-bottom:0;">${s.name}</h3>
+              <span class="stock-badge" style="font-size:0.75rem; color:#2b7a4b; font-weight:700; background:rgba(43,122,75,0.12); padding:3px 9px; border-radius:999px;">● In Stock</span>
+            </div>
+            <div class="sc-meta">${s.categoryLabel || s.category} · ${s.origin || "Imported"}</div>
+            
+            <div class="slab-key-specs" style="margin:0.85rem 0; padding:0.75rem; background:var(--bg); border:1px solid var(--line); border-radius:var(--radius-sm); display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-size:0.78rem;">
+              <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">GT Number</span><strong style="color:var(--accent); font-size:0.95rem;">${s.gtNumber || "GT-Pending"}</strong></div>
+              <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Lot Number</span><strong style="color:var(--ink); font-size:0.95rem;">${s.lotNumber || "LOT #Stock"}</strong></div>
+              <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Thickness</span><strong style="color:var(--ink);">${s.thickness || "2 cm · 3 cm"}</strong></div>
+              <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Size</span><strong style="color:var(--ink);">${s.size || "Full Slab"}</strong></div>
+            </div>
+
+            <p class="sc-desc">${s.description || ""}</p>
+            
+            <div class="sc-specs" style="margin-top:auto; padding-top:0.5rem;">
+              <span class="spec-pill">${s.finish || "Polished"}</span>
+              <span class="spec-pill">${s.typeLabel || (typeVal === "engineered" ? "Engineered Quartz" : "Natural Stone")}</span>
+              <span class="spec-pill">${s.colorLabel || "Calibrated"}</span>
+            </div>
+
+            <div style="margin-top:1rem;">
+              <span class="btn btn-sm btn-primary btn-block" style="display:flex; align-items:center; justify-content:center; gap:0.4rem;">
+                <span>Inspect Slab in New Tab</span>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      `;
+
+      if (emptyEl) {
+        slabGrid.insertBefore(card, emptyEl);
+      } else {
+        slabGrid.appendChild(card);
+      }
+    });
+  }
+
   const cards = Array.from(slabGrid.querySelectorAll(".slab-card"));
   // Tag original index for "featured" restore
   cards.forEach((card, idx) => card.setAttribute("data-idx", idx));
