@@ -58,10 +58,10 @@
   width: 100%;
 }
 
-/* ---------------- Product / Slab Cards ---------------- */
+/* ---------------- Product / Slab Cards & Authentic Manifest ---------------- */
 .slab-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: clamp(1.25rem, 2vw, 2rem);
 }
 
@@ -74,17 +74,18 @@
   flex-direction: column;
   transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-fast);
   position: relative;
+  box-shadow: var(--shadow-sm);
 }
 
 .slab-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 36px -4px rgba(46, 36, 22, 0.1), 0 0 0 1px var(--line-strong);
   border-color: var(--line-strong);
 }
 
 .sc-media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 11;
   background-color: var(--bg-2);
   background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.4), transparent 70%),
               linear-gradient(135deg, var(--bg-2) 0%, var(--chip) 50%, var(--line) 100%);
@@ -96,18 +97,26 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform var(--transition-slow);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slab-card:hover .sc-media img {
-  transform: scale(1.05);
+  transform: scale(1.06);
+}
+
+.sc-media-badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  z-index: 2;
+  flex-wrap: wrap;
 }
 
 .cat-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(24, 20, 16, 0.85);
+  background: rgba(22, 18, 14, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #ffffff;
@@ -116,8 +125,31 @@
   letter-spacing: 0.05em;
   padding: 4px 10px;
   border-radius: var(--radius-pill);
-  z-index: 2;
   text-transform: uppercase;
+}
+
+.stock-pill {
+  background: rgba(43, 122, 75, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 4px 9px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stock-pill::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #7bf1a8;
 }
 
 /* Heart Favorite Button */
@@ -125,10 +157,12 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
@@ -151,8 +185,8 @@
 }
 
 .heart svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -167,25 +201,97 @@
   flex-grow: 1;
 }
 
+.sc-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
 .sc-title {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  margin-bottom: 0.35rem;
+  font-size: 1.28rem;
+  line-height: 1.25;
   color: var(--ink);
+  margin-bottom: 0;
+}
+
+.sc-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.sc-title a:hover {
+  color: var(--accent);
+}
+
+.sc-gt-pill {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid rgba(138, 90, 38, 0.25);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
 }
 
 .sc-meta {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--muted);
   font-weight: 500;
   margin-bottom: 0.85rem;
 }
 
+/* Authentic Key Specs Quadrant Box */
+.slab-key-specs {
+  margin: 0.25rem 0 0.85rem;
+  padding: 0.75rem 0.85rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem 0.75rem;
+}
+
+.spec-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.spec-lbl {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.spec-val {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spec-val.highlight {
+  color: var(--ink);
+  font-weight: 700;
+}
+
 .sc-desc {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   color: var(--ink-2);
   line-height: 1.5;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.85rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -210,6 +316,27 @@
   padding: 3px 8px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
+}
+
+/* Action Button Row */
+.sc-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.sc-action-inspect {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.sc-action-hold {
+  flex-shrink: 0;
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
 }
 
 /* ---------------- 3-Picture Stone Viewer ---------------- */
@@ -866,4 +993,266 @@
 .empty-box p {
   color: var(--muted);
   margin-bottom: 1.5rem;
+}
+
+/* ---------------- View Mode Switcher in Meta Bar ---------------- */
+.view-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+  gap: 2px;
+}
+
+.view-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.view-mode-btn:hover {
+  color: var(--ink);
+}
+
+.view-mode-btn.active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(46, 36, 22, 0.1);
+}
+
+/* ---------------- Active Filter Chips Rail ---------------- */
+.active-filters-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  padding: 0.65rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+}
+
+.active-filters-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.active-filter-remove {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.active-filter-remove:hover {
+  color: var(--danger);
+}
+
+.clear-all-filters-btn {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.2rem 0.4rem;
+}
+
+.clear-all-filters-btn:hover {
+  color: var(--accent-hover);
+}
+
+/* ---------------- List / Manifest View for Fabricators ---------------- */
+.slab-grid.is-list-view {
+  grid-template-columns: 1fr !important;
+  gap: 0.75rem !important;
+}
+
+.slab-grid.is-list-view .slab-card {
+  flex-direction: row;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  gap: 1.25rem;
+}
+
+.slab-grid.is-list-view .sc-media {
+  width: 140px;
+  height: 95px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  aspect-ratio: auto;
+}
+
+.slab-grid.is-list-view .sc-media-badges {
+  display: none;
+}
+
+.slab-grid.is-list-view .sc-body {
+  padding: 0;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.slab-grid.is-list-view .sc-info-block {
+  min-width: 220px;
+}
+
+.slab-grid.is-list-view .slab-key-specs {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+}
+
+.slab-grid.is-list-view .sc-desc,
+.slab-grid.is-list-view .sc-specs {
+  display: none;
+}
+
+.slab-grid.is-list-view .sc-actions {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* ---------------- Tab Counts Badge ---------------- */
+.tab-count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-2);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  margin-left: 0.4rem;
+  transition: all var(--transition-fast);
+}
+
+.tab-btn[aria-pressed="true"] .tab-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* ---------------- Authentic Wholesale Yard Advantage Strip ---------------- */
+.yard-advantage-strip {
+  margin-top: 4rem;
+  padding: clamp(3rem, 5vw, 4.5rem) 0;
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.yard-adv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.yard-adv-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.yard-adv-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.yard-adv-card h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.yard-adv-card p {
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.yard-adv-card a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.yard-adv-card a:hover {
+  text-decoration: underline;
+}
+
+/* ---------------- Header Trust Strip in collections.html ---------------- */
+.coll-trust-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.trust-pill.highlight {
+  background: var(--accent-light);
+  border-color: rgba(138, 90, 38, 0.3);
+  color: var(--accent);
 }

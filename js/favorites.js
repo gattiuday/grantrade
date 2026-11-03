@@ -195,5 +195,6 @@
     open: openDrawer,
     close: closeDrawer,
     getAll: () => [...favorites],
+    sync: syncCardHearts,
   };
 })();

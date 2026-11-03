@@ -53,48 +53,68 @@
         <div class="sc-tags-hidden" aria-hidden="true" style="display:none;">
           ${s.name}, ${s.categoryLabel || s.category}, ${s.gtNumber || ""}, ${s.lotNumber || ""}, ${s.origin || ""}, ${colorsVal}, ${s.finish || ""}, ${s.thickness || ""}, ${s.application || ""}
         </div>
-        <a href="slab.html?id=${encodeURIComponent(s.id)}" target="_blank" rel="noopener noreferrer" class="sc-link-wrap" aria-label="Inspect ${s.name} slab in new tab" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%;">
-          <div class="sc-media">
+        <div class="sc-media">
+          <div class="sc-media-badges">
             <span class="cat-badge">${s.categoryLabel || s.category}</span>
-            <button class="heart" type="button" aria-label="Save ${s.name} to favorites" onclick="event.preventDefault(); event.stopPropagation();">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
-            </button>
+            <span class="stock-pill">In Stock</span>
+          </div>
+          <button class="heart" type="button" aria-label="Save ${s.name} to favorites" onclick="event.preventDefault(); event.stopPropagation();">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+          </button>
+          <a href="slab.html?id=${encodeURIComponent(s.id)}" class="sc-img-link" aria-label="Inspect ${s.name} full slab view" style="display:block; width:100%; height:100%;">
             <img src="${s.image1 || ('assets/images/stone-types/' + s.category + '.jpg')}" alt="${s.name} wholesale stone slab" loading="lazy" onerror="this.onerror=null; this.src='assets/images/stone-types/${s.category}.jpg';" />
-            <div class="sc-newtab-hint">
+          </a>
+          <div class="sc-newtab-hint">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
+            <span>Inspect Slab</span>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="sc-info-block">
+            <div class="sc-header-row">
+              <h3 class="sc-title"><a href="slab.html?id=${encodeURIComponent(s.id)}">${s.name}</a></h3>
+              <span class="sc-gt-pill">${s.gtNumber || "GT-Stock"}</span>
+            </div>
+            <div class="sc-meta">${s.categoryLabel || s.category} · ${s.origin || "Direct Quarry Import"}</div>
+          </div>
+          
+          <div class="slab-key-specs">
+            <div class="spec-col">
+              <span class="spec-lbl">Lot Number</span>
+              <span class="spec-val highlight">${s.lotNumber || "LOT #Stock"}</span>
+            </div>
+            <div class="spec-col">
+              <span class="spec-lbl">Thickness</span>
+              <span class="spec-val">${s.thickness || "2 cm · 3 cm"}</span>
+            </div>
+            <div class="spec-col">
+              <span class="spec-lbl">Dimensions</span>
+              <span class="spec-val">${s.size || "128\" × 76\" · Full Slab"}</span>
+            </div>
+            <div class="spec-col">
+              <span class="spec-lbl">Finish</span>
+              <span class="spec-val">${s.finish || "Polished"}</span>
+            </div>
+          </div>
+
+          <p class="sc-desc">${s.description || ""}</p>
+          
+          <div class="sc-specs">
+            <span class="spec-pill">${s.finish || "Polished"}</span>
+            <span class="spec-pill">${s.typeLabel || (typeVal === "engineered" ? "Engineered Quartz" : "Natural Stone")}</span>
+            <span class="spec-pill">${s.colorLabel || "Calibrated"}</span>
+          </div>
+
+          <div class="sc-actions">
+            <a href="slab.html?id=${encodeURIComponent(s.id)}" class="btn btn-sm btn-primary sc-action-inspect">
+              <span>Inspect Full Slab</span>
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-              <span>Opens in New Tab</span>
-            </div>
+            </a>
+            <a href="contact.html?stone=${encodeURIComponent(s.name)}&gt=${encodeURIComponent(s.gtNumber || '')}" class="btn btn-sm btn-secondary sc-action-hold" title="Request 48-hour trade hold on ${s.name}">
+              <span>Hold</span>
+            </a>
           </div>
-          <div class="sc-body">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.35rem;">
-              <h3 class="sc-title" style="margin-bottom:0;">${s.name}</h3>
-              <span class="stock-badge" style="font-size:0.75rem; color:#2b7a4b; font-weight:700; background:rgba(43,122,75,0.12); padding:3px 9px; border-radius:999px;">● In Stock</span>
-            </div>
-            <div class="sc-meta">${s.categoryLabel || s.category} · ${s.origin || "Imported"}</div>
-            
-            <div class="slab-key-specs" style="margin:0.85rem 0; padding:0.75rem; background:var(--bg); border:1px solid var(--line); border-radius:var(--radius-sm); display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-size:0.78rem;">
-              <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">GT Number</span><strong style="color:var(--accent); font-size:0.95rem;">${s.gtNumber || "GT-Pending"}</strong></div>
-              <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Lot Number</span><strong style="color:var(--ink); font-size:0.95rem;">${s.lotNumber || "LOT #Stock"}</strong></div>
-              <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Thickness</span><strong style="color:var(--ink);">${s.thickness || "2 cm · 3 cm"}</strong></div>
-              <div><span style="color:var(--muted); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; display:block;">Size</span><strong style="color:var(--ink);">${s.size || "Full Slab"}</strong></div>
-            </div>
-
-            <p class="sc-desc">${s.description || ""}</p>
-            
-            <div class="sc-specs" style="margin-top:auto; padding-top:0.5rem;">
-              <span class="spec-pill">${s.finish || "Polished"}</span>
-              <span class="spec-pill">${s.typeLabel || (typeVal === "engineered" ? "Engineered Quartz" : "Natural Stone")}</span>
-              <span class="spec-pill">${s.colorLabel || "Calibrated"}</span>
-            </div>
-
-            <div style="margin-top:1rem;">
-              <span class="btn btn-sm btn-primary btn-block" style="display:flex; align-items:center; justify-content:center; gap:0.4rem;">
-                <span>Inspect Slab in New Tab</span>
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
-              </span>
-            </div>
-          </div>
-        </a>
+        </div>
       `;
 
       if (emptyEl) {
@@ -103,6 +123,10 @@
         slabGrid.appendChild(card);
       }
     });
+
+    if (window.GranTradeFavorites && typeof window.GranTradeFavorites.sync === "function") {
+      window.GranTradeFavorites.sync();
+    }
   }
 
   const cards = Array.from(slabGrid.querySelectorAll(".slab-card"));
@@ -112,6 +136,7 @@
   const emptyMsg = document.getElementById("slabEmpty");
   const resultCount = document.getElementById("resultCount");
   const resetBtn = document.getElementById("resetFiltersBtn");
+  const collCount = document.getElementById("collCount");
 
   // Search inputs & clear buttons (Hero search + Filter bar search)
   const heroSearchInput = document.getElementById("catalogSearchHero");
@@ -128,7 +153,26 @@
   const selThickness = document.getElementById("filterThickness");
   const selSort = document.getElementById("sortBy");
 
+  // Active filters bar & view mode controls
+  const activeFiltersBar = document.getElementById("activeFiltersBar");
+  const activeChipsList = document.getElementById("activeChipsList");
+  const clearAllFiltersBtn = document.getElementById("clearAllFiltersBtn");
+  const viewGridBtn = document.getElementById("viewGridBtn");
+  const viewListBtn = document.getElementById("viewListBtn");
+
   let currentCategory = "all";
+
+  const CATEGORY_LABELS = {
+    all: "All Stones",
+    quartzite: "Exotic Quartzite",
+    quartz: "Gran Trade Quartz",
+    granite: "Natural Granite",
+    marble: "Fine Marble",
+    monuments: "Monuments",
+    soapstone: "Soapstone",
+    semi: "Semi Precious",
+    tile: "Tile"
+  };
 
   function getSearchQuery() {
     if (heroSearchInput && heroSearchInput.value.trim()) {
@@ -282,15 +326,103 @@
       emptyMsg.style.display = visibleCount === 0 ? "block" : "none";
     }
 
-    // Results count
-    if (resultCount) {
-      resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? "stone available" : "stones available"}`;
+    // Results count & authentic copy
+    if (collCount) {
+      if (currentCategory === "all" && !q && (!selColor || selColor.value === "all") && (!selType || selType.value === "all") && (!selFinish || selFinish.value === "all") && (!selThickness || selThickness.value === "all")) {
+        collCount.textContent = `Showing all ${cards.length} wholesale stone slabs in Carlstadt yard`;
+      } else {
+        collCount.textContent = `Showing ${visibleCount} of ${cards.length} stone slabs in Carlstadt yard`;
+      }
     }
+
+    if (resultCount) {
+      resultCount.textContent = visibleCount === cards.length ? "" : `${visibleCount} ${visibleCount === 1 ? "slab matches criteria" : "slabs match criteria"}`;
+    }
+
+    // Render active filter chips rail
+    renderActiveFilters();
 
     // Synchronize with tabs counter
     if (window.GranTradeTabs && typeof window.GranTradeTabs.updateCountDisplay === "function") {
       window.GranTradeTabs.updateCountDisplay(visibleCount, cards.length);
     }
+  }
+
+  function renderActiveFilters() {
+    if (!activeFiltersBar || !activeChipsList) return;
+    activeChipsList.innerHTML = "";
+
+    const activeList = [];
+    const q = getSearchQuery();
+    if (q) {
+      activeList.push({
+        label: `Search: "${q}"`,
+        clear: () => { setSearchQuery(""); applyFiltersAndSort(); }
+      });
+    }
+
+    if (currentCategory !== "all") {
+      activeList.push({
+        label: `Category: ${CATEGORY_LABELS[currentCategory] || currentCategory}`,
+        clear: () => {
+          if (window.GranTradeTabs && typeof window.GranTradeTabs.setCategory === "function") {
+            window.GranTradeTabs.setCategory("all");
+          } else {
+            currentCategory = "all";
+            applyFiltersAndSort();
+          }
+        }
+      });
+    }
+
+    if (selColor && selColor.value !== "all") {
+      const text = selColor.options[selColor.selectedIndex]?.text || selColor.value;
+      activeList.push({
+        label: text,
+        clear: () => { selColor.value = "all"; applyFiltersAndSort(); }
+      });
+    }
+
+    if (selType && selType.value !== "all") {
+      const text = selType.options[selType.selectedIndex]?.text || selType.value;
+      activeList.push({
+        label: text,
+        clear: () => { selType.value = "all"; applyFiltersAndSort(); }
+      });
+    }
+
+    if (selFinish && selFinish.value !== "all") {
+      const text = selFinish.options[selFinish.selectedIndex]?.text || selFinish.value;
+      activeList.push({
+        label: text,
+        clear: () => { selFinish.value = "all"; applyFiltersAndSort(); }
+      });
+    }
+
+    if (selThickness && selThickness.value !== "all") {
+      const text = selThickness.options[selThickness.selectedIndex]?.text || selThickness.value;
+      activeList.push({
+        label: text,
+        clear: () => { selThickness.value = "all"; applyFiltersAndSort(); }
+      });
+    }
+
+    if (activeList.length === 0) {
+      activeFiltersBar.style.display = "none";
+      return;
+    }
+
+    activeFiltersBar.style.display = "flex";
+    activeList.forEach((item) => {
+      const chip = document.createElement("span");
+      chip.className = "active-filter-chip";
+      chip.innerHTML = `
+        <span>${item.label}</span>
+        <button type="button" class="active-filter-remove" aria-label="Remove filter ${item.label}">&times;</button>
+      `;
+      chip.querySelector(".active-filter-remove").addEventListener("click", item.clear);
+      activeChipsList.appendChild(chip);
+    });
   }
 
   // Exposed API
@@ -396,6 +528,74 @@
   if (resetBtn) {
     resetBtn.addEventListener("click", window.GranTradeFilters.resetAll);
   }
+
+  // Wire Active Filters Bar Clear All Button
+  if (clearAllFiltersBtn) {
+    clearAllFiltersBtn.addEventListener("click", window.GranTradeFilters.resetAll);
+  }
+
+  // View Mode Switcher (Grid vs Manifest List)
+  function setCatalogViewMode(mode) {
+    if (!slabGrid) return;
+    const isList = mode === "list";
+    if (isList) {
+      slabGrid.classList.add("is-list-view");
+      if (viewListBtn) {
+        viewListBtn.classList.add("active");
+        viewListBtn.setAttribute("aria-pressed", "true");
+      }
+      if (viewGridBtn) {
+        viewGridBtn.classList.remove("active");
+        viewGridBtn.setAttribute("aria-pressed", "false");
+      }
+    } else {
+      slabGrid.classList.remove("is-list-view");
+      if (viewGridBtn) {
+        viewGridBtn.classList.add("active");
+        viewGridBtn.setAttribute("aria-pressed", "true");
+      }
+      if (viewListBtn) {
+        viewListBtn.classList.remove("active");
+        viewListBtn.setAttribute("aria-pressed", "false");
+      }
+    }
+    try {
+      localStorage.setItem("granTrade_catalog_view", isList ? "list" : "grid");
+    } catch (_) {}
+  }
+
+  if (viewGridBtn) {
+    viewGridBtn.addEventListener("click", function () {
+      setCatalogViewMode("grid");
+    });
+  }
+  if (viewListBtn) {
+    viewListBtn.addEventListener("click", function () {
+      setCatalogViewMode("list");
+    });
+  }
+
+  // Restore saved view preference
+  try {
+    const savedView = localStorage.getItem("granTrade_catalog_view");
+    if (savedView === "list") {
+      setCatalogViewMode("list");
+    }
+  } catch (_) {}
+
+  // Global Keyboard Shortcut: Press "/" to focus catalog search
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName)) {
+      e.preventDefault();
+      if (heroSearchInput) {
+        heroSearchInput.focus();
+        heroSearchInput.select();
+      } else if (filterSearchInput) {
+        filterSearchInput.focus();
+        filterSearchInput.select();
+      }
+    }
+  });
 
   // Initial Run: Check URL Query params (?q=... or ?search=... or ?category=...)
   const urlParams = new URLSearchParams(window.location.search);
