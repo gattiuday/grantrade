@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/base.css?v=20261020b" />
   <link rel="stylesheet" href="css/components.css?v=20261020b" />
   <link rel="stylesheet" href="css/admin.css?v=20261020b" />
+  <link rel="stylesheet" href="css/filemanager.css?v=20261020b" />
 
   <!-- Supabase JS Library (Cloud Database & Storage) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -84,7 +85,11 @@
           <span>Cloud Database</span>
         </button>
 
-        <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--line);">
+        <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:0.35rem;">
+          <a href="filemanager.html" target="_blank" class="nav-item">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" /></svg>
+            <span>OS File Manager &rarr;</span>
+          </a>
           <a href="index.html" target="_blank" class="nav-item">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
             <span>View Public Website</span>
@@ -155,31 +160,89 @@
         </div>
       </section>
 
-      <!-- ================= PANE 2: MEDIA & FILE MANAGER ================= -->
+      <!-- ================= PANE 2: OPEN SOURCE WEB FILE MANAGER ================= -->
       <section id="paneMedia" class="admin-pane">
         <div class="pane-header-bar">
           <div>
-            <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.25rem;">Media & File Manager</h2>
-            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Upload high-resolution slab photos, bundle sequences, and showroom imagery.</p>
+            <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.25rem;">
+              <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin:0;">Web File Manager</h2>
+              <span class="fm-badge-os">Open Source v2.4</span>
+            </div>
+            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Client-side digital asset management with Supabase cloud storage sync.</p>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <a href="filemanager.html" target="_blank" class="btn btn-sm btn-secondary" title="Open Fullscreen File Manager in a new tab">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+              <span>Fullscreen App &rarr;</span>
+            </a>
+            <button type="button" class="btn btn-sm btn-secondary" onclick="window.GranTradeFileManager && window.GranTradeFileManager.createFolder()">+ New Folder</button>
+            <button type="button" class="btn btn-sm btn-primary" onclick="window.GranTradeFileManager && window.GranTradeFileManager.triggerUpload()">+ Upload Files</button>
           </div>
         </div>
 
-        <!-- Drag & Drop Zone -->
-        <div id="dropzone" class="dropzone-box">
-          <input type="file" id="fileInput" multiple accept="image/*" style="display:none;" />
-          <svg style="width:44px; height:44px; color:var(--accent); margin:0 auto 12px; display:block;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-          </svg>
-          <h3 style="font-size:1.1rem; margin-bottom:0.35rem;">Drag & drop slab photography here</h3>
-          <p style="color:var(--muted); font-size:0.85rem; margin-bottom:1rem;">Supports JPG, PNG, WebP up to 25MB each</p>
-          <button type="button" class="btn btn-sm btn-secondary">Select Files from Computer</button>
+        <!-- Embedded Explorer Toolbar -->
+        <div class="fm-toolbar" style="border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--line); border-bottom:none;">
+          <div id="fmBreadcrumbs" class="fm-breadcrumbs"></div>
+          <div class="fm-toolbar-controls">
+            <div class="fm-search-box">
+              <svg class="fm-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+              <input type="search" id="fmSearchInput" class="fm-search-input" placeholder="Search files & assets..." />
+            </div>
+            <div class="fm-view-toggles" role="group" aria-label="View Mode">
+              <button type="button" id="fmViewGridBtn" class="fm-view-btn active" title="Grid View">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+              </button>
+              <button type="button" id="fmViewListBtn" class="fm-view-btn" title="List View">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+              </button>
+            </div>
+            <input type="file" id="fmFileInput" multiple style="display:none;" />
+          </div>
         </div>
 
-        <div id="mediaLoading" style="display:none; text-align:center; padding:1.5rem; color:var(--muted);">Loading storage assets...</div>
+        <!-- Embedded Workspace -->
+        <div class="fm-workspace" style="border:1px solid var(--line); border-radius:0 0 var(--radius-md) var(--radius-md); min-height:480px; max-height:560px; background:var(--surface);">
+          <aside class="fm-sidebar" style="height:auto;">
+            <div class="fm-sidebar-section">
+              <div class="fm-sidebar-title">Directories</div>
+              <ul id="fmSidebarTree" class="fm-tree-list"></ul>
+            </div>
+            <div class="fm-storage-box">
+              <div style="display:flex; justify-content:space-between; font-weight:600; color:var(--ink);">
+                <span>Storage</span>
+                <span id="fmTotalSizeStat">0 MB</span>
+              </div>
+              <div class="fm-storage-bar-wrap">
+                <div class="fm-storage-bar-fill"></div>
+              </div>
+              <div style="display:flex; justify-content:space-between; color:var(--muted); font-size:0.72rem; margin-top:0.35rem;">
+                <span id="fmTotalFilesStat">0 Files</span>
+                <span>Active Assets</span>
+              </div>
+            </div>
+          </aside>
 
-        <!-- Asset Grid -->
-        <div id="mediaGrid" class="media-grid">
-          <!-- Rendered via JS -->
+          <main id="fmMainPane" class="fm-main-pane">
+            <div id="fmDropOverlay" class="fm-drop-overlay">
+              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" /></svg>
+              <h3 style="font-family:var(--font-serif); font-size:1.3rem; margin-top:0.35rem;">Drop files to upload</h3>
+            </div>
+            <div id="fmFileGrid" class="fm-file-grid"></div>
+            <div id="fmFileTableWrap" class="fm-file-table-wrap" style="display:none;">
+              <table class="fm-file-table">
+                <thead>
+                  <tr>
+                    <th>File Name</th>
+                    <th>Format</th>
+                    <th>Size</th>
+                    <th>Modified</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="fmFileTableBody"></tbody>
+              </table>
+            </div>
+          </main>
         </div>
       </section>
 
@@ -347,9 +410,38 @@
     </div>
   </div>
 
+  <!-- ================= FILE PREVIEW / CODE INSPECTOR MODAL ================= -->
+  <div id="fmPreviewModal" class="fm-modal">
+    <div class="fm-modal-box">
+      <div class="fm-modal-header">
+        <div>
+          <h3 id="fmPreviewTitle" style="font-family:var(--font-serif); font-size:1.25rem; margin:0;">File Inspector</h3>
+          <div id="fmPreviewMeta" style="font-size:0.78rem; color:var(--muted); margin-top:0.2rem;">/assets · 0 KB</div>
+        </div>
+        <button type="button" class="btn btn-sm" style="border:1px solid var(--line);" onclick="window.GranTradeFileManager.closePreview()">&times;</button>
+      </div>
+
+      <div class="fm-modal-body">
+        <img id="fmPreviewImg" src="" alt="File Preview" class="fm-modal-preview-img" style="display:none;" />
+        <textarea id="fmPreviewEditor" class="fm-code-editor" style="display:none;" spellcheck="false"></textarea>
+      </div>
+
+      <div class="fm-modal-footer">
+        <div style="font-size:0.8rem; color:var(--muted);">
+          <span>Tip: Image URLs can be copied directly into stone catalog data.</span>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" id="fmPreviewCopyBtn" class="btn btn-sm btn-secondary">Copy Public URL</button>
+          <button type="button" id="fmPreviewDownloadBtn" class="btn btn-sm btn-primary">Download File</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="js/stone-catalog-data.js"></script>
   <script src="js/supabase-client.js"></script>
+  <script src="js/filemanager.js"></script>
   <script src="js/admin.js"></script>
 </body>
 </html>

@@ -13,6 +13,8 @@ grantrade/
 ├── collections.html              # 3/5 Page: Full catalog, 3-view panel, multi-facet filter & sort engine
 ├── showroom.html                 # 4/5 Page: "Come Walk the Yard", warehouse gallery, bookmatching guide
 ├── contact.html                  # 5/5 Page: Live yard status, hours table, phone lines, wholesale form
+├── admin.html                    # Admin Portal: Inventory management, inquiries, cloud settings & embedded explorer
+├── filemanager.html              # Open Source Web File Manager: Fullscreen digital asset manager & inspector
 │
 ├── css/
 │   ├── base.css                  # 1/5 CSS: Design tokens, typography (Marcellus + Archivo), dark mode
@@ -95,5 +97,6 @@ Visit `http://localhost:8080` in your browser.
 - [Dual Route Deployment Guide](file:///Users/udaygatti/.gemini/antigravity-ide/scratch/grantrade/docs/DEPLOYMENT.md)
 - [Pages & Component Architecture](file:///Users/udaygatti/.gemini/antigravity-ide/scratch/grantrade/docs/PAGES_AND_COMPONENTS.md)
 - [Data Model Specification](file:///Users/udaygatti/.gemini/antigravity-ide/scratch/grantrade/docs/DATA_MODEL.md)
+- [Open Source Web File Manager Guide](file:///Users/udaygatti/.gemini/antigravity-ide/scratch/grantrade/docs/FILE_MANAGER.md)
 - [Responsive Contract Specification](file:///Users/udaygatti/.gemini/antigravity-ide/scratch/grantrade/docs/RESPONSIVE_CONTRACT.md)
 - [Content Rules & Facts to Confirm](file:///Users/udaygatti/.gemini/antigravity-ide/scratch/grantrade/docs/CONTENT_RULES.md)

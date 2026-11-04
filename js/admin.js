@@ -260,99 +260,35 @@
     });
   }
 
-  // ---------------- 5. Media & File Manager ----------------
-  async function loadMedia() {
-    if (!mediaGrid) return;
-    if (mediaLoading) mediaLoading.style.display = "block";
-    mediaGrid.innerHTML = "";
+  // ---------------- 5. Open Source Web File Manager ----------------
+  let fileManagerReady = false;
 
-    try {
-      if (window.GranTradeDB && window.GranTradeDB.isConnected()) {
-        currentMedia = await window.GranTradeDB.listMedia();
-      } else {
-        // Fallback default sample media
-        currentMedia = [
-          { name: "aquamarine-slab-1.jpg", publicUrl: "assets/images/aquamarine-slab-1.jpg", size: 450000 },
-          { name: "aquamarine-slab-2.jpg", publicUrl: "assets/images/aquamarine-slab-2.jpg", size: 520000 },
-          { name: "granite.jpg", publicUrl: "assets/images/stone-types/granite.jpg", size: 380000 },
-          { name: "marble.jpg", publicUrl: "assets/images/stone-types/marble.jpg", size: 390000 },
-          { name: "quartzite.jpg", publicUrl: "assets/images/stone-types/quartzite.jpg", size: 410000 },
-          { name: "quartz.jpg", publicUrl: "assets/images/stone-types/quartz.jpg", size: 360000 },
-        ];
-      }
-    } catch (err) {
-      console.warn("Failed loading media:", err);
-    } finally {
-      if (mediaLoading) mediaLoading.style.display = "none";
-    }
-
-    renderMediaGrid();
-  }
-
-  function renderMediaGrid() {
-    if (!mediaGrid) return;
-    if (currentMedia.length === 0) {
-      mediaGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--muted);">No media uploaded yet. Drag and drop images above to upload to your storage bucket.</div>`;
-      return;
-    }
-
-    mediaGrid.innerHTML = currentMedia
-      .map(
-        (m) => `
-      <div class="media-card">
-        <img src="${m.publicUrl}" alt="${m.name}" class="media-card-img" onerror="this.src='assets/images/stone-types/quartzite.jpg';" />
-        <div class="media-card-body">
-          <div class="media-card-name" title="${m.name}">${m.name}</div>
-          <div style="font-size:0.75rem; color:var(--muted);">${m.size ? Math.round(m.size / 1024) + ' KB' : 'Static Image'}</div>
-          <div style="display:flex; gap:0.5rem; margin-top:0.25rem;">
-            <button class="btn btn-sm btn-secondary" style="flex:1;" onclick="navigator.clipboard.writeText('${m.publicUrl}'); alert('Public image URL copied to clipboard!');">Copy URL</button>
-            <button class="btn btn-sm" style="color:var(--danger); border:1px solid var(--line);" onclick="window.GranTradeAdmin.deleteMediaFile('${m.name}')">Delete</button>
-          </div>
-        </div>
-      </div>
-    `
-      )
-      .join("");
-  }
-
-  // Drag and drop upload
-  if (dropzone && fileInput) {
-    dropzone.addEventListener("click", () => fileInput.click());
-    dropzone.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropzone.classList.add("dragover");
-    });
-    dropzone.addEventListener("dragleave", () => dropzone.classList.remove("dragover"));
-    dropzone.addEventListener("drop", async (e) => {
-      e.preventDefault();
-      dropzone.classList.remove("dragover");
-      if (e.dataTransfer.files.length) {
-        handleUploadFiles(e.dataTransfer.files);
-      }
-    });
-
-    fileInput.addEventListener("change", (e) => {
-      if (e.target.files.length) {
-        handleUploadFiles(e.target.files);
-      }
-    });
-  }
-
-  async function handleUploadFiles(files) {
-    for (const file of Array.from(files)) {
-      try {
-        if (window.GranTradeDB && window.GranTradeDB.isConnected()) {
-          const res = await window.GranTradeDB.uploadMedia(file);
-          currentMedia.unshift(res);
-        } else {
-          alert("Connect your Supabase project in Database Settings to enable direct cloud file uploads.");
-          return;
-        }
-      } catch (err) {
-        alert(`Failed to upload ${file.name}: ` + err.message);
+  function loadMedia() {
+    if (window.GranTradeFileManager) {
+      if (!fileManagerReady) {
+        window.GranTradeFileManager.init({
+          breadcrumbsId: "fmBreadcrumbs",
+          fileGridId: "fmFileGrid",
+          fileTableWrapId: "fmFileTableWrap",
+          fileTableBodyId: "fmFileTableBody",
+          sidebarTreeId: "fmSidebarTree",
+          searchInputId: "fmSearchInput",
+          viewGridBtnId: "fmViewGridBtn",
+          viewListBtnId: "fmViewListBtn",
+          fileInputId: "fmFileInput",
+          dropOverlayId: "fmDropOverlay",
+          mainPaneId: "fmMainPane",
+          previewModalId: "fmPreviewModal",
+          previewImgId: "fmPreviewImg",
+          previewEditorId: "fmPreviewEditor",
+          previewTitleId: "fmPreviewTitle",
+          previewMetaId: "fmPreviewMeta",
+          previewDownloadBtnId: "fmPreviewDownloadBtn",
+          previewCopyBtnId: "fmPreviewCopyBtn"
+        });
+        fileManagerReady = true;
       }
     }
-    renderMediaGrid();
   }
 
   // ---------------- 6. Leads & Inquiries ----------------
@@ -512,8 +448,10 @@
         if (window.GranTradeDB && window.GranTradeDB.isConnected()) {
           await window.GranTradeDB.deleteMedia(name);
         }
-        currentMedia = currentMedia.filter((m) => m.name !== name);
-        renderMediaGrid();
+        if (window.GranTradeFileManager) {
+          const file = window.GranTradeFileManager.getFiles().find((f) => f.name === name);
+          if (file) window.GranTradeFileManager.deleteFile(file.id);
+        }
       } catch (err) {
         alert("Failed to delete media: " + err.message);
       }

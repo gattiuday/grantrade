@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Source Web File Manager — Gran Trade Inc.</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Fonts & Design Tokens -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="css/filemanager.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ================= AUTH SECURITY OVERLAY ================= -->
+  <div id="authGate" class="auth-gate">
+    <div class="auth-card">
+      <img src="assets/images/logo.png" alt="Gran Trade Inc." class="auth-logo" />
+      <h2>Web File Manager</h2>
+      <p>Enter administrative credentials to manage digital assets, slab photography, and documentation.</p>
+
+      <form id="authForm" style="display:flex; flex-direction:column; gap:1rem;">
+        <div>
+          <label for="adminPass" class="visually-hidden">Master Passphrase</label>
+          <input type="password" id="adminPass" class="admin-input" placeholder="Enter admin passphrase..." required autofocus />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Access File Manager</button>
+        <div id="authError" style="color:var(--danger); font-size:0.82rem; display:none;">Invalid passphrase. Default: <code>grantrade2026</code></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= WEB FILE MANAGER APP ================= -->
+  <div class="fm-container">
+
+    <!-- Top Navigation Bar -->
+    <header class="fm-topbar">
+      <div class="fm-brand-wrap">
+        <picture>
+          <source srcset="assets/images/logo-white.png" media="(prefers-color-scheme: dark)" />
+          <img src="assets/images/logo.png" alt="Gran Trade" style="height:28px; width:auto;" />
+        </picture>
+        <h1 class="fm-brand-title">
+          <span>Web File Manager</span>
+          <span class="fm-badge-os">Open Source v2.4</span>
+        </h1>
+      </div>
+
+      <div class="fm-topbar-actions">
+        <a href="admin.html" class="btn btn-sm btn-secondary">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+          <span>Admin Portal</span>
+        </a>
+        <a href="index.html" target="_blank" class="btn btn-sm btn-secondary">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+          <span>Public Website</span>
+        </a>
+        <button id="logoutBtn" class="btn btn-sm" style="border:1px solid var(--line);" type="button">Logout</button>
+      </div>
+    </header>
+
+    <!-- Explorer Toolbar & Breadcrumbs -->
+    <div class="fm-toolbar">
+      <div id="fmBreadcrumbs" class="fm-breadcrumbs">
+        <!-- Rendered via JS -->
+      </div>
+
+      <div class="fm-toolbar-controls">
+        <div class="fm-search-box">
+          <svg class="fm-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
+          <input type="search" id="fmSearchInput" class="fm-search-input" placeholder="Search files & assets..." />
+        </div>
+
+        <div class="fm-view-toggles" role="group" aria-label="View Mode">
+          <button type="button" id="fmViewGridBtn" class="fm-view-btn active" title="Thumbnail Grid View">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+          </button>
+          <button type="button" id="fmViewListBtn" class="fm-view-btn" title="Detailed Table List View">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+          </button>
+        </div>
+
+        <button type="button" class="btn btn-sm btn-secondary" onclick="window.GranTradeFileManager.createFolder()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          <span>New Folder</span>
+        </button>
+
+        <button type="button" class="btn btn-sm btn-primary" onclick="window.GranTradeFileManager.triggerUpload()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+          <span>Upload Files</span>
+        </button>
+
+        <input type="file" id="fmFileInput" multiple style="display:none;" />
+      </div>
+    </div>
+
+    <!-- Workspace: Split Layout -->
+    <div class="fm-workspace">
+
+      <!-- Left Sidebar: Directories -->
+      <aside class="fm-sidebar">
+        <div class="fm-sidebar-section">
+          <div class="fm-sidebar-title">Directories</div>
+          <ul id="fmSidebarTree" class="fm-tree-list">
+            <!-- Rendered via JS -->
+          </ul>
+        </div>
+
+        <!-- Quick Access Documentation -->
+        <div class="fm-sidebar-section" style="border-top:none;">
+          <div class="fm-sidebar-title">Open Source Tools</div>
+          <ul class="fm-tree-list">
+            <li>
+              <a href="https://filebrowser.org" target="_blank" rel="noopener noreferrer" class="fm-tree-item" title="Filebrowser: Single-binary open source web file manager">
+                <span class="fm-tree-item-label">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                  <span>Filebrowser.org</span>
+                </span>
+                <span class="fm-tree-badge">Go</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://tinyfilemanager.github.io" target="_blank" rel="noopener noreferrer" class="fm-tree-item" title="Tiny File Manager: Single-file open source web file manager">
+                <span class="fm-tree-item-label">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                  <span>TinyFileManager</span>
+                </span>
+                <span class="fm-tree-badge">PHP</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://decapcms.org" target="_blank" rel="noopener noreferrer" class="fm-tree-item" title="Decap CMS: Open-source Git-backed content & media manager">
+                <span class="fm-tree-item-label">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                  <span>Decap CMS</span>
+                </span>
+                <span class="fm-tree-badge">Git</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Storage Quota Stats -->
+        <div class="fm-storage-box">
+          <div style="display:flex; justify-content:space-between; font-weight:600; color:var(--ink);">
+            <span>Virtual Storage</span>
+            <span id="fmTotalSizeStat">0 MB</span>
+          </div>
+          <div class="fm-storage-bar-wrap">
+            <div class="fm-storage-bar-fill"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; color:var(--muted); font-size:0.72rem; margin-top:0.35rem;">
+            <span id="fmTotalFilesStat">0 Files</span>
+            <span>Client VFS + Cloud</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Explorer Files Area -->
+      <main id="fmMainPane" class="fm-main-pane">
+
+        <!-- Drag & Drop Visual Overlay -->
+        <div id="fmDropOverlay" class="fm-drop-overlay">
+          <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" /></svg>
+          <h2 style="font-family:var(--font-serif); font-size:1.5rem; margin-top:0.5rem;">Drop files to upload</h2>
+          <p style="font-size:0.9rem; opacity:0.85;">Files will be staged in the current directory</p>
+        </div>
+
+        <!-- Grid View -->
+        <div id="fmFileGrid" class="fm-file-grid">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- Table View -->
+        <div id="fmFileTableWrap" class="fm-file-table-wrap" style="display:none;">
+          <table class="fm-file-table">
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>Format</th>
+                <th>Size</th>
+                <th>Modified</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="fmFileTableBody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ================= FILE PREVIEW / CODE INSPECTOR MODAL ================= -->
+  <div id="fmPreviewModal" class="fm-modal">
+    <div class="fm-modal-box">
+      <div class="fm-modal-header">
+        <div>
+          <h3 id="fmPreviewTitle" style="font-family:var(--font-serif); font-size:1.25rem; margin:0;">File Inspector</h3>
+          <div id="fmPreviewMeta" style="font-size:0.78rem; color:var(--muted); margin-top:0.2rem;">/assets · 0 KB</div>
+        </div>
+        <button type="button" class="btn btn-sm" style="border:1px solid var(--line);" onclick="window.GranTradeFileManager.closePreview()">&times;</button>
+      </div>
+
+      <div class="fm-modal-body">
+        <img id="fmPreviewImg" src="" alt="File Preview" class="fm-modal-preview-img" style="display:none;" />
+        <textarea id="fmPreviewEditor" class="fm-code-editor" style="display:none;" spellcheck="false"></textarea>
+      </div>
+
+      <div class="fm-modal-footer">
+        <div style="font-size:0.8rem; color:var(--muted);">
+          <span>Tip: Image URLs can be copied directly into stone catalog data.</span>
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" id="fmPreviewCopyBtn" class="btn btn-sm btn-secondary">Copy Public URL</button>
+          <button type="button" id="fmPreviewDownloadBtn" class="btn btn-sm btn-primary">Download File</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/filemanager.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      // 1. Simple Security Gate
+      const authGate = document.getElementById("authGate");
+      const authForm = document.getElementById("authForm");
+      const adminPass = document.getElementById("adminPass");
+      const authError = document.getElementById("authError");
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      const MASTER_HASH = "grantrade2026";
+      const AUTH_STORAGE_KEY = "grantrade_admin_auth";
+
+      function checkAuth() {
+        if (sessionStorage.getItem(AUTH_STORAGE_KEY) === "true") {
+          if (authGate) authGate.style.display = "none";
+        } else {
+          if (authGate) authGate.style.display = "flex";
+        }
+      }
+
+      if (authForm) {
+        authForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (adminPass.value.trim() === MASTER_HASH) {
+            sessionStorage.setItem(AUTH_STORAGE_KEY, "true");
+            if (authGate) authGate.style.display = "none";
+          } else {
+            if (authError) authError.style.display = "block";
+          }
+        });
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          sessionStorage.removeItem(AUTH_STORAGE_KEY);
+          window.location.reload();
+        });
+      }
+
+      checkAuth();
+
+      // 2. Initialize File Manager Engine
+      window.GranTradeFileManager.init({
+        breadcrumbsId: "fmBreadcrumbs",
+        fileGridId: "fmFileGrid",
+        fileTableWrapId: "fmFileTableWrap",
+        fileTableBodyId: "fmFileTableBody",
+        sidebarTreeId: "fmSidebarTree",
+        searchInputId: "fmSearchInput",
+        viewGridBtnId: "fmViewGridBtn",
+        viewListBtnId: "fmViewListBtn",
+        fileInputId: "fmFileInput",
+        dropOverlayId: "fmDropOverlay",
+        mainPaneId: "fmMainPane",
+        previewModalId: "fmPreviewModal",
+        previewImgId: "fmPreviewImg",
+        previewEditorId: "fmPreviewEditor",
+        previewTitleId: "fmPreviewTitle",
+        previewMetaId: "fmPreviewMeta",
+        previewDownloadBtnId: "fmPreviewDownloadBtn",
+        previewCopyBtnId: "fmPreviewCopyBtn"
+      });
+    })();
+  </script>
+</body>
+</html>
