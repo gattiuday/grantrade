@@ -35,6 +35,18 @@
         s.application
       ].filter(Boolean).join(" ").toLowerCase();
 
+      // Clean lot number without repeating "LOT" or "Lot"
+      const cleanLot = (s.lotNumber || "Stock").replace(/^LOT\s*#?/i, "").trim();
+      // Clean size without redundant "Full Slab"
+      const cleanSize = (s.size || '128" × 76"').replace(/\s*·\s*Full Slab/i, "").trim();
+      // Application highlight badges (non-redundant architectural tags)
+      const appHighlights = s.application 
+        ? s.application.split(/\s*·\s*/).filter(Boolean)
+        : ["Kitchen Islands", "Feature Walls"];
+      const appPill1 = appHighlights[0] || "Waterfall Countertops";
+      const appPill2 = appHighlights[1] || "Vanity Surfaces";
+      const charPill = s.category === "quartzite" ? "Acid-Resistant" : (s.category === "marble" ? "Bookmatched Veins" : (s.category === "granite" ? "High-Traffic" : "Calibrated Quartz"));
+
       const card = document.createElement("article");
       card.className = "slab-card";
       card.setAttribute("data-id", s.id);
@@ -65,7 +77,7 @@
           </a>
           <div class="sc-newtab-hint">
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
-            <span>Inspect Slab</span>
+            <span>High-Res Zoom</span>
           </div>
         </div>
         <div class="sc-body">
@@ -74,24 +86,24 @@
               <h3 class="sc-title"><a href="slab.html?id=${encodeURIComponent(s.id)}">${s.name}</a></h3>
               <span class="sc-gt-pill">${s.gtNumber || "GT-Stock"}</span>
             </div>
-            <div class="sc-meta">${s.categoryLabel || s.category} · ${s.origin || "Direct Quarry Import"}</div>
+            <div class="sc-meta">${s.typeLabel || (typeVal === "engineered" ? "Engineered Surface" : "Natural Stone")} · ${s.origin || "Direct Import"}</div>
           </div>
           
           <div class="slab-key-specs">
             <div class="spec-col">
-              <span class="spec-lbl">Lot Number</span>
-              <span class="spec-val highlight">${s.lotNumber || "LOT #Stock"}</span>
+              <span class="spec-lbl">Lot Code</span>
+              <span class="spec-val highlight">#${cleanLot}</span>
             </div>
             <div class="spec-col">
-              <span class="spec-lbl">Thickness</span>
+              <span class="spec-lbl">Calibration</span>
               <span class="spec-val">${s.thickness || "2 cm · 3 cm"}</span>
             </div>
             <div class="spec-col">
-              <span class="spec-lbl">Dimensions</span>
-              <span class="spec-val">${s.size || "128\" × 76\" · Full Slab"}</span>
+              <span class="spec-lbl">Net Size</span>
+              <span class="spec-val">${cleanSize}</span>
             </div>
             <div class="spec-col">
-              <span class="spec-lbl">Finish</span>
+              <span class="spec-lbl">Surface</span>
               <span class="spec-val">${s.finish || "Polished"}</span>
             </div>
           </div>
@@ -99,18 +111,18 @@
           <p class="sc-desc">${s.description || ""}</p>
           
           <div class="sc-specs">
-            <span class="spec-pill">${s.finish || "Polished"}</span>
-            <span class="spec-pill">${s.typeLabel || (typeVal === "engineered" ? "Engineered Quartz" : "Natural Stone")}</span>
-            <span class="spec-pill">${s.colorLabel || "Calibrated"}</span>
+            <span class="spec-pill">${appPill1}</span>
+            <span class="spec-pill">${appPill2}</span>
+            <span class="spec-pill">${charPill}</span>
           </div>
 
           <div class="sc-actions">
             <a href="slab.html?id=${encodeURIComponent(s.id)}" class="btn btn-sm btn-primary sc-action-inspect">
-              <span>Inspect Full Slab</span>
+              <span>View Slab Details</span>
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
             </a>
-            <a href="contact.html?stone=${encodeURIComponent(s.name)}&gt=${encodeURIComponent(s.gtNumber || '')}" class="btn btn-sm btn-secondary sc-action-hold" title="Request 48-hour trade hold on ${s.name}">
-              <span>Hold</span>
+            <a href="contact.html?stone=${encodeURIComponent(s.name)}&gt=${encodeURIComponent(s.gtNumber || '')}" class="btn btn-sm btn-secondary sc-action-hold" title="Reserve 48-hour trade hold on ${s.name}">
+              <span>Place 48h Hold</span>
             </a>
           </div>
         </div>
@@ -325,17 +337,17 @@
       emptyMsg.style.display = visibleCount === 0 ? "block" : "none";
     }
 
-    // Results count & authentic copy
+    // Results count & concise, non-repetitive copy
     if (collCount) {
       if (currentCategory === "all" && !q && (!selColor || selColor.value === "all") && (!selType || selType.value === "all") && (!selFinish || selFinish.value === "all") && (!selThickness || selThickness.value === "all")) {
-        collCount.textContent = `Showing all ${cards.length} wholesale stone slabs in Carlstadt yard`;
+        collCount.textContent = `${cards.length} Architectural Slabs Staged`;
       } else {
-        collCount.textContent = `Showing ${visibleCount} of ${cards.length} stone slabs in Carlstadt yard`;
+        collCount.textContent = `Displaying ${visibleCount} of ${cards.length} Materials`;
       }
     }
 
     if (resultCount) {
-      resultCount.textContent = visibleCount === cards.length ? "" : `${visibleCount} ${visibleCount === 1 ? "slab matches criteria" : "slabs match criteria"}`;
+      resultCount.textContent = "";
     }
 
     // Render active filter chips rail

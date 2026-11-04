@@ -724,15 +724,15 @@
               <span id="specGtNumber" class="value highlight">GT-4008</span>
             </div>
             <div class="spec-block">
-              <span class="label">Lot Number</span>
-              <span id="specLotNumber" class="value highlight">LOT #59108</span>
+              <span class="label">Lot Code</span>
+              <span id="specLotNumber" class="value highlight">#59108</span>
             </div>
             <div class="spec-block">
-              <span class="label">Thickness</span>
-              <span id="specThickness" class="value">2 cm · 3 cm Calibrated</span>
+              <span class="label">Calibration</span>
+              <span id="specThickness" class="value">2 cm · 3 cm</span>
             </div>
             <div class="spec-block">
-              <span class="label">Size / Dimensions</span>
+              <span class="label">Dimensions</span>
               <span id="specSize" class="value">128" × 76" · 67.5 sq. ft.</span>
             </div>
           </div>
@@ -901,9 +901,9 @@
       document.getElementById("slabCatBadge").textContent = stone.categoryLabel;
       document.getElementById("slabName").textContent = stone.name;
       document.getElementById("specGtNumber").textContent = stone.gtNumber;
-      document.getElementById("specLotNumber").textContent = stone.lotNumber;
+      document.getElementById("specLotNumber").textContent = `#${(stone.lotNumber || '59108').replace(/^LOT\s*#?/i, '').trim()}`;
       document.getElementById("specThickness").textContent = stone.thickness;
-      document.getElementById("specSize").textContent = stone.size;
+      document.getElementById("specSize").textContent = (stone.size || '128" × 76"').replace(/\s*·\s*Full Slab/i, '').trim();
 
       // Secondary specs
       const specFinish = document.getElementById("specFinish");
