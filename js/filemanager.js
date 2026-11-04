@@ -1,13 +1,40 @@
 /**
  * GRAN TRADE INC. — OPEN SOURCE WEB FILE MANAGER ENGINE
- * Lightweight, self-contained client-side web file manager with Supabase Storage sync.
+ * Lightweight, self-contained client-side web file manager with Supabase Storage sync,
+ * code/content editor, and direct Homepage Content Management.
  */
 
 (function (global) {
   "use strict";
 
-  // Initial Built-in Website Asset Manifest
+  // Initial Built-in Website Asset & Code Manifest
   const DEFAULT_FILES = [
+    // Web Pages (Directly editable from File Manager)
+    { id: "f_index", name: "index.html", path: "/", size: 54120, type: "text/html", url: "index.html", modified: "2026-11-03" },
+    { id: "f_about", name: "about.html", path: "/", size: 13046, type: "text/html", url: "about.html", modified: "2026-11-03" },
+    { id: "f_colls", name: "collections.html", path: "/", size: 24604, type: "text/html", url: "collections.html", modified: "2026-11-03" },
+    { id: "f_show", name: "showroom.html", path: "/", size: 10809, type: "text/html", url: "showroom.html", modified: "2026-11-03" },
+    { id: "f_contact", name: "contact.html", path: "/", size: 22629, type: "text/html", url: "contact.html", modified: "2026-11-03" },
+    { id: "f_admin", name: "admin.html", path: "/", size: 26174, type: "text/html", url: "admin.html", modified: "2026-11-03" },
+    { id: "f_fm", name: "filemanager.html", path: "/", size: 19500, type: "text/html", url: "filemanager.html", modified: "2026-11-03" },
+
+    // Data Files
+    { id: "f_hp_json", name: "homepage.json", path: "/data", size: 4120, type: "application/json", url: "data/homepage.json", modified: "2026-11-03" },
+    { id: "f14", name: "products.json", path: "/data", size: 42662, type: "application/json", url: "data/products.json", modified: "2026-11-03" },
+
+    // Stylesheets
+    { id: "f_css_base", name: "base.css", path: "/css", size: 7600, type: "text/css", url: "css/base.css", modified: "2026-11-03" },
+    { id: "f_css_layout", name: "layout.css", path: "/css", size: 9200, type: "text/css", url: "css/layout.css", modified: "2026-11-03" },
+    { id: "f_css_components", name: "components.css", path: "/css", size: 14500, type: "text/css", url: "css/components.css", modified: "2026-11-03" },
+    { id: "f_css_pages", name: "pages.css", path: "/css", size: 18400, type: "text/css", url: "css/pages.css", modified: "2026-11-03" },
+    { id: "f_css_fm", name: "filemanager.css", path: "/css", size: 14200, type: "text/css", url: "css/filemanager.css", modified: "2026-11-03" },
+
+    // Core Scripts
+    { id: "f_js_hp", name: "homepage-loader.js", path: "/js", size: 3800, type: "application/javascript", url: "js/homepage-loader.js", modified: "2026-11-03" },
+    { id: "f_js_fm", name: "filemanager.js", path: "/js", size: 28800, type: "application/javascript", url: "js/filemanager.js", modified: "2026-11-03" },
+    { id: "f_js_nav", name: "nav.js", path: "/js", size: 4200, type: "application/javascript", url: "js/nav.js", modified: "2026-11-03" },
+
+    // Assets: Brand & Images
     { id: "f1", name: "aquamarine-slab-1.jpg", path: "/assets/images", size: 897579, type: "image/jpeg", url: "assets/images/aquamarine-slab-1.jpg", modified: "2026-11-03" },
     { id: "f2", name: "aquamarine-slab-2.jpg", path: "/assets/images", size: 857508, type: "image/jpeg", url: "assets/images/aquamarine-slab-2.jpg", modified: "2026-11-03" },
     { id: "f3", name: "logo.png", path: "/assets/images", size: 16524, type: "image/png", url: "assets/images/logo.png", modified: "2026-11-03" },
@@ -21,15 +48,18 @@
     { id: "f11", name: "semi-precious.jpg", path: "/assets/images/stone-types", size: 919719, type: "image/jpeg", url: "assets/images/stone-types/semi-precious.jpg", modified: "2026-11-03" },
     { id: "f12", name: "soapstone.jpg", path: "/assets/images/stone-types", size: 680423, type: "image/jpeg", url: "assets/images/stone-types/soapstone.jpg", modified: "2026-11-03" },
     { id: "f13", name: "tile.jpg", path: "/assets/images/stone-types", size: 891973, type: "image/jpeg", url: "assets/images/stone-types/tile.jpg", modified: "2026-11-03" },
-    { id: "f14", name: "products.json", path: "/data", size: 42662, type: "application/json", url: "data/products.json", modified: "2026-11-03", content: '{\n  "version": "1.0",\n  "company": "Gran Trade Inc.",\n  "totalStones": 50\n}' },
-    { id: "f15", name: "DEPLOYMENT.md", path: "/docs", size: 6800, type: "text/markdown", url: "docs/DEPLOYMENT.md", modified: "2026-11-03", content: '# Gran Trade Inc. Deployment Guide\n\nConfigure custom domains, static hosting, and forms.' }
+
+    // Documentation
+    { id: "f15", name: "DEPLOYMENT.md", path: "/docs", size: 6800, type: "text/markdown", url: "docs/DEPLOYMENT.md", modified: "2026-11-03" },
+    { id: "f16", name: "FILE_MANAGER.md", path: "/docs", size: 9200, type: "text/markdown", url: "docs/FILE_MANAGER.md", modified: "2026-11-03" }
   ];
 
   const STORAGE_KEY = "grantrade_fm_files";
   const DIRECTORIES_KEY = "grantrade_fm_dirs";
+  const HOMEPAGE_STORAGE_KEY = "grantrade_homepage_content";
 
   let files = [];
-  let customDirs = ["/", "/assets/images", "/assets/images/stone-types", "/data", "/docs", "/uploads"];
+  let customDirs = ["/", "/assets/images", "/assets/images/stone-types", "/data", "/css", "/js", "/docs", "/uploads"];
   let currentDirectory = "/";
   let searchQuery = "";
   let viewMode = "grid"; // "grid" | "list"
@@ -38,21 +68,33 @@
   // DOM Elements Cache
   let breadcrumbsEl, fileGridEl, fileTableBodyEl, fileTableWrapEl, sidebarTreeEl;
   let searchInput, viewGridBtn, viewListBtn, fileInput, dropOverlay;
-  let previewModal, previewImg, previewEditor, previewTitle, previewMeta, previewDownloadBtn, previewCopyBtn;
+  let previewModal, previewImg, previewEditor, previewTitle, previewMeta, previewDownloadBtn, previewCopyBtn, previewSaveBtn;
   let totalFilesStatEl, totalSizeStatEl;
+
+  // Homepage Editor Modal Elements
+  let homepageModal;
 
   function loadState() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        files = JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        const existingIds = new Set(parsed.map((x) => x.id));
+        DEFAULT_FILES.forEach((df) => {
+          if (!existingIds.has(df.id)) {
+            parsed.push(df);
+          }
+        });
+        files = parsed;
       } else {
         files = [...DEFAULT_FILES];
-        saveState();
       }
+      saveState();
+
       const savedDirs = localStorage.getItem(DIRECTORIES_KEY);
       if (savedDirs) {
-        customDirs = JSON.parse(savedDirs);
+        const parsedDirs = JSON.parse(savedDirs);
+        customDirs = Array.from(new Set([...customDirs, ...parsedDirs]));
       }
     } catch (_) {
       files = [...DEFAULT_FILES];
@@ -88,7 +130,7 @@
   function getFilteredFiles() {
     return files.filter((f) => {
       // Directory match
-      const dirMatch = currentDirectory === "/" ? true : f.path.startsWith(currentDirectory);
+      const dirMatch = currentDirectory === "/" ? true : f.path === currentDirectory || f.path.startsWith(currentDirectory + "/");
       if (!dirMatch) return false;
 
       // Search match
@@ -130,7 +172,7 @@
     
     files.forEach((f) => {
       customDirs.forEach((d) => {
-        if (d === "/" || f.path.startsWith(d)) {
+        if (d === "/" || f.path === d || f.path.startsWith(d + "/")) {
           counts[d] = (counts[d] || 0) + 1;
         }
       });
@@ -157,140 +199,168 @@
       .join("");
   }
 
-  function renderStorageStats() {
-    const totalFiles = files.length;
-    const totalBytes = files.reduce((acc, f) => acc + (f.size || 0), 0);
-
-    if (totalFilesStatEl) totalFilesStatEl.textContent = `${totalFiles} Files`;
-    if (totalSizeStatEl) totalSizeStatEl.textContent = formatBytes(totalBytes);
-  }
-
-  function renderFiles() {
-    const list = getFilteredFiles();
-    renderBreadcrumbs();
-    renderSidebarTree();
-    renderStorageStats();
-
-    if (viewMode === "grid") {
-      if (fileTableWrapEl) fileTableWrapEl.style.display = "none";
-      if (fileGridEl) {
-        fileGridEl.style.display = "grid";
-        if (list.length === 0) {
-          fileGridEl.innerHTML = `
-            <div style="grid-column:1/-1; text-align:center; padding:3.5rem 1rem; color:var(--muted);">
-              <svg width="44" height="44" style="margin:0 auto 12px; display:block; opacity:0.5;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" /></svg>
-              <h3>Folder is empty</h3>
-              <p style="font-size:0.85rem; margin-top:0.35rem;">Drag and drop files here to upload to this directory.</p>
-            </div>
-          `;
-          return;
-        }
-
-        fileGridEl.innerHTML = list
-          .map((f) => {
-            const isImg = f.type.startsWith("image/") || /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(f.name);
-            return `
-              <div class="fm-file-card" onclick="window.GranTradeFileManager.openPreview('${f.id}')">
-                <div class="fm-file-preview-wrap">
-                  ${
-                    isImg
-                      ? `<img src="${f.url}" alt="${f.name}" class="fm-file-thumb" onerror="this.onerror=null; this.src='assets/images/stone-types/quartzite.jpg';" />`
-                      : `<div class="fm-file-icon-box">${getFileIcon(f.type, f.name)}<span class="fm-file-ext-tag">${f.name.split(".").pop()}</span></div>`
-                  }
-                </div>
-                <div class="fm-file-card-info">
-                  <div class="fm-file-card-name" title="${f.name}">${f.name}</div>
-                  <div class="fm-file-card-meta">
-                    <span>${formatBytes(f.size)}</span>
-                    <span>${f.path.replace(/^\/assets/, "") || "/"}</span>
-                  </div>
-                  <div class="fm-card-quick-actions" onclick="event.stopPropagation();">
-                    <button class="btn btn-sm btn-secondary" style="flex:1; padding:2px 6px; font-size:0.72rem;" onclick="window.GranTradeFileManager.copyUrl('${f.url}')">Copy URL</button>
-                    <button class="btn btn-sm btn-secondary" style="padding:2px 6px; font-size:0.72rem;" onclick="window.GranTradeFileManager.downloadFile('${f.id}')">Download</button>
-                    <button class="btn btn-sm" style="color:var(--danger); border:1px solid var(--line); padding:2px 6px; font-size:0.72rem;" onclick="window.GranTradeFileManager.deleteFile('${f.id}')">&times;</button>
-                  </div>
-                </div>
-              </div>
-            `;
-          })
-          .join("");
-      }
-    } else {
-      // List Table View
-      if (fileGridEl) fileGridEl.style.display = "none";
-      if (fileTableWrapEl) {
-        fileTableWrapEl.style.display = "block";
-        if (!fileTableBodyEl) return;
-        if (list.length === 0) {
-          fileTableBodyEl.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:3rem; color:var(--muted);">No files match your search criteria.</td></tr>`;
-          return;
-        }
-
-        fileTableBodyEl.innerHTML = list
-          .map((f) => {
-            const isImg = f.type.startsWith("image/") || /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(f.name);
-            return `
-              <tr onclick="window.GranTradeFileManager.openPreview('${f.id}')" style="cursor:pointer;">
-                <td>
-                  <div class="fm-table-file-cell">
-                    ${
-                      isImg
-                        ? `<img src="${f.url}" alt="${f.name}" class="fm-table-thumb" onerror="this.src='assets/images/stone-types/quartzite.jpg';" />`
-                        : `<div class="fm-table-thumb" style="display:flex; align-items:center; justify-content:center;">${getFileIcon(f.type, f.name)}</div>`
-                    }
-                    <div>
-                      <div style="font-weight:600; color:var(--ink);">${f.name}</div>
-                      <div style="font-size:0.75rem; color:var(--muted);">${f.path}</div>
-                    </div>
-                  </div>
-                </td>
-                <td><code>${f.name.split(".").pop().toUpperCase()}</code></td>
-                <td>${formatBytes(f.size)}</td>
-                <td>${f.modified || "2026-11-03"}</td>
-                <td style="text-align:right;" onclick="event.stopPropagation();">
-                  <button class="btn btn-sm btn-secondary" onclick="window.GranTradeFileManager.copyUrl('${f.url}')">Copy URL</button>
-                  <button class="btn btn-sm btn-secondary" onclick="window.GranTradeFileManager.downloadFile('${f.id}')">Download</button>
-                  <button class="btn btn-sm" style="color:var(--danger); border:1px solid var(--line);" onclick="window.GranTradeFileManager.deleteFile('${f.id}')">Delete</button>
-                </td>
-              </tr>
-            `;
-          })
-          .join("");
-      }
+  function renderStats() {
+    if (totalFilesStatEl) totalFilesStatEl.textContent = `${files.length} Files`;
+    if (totalSizeStatEl) {
+      const totalBytes = files.reduce((acc, cur) => acc + (cur.size || 0), 0);
+      totalSizeStatEl.textContent = formatBytes(totalBytes);
     }
   }
 
-  // ---------------- File Actions ----------------
+  function renderFiles() {
+    renderBreadcrumbs();
+    renderSidebarTree();
+    renderStats();
+
+    const filtered = getFilteredFiles();
+
+    // Toggle Grid vs List container visibility
+    if (viewMode === "grid") {
+      if (fileGridEl) fileGridEl.style.display = "grid";
+      if (fileTableWrapEl) fileTableWrapEl.style.display = "none";
+      renderGridView(filtered);
+    } else {
+      if (fileGridEl) fileGridEl.style.display = "none";
+      if (fileTableWrapEl) fileTableWrapEl.style.display = "block";
+      renderListView(filtered);
+    }
+  }
+
+  function renderGridView(items) {
+    if (!fileGridEl) return;
+    if (items.length === 0) {
+      fileGridEl.innerHTML = `
+        <div class="fm-empty-state">
+          <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+          <div style="font-size:1.1rem; font-weight:600; color:var(--ink);">No files found in ${currentDirectory}</div>
+          <p style="font-size:0.85rem; color:var(--muted); margin-top:0.25rem;">Drop files here or click "+ Upload Files" above.</p>
+        </div>
+      `;
+      return;
+    }
+
+    fileGridEl.innerHTML = items
+      .map((f) => {
+        const isImg = f.type.startsWith("image/") || /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(f.name);
+        const thumbHtml = isImg
+          ? `<img src="${f.url}" alt="${f.name}" class="fm-card-img" onerror="this.onerror=null; this.src='assets/images/stone-types/quartzite.jpg';" />`
+          : `<div class="fm-card-icon-fallback">${getFileIcon(f.type, f.name)}</div>`;
+
+        const isEditable = /\.(html|json|css|js|md|txt)$/i.test(f.name);
+
+        return `
+          <div class="fm-card" onclick="window.GranTradeFileManager.openPreview('${f.id}')">
+            <div class="fm-card-thumb">${thumbHtml}</div>
+            <div class="fm-card-body">
+              <div class="fm-card-title" title="${f.name}">${f.name}</div>
+              <div class="fm-card-meta">
+                <span>${formatBytes(f.size)}</span>
+                <span style="display:inline-flex; align-items:center; gap:0.2rem;">
+                  ${isEditable ? '<span style="color:var(--accent); font-weight:700;">● Edit</span> · ' : ''}${f.path}
+                </span>
+              </div>
+            </div>
+            <div class="fm-card-actions" onclick="event.stopPropagation()">
+              <button type="button" class="fm-action-btn" title="Inspect & Edit File" onclick="window.GranTradeFileManager.openPreview('${f.id}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              </button>
+              <button type="button" class="fm-action-btn" title="Copy Public URL" onclick="window.GranTradeFileManager.copyUrl('${f.url}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+              </button>
+              <button type="button" class="fm-action-btn" title="Download File" onclick="window.GranTradeFileManager.downloadFile('${f.id}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+              </button>
+              <button type="button" class="fm-action-btn delete" title="Delete File" onclick="window.GranTradeFileManager.deleteFile('${f.id}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  function renderListView(items) {
+    if (!fileTableBodyEl) return;
+    if (items.length === 0) {
+      fileTableBodyEl.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:3rem; color:var(--muted);">No files found in directory.</td></tr>`;
+      return;
+    }
+
+    fileTableBodyEl.innerHTML = items
+      .map((f) => {
+        const isImg = f.type.startsWith("image/") || /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(f.name);
+        const iconOrThumb = isImg
+          ? `<img src="${f.url}" alt="${f.name}" class="fm-table-thumb" onerror="this.onerror=null; this.src='assets/images/stone-types/quartzite.jpg';" />`
+          : `<div style="width:36px; height:36px; display:flex; align-items:center; justify-content:center; background:var(--bg-2); border-radius:var(--radius-sm); border:1px solid var(--line); color:var(--muted);">${getFileIcon(f.type, f.name)}</div>`;
+
+        return `
+          <tr onclick="window.GranTradeFileManager.openPreview('${f.id}')" style="cursor:pointer;">
+            <td>
+              <div class="fm-table-file-cell">
+                ${iconOrThumb}
+                <div>
+                  <div style="font-weight:600; color:var(--ink);">${f.name}</div>
+                  <div style="font-size:0.75rem; color:var(--muted);">${f.path}</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="fm-tree-badge">${f.type.split("/")[1] || f.name.split(".").pop()}</span></td>
+            <td style="font-size:0.85rem; color:var(--ink-2);">${formatBytes(f.size)}</td>
+            <td style="font-size:0.85rem; color:var(--muted);">${f.modified || "2026-11-03"}</td>
+            <td style="text-align:right;" onclick="event.stopPropagation()">
+              <button type="button" class="fm-action-btn" title="Inspect & Edit File" onclick="window.GranTradeFileManager.openPreview('${f.id}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              </button>
+              <button type="button" class="fm-action-btn" title="Copy URL" onclick="window.GranTradeFileManager.copyUrl('${f.url}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+              </button>
+              <button type="button" class="fm-action-btn" title="Download" onclick="window.GranTradeFileManager.downloadFile('${f.id}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+              </button>
+              <button type="button" class="fm-action-btn delete" title="Delete" onclick="window.GranTradeFileManager.deleteFile('${f.id}')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>
+              </button>
+            </td>
+          </tr>
+        `;
+      })
+      .join("");
+  }
+
+  // ---------------- File Ingestion (Upload) ----------------
   async function handleFilesUpload(fileList) {
     for (const file of Array.from(fileList)) {
-      const isImg = file.type.startsWith("image/");
-      const blobUrl = URL.createObjectURL(file);
+      let publicUrl = "";
 
-      // Check if Supabase Cloud Storage is connected
-      let finalUrl = blobUrl;
-      if (global.GranTradeDB && global.GranTradeDB.isConnected()) {
+      // Try Supabase Storage sync if client configured
+      if (window.GranTradeDB && window.GranTradeDB.isConnected()) {
         try {
-          const res = await global.GranTradeDB.uploadMedia(file, currentDirectory.replace(/^\//, ""));
-          if (res && res.publicUrl) finalUrl = res.publicUrl;
-        } catch (err) {
-          console.warn("[FileManager] Supabase upload failed, falling back to local object URL:", err);
+          const res = await window.GranTradeDB.uploadMedia(file);
+          publicUrl = res.publicUrl || res.url;
+        } catch (e) {
+          console.warn("Supabase upload fallback to local URL:", e);
         }
       }
 
+      if (!publicUrl) {
+        publicUrl = URL.createObjectURL(file);
+      }
+
       let fileContent = "";
-      if (file.type.startsWith("text/") || file.name.endsWith(".json") || file.name.endsWith(".md")) {
+      if (file.type.startsWith("text/") || file.type.includes("json") || file.name.match(/\.(html|css|js|json|md)$/i)) {
         try {
           fileContent = await file.text();
         } catch (_) {}
       }
 
       const newFileObj = {
-        id: "f_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5),
+        id: "usr_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6),
         name: file.name,
-        path: currentDirectory === "/" ? "/uploads" : currentDirectory,
+        path: currentDirectory,
         size: file.size,
         type: file.type || "application/octet-stream",
-        url: finalUrl,
+        url: publicUrl,
         modified: new Date().toISOString().split("T")[0],
         content: fileContent
       };
@@ -302,6 +372,7 @@
     renderFiles();
   }
 
+  // ---------------- Inspector & Code Preview ----------------
   function openPreview(fileId) {
     const f = files.find((x) => x.id === fileId);
     if (!f || !previewModal) return;
@@ -315,10 +386,27 @@
       previewImg.src = f.url;
       previewImg.style.display = "block";
       if (previewEditor) previewEditor.style.display = "none";
+      if (previewSaveBtn) previewSaveBtn.style.display = "none";
     } else if (previewEditor) {
       if (previewImg) previewImg.style.display = "none";
       previewEditor.style.display = "block";
-      previewEditor.value = f.content || `/* Binary or media file: ${f.name} */\n/* Size: ${formatBytes(f.size)} */`;
+      if (previewSaveBtn) previewSaveBtn.style.display = "inline-flex";
+
+      // If text content is not cached, fetch live content
+      if (!f.content && f.url) {
+        previewEditor.value = "/* Loading live file content... */";
+        fetch(f.url)
+          .then((r) => r.text())
+          .then((text) => {
+            f.content = text;
+            previewEditor.value = text;
+          })
+          .catch(() => {
+            previewEditor.value = `/* Binary or media file: ${f.name} */\n/* Size: ${formatBytes(f.size)} */`;
+          });
+      } else {
+        previewEditor.value = f.content || "";
+      }
     }
 
     previewModal.classList.add("active");
@@ -327,6 +415,34 @@
   function closePreview() {
     if (previewModal) previewModal.classList.remove("active");
     currentPreviewFile = null;
+  }
+
+  function saveCurrentFile() {
+    if (!currentPreviewFile || !previewEditor) return;
+    const newContent = previewEditor.value;
+    currentPreviewFile.content = newContent;
+    currentPreviewFile.size = new Blob([newContent]).size;
+    currentPreviewFile.modified = new Date().toISOString().split("T")[0];
+
+    // Special handlers for critical website files
+    if (currentPreviewFile.name === "homepage.json") {
+      try {
+        const parsed = JSON.parse(newContent);
+        localStorage.setItem(HOMEPAGE_STORAGE_KEY, JSON.stringify(parsed));
+        if (window.GranTradeHomepageLoader) {
+          window.GranTradeHomepageLoader.apply(parsed);
+        }
+      } catch (err) {
+        alert("JSON syntax error: " + err.message);
+        return;
+      }
+    } else if (currentPreviewFile.name === "index.html") {
+      localStorage.setItem("grantrade_vfs_index_html", newContent);
+    }
+
+    saveState();
+    renderFiles();
+    alert(`File "${currentPreviewFile.name}" saved successfully!\nUpdated size: ${formatBytes(currentPreviewFile.size)}`);
   }
 
   function copyUrl(url) {
@@ -341,6 +457,21 @@
   function downloadFile(fileId) {
     const f = files.find((x) => x.id === fileId);
     if (!f) return;
+
+    // If text file was edited in memory, download from blob
+    if (f.content) {
+      const blob = new Blob([f.content], { type: f.type || "text/plain" });
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = f.name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(blobUrl);
+      return;
+    }
+
     const a = document.createElement("a");
     a.href = f.url;
     a.download = f.name;
@@ -373,8 +504,224 @@
     }
   }
 
+  // ---------------- Visual Homepage Content Editor ----------------
+  async function openHomepageEditor() {
+    homepageModal = document.getElementById("fmHomepageModal");
+    if (!homepageModal) return;
+
+    let hpData = null;
+
+    // Check localStorage first
+    try {
+      const local = localStorage.getItem(HOMEPAGE_STORAGE_KEY);
+      if (local) hpData = JSON.parse(local);
+    } catch (_) {}
+
+    // Fallback to homepage.json in files or fetch
+    if (!hpData) {
+      const f = files.find((x) => x.name === "homepage.json");
+      if (f && f.content) {
+        try { hpData = JSON.parse(f.content); } catch (_) {}
+      }
+    }
+
+    if (!hpData) {
+      try {
+        const res = await fetch("data/homepage.json");
+        if (res.ok) hpData = await res.json();
+      } catch (_) {}
+    }
+
+    hpData = hpData || {};
+
+    // Helper to safely set input values
+    const setVal = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.value = val !== undefined ? val : "";
+    };
+
+    // Hero Section
+    setVal("hpEditHeroTag", hpData.hero?.tag || "Wholesale Warehouse & Slab Display · Carlstadt, NJ");
+    setVal("hpEditHeroTitle", hpData.hero?.title || "The slab is the statement.");
+    setVal("hpEditHeroLead", hpData.hero?.lead || "A premier distributor of architectural stones. Gran Trade imports natural quartzite, fine marble, durable granite, and engineered quartz from trusted quarries worldwide, stocked and ready at our Carlstadt, New Jersey warehouse.");
+    setVal("hpEditMetric1Val", hpData.hero?.metric1Val || "20+");
+    setVal("hpEditMetric1Lbl", hpData.hero?.metric1Lbl || "Years importing stone");
+    setVal("hpEditMetric2Val", hpData.hero?.metric2Val || "1,000+");
+    setVal("hpEditMetric2Lbl", hpData.hero?.metric2Lbl || "Trade customers served");
+    setVal("hpEditHeroBg", hpData.hero?.bgImage || "assets/images/stone-types/granite.jpg");
+
+    // Featured Slab
+    setVal("hpEditSlabTitle", hpData.featuredSlab?.title || "Aquamarine Quartzite");
+    setVal("hpEditSlabSub", hpData.featuredSlab?.sub || "GT-4008 · LOT #59108 · 2 cm / 3 cm");
+    setVal("hpEditSlabImage", hpData.featuredSlab?.image || "assets/images/aquamarine-slab-1.jpg");
+
+    // Why Gran Trade (4 Pillars)
+    const cards = hpData.whyGranTrade?.cards || [];
+    setVal("hpEditWhy1Title", cards[0]?.title || "Acclaimed at the source");
+    setVal("hpEditWhy1Desc", cards[0]?.desc || "Our products come from premier global quarries widely acclaimed for slab clarity. Every ocean container is inspected at our Carlstadt warehouse upon arrival.");
+    setVal("hpEditWhy2Title", cards[1]?.title || "Fully customizable choice");
+    setVal("hpEditWhy2Desc", cards[1]?.desc || "Pick from 60+ curated natural and engineered stone options — a range tailored to diverse architectural styles, high-traffic commercial spaces, and custom homes.");
+    setVal("hpEditWhy3Title", cards[2]?.title || "Built to perform");
+    setVal("hpEditWhy3Desc", cards[2]?.desc || "Durable, cleanable, high-grade stone stocked deep in consecutive bundles so your fabricator can match veins and fulfill multi-room project requirements without batch variations.");
+    setVal("hpEditWhy4Title", cards[3]?.title || "Service you can call");
+    setVal("hpEditWhy4Desc", cards[3]?.desc || "We take pride in our direct customer relations. Real stone specialists answer our phones, know the current rack locations, and coordinate seamless delivery logistics.");
+
+    // Applied / Fabrication
+    setVal("hpEditAppTitle", hpData.applied?.title || "Where our stone ends up");
+    setVal("hpEditAppLead", hpData.applied?.lead || "Most of what leaves our Carlstadt facility is fabricated within the tri-state area — kitchens, master baths, hotel lobbies, restaurant bars, and monumental memorials.");
+    setVal("hpEditAppFab", hpData.applied?.fabricatorsDesc || "Consistent slab thickness, true calibration, and verified resin quality slab after slab.");
+    setVal("hpEditAppDes", hpData.applied?.designersDesc || "Bookmatch sequential slabs from the same geological block for waterfall islands and full-height backsplashes.");
+    setVal("hpEditAppHome", hpData.applied?.homeownersDesc || "You are welcome to walk the warehouse and tag your dream slab in person — bring your fabricator or borrow ours.");
+
+    // Yard Visit & Contact
+    setVal("hpEditYardTitle", hpData.yardCta?.title || "Come walk the slab yard");
+    setVal("hpEditYardDesc", hpData.yardCta?.desc || "Photos sell stone short. Visit our 178 Commerce Road warehouse to see full slabs under natural and overhead staging light. No appointment needed during open hours.");
+    setVal("hpEditPhone", hpData.contact?.phone || "(201) 438-1888");
+    setVal("hpEditEmail", hpData.contact?.email || "sales.grantrade@gmail.com");
+    setVal("hpEditAddress", hpData.contact?.address || "178 Commerce Road, Carlstadt, New Jersey 07072");
+    setVal("hpEditHoursWk", hpData.contact?.hoursWeekday || "Monday – Friday: 8:00 AM – 5:00 PM");
+    setVal("hpEditHoursSat", hpData.contact?.hoursSaturday || "Saturday: 8:00 AM – 1:00 PM");
+
+    // Setup Tabs
+    const tabs = homepageModal.querySelectorAll(".fm-hp-tab");
+    const panes = homepageModal.querySelectorAll(".fm-hp-pane");
+    tabs.forEach((tab) => {
+      tab.onclick = function () {
+        tabs.forEach((t) => t.classList.remove("active"));
+        panes.forEach((p) => (p.style.display = "none"));
+        this.classList.add("active");
+        const targetPane = document.getElementById(this.getAttribute("data-tab"));
+        if (targetPane) targetPane.style.display = "flex";
+      };
+    });
+
+    homepageModal.classList.add("active");
+  }
+
+  function closeHomepageEditor() {
+    if (homepageModal) homepageModal.classList.remove("active");
+  }
+
+  function saveHomepageContent() {
+    const getVal = (id) => {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : "";
+    };
+
+    const hpData = {
+      hero: {
+        tag: getVal("hpEditHeroTag"),
+        title: getVal("hpEditHeroTitle"),
+        lead: getVal("hpEditHeroLead"),
+        bgImage: getVal("hpEditHeroBg") || "assets/images/stone-types/granite.jpg",
+        metric1Val: getVal("hpEditMetric1Val"),
+        metric1Lbl: getVal("hpEditMetric1Lbl"),
+        metric2Val: getVal("hpEditMetric2Val"),
+        metric2Lbl: getVal("hpEditMetric2Lbl")
+      },
+      featuredSlab: {
+        title: getVal("hpEditSlabTitle"),
+        sub: getVal("hpEditSlabSub"),
+        image: getVal("hpEditSlabImage") || "assets/images/aquamarine-slab-1.jpg",
+        link: "slab.html?id=aquamarine-quartzite"
+      },
+      taxonomyHead: {
+        eyebrow: "Wholesale Material Taxonomy",
+        title: "The Types of Stone We Carry",
+        lead: "Direct from premier quarries across Brazil, Italy, India, and the United States to our Carlstadt, NJ warehouse. Scroll down through our vertical liquid flow catalog to inspect geological formation, natural veining, and architectural applications."
+      },
+      whyGranTrade: {
+        eyebrow: "The Wholesale Advantage",
+        title: "Built for the trade, open to everyone",
+        lead: "We work directly with quarries to provide Northeast fabricators, designers, and project managers with unmatched inventory reliability.",
+        cards: [
+          { num: "01", title: getVal("hpEditWhy1Title"), desc: getVal("hpEditWhy1Desc") },
+          { num: "02", title: getVal("hpEditWhy2Title"), desc: getVal("hpEditWhy2Desc") },
+          { num: "03", title: getVal("hpEditWhy3Title"), desc: getVal("hpEditWhy3Desc") },
+          { num: "04", title: getVal("hpEditWhy4Title"), desc: getVal("hpEditWhy4Desc") }
+        ]
+      },
+      applied: {
+        eyebrow: "From Slab to Space",
+        title: getVal("hpEditAppTitle"),
+        lead: getVal("hpEditAppLead"),
+        image: "assets/images/aquamarine-slab-2.jpg",
+        fabricatorsDesc: getVal("hpEditAppFab"),
+        designersDesc: getVal("hpEditAppDes"),
+        homeownersDesc: getVal("hpEditAppHome")
+      },
+      yardCta: {
+        eyebrow: "Visit Carlstadt, NJ",
+        title: getVal("hpEditYardTitle"),
+        desc: getVal("hpEditYardDesc"),
+        phone: getVal("hpEditPhone")
+      },
+      contact: {
+        address: getVal("hpEditAddress"),
+        phone: getVal("hpEditPhone"),
+        email: getVal("hpEditEmail"),
+        hoursWeekday: getVal("hpEditHoursWk"),
+        hoursSaturday: getVal("hpEditHoursSat"),
+        hoursSunday: "Sunday: Closed"
+      }
+    };
+
+    // 1. Save to local storage for live updates
+    const jsonStr = JSON.stringify(hpData, null, 2);
+    localStorage.setItem(HOMEPAGE_STORAGE_KEY, jsonStr);
+
+    // 2. Update Virtual File System homepage.json
+    const hpFile = files.find((f) => f.name === "homepage.json");
+    if (hpFile) {
+      hpFile.content = jsonStr;
+      hpFile.size = new Blob([jsonStr]).size;
+      hpFile.modified = new Date().toISOString().split("T")[0];
+    }
+    saveState();
+    renderFiles();
+
+    // 3. Apply to live homepage if loader is present
+    if (window.GranTradeHomepageLoader) {
+      window.GranTradeHomepageLoader.apply(hpData);
+    }
+
+    alert("Homepage content updated successfully!\nAll changes are now active on index.html and stored in data/homepage.json.");
+    closeHomepageEditor();
+  }
+
+  async function downloadUpdatedIndexHtml() {
+    let htmlContent = "";
+
+    // Check if we have cached index.html
+    const indexFile = files.find((f) => f.name === "index.html");
+    if (indexFile && indexFile.content) {
+      htmlContent = indexFile.content;
+    } else {
+      try {
+        const res = await fetch("index.html");
+        if (res.ok) htmlContent = await res.text();
+      } catch (_) {}
+    }
+
+    if (!htmlContent) {
+      alert("Unable to load index.html template for export.");
+      return;
+    }
+
+    const blob = new Blob([htmlContent], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "index.html";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
   // ---------------- Initialization ----------------
   function init(options) {
+    options = options || {};
     loadState();
 
     breadcrumbsEl = document.getElementById(options.breadcrumbsId || "fmBreadcrumbs");
@@ -396,6 +743,7 @@
     previewMeta = document.getElementById(options.previewMetaId || "fmPreviewMeta");
     previewDownloadBtn = document.getElementById(options.previewDownloadBtnId || "fmPreviewDownloadBtn");
     previewCopyBtn = document.getElementById(options.previewCopyBtnId || "fmPreviewCopyBtn");
+    previewSaveBtn = document.getElementById(options.previewSaveBtnId || "fmPreviewSaveBtn");
 
     totalFilesStatEl = document.getElementById("fmTotalFilesStat");
     totalSizeStatEl = document.getElementById("fmTotalSizeStat");
@@ -467,11 +815,17 @@
         if (currentPreviewFile) copyUrl(currentPreviewFile.url);
       });
     }
+    if (previewSaveBtn) {
+      previewSaveBtn.addEventListener("click", () => {
+        saveCurrentFile();
+      });
+    }
 
     // Modal close on Escape
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && previewModal && previewModal.classList.contains("active")) {
-        closePreview();
+      if (e.key === "Escape") {
+        if (previewModal && previewModal.classList.contains("active")) closePreview();
+        if (homepageModal && homepageModal.classList.contains("active")) closeHomepageEditor();
       }
     });
 
@@ -481,16 +835,22 @@
   // Public API
   global.GranTradeFileManager = {
     init: init,
+    render: renderFiles,
     setDirectory: function (dir) {
       currentDirectory = dir;
       renderFiles();
     },
     openPreview: openPreview,
     closePreview: closePreview,
+    saveCurrentFile: saveCurrentFile,
     copyUrl: copyUrl,
     downloadFile: downloadFile,
     deleteFile: deleteFile,
     createFolder: createFolder,
+    openHomepageEditor: openHomepageEditor,
+    closeHomepageEditor: closeHomepageEditor,
+    saveHomepageContent: saveHomepageContent,
+    downloadUpdatedIndexHtml: downloadUpdatedIndexHtml,
     triggerUpload: function () {
       if (fileInput) fileInput.click();
     },

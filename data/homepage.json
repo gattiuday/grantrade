@@ -1,0 +1,80 @@
+{
+  "hero": {
+    "tag": "Wholesale Warehouse & Slab Display · Carlstadt, NJ",
+    "title": "The slab is the statement.",
+    "lead": "A premier distributor of architectural stones. Gran Trade imports natural quartzite, fine marble, durable granite, and engineered quartz from trusted quarries worldwide, stocked and ready at our Carlstadt, New Jersey warehouse.",
+    "bgImage": "assets/images/stone-types/granite.jpg",
+    "primaryBtnText": "Browse the Collections",
+    "primaryBtnLink": "collections.html",
+    "secondaryBtnText": "Plan a Warehouse Visit",
+    "secondaryBtnLink": "showroom.html",
+    "metric1Val": "20+",
+    "metric1Lbl": "Years importing stone",
+    "metric2Val": "1,000+",
+    "metric2Lbl": "Trade customers served"
+  },
+  "featuredSlab": {
+    "title": "Aquamarine Quartzite",
+    "sub": "GT-4008 · LOT #59108 · 2 cm / 3 cm",
+    "image": "assets/images/aquamarine-slab-1.jpg",
+    "link": "slab.html?id=aquamarine-quartzite"
+  },
+  "taxonomyHead": {
+    "eyebrow": "Wholesale Material Taxonomy",
+    "title": "The Types of Stone We Carry",
+    "lead": "Direct from premier quarries across Brazil, Italy, India, and the United States to our Carlstadt, NJ warehouse. Scroll down through our vertical liquid flow catalog to inspect geological formation, natural veining, and architectural applications."
+  },
+  "whyGranTrade": {
+    "eyebrow": "The Wholesale Advantage",
+    "title": "Built for the trade, open to everyone",
+    "lead": "We work directly with quarries to provide Northeast fabricators, designers, and project managers with unmatched inventory reliability.",
+    "cards": [
+      {
+        "num": "01",
+        "title": "Acclaimed at the source",
+        "desc": "Our products come from premier global quarries widely acclaimed for slab clarity. Every ocean container is inspected at our Carlstadt warehouse upon arrival."
+      },
+      {
+        "num": "02",
+        "title": "Fully customizable choice",
+        "desc": "Pick from 60+ curated natural and engineered stone options — a range tailored to diverse architectural styles, high-traffic commercial spaces, and custom homes."
+      },
+      {
+        "num": "03",
+        "title": "Built to perform",
+        "desc": "Durable, cleanable, high-grade stone stocked deep in consecutive bundles so your fabricator can match veins and fulfill multi-room project requirements without batch variations."
+      },
+      {
+        "num": "04",
+        "title": "Service you can call",
+        "desc": "We take pride in our direct customer relations. Real stone specialists answer our phones, know the current rack locations, and coordinate seamless delivery logistics."
+      }
+    ]
+  },
+  "applied": {
+    "eyebrow": "From Slab to Space",
+    "title": "Where our stone ends up",
+    "lead": "Most of what leaves our Carlstadt facility is fabricated within the tri-state area — kitchens, master baths, hotel lobbies, restaurant bars, and monumental memorials.",
+    "image": "assets/images/aquamarine-slab-2.jpg",
+    "fabricatorsDesc": "Consistent slab thickness, true calibration, and verified resin quality slab after slab.",
+    "designersDesc": "Bookmatch sequential slabs from the same geological block for waterfall islands and full-height backsplashes.",
+    "homeownersDesc": "You are welcome to walk the warehouse and tag your dream slab in person — bring your fabricator or borrow ours."
+  },
+  "yardCta": {
+    "eyebrow": "Visit Carlstadt, NJ",
+    "title": "Come walk the slab yard",
+    "desc": "Photos sell stone short. Visit our 178 Commerce Road warehouse to see full slabs under natural and overhead staging light. No appointment needed during open hours.",
+    "primaryBtnText": "Check Hours & Directions",
+    "primaryBtnLink": "contact.html",
+    "phone": "(201) 438-1888",
+    "phoneRaw": "2014381888"
+  },
+  "contact": {
+    "address": "178 Commerce Road, Carlstadt, New Jersey 07072",
+    "phone": "(201) 438-1888",
+    "email": "sales.grantrade@gmail.com",
+    "hoursWeekday": "Monday – Friday: 8:00 AM – 5:00 PM",
+    "hoursSaturday": "Saturday: 8:00 AM – 1:00 PM",
+    "hoursSunday": "Sunday: Closed"
+  }
+}

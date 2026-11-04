@@ -26,6 +26,10 @@ Gran Trade Inc. includes a modern, zero-dependency open-source web file manager 
   - One-click button to **"Copy Public URL / File Path"** ready to paste into the Stone Inventory Editor.
 - **Client-Side Virtual File System (VFS)**: Fully operational in offline / static hosting environments (GitHub Pages, Netlify, Vercel) using `localStorage` persistence and object blob URLs.
 - **Supabase Cloud Storage Sync**: Seamlessly syncs with Supabase Storage buckets (`stone-media`) when database credentials are configured in Database Settings.
+- **Direct Website & Homepage Content Editing**:
+  - **Visual Homepage Editor**: Click **"Edit Homepage"** in the toolbar to change every title, hero headline, lead text, 4 pillars of value, metrics, and showroom contact info through an intuitive tabbed form.
+  - **Live In-Browser Code Editor**: Click `index.html`, `data/homepage.json`, or any CSS/JS file to edit source code directly with line-by-line inspection and a one-click **"💾 Save File"** button.
+  - **Static HTML Export**: Download the fully customized static `index.html` with one click.
 
 ---
 
@@ -89,7 +93,33 @@ window.GranTradeFileManager.triggerUpload();
 
 ---
 
-## 4. Alternative Self-Hosted Open-Source File Managers
+## 4. Editing Homepage Everything from the File Manager
+
+You can modify every section, headline, description, image, and contact detail across the homepage directly through two complementary modes:
+
+### Method A: The Visual Homepage Content Editor (Form-Based)
+1. In the Web File Manager toolbar (or the Admin Portal's File Manager tab), click the gold **"Edit Homepage"** button.
+2. A tabbed editor opens with 5 sections:
+   - **Tab 1: Hero & Metrics**: Edit eyebrow tagline, main `<h1>` headline, lead paragraph, metric numbers (e.g. `20+`, `1,000+`), and background photo.
+   - **Tab 2: Featured Slab**: Modify the 3D rotating showcase slab name, lot number, and image path.
+   - **Tab 3: Why Gran Trade**: Customize all 4 value proposition cards (titles & descriptions).
+   - **Tab 4: Fabrication & Audiences**: Customize pitches for Fabricators, Designers/Architects, and Homeowners.
+   - **Tab 5: Yard Visit & Contact**: Update the warehouse banner text, Carlstadt address, phone number, and operating hours.
+3. Click **"💾 Save & Apply to Homepage"**.
+   - Changes are immediately applied live on [`index.html`](../index.html) via [`js/homepage-loader.js`](../js/homepage-loader.js).
+   - Stored in [`data/homepage.json`](../data/homepage.json) and browser storage.
+4. Click **"📥 Download index.html"** if you want to export an updated static HTML file.
+
+### Method B: Direct Code & File Editing (In-Browser Inspector)
+1. In the File Manager directory tree, navigate to `/` or `/data`.
+2. Click **`index.html`** or **`data/homepage.json`**.
+3. The File Inspector modal opens with full syntax-formatted code.
+4. Make your edits directly in the code editor.
+5. Click **"💾 Save File"** in the footer to commit changes.
+
+---
+
+## 5. Alternative Self-Hosted Open-Source File Managers
 
 If you run Gran Trade on a dedicated VPS, private server, or containerized infrastructure, you can deploy any of these proven open-source web file managers alongside the static website:
 
@@ -168,3 +198,4 @@ Gran Trade Inc. includes native client support for [Supabase Storage](https://su
   2. Create a public bucket named `stone-media`.
   3. Enter your Supabase Project URL and Anon Public Key in the Admin Portal **Database & Cloud Settings** tab.
   4. Uploaded photos are stored in the cloud with CDN-cached public URLs.
+
