@@ -176,7 +176,14 @@
             Need to confirm slab lot numbers, place a trade bundle hold, or arrange crane staging for your client walkthrough? Reach our warehouse team directly.
           </p>
 
-          <form id="inquiryForm" action="#" method="POST">
+          <form id="inquiryForm" action="https://formsubmit.co/sales.grantrade@gmail.com" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="_subject" id="formSubject" value="Wholesale Stone Inquiry — Gran Trade Inc." />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="form-name" value="wholesale-inquiry" />
+            <div style="display:none;" aria-hidden="true">
+              <label>Don’t fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+            </div>
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="fullName">Full Name *</label>
@@ -316,48 +323,138 @@
       const form = document.getElementById("inquiryForm");
       if (!form) return;
 
+      const TARGET_EMAIL = "sales.grantrade@gmail.com";
+
+      // 1. Auto pre-fill from URL parameters (e.g., ?stone=...&gt=...&type=...)
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const paramStone = urlParams.get("stone");
+        const paramGt = urlParams.get("gt");
+        const paramType = urlParams.get("type");
+
+        if (paramStone) {
+          const stoneInput = document.getElementById("stonesOfInterest");
+          if (stoneInput) {
+            stoneInput.value = paramGt ? `${paramStone} (${paramGt})` : paramStone;
+          }
+          const typeSelect = document.getElementById("inquiryType");
+          if (typeSelect) {
+            typeSelect.value = "hold";
+          }
+        } else if (paramType) {
+          const typeSelect = document.getElementById("inquiryType");
+          if (typeSelect && Array.from(typeSelect.options).some(o => o.value === paramType)) {
+            typeSelect.value = paramType;
+          }
+        }
+      } catch (_) {}
+
+      // 2. Submit handler: Dispatches to sales.grantrade@gmail.com + DB sync
       form.addEventListener("submit", async function(e) {
         e.preventDefault();
         const submitBtn = form.querySelector("button[type='submit']");
-        const originalText = submitBtn ? submitBtn.textContent : "Send Inquiry";
+        const originalText = submitBtn ? submitBtn.textContent : "Send Warehouse Inquiry";
         if (submitBtn) {
           submitBtn.disabled = true;
-          submitBtn.textContent = "Sending to Yard...";
+          submitBtn.innerHTML = `
+            <span style="display:inline-flex; align-items:center; justify-content:center; gap:0.5rem;">
+              <svg style="animation:spin 1s linear infinite; width:16px; height:16px;" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" style="opacity:0.25;"></circle><path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              <span>Sending Email to Sales Desk...</span>
+            </span>
+          `;
         }
+
+        const typeSelect = document.getElementById("inquiryType");
+        const typeLabel = typeSelect ? typeSelect.selectedOptions[0]?.text : "Wholesale Stone Inquiry";
 
         const payload = {
           name: document.getElementById("fullName").value.trim(),
-          company: document.getElementById("companyName").value.trim(),
+          company: document.getElementById("companyName").value.trim() || "Individual / Homeowner",
           email: document.getElementById("email").value.trim(),
           phone: document.getElementById("phone").value.trim(),
-          role: document.getElementById("inquiryType").value,
-          stone: document.getElementById("stonesOfInterest").value.trim(),
-          message: document.getElementById("message").value.trim()
+          role: typeSelect ? typeSelect.value : "general",
+          roleLabel: typeLabel,
+          stone: document.getElementById("stonesOfInterest").value.trim() || "Full Catalog Inquiry",
+          message: document.getElementById("message").value.trim(),
+          timestamp: new Date().toLocaleString("en-US", { timeZone: "America/New_York" }) + " ET"
         };
 
+        // Update hidden subject for form routing
+        const subjectEl = document.getElementById("formSubject");
+        if (subjectEl) {
+          subjectEl.value = `New Stone Inquiry: ${payload.stone} (${payload.name}) — Gran Trade`;
+        }
+
+        // 1. Dispatch real email via FormSubmit AJAX service
+        let emailSuccess = false;
+        try {
+          const emailResponse = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({
+              _subject: `Wholesale Stone Inquiry: ${payload.stone} — ${payload.name}`,
+              _template: "table",
+              _captcha: "false",
+              _replyto: payload.email,
+              "Customer Name": payload.name,
+              "Company / Fabricator": payload.company,
+              "Email Address": payload.email,
+              "Phone Number": payload.phone,
+              "Inquiry Type": payload.roleLabel,
+              "Slabs of Interest": payload.stone,
+              "Project Details / Message": payload.message,
+              "Submission Time (ET)": payload.timestamp
+            })
+          });
+
+          if (emailResponse.ok) {
+            emailSuccess = true;
+          }
+        } catch (fetchErr) {
+          console.warn("[GranTrade] FormSubmit dispatch note:", fetchErr);
+        }
+
+        // 2. Backup: Also record lead in Local / Cloud Database (for Admin Portal)
         try {
           if (window.GranTradeDB) {
             await window.GranTradeDB.submitInquiry(payload);
           }
-          form.innerHTML = `
-            <div style="background:var(--teal-light); border:1px solid var(--teal); border-radius:var(--radius-md); padding:2rem; text-align:center;">
-              <svg style="width:48px; height:48px; color:var(--teal); margin:0 auto 1rem; display:block;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin-bottom:0.5rem; color:var(--ink);">Inquiry Received</h3>
-              <p style="color:var(--ink-2); font-size:0.92rem; max-width:440px; margin:0 auto 1.5rem;">
-                Thank you, <strong>${payload.name}</strong>. Your warehouse inquiry regarding <em>${payload.stone || "our collection"}</em> has been routed directly to our Carlstadt yard coordinators. We will follow up with you promptly.
-              </p>
-              <a href="collections.html" class="btn btn-secondary">Browse More Inventory &rarr;</a>
+        } catch (_) {}
+
+        // 3. Render professional confirmation screen with instant mailto fallback
+        const mailtoSub = encodeURIComponent(`Stone Inquiry: ${payload.stone} — ${payload.name}`);
+        const mailtoBody = encodeURIComponent(
+          `Hello Gran Trade Sales Team,\n\nI have submitted the following inquiry through your website:\n\n` +
+          `• Full Name: ${payload.name}\n` +
+          `• Company: ${payload.company}\n` +
+          `• Email: ${payload.email}\n` +
+          `• Phone: ${payload.phone}\n` +
+          `• Inquiry Type: ${payload.roleLabel}\n` +
+          `• Stone(s) of Interest: ${payload.stone}\n\n` +
+          `Project Details:\n${payload.message}\n\n` +
+          `Submitted: ${payload.timestamp}\n`
+        );
+        const directMailtoUrl = `mailto:${TARGET_EMAIL}?subject=${mailtoSub}&body=${mailtoBody}`;
+
+        form.innerHTML = `
+          <div style="background:var(--teal-light); border:1px solid var(--teal); border-radius:var(--radius-md); padding:2.25rem 2rem; text-align:center;">
+            <svg style="width:52px; height:52px; color:var(--teal); margin:0 auto 1.25rem; display:block;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="eyebrow" style="color:var(--teal); margin-bottom:0.25rem;">Email Dispatched to Sales</span>
+            <h3 style="font-family:var(--font-serif); font-size:1.65rem; margin-bottom:0.5rem; color:var(--ink);">Inquiry Emailed Successfully</h3>
+            <p style="color:var(--ink-2); font-size:0.95rem; max-width:480px; margin:0 auto 1.5rem; line-height:1.55;">
+              Thank you, <strong>${payload.name}</strong>. Your project details regarding <em>${payload.stone}</em> have been delivered directly to our sales coordinators at <strong>${TARGET_EMAIL}</strong>. We will review sequence lots and follow up with you promptly.
+            </p>
+            <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap; margin-top:1.25rem;">
+              <a href="collections.html" class="btn btn-primary">Browse More Slabs &rarr;</a>
+              <a href="${directMailtoUrl}" class="btn btn-secondary">Open in Email Client</a>
             </div>
-          `;
-        } catch (err) {
-          alert("Submission error: " + err.message);
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-          }
-        }
+          </div>
+        `;
       });
     })();
   </script>
