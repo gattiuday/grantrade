@@ -67,7 +67,6 @@
     if (!isWordPress) return;
     const wpList = Array.isArray(env.wpStones) ? env.wpStones : [];
     const replaceBuiltin = Boolean(env.replaceBuiltinCatalog);
-    if (!replaceBuiltin && wpList.length === 0) return;
     if (!global.GRAN_TRADE_CATALOG || !Array.isArray(global.GRAN_TRADE_CATALOG.all)) return;
 
     if (typeof global.GRAN_TRADE_CATALOG.setExternalStones === "function") {

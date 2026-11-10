@@ -1237,10 +1237,10 @@
     return stone;
   }
 
-  // Pristine base snapshot & WordPress CPT overlay store
+  // Pristine base snapshot & WordPress / GitHub Pages empty-until-uploaded store
   const INITIAL_STONES = STONES.map((s) => normalizeStone(cloneStone(s)));
   let externalStones = [];
-  let externalReplaceBuiltin = false;
+  let externalReplaceBuiltin = true;
 
   // Helper dictionary keyed by ID (mutated in-place on refresh so references stay valid)
   const STONES_BY_ID = {};
@@ -1277,7 +1277,7 @@
         const target = byId.get(id);
         Object.assign(target, patch);
         normalizeStone(target);
-      } else if (!externalReplaceBuiltin && patch.name) {
+      } else if (!(global.GRAN_TRADE_ENV && global.GRAN_TRADE_ENV.replaceBuiltinCatalog) && patch.name) {
         const created = normalizeStone(Object.assign({ id }, cloneStone(patch)));
         baseList.unshift(created);
         byId.set(id, created);

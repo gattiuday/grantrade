@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('GRANTRADE_VERSION', '1.1.5');
+define('GRANTRADE_VERSION', '1.1.6');
 
 require_once get_template_directory() . '/inc/security.php';
 require_once get_template_directory() . '/inc/setup-and-cpt.php';
