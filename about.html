@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
+  <script>if ("scrollRestoration" in history) history.scrollRestoration = "manual";</script>
   <title>About Us | Gran Trade Inc. · Premier Stone Distributor Since 2003</title>
   <meta name="description" content="Founded in 2003 in Carlstadt, NJ, Gran Trade Inc. is a trusted distributor of natural granite, marble, exotic quartzite, engineered quartz, and monuments." />
 
@@ -13,11 +14,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
   <!-- CSS Split 5 Ways -->
-  <link rel="stylesheet" href="css/base.css?v=20261020b" />
-  <link rel="stylesheet" href="css/layout.css?v=20261020b" />
-  <link rel="stylesheet" href="css/components.css?v=20261020b" />
-  <link rel="stylesheet" href="css/pages.css?v=20261020b" />
-  <link rel="stylesheet" href="css/responsive.css?v=20261020b" />
+  <link rel="stylesheet" href="css/base.css?v=20261110k" />
+  <link rel="stylesheet" href="css/layout.css?v=20261110k" />
+  <link rel="stylesheet" href="css/components.css?v=20261110k" />
+  <link rel="stylesheet" href="css/pages.css?v=20261110k" />
+  <link rel="stylesheet" href="css/responsive.css?v=20261110k" />
 </head>
 <body>
 
@@ -76,16 +77,16 @@
 
     <!-- ================= METRICS BAR ================= -->
     <div class="container">
-      <div class="specs-bar" style="display: flex; justify-content: center; align-items: center; max-width: 1040px; margin-left: auto; margin-right: auto;">
-        <div class="spec-item" style="flex: 1 1 0; text-align: center;">
+      <div class="specs-bar">
+        <div class="spec-item">
           <div class="val">2003</div>
           <div class="lbl">Year Established</div>
         </div>
-        <div class="spec-item" style="flex: 1 1 0; text-align: center;">
+        <div class="spec-item">
           <div class="val">20+</div>
           <div class="lbl">Years in Business</div>
         </div>
-        <div class="spec-item" style="flex: 1 1 0; text-align: center;">
+        <div class="spec-item">
           <div class="val">1,000+</div>
           <div class="lbl">Fabricators & Partners</div>
         </div>
@@ -160,7 +161,7 @@
         <div style="background-color: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(2rem, 4vw, 3.5rem);">
           <span class="eyebrow">Operational Standards</span>
           <h2 style="margin-bottom:1rem;">Our wholesale trade commitment</h2>
-          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:2rem; margin-top:1.5rem;">
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap:2rem; margin-top:1.5rem;">
             <div>
               <h4 style="margin-bottom:0.5rem; color:var(--ink);">Strictly Wholesale</h4>
               <p style="font-size:0.92rem; color:var(--ink-2);">Gran Trade Inc. is a slab importer and distributor. We do not fabricate or install counters. We protect our fabricator partners by never quoting installation prices directly to homeowners.</p>
@@ -218,12 +219,14 @@
       <div class="footer-col">
         <h4>Stone Families</h4>
         <ul class="footer-links">
-          <li><a href="collections.html">Gran Trade Quartz</a></li>
-          <li><a href="collections.html">Natural Granite</a></li>
-          <li><a href="collections.html">Fine Marble</a></li>
-          <li><a href="collections.html">Exotic Quartzite</a></li>
-          <li><a href="collections.html">Civic Monuments</a></li>
-          <li><a href="collections.html">Soapstone & Tile</a></li>
+          <li><a href="collections.html?category=quartzite">Quartzite</a></li>
+          <li><a href="collections.html?category=quartz">Quartz</a></li>
+          <li><a href="collections.html?category=granite">Granite</a></li>
+          <li><a href="collections.html?category=marble">Marble</a></li>
+          <li><a href="collections.html?category=monuments">Monuments</a></li>
+          <li><a href="collections.html?category=soapstone">Soapstone</a></li>
+          <li><a href="collections.html?category=semi">Semi Precious</a></li>
+          <li><a href="collections.html?category=tile">Tiles</a></li>
         </ul>
       </div>
 
@@ -234,6 +237,9 @@
         </div>
         <div class="footer-contact-item">
           <a href="tel:2014381888">(201) 438-1888</a>
+        </div>
+        <div class="footer-contact-item">
+          <a href="mailto:grantrade@gmail.com">grantrade@gmail.com</a>
         </div>
         <div class="footer-contact-item">
           <a href="mailto:sales.grantrade@gmail.com">sales.grantrade@gmail.com</a>
@@ -253,7 +259,7 @@
     </div>
   </footer>
 
-  <script src="js/nav.js"></script>
-  <script src="js/favorites.js"></script>
+  <script src="js/nav.js?v=20261110k"></script>
+  <script src="js/favorites.js?v=20261110k"></script>
 </body>
 </html>

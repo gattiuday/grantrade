@@ -6,25 +6,25 @@
 /* ---------------- Container System ---------------- */
 .container {
   width: 100%;
-  max-width: min(1560px, 94vw);
+  max-width: min(1320px, 92vw);
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1rem, 3.5vw, 2.5rem);
-  padding-right: clamp(1rem, 3.5vw, 2.5rem);
+  padding-left: clamp(1rem, 3vw, 2rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
 }
 
 .container-wide {
   width: 100%;
-  max-width: min(1760px, 96vw);
+  max-width: min(1320px, 92vw);
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1rem, 3.5vw, 2.5rem);
-  padding-right: clamp(1rem, 3.5vw, 2.5rem);
+  padding-left: clamp(1rem, 3vw, 2rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
 }
 
 .section {
-  padding-top: clamp(3.5rem, 6vw, 6.5rem);
-  padding-bottom: clamp(3.5rem, 6vw, 6.5rem);
+  padding-top: clamp(3rem, 5vw, 4.75rem);
+  padding-bottom: clamp(3rem, 5vw, 4.75rem);
 }
 
 .section-tight {
@@ -37,28 +37,57 @@
 }
 
 /* ---------------- Site Header ---------------- */
+/* Note: backdrop-filter is placed on ::before so .site-header does NOT create
+   a containing block that traps the position:fixed mobile nav drawer. */
+:root {
+  --wp-bar: 0px;
+  --header-h: 72px;
+}
+
+body.admin-bar {
+  --wp-bar: 32px;
+}
+
+@media (max-width: 782px) {
+  body.admin-bar {
+    --wp-bar: 46px;
+  }
+}
+
 .site-header {
   position: sticky;
-  top: 0;
+  top: var(--wp-bar);
+  z-index: 100;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   z-index: 100;
   background-color: var(--header-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--line);
-  transition: transform var(--transition-fast), background var(--transition-fast);
+  pointer-events: none;
+  transition: background-color var(--transition-fast);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: var(--header-h);
   gap: 1.5rem;
 }
 
 /* Brand Wordmark */
 .wordmark {
-  display: flex;
+  position: relative;
+  z-index: 101;
+  flex-shrink: 0;
+  min-height: 44px;
+  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
   font-family: var(--font-serif);
@@ -67,12 +96,20 @@
   letter-spacing: 0.05em;
   color: var(--ink);
   text-transform: uppercase;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.wordmark img {
+.wordmark img,
+.wordmark .custom-logo {
   height: 38px;
   width: auto;
   object-fit: contain;
+}
+
+.wordmark .custom-logo-link {
+  display: inline-flex;
+  align-items: center;
 }
 
 .wordmark-text span {
@@ -86,6 +123,8 @@
 
 /* Desktop Navigation */
 .main-nav {
+  position: relative;
+  z-index: 101;
   display: flex;
   align-items: center;
   gap: clamp(1rem, 2vw, 2.25rem);
@@ -98,30 +137,42 @@
   gap: clamp(0.75rem, 1.8vw, 1.75rem);
 }
 
-.nav-link {
+.nav-link,
+.nav-links a {
   font-family: var(--font-sans);
   font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ink-2);
-  padding: 0.4rem 0.1rem;
+  padding: 0.55rem 0.15rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
   position: relative;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: color var(--transition-fast);
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-links a:hover {
   color: var(--accent);
 }
 
-.nav-link.active {
+.nav-link.active,
+.nav-links li.current-menu-item>a,
+.nav-links li.current_page_item>a {
   color: var(--ink);
 }
 
-.nav-link.active::after {
+.nav-link.active::after,
+.nav-links li.current-menu-item>a::after,
+.nav-links li.current_page_item>a::after {
   content: "";
   position: absolute;
-  bottom: -2px;
+  bottom: 4px;
   left: 0;
   right: 0;
   height: 2px;
@@ -129,8 +180,15 @@
   border-radius: 1px;
 }
 
+.mobile-drawer-meta {
+  display: none;
+}
+
 /* Header Actions: Yard Pill & Favorites Button */
 .header-actions {
+  position: relative;
+  z-index: 101;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 0.85rem;
@@ -162,6 +220,8 @@
   font-weight: 600;
   color: var(--ink);
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: all var(--transition-fast);
 }
 
@@ -187,17 +247,27 @@
 
 .menu-toggle {
   display: none;
-  background: transparent;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   padding: 0.45rem;
   color: var(--ink);
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.menu-toggle:hover,
+.menu-toggle[aria-expanded="true"] {
+  border-color: var(--accent);
+  background-color: var(--bg-2);
 }
 
 .menu-toggle svg {
   width: 22px;
   height: 22px;
+  pointer-events: none;
 }
 
 /* ---------------- Favorites Slide-out Drawer ---------------- */
@@ -230,7 +300,7 @@
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
@@ -376,4 +446,39 @@
   gap: 1rem;
   font-size: 0.85rem;
   color: var(--muted);
+}
+
+.social-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.15rem;
+}
+
+.social-link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.85rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background-color: var(--surface);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.social-link-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: var(--accent-light);
+  transform: translateY(-1px);
+}
+
+.social-link-pill svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }

@@ -40,13 +40,13 @@ create index if not exists idx_stones_lot on public.stones (lot_number);
 -- 3. Create Wholesale Inquiries Table (Lead Capture from contact.html)
 create table if not exists public.inquiries (
   id uuid primary key default uuid_generate_v4(),
-  full_name text not null,
-  company text,
-  email text not null,
-  phone text,
-  role text default 'fabricator',
-  stone_interest text,
-  message text not null,
+  full_name text not null check (char_length(full_name) between 1 and 120 and full_name !~* '<\s*script|<\?php'),
+  company text check (company is null or char_length(company) <= 160),
+  email text not null check (char_length(email) <= 160 and email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$'),
+  phone text check (phone is null or char_length(phone) <= 40),
+  role text default 'fabricator' check (char_length(role) <= 60),
+  stone_interest text check (stone_interest is null or char_length(stone_interest) <= 200),
+  message text not null check (char_length(message) between 1 and 3000 and message !~* '<\s*script|<\?php|javascript:'),
   status text not null default 'new' check (status in ('new', 'contacted', 'held', 'archived')),
   created_at timestamptz not null default now()
 );

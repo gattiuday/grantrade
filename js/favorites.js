@@ -9,6 +9,12 @@
   const STORAGE_KEY = "grantrade_saved_slabs";
   let favorites = [];
 
+  function wpAsset(path) {
+    return window.GranTradeWP && typeof window.GranTradeWP.asset === "function"
+      ? window.GranTradeWP.asset(path)
+      : path;
+  }
+
   // DOM Elements
   const favCountBadges = document.querySelectorAll(".fav-badge");
   const favBody = document.getElementById("favBody");
@@ -70,7 +76,7 @@
       row.className = "fav-item";
 
       const img = document.createElement("img");
-      img.src = item.img;
+      img.src = wpAsset(item.img);
       img.alt = item.name;
 
       const info = document.createElement("div");
@@ -121,22 +127,36 @@
     });
   }
 
-  function toggleFavorite(name, meta, img) {
+  function toggleFavorite(nameOrObj, meta, img) {
+    let name = nameOrObj;
+    if (nameOrObj && typeof nameOrObj === "object") {
+      name = nameOrObj.name;
+      meta = nameOrObj.meta || "";
+      img = nameOrObj.img || nameOrObj.image || "";
+    }
+    if (!name) return false;
+
     const idx = findIndex(name);
+    let added = false;
     if (idx !== -1) {
       favorites.splice(idx, 1);
     } else {
-      favorites.push({ name, meta, img });
+      favorites.push({ name, meta: meta || "", img: wpAsset(img || "") });
+      added = true;
     }
 
     saveFavorites();
     updateBadgeCounts();
     renderDrawer();
     syncCardHearts();
+    return added;
   }
 
   function openDrawer() {
     if (!drawer || !scrim) return;
+    if (window.GranTradeNav && typeof window.GranTradeNav.closeMenu === "function") {
+      window.GranTradeNav.closeMenu(false);
+    }
     drawer.hidden = false;
     document.body.style.overflow = "hidden";
     requestAnimationFrame(() => {
@@ -150,7 +170,10 @@
     if (!drawer || !scrim) return;
     drawer.classList.remove("open");
     scrim.classList.remove("open");
-    document.body.style.overflow = "";
+    const mainNav = document.getElementById("mainNav");
+    if (!mainNav || !mainNav.classList.contains("open")) {
+      document.body.style.overflow = "";
+    }
     setTimeout(() => {
       drawer.hidden = true;
     }, 280);
@@ -189,6 +212,24 @@
   renderDrawer();
   syncCardHearts();
 
+  function refreshFavorites() {
+    favorites = [];
+    loadFavorites();
+    updateBadgeCounts();
+    renderDrawer();
+    syncCardHearts();
+  }
+
+  window.addEventListener("storage", (e) => {
+    if (e.key === STORAGE_KEY) {
+      refreshFavorites();
+    }
+  });
+
+  window.addEventListener("pageshow", () => {
+    refreshFavorites();
+  });
+
   // Expose global API
   window.GranTradeFavorites = {
     toggle: toggleFavorite,
@@ -196,5 +237,6 @@
     close: closeDrawer,
     getAll: () => [...favorites],
     sync: syncCardHearts,
+    refresh: refreshFavorites,
   };
 })();

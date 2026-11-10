@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
+  <script>if ("scrollRestoration" in history) history.scrollRestoration = "manual";</script>
   <title>Showroom & Slab Yard | Gran Trade Inc. · Carlstadt, NJ</title>
   <meta name="description" content="Visit our Carlstadt, NJ stone warehouse and slab display. Walk the yard to view full upright slabs in person. Trade customers and homeowners welcome." />
 
@@ -13,11 +14,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
   <!-- CSS Split 5 Ways -->
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/pages.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/base.css?v=20261110k" />
+  <link rel="stylesheet" href="css/layout.css?v=20261110k" />
+  <link rel="stylesheet" href="css/components.css?v=20261110k" />
+  <link rel="stylesheet" href="css/pages.css?v=20261110k" />
+  <link rel="stylesheet" href="css/responsive.css?v=20261110k" />
 </head>
 <body>
 
@@ -130,13 +131,13 @@
 
     <!-- ================= LOCATION & YARD HOURS STRIP ================= -->
     <section class="section" style="background-color: var(--surface); border-top: 1px solid var(--line);">
-      <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem;">
+      <div class="container yard-cta-bar">
         <div>
           <span class="eyebrow">Warehouse Location</span>
           <h2 style="margin-bottom:0.35rem;">178 Commerce Road, Carlstadt, NJ 07072</h2>
           <p>Monday–Friday: 8:00 AM – 6:00 PM · Saturday: 9:00 AM – 2:00 PM · Sunday: 10:00 AM – 2:00 PM</p>
         </div>
-        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+        <div class="yard-cta-actions">
           <a href="contact.html" class="btn btn-dark">View Map & Driving Directions</a>
           <a href="tel:2014381888" class="btn btn-secondary">Call Yard: (201) 438-1888</a>
         </div>
@@ -183,12 +184,14 @@
       <div class="footer-col">
         <h4>Stone Families</h4>
         <ul class="footer-links">
-          <li><a href="collections.html">Gran Trade Quartz</a></li>
-          <li><a href="collections.html">Natural Granite</a></li>
-          <li><a href="collections.html">Fine Marble</a></li>
-          <li><a href="collections.html">Exotic Quartzite</a></li>
-          <li><a href="collections.html">Civic Monuments</a></li>
-          <li><a href="collections.html">Soapstone & Tile</a></li>
+          <li><a href="collections.html?category=quartzite">Quartzite</a></li>
+          <li><a href="collections.html?category=quartz">Quartz</a></li>
+          <li><a href="collections.html?category=granite">Granite</a></li>
+          <li><a href="collections.html?category=marble">Marble</a></li>
+          <li><a href="collections.html?category=monuments">Monuments</a></li>
+          <li><a href="collections.html?category=soapstone">Soapstone</a></li>
+          <li><a href="collections.html?category=semi">Semi Precious</a></li>
+          <li><a href="collections.html?category=tile">Tiles</a></li>
         </ul>
       </div>
 
@@ -199,6 +202,9 @@
         </div>
         <div class="footer-contact-item">
           <a href="tel:2014381888">(201) 438-1888</a>
+        </div>
+        <div class="footer-contact-item">
+          <a href="mailto:grantrade@gmail.com">grantrade@gmail.com</a>
         </div>
         <div class="footer-contact-item">
           <a href="mailto:sales.grantrade@gmail.com">sales.grantrade@gmail.com</a>
@@ -218,7 +224,7 @@
     </div>
   </footer>
 
-  <script src="js/nav.js"></script>
-  <script src="js/favorites.js"></script>
+  <script src="js/nav.js?v=20261110k"></script>
+  <script src="js/favorites.js?v=20261110k"></script>
 </body>
 </html>

@@ -12,10 +12,10 @@
       name: "Calacatta Alps",
       gtNumber: "GT-1001",
       lotNumber: "LOT #84920",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 65\" · 57.8 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -33,10 +33,10 @@
       name: "Calacatta Gold",
       gtNumber: "GT-1002",
       lotNumber: "LOT #84921",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "130\" × 65\" · 58.7 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -54,10 +54,10 @@
       name: "Calacatta Panda",
       gtNumber: "GT-1003",
       lotNumber: "LOT #84922",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 64\" · 56.9 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -75,10 +75,10 @@
       name: "Calacatta Tuscany",
       gtNumber: "GT-1004",
       lotNumber: "LOT #84923",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "132\" × 65\" · 59.6 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -96,10 +96,10 @@
       name: "Calacatta Vega",
       gtNumber: "GT-1005",
       lotNumber: "LOT #84924",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "126\" × 63\" · 55.1 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -117,10 +117,10 @@
       name: "Nero Marquina",
       gtNumber: "GT-1006",
       lotNumber: "LOT #84925",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 64\" · 56.9 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -138,10 +138,10 @@
       name: "Organic White",
       gtNumber: "GT-1007",
       lotNumber: "LOT #84926",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "126\" × 63\" · 55.1 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -159,10 +159,10 @@
       name: "Carrara White Quartz",
       gtNumber: "GT-1008",
       lotNumber: "LOT #84927",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 64\" · 56.9 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -180,10 +180,10 @@
       name: "Black Crystal Quartz",
       gtNumber: "GT-1009",
       lotNumber: "LOT #84928",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "126\" × 63\" · 55.1 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -201,10 +201,10 @@
       name: "Zermatt",
       gtNumber: "GT-1010",
       lotNumber: "LOT #84929",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "130\" × 65\" · 58.7 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -222,10 +222,10 @@
       name: "Versilia",
       gtNumber: "GT-1011",
       lotNumber: "LOT #84930",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "132\" × 65\" · 59.6 sq. ft.",
       category: "quartz",
-      categoryLabel: "Gran Trade Quartz",
+      categoryLabel: "Quartz",
       type: "engineered",
       typeLabel: "Engineered Quartz",
       finish: "Polished",
@@ -243,12 +243,12 @@
     {
       id: "absolute-black-polished",
       name: "Absolute Black Polished",
-      gtNumber: "GT-2001",
+      gtNumber: "",
       lotNumber: "LOT #71201",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "124\" × 76\" · 65.4 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Polished",
@@ -264,12 +264,12 @@
     {
       id: "black-galaxy",
       name: "Black Galaxy",
-      gtNumber: "GT-2002",
+      gtNumber: "",
       lotNumber: "LOT #71202",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "122\" × 74\" · 62.7 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Polished",
@@ -285,12 +285,12 @@
     {
       id: "blue-pearl",
       name: "Blue Pearl",
-      gtNumber: "GT-2003",
+      gtNumber: "",
       lotNumber: "LOT #71203",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "120\" × 72\" · 60.0 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Larvikite Stone",
       finish: "Polished",
@@ -306,12 +306,12 @@
     {
       id: "colonial-white",
       name: "Colonial White",
-      gtNumber: "GT-2004",
+      gtNumber: "",
       lotNumber: "LOT #71204",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 75\" · 66.7 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Polished",
@@ -327,12 +327,12 @@
     {
       id: "kashmir-white-leather",
       name: "Kashmir White Leather",
-      gtNumber: "GT-2005",
+      gtNumber: "",
       lotNumber: "LOT #71205",
-      thickness: "3 cm Calibrated",
+      thickness: "3 cm",
       size: "126\" × 74\" · 64.8 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Leathered",
@@ -348,12 +348,12 @@
     {
       id: "new-venetian-gold",
       name: "New Venetian Gold",
-      gtNumber: "GT-2006",
+      gtNumber: "",
       lotNumber: "LOT #71206",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "125\" × 73\" · 63.4 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Polished",
@@ -369,12 +369,12 @@
     {
       id: "ruby-red",
       name: "Ruby Red",
-      gtNumber: "GT-2007",
+      gtNumber: "",
       lotNumber: "LOT #71207",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "118\" × 70\" · 57.4 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Polished",
@@ -390,12 +390,12 @@
     {
       id: "steel-grey-leather",
       name: "Steel Grey Leather",
-      gtNumber: "GT-2008",
+      gtNumber: "",
       lotNumber: "LOT #71208",
-      thickness: "3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 76\" · 67.5 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Leathered",
@@ -411,12 +411,12 @@
     {
       id: "tan-brown",
       name: "Tan Brown",
-      gtNumber: "GT-2009",
+      gtNumber: "",
       lotNumber: "LOT #71209",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "126\" × 75\" · 65.6 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Polished",
@@ -432,12 +432,12 @@
     {
       id: "emerald-pearl",
       name: "Emerald Pearl",
-      gtNumber: "GT-2010",
+      gtNumber: "",
       lotNumber: "LOT #71210",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "122\" × 72\" · 61.0 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Larvikite Stone",
       finish: "Polished",
@@ -453,12 +453,12 @@
     {
       id: "black-forest",
       name: "Black Forest",
-      gtNumber: "GT-2011",
+      gtNumber: "",
       lotNumber: "LOT #71211",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "130\" × 78\" · 70.4 sq. ft.",
       category: "granite",
-      categoryLabel: "Natural Granite",
+      categoryLabel: "Granite",
       type: "natural",
       typeLabel: "Natural Igneous Stone",
       finish: "Polished",
@@ -476,12 +476,12 @@
     {
       id: "bianco-carrara",
       name: "Bianco Carrara",
-      gtNumber: "GT-3001",
+      gtNumber: "",
       lotNumber: "LOT #62011",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "122\" × 70\" · 59.3 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Metamorphic Marble",
       finish: "Polished",
@@ -497,12 +497,12 @@
     {
       id: "bianco-carrara-honed",
       name: "Bianco Carrara Honed",
-      gtNumber: "GT-3002",
+      gtNumber: "",
       lotNumber: "LOT #62012",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "120\" × 68\" · 56.7 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Metamorphic Marble",
       finish: "Honed",
@@ -518,12 +518,12 @@
     {
       id: "bianco-rhino",
       name: "Bianco Rhino",
-      gtNumber: "GT-3003",
+      gtNumber: "",
       lotNumber: "LOT #62013",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "124\" × 72\" · 62.0 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Metamorphic Marble",
       finish: "Polished",
@@ -539,12 +539,12 @@
     {
       id: "calacatta-zambia",
       name: "Calacatta Zambia",
-      gtNumber: "GT-3004",
+      gtNumber: "",
       lotNumber: "LOT #62014",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "126\" × 74\" · 64.8 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Metamorphic Marble",
       finish: "Polished",
@@ -560,12 +560,12 @@
     {
       id: "crema-marfil",
       name: "Crema Marfil",
-      gtNumber: "GT-3005",
+      gtNumber: "",
       lotNumber: "LOT #62015",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "120\" × 70\" · 58.3 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Sedimentary Marble",
       finish: "Polished",
@@ -581,12 +581,12 @@
     {
       id: "dark-emperador",
       name: "Dark Emperador",
-      gtNumber: "GT-3006",
+      gtNumber: "",
       lotNumber: "LOT #62016",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "118\" × 68\" · 55.7 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Metamorphic Marble",
       finish: "Polished",
@@ -602,12 +602,12 @@
     {
       id: "dover-white",
       name: "Dover White",
-      gtNumber: "GT-3007",
+      gtNumber: "",
       lotNumber: "LOT #62017",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "125\" × 72\" · 62.5 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Metamorphic Marble",
       finish: "Polished",
@@ -623,12 +623,12 @@
     {
       id: "forest-brown",
       name: "Forest Brown",
-      gtNumber: "GT-3008",
+      gtNumber: "",
       lotNumber: "LOT #62018",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "118\" × 66\" · 54.1 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Serpentine Marble",
       finish: "Polished",
@@ -644,12 +644,12 @@
     {
       id: "nero-marquina-marble",
       name: "Nero Marquina",
-      gtNumber: "GT-3009",
+      gtNumber: "",
       lotNumber: "LOT #62019",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "122\" × 70\" · 59.3 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Metamorphic Marble",
       finish: "Polished",
@@ -665,12 +665,12 @@
     {
       id: "sahara-beige-marble",
       name: "Sahara Beige",
-      gtNumber: "GT-3010",
+      gtNumber: "",
       lotNumber: "LOT #62020",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "120\" × 68\" · 56.7 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Metamorphic Marble",
       finish: "Polished",
@@ -686,12 +686,12 @@
     {
       id: "arabescato",
       name: "Arabescato",
-      gtNumber: "GT-3011",
+      gtNumber: "",
       lotNumber: "LOT #62021",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "124\" × 72\" · 62.0 sq. ft.",
       category: "marble",
-      categoryLabel: "Fine Marble",
+      categoryLabel: "Marble",
       type: "natural",
       typeLabel: "Natural Brecciated Marble",
       finish: "Polished",
@@ -714,7 +714,7 @@
       thickness: "3 cm · 4 cm Monument Spec",
       size: "84\" × 48\" Monument Blank",
       category: "monuments",
-      categoryLabel: "Civic Monuments",
+      categoryLabel: "Monuments",
       type: "natural",
       typeLabel: "Monument-Grade Granite",
       finish: "Polished",
@@ -735,7 +735,7 @@
       thickness: "3 cm · 4 cm Monument Spec",
       size: "80\" × 46\" Monument Blank",
       category: "monuments",
-      categoryLabel: "Civic Monuments",
+      categoryLabel: "Monuments",
       type: "natural",
       typeLabel: "Monument-Grade Granite",
       finish: "Polished",
@@ -756,7 +756,7 @@
       thickness: "4 cm Monument Spec",
       size: "72\" × 36\" Monument Blank",
       category: "monuments",
-      categoryLabel: "Civic Monuments",
+      categoryLabel: "Monuments",
       type: "natural",
       typeLabel: "Monument-Grade Granite",
       finish: "Polished",
@@ -777,7 +777,7 @@
       thickness: "3 cm Monument Spec",
       size: "76\" × 40\" Monument Blank",
       category: "monuments",
-      categoryLabel: "Civic Monuments",
+      categoryLabel: "Monuments",
       type: "natural",
       typeLabel: "Monument-Grade Granite",
       finish: "Polished",
@@ -798,7 +798,7 @@
       thickness: "4 cm Monument Spec",
       size: "82\" × 44\" Monument Blank",
       category: "monuments",
-      categoryLabel: "Civic Monuments",
+      categoryLabel: "Monuments",
       type: "natural",
       typeLabel: "Monument-Grade Granite",
       finish: "Polished",
@@ -816,12 +816,12 @@
     {
       id: "casablanca",
       name: "Casablanca Quartzite",
-      gtNumber: "GT-4001",
+      gtNumber: "",
       lotNumber: "LOT #59101",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 76\" · 67.5 sq. ft.",
       category: "quartzite",
-      categoryLabel: "Exotic Quartzite",
+      categoryLabel: "Quartzite",
       type: "natural",
       typeLabel: "Natural Metamorphic Quartzite",
       finish: "Polished",
@@ -837,12 +837,12 @@
     {
       id: "crystallo",
       name: "Crystallo Quartzite",
-      gtNumber: "GT-4002",
+      gtNumber: "",
       lotNumber: "LOT #59102",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "124\" × 72\" · 62.0 sq. ft.",
       category: "quartzite",
-      categoryLabel: "Exotic Quartzite",
+      categoryLabel: "Quartzite",
       type: "natural",
       typeLabel: "Natural Metamorphic Quartzite",
       finish: "Polished",
@@ -858,12 +858,12 @@
     {
       id: "deep-blue",
       name: "Deep Blue Quartzite",
-      gtNumber: "GT-4003",
+      gtNumber: "",
       lotNumber: "LOT #59103",
-      thickness: "3 cm Calibrated",
+      thickness: "3 cm",
       size: "126\" × 74\" · 64.8 sq. ft.",
       category: "quartzite",
-      categoryLabel: "Exotic Quartzite",
+      categoryLabel: "Quartzite",
       type: "natural",
       typeLabel: "Natural Metamorphic Quartzite",
       finish: "Polished",
@@ -879,12 +879,12 @@
     {
       id: "fantasy-brown",
       name: "Fantasy Brown",
-      gtNumber: "GT-4004",
+      gtNumber: "",
       lotNumber: "LOT #59104",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "130\" × 78\" · 70.4 sq. ft.",
       category: "quartzite",
-      categoryLabel: "Exotic Quartzite",
+      categoryLabel: "Quartzite",
       type: "natural",
       typeLabel: "Natural Metamorphic Stone",
       finish: "Leathered",
@@ -900,12 +900,12 @@
     {
       id: "grey-quartzite-leather",
       name: "Grey Quartzite Leather",
-      gtNumber: "GT-4005",
+      gtNumber: "",
       lotNumber: "LOT #59105",
-      thickness: "3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 75\" · 66.7 sq. ft.",
       category: "quartzite",
-      categoryLabel: "Exotic Quartzite",
+      categoryLabel: "Quartzite",
       type: "natural",
       typeLabel: "Natural Metamorphic Quartzite",
       finish: "Leathered",
@@ -921,12 +921,12 @@
     {
       id: "river-blue",
       name: "River Blue Quartzite",
-      gtNumber: "GT-4006",
+      gtNumber: "",
       lotNumber: "LOT #59106",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "125\" × 73\" · 63.4 sq. ft.",
       category: "quartzite",
-      categoryLabel: "Exotic Quartzite",
+      categoryLabel: "Quartzite",
       type: "natural",
       typeLabel: "Natural Metamorphic Quartzite",
       finish: "Polished",
@@ -942,12 +942,12 @@
     {
       id: "taj-mahal",
       name: "Taj Mahal Quartzite",
-      gtNumber: "GT-4007",
+      gtNumber: "",
       lotNumber: "LOT #59107",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "132\" × 78\" · 71.5 sq. ft.",
       category: "quartzite",
-      categoryLabel: "Exotic Quartzite",
+      categoryLabel: "Quartzite",
       type: "natural",
       typeLabel: "Natural Metamorphic Quartzite",
       finish: "Polished",
@@ -963,12 +963,12 @@
     {
       id: "aquamarine-quartzite",
       name: "Aquamarine Quartzite",
-      gtNumber: "GT-4008",
+      gtNumber: "",
       lotNumber: "LOT #59108",
-      thickness: "2 cm · 3 cm Calibrated",
+      thickness: "3 cm",
       size: "128\" × 76\" · 67.5 sq. ft.",
       category: "quartzite",
-      categoryLabel: "Exotic Quartzite",
+      categoryLabel: "Quartzite",
       type: "natural",
       typeLabel: "Natural Metamorphic Quartzite",
       finish: "Polished",
@@ -988,10 +988,10 @@
       name: "Graphite Soapstone",
       gtNumber: "GT-5001",
       lotNumber: "LOT #48201",
-      thickness: "3 cm Calibrated",
+      thickness: "3 cm",
       size: "116\" × 64\" · 51.5 sq. ft.",
       category: "soapstone",
-      categoryLabel: "Natural Soapstone",
+      categoryLabel: "Soapstone",
       type: "natural",
       typeLabel: "Natural Steatite Stone",
       finish: "Honed",
@@ -1009,10 +1009,10 @@
       name: "Green Soapstone",
       gtNumber: "GT-5002",
       lotNumber: "LOT #48202",
-      thickness: "3 cm Calibrated",
+      thickness: "3 cm",
       size: "114\" × 62\" · 49.1 sq. ft.",
       category: "soapstone",
-      categoryLabel: "Natural Soapstone",
+      categoryLabel: "Soapstone",
       type: "natural",
       typeLabel: "Natural Steatite Stone",
       finish: "Honed",
@@ -1032,10 +1032,10 @@
       name: "Blue Agate Geode Slab",
       gtNumber: "GT-6001",
       lotNumber: "LOT #32001",
-      thickness: "2 cm · 3 cm Backlit",
+      thickness: "3 cm Backlit",
       size: "110\" × 58\" · 44.3 sq. ft.",
       category: "semi",
-      categoryLabel: "Semi Precious Stone",
+      categoryLabel: "Semi Precious",
       type: "natural",
       typeLabel: "Hand-Composed Gemstone Mosaic",
       finish: "Polished",
@@ -1055,10 +1055,10 @@
       name: "Travertino Classico",
       gtNumber: "GT-7001",
       lotNumber: "LOT #21001",
-      thickness: "1.2 cm Calibrated Tile",
+      thickness: "1.2 cm Tile",
       size: "24\" × 24\" / 12\" × 24\" Tile Crate",
       category: "tile",
-      categoryLabel: "Architectural Tile",
+      categoryLabel: "Tiles",
       type: "natural",
       typeLabel: "Natural Travertine",
       finish: "Honed / Filled",
@@ -1073,19 +1073,313 @@
     }
   ];
 
-  // Helper dictionary keyed by ID
+  const OVERRIDES_KEY = "granTrade_stone_overrides_v1";
+  const BUILTIN_COLOR_LABELS = {
+    blue: "Blue / Teal",
+    green: "Green",
+    white: "White",
+    grey: "Grey",
+    black: "Black",
+    gold: "Gold / Amber",
+    cream: "Cream / Beige",
+    brown: "Brown",
+    red: "Red",
+  };
+  const COLOR_HEX_MAP = {
+    white: "#f3f4f6",
+    cream: "#ede0cc",
+    beige: "#e6d7be",
+    ivory: "#f5f1e6",
+    grey: "#8b929a",
+    gray: "#8b929a",
+    silver: "#b8bec6",
+    charcoal: "#3f444c",
+    black: "#1f2328",
+    blue: "#2f6b8a",
+    navy: "#1e3a5f",
+    teal: "#1b7a78",
+    aquamarine: "#2e8b89",
+    seafoam: "#5ea396",
+    green: "#2f6e49",
+    emerald: "#197a52",
+    olive: "#5f6b3a",
+    sage: "#7d937e",
+    gold: "#c7963e",
+    amber: "#b87424",
+    bronze: "#8c6239",
+    brown: "#7c5238",
+    taupe: "#8d7b6b",
+    red: "#9e3333",
+    burgundy: "#6b232e",
+  };
+
+  function normalizeColorTags(input) {
+    const rawList = Array.isArray(input)
+      ? input
+      : String(input || "").split(/[,;|]+/);
+    const seen = new Set();
+    const out = [];
+    rawList.forEach((item) => {
+      const clean = String(item || "").trim().toLowerCase().replace(/\s+/g, " ");
+      if (clean && !seen.has(clean)) {
+        seen.add(clean);
+        out.push(clean);
+      }
+    });
+    return out;
+  }
+
+  function formatColorLabel(tag) {
+    const clean = String(tag || "").trim().toLowerCase();
+    if (!clean) return "";
+    if (BUILTIN_COLOR_LABELS[clean]) return BUILTIN_COLOR_LABELS[clean];
+    return clean.replace(/\b\w/g, (ch) => ch.toUpperCase());
+  }
+
+  function getColorSwatch(tag) {
+    const clean = String(tag || "").trim().toLowerCase();
+    const wpCustom = global.GRAN_TRADE_ENV && global.GRAN_TRADE_ENV.customColors;
+    if (wpCustom && wpCustom[clean] && wpCustom[clean].hex) return wpCustom[clean].hex;
+    if (COLOR_HEX_MAP[clean]) return COLOR_HEX_MAP[clean];
+    const words = clean.split(/\s+/);
+    for (let i = 0; i < words.length; i++) {
+      if (wpCustom && wpCustom[words[i]] && wpCustom[words[i]].hex) return wpCustom[words[i]].hex;
+      if (COLOR_HEX_MAP[words[i]]) return COLOR_HEX_MAP[words[i]];
+    }
+    let hash = 0;
+    for (let i = 0; i < clean.length; i++) {
+      hash = (clean.charCodeAt(i) + ((hash << 5) - hash)) | 0;
+    }
+    return `hsl(${Math.abs(hash) % 360}, 36%, 46%)`;
+  }
+
+  function readOverrides() {
+    try {
+      const raw = global.localStorage && global.localStorage.getItem(OVERRIDES_KEY);
+      if (!raw) return {};
+      const parsed = JSON.parse(raw);
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function writeOverrides(map) {
+    try {
+      if (global.localStorage) {
+        global.localStorage.setItem(OVERRIDES_KEY, JSON.stringify(map));
+      }
+    } catch (_) {}
+  }
+
+  const NO_GT_CATEGORIES = new Set(["granite", "quartzite", "marble"]);
+  const CATEGORY_LABELS = {
+    quartzite: "Quartzite",
+    quartz: "Quartz",
+    granite: "Granite",
+    marble: "Marble",
+    monuments: "Monuments",
+    soapstone: "Soapstone",
+    semi: "Semi Precious",
+    tile: "Tiles",
+  };
+
+  function getCategoryLabel(cat, fallback) {
+    const key = String(cat || "").toLowerCase().trim();
+    if (CATEGORY_LABELS[key]) return CATEGORY_LABELS[key];
+    return fallback || cat || "";
+  }
+
+  function normalizeThickness(raw) {
+    if (raw === null || raw === undefined) return "";
+    const str = String(raw).trim();
+    if (!str) return "";
+    const cleaned = (/calibrated/i.test(str)
+      ? str.replace(/\b2\s*cm\s*·\s*3\s*cm/gi, "3 cm").replace(/\bcalibrated\b/gi, "")
+      : str
+    )
+      .replace(/\s{2,}/g, " ")
+      .replace(/\s*·\s*$/g, "")
+      .trim();
+    return cleaned;
+  }
+
+  function cloneStone(s) {
+    return Object.assign({}, s, {
+      colors: Array.isArray(s.colors) ? s.colors.slice() : normalizeColorTags(s.colors),
+      tags: Array.isArray(s.tags) ? s.tags.slice() : (s.tags || []),
+    });
+  }
+
+  function hasGtNumber(stoneOrCategory) {
+    if (!stoneOrCategory) return false;
+    if (typeof stoneOrCategory === "string") {
+      return !NO_GT_CATEGORIES.has(stoneOrCategory.toLowerCase().trim());
+    }
+    const cat = String(stoneOrCategory.category || "").toLowerCase().trim();
+    if (NO_GT_CATEGORIES.has(cat)) return false;
+    return Boolean(stoneOrCategory.gtNumber && String(stoneOrCategory.gtNumber).trim());
+  }
+
+  function normalizeStone(stone) {
+    if (!stone || typeof stone !== "object") return stone;
+    const cat = String(stone.category || "").toLowerCase().trim();
+    if (NO_GT_CATEGORIES.has(cat)) {
+      stone.gtNumber = "";
+    }
+    if (CATEGORY_LABELS[cat]) {
+      stone.categoryLabel = CATEGORY_LABELS[cat];
+    }
+    if (stone.thickness !== undefined) {
+      stone.thickness = normalizeThickness(stone.thickness);
+    }
+    stone.colors = normalizeColorTags(stone.colors);
+    return stone;
+  }
+
+  // Pristine base snapshot & WordPress CPT overlay store
+  const INITIAL_STONES = STONES.map((s) => normalizeStone(cloneStone(s)));
+  let externalStones = [];
+  let externalReplaceBuiltin = false;
+
+  // Helper dictionary keyed by ID (mutated in-place on refresh so references stay valid)
   const STONES_BY_ID = {};
-  STONES.forEach(s => {
-    STONES_BY_ID[s.id] = s;
-  });
+
+  function applyLocalOverrides() {
+    const baseList = externalReplaceBuiltin ? [] : INITIAL_STONES.map(cloneStone);
+    const byId = new Map();
+    baseList.forEach((item) => {
+      if (item && item.id) byId.set(item.id, item);
+    });
+
+    externalStones.forEach((extStone) => {
+      if (!extStone || !extStone.id) return;
+      if (byId.has(extStone.id)) {
+        Object.assign(byId.get(extStone.id), cloneStone(extStone));
+      } else {
+        const copy = cloneStone(extStone);
+        baseList.unshift(copy);
+        byId.set(copy.id, copy);
+      }
+    });
+
+    const overrides = readOverrides();
+    const deletedIds = new Set();
+
+    Object.keys(overrides).forEach((id) => {
+      const patch = overrides[id];
+      if (!patch || typeof patch !== "object") return;
+      if (patch._deleted) {
+        deletedIds.add(id);
+        return;
+      }
+      if (byId.has(id)) {
+        const target = byId.get(id);
+        Object.assign(target, patch);
+        normalizeStone(target);
+      } else if (!externalReplaceBuiltin && patch.name) {
+        const created = normalizeStone(Object.assign({ id }, cloneStone(patch)));
+        baseList.unshift(created);
+        byId.set(id, created);
+      }
+    });
+
+    const finalList = baseList
+      .filter((s) => s && s.id && !deletedIds.has(s.id))
+      .map((s) => normalizeStone(s));
+
+    STONES.length = 0;
+    Object.keys(STONES_BY_ID).forEach((k) => {
+      delete STONES_BY_ID[k];
+    });
+    finalList.forEach((s) => {
+      STONES.push(s);
+      STONES_BY_ID[s.id] = s;
+    });
+
+    return STONES;
+  }
+
+  applyLocalOverrides();
 
   global.GRAN_TRADE_CATALOG = {
     all: STONES,
     byId: STONES_BY_ID,
+    categoryLabels: Object.assign({}, CATEGORY_LABELS),
+    noGtCategories: Array.from(NO_GT_CATEGORIES),
+    getCategoryLabel,
+    hasGtNumber,
+    normalizeColorTags,
+    formatColorLabel,
+    getColorSwatch,
+    applyLocalOverrides,
+    refresh: function () {
+      return applyLocalOverrides();
+    },
+    setExternalStones: function (list, replaceBuiltin) {
+      externalStones = Array.isArray(list) ? list.map(cloneStone) : [];
+      externalReplaceBuiltin = Boolean(replaceBuiltin);
+      return applyLocalOverrides();
+    },
+    saveOverride: function (id, patch) {
+      if (!id || !patch || typeof patch !== "object") return null;
+      const overrides = readOverrides();
+      const prev = overrides[id] ? Object.assign({}, overrides[id]) : {};
+      delete prev._deleted;
+      const nextPatch = Object.assign(prev, patch);
+      if ("colors" in patch) {
+        nextPatch.colors = normalizeColorTags(patch.colors);
+      }
+      if (nextPatch.category && CATEGORY_LABELS[nextPatch.category]) {
+        nextPatch.categoryLabel = CATEGORY_LABELS[nextPatch.category];
+      }
+      overrides[id] = nextPatch;
+      writeOverrides(overrides);
+      applyLocalOverrides();
+      return STONES_BY_ID[id] || null;
+    },
+    deleteOverride: function (id) {
+      if (!id) return false;
+      const overrides = readOverrides();
+      const isCustomOnly = !INITIAL_STONES.some((s) => s.id === id) && !externalStones.some((s) => s.id === id);
+      if (isCustomOnly) {
+        delete overrides[id];
+      } else {
+        overrides[id] = { _deleted: true };
+      }
+      writeOverrides(overrides);
+      applyLocalOverrides();
+      return true;
+    },
+    clearOverrides: function () {
+      try {
+        if (global.localStorage) global.localStorage.removeItem(OVERRIDES_KEY);
+      } catch (_) {}
+      return applyLocalOverrides();
+    },
+    saveColorTags: function (id, tags) {
+      const normalized = normalizeColorTags(tags);
+      this.saveOverride(id, { colors: normalized });
+      return normalized;
+    },
+    getAllColorTags: function () {
+      const seen = new Set(Object.keys(BUILTIN_COLOR_LABELS));
+      const extras = [];
+      STONES.forEach((s) => {
+        normalizeColorTags(s.colors).forEach((c) => {
+          if (!seen.has(c)) {
+            seen.add(c);
+            extras.push(c);
+          }
+        });
+      });
+      extras.sort((a, b) => a.localeCompare(b));
+      return Object.keys(BUILTIN_COLOR_LABELS).concat(extras);
+    },
     getById: function (id) {
       if (!id) return STONES[0];
       const clean = String(id).toLowerCase().trim();
-      return STONES_BY_ID[clean] || STONES.find(s => s.name.toLowerCase() === clean) || STONES[0];
+      return STONES_BY_ID[clean] || STONES.find((s) => s.name.toLowerCase() === clean) || STONES[0];
     }
   };
 })(typeof window !== "undefined" ? window : this);

@@ -41,7 +41,7 @@
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 40px 0px" }
     );
 
     rows.forEach(function (row) {
@@ -85,12 +85,12 @@
   // 3. CLEAN MATERIAL INSPECT MODAL (ZERO TEMPERATURE / THERMAL INFO)
   const stoneData = {
     quartzite: {
-      title: "Exotic Quartzite",
+      title: "Quartzite",
       geology: "Metamorphic Quartz Sandstone",
       origin: "Brazil (Bahia & Espirito Santo)",
       desc: "Pure recrystallized sandstone formed under colossal tectonic pressure. Quartzite pairs the ethereal luminescence and flowing movement of marble with exceptional natural mineral density. Completely impervious to red wine, citrus acids, and cutlery scratches.",
       category: "Natural Metamorphic",
-      thickness: "2 cm & 3 cm Bookmatched Slabs",
+      thickness: "3 cm Bookmatched Slabs",
       finishes: "Polished Mirror, Leathered Satin, Honed Velvet",
       availability: "Consecutive Bundles In Stock",
       apps: "Waterfall Islands · Backlit Walls · High-End Countertops",
@@ -98,12 +98,12 @@
       catalogCategory: "quartzite",
     },
     marble: {
-      title: "Fine Marble",
+      title: "Marble",
       geology: "Metamorphic Recrystallized Limestone",
       origin: "Italy (Carrara) & Greece",
       desc: "The enduring benchmark of classical and contemporary architectural prestige. Imported directly from the Apuan Alps of Tuscany, our natural marbles offer dramatic brecciated veining, subtle translucency, and consecutive sequence bundles for mirrored bookmatched layouts.",
       category: "Natural Metamorphic",
-      thickness: "2 cm & 3 cm Calibrated Slabs",
+      thickness: "3 cm Architectural Slabs",
       finishes: "Polished High Gloss, Honed Matte, Satin Silk",
       availability: "Full Inventory In Stock",
       apps: "Showcase Islands · Master En-Suites · Fireplace Surrounds",
@@ -111,12 +111,12 @@
       catalogCategory: "marble",
     },
     granite: {
-      title: "Natural Granite",
+      title: "Granite",
       geology: "Igneous Intrusive Magma",
       origin: "Brazil, India & Norway",
       desc: "Pure volcanic fortitude formed by molten magma slowly crystallizing miles beneath the Earth's crust. Interlocking quartz, feldspar, and mica crystals produce unmatched structural strength, deep chromatic depth, and enduring resistance to heavy culinary preparation.",
       category: "Natural Igneous",
-      thickness: "2 cm & 3 cm Heavy-Duty Slabs",
+      thickness: "3 cm Heavy-Duty Slabs",
       finishes: "Polished, Leathered Tactile, Flamed, Honed",
       availability: "High Volume In Stock",
       apps: "Chef's Prep Kitchens · Outdoor BBQ Islands · Commercial Bars",
@@ -124,12 +124,12 @@
       catalogCategory: "granite",
     },
     quartz: {
-      title: "Gran Trade Quartz",
+      title: "Quartz",
       geology: "93% Pure Quartz Composite",
       origin: "USA & Global Surfacing",
       desc: "Advanced architectural engineering tailored for modern family living and demanding commercial projects. Crafted from 93% pure crushed natural quartz bonded with high-grade polymers. Zero porosity ensures liquids and oils never penetrate, requiring zero sealing over its lifespan.",
       category: "Engineered Surfacing",
-      thickness: "Jumbo Slabs (63\" x 128\") · 2 cm & 3 cm",
+      thickness: "Jumbo Slabs (63\" x 128\") · 3 cm",
       finishes: "High Polish Brilliant, Soft Touch Matte",
       availability: "Full Palette In Stock",
       apps: "Modern Family Kitchens · Multi-Unit Developments · Hospitality Suites",
@@ -137,7 +137,7 @@
       catalogCategory: "quartz",
     },
     soapstone: {
-      title: "Natural Soapstone",
+      title: "Soapstone",
       geology: "Metamorphic Steatite Talc Rock",
       origin: "Brazil & Virginia, USA",
       desc: "An authentic artisanal heritage stone prized for its silky-smooth tactile touch. Soapstone is naturally non-porous and chemically inert, making it immune to lemon juice, vinegar, and household acids. Develops an organic, rich charcoal patina when seasoned with food-safe mineral oil.",
@@ -150,7 +150,7 @@
       catalogCategory: "soapstone",
     },
     semi: {
-      title: "Semi-Precious Gemstone",
+      title: "Semi Precious",
       geology: "Handcrafted Natural Agate & Crystal Geode",
       origin: "Brazil & Madagascar",
       desc: "The pinnacle of architectural opulence and lapidary craftsmanship. Skilled artisans hand-select and composite translucent slices of genuine natural agate, petrified wood, and crystal geode. Designed specifically for dramatic rear-illumination with LED light panels.",
@@ -163,7 +163,7 @@
       catalogCategory: "semi",
     },
     monuments: {
-      title: "Civic Monuments",
+      title: "Monuments",
       geology: "Certified Structural Granite",
       origin: "North America & India",
       desc: "Certified structural-grade natural granites quarried for multi-generational outdoor permanence. Dense, uniform crystalline matrix withstands severe Northeastern freeze-thaw cycles and weathering without surface degradation. Provides flawless contrast for precision laser etching and diamond engraving.",
@@ -176,12 +176,12 @@
       catalogCategory: "monuments",
     },
     tile: {
-      title: "Architectural Tile",
-      geology: "Calibrated Travertine & Natural Marble",
+      title: "Tiles",
+      geology: "Travertine & Natural Marble Formats",
       origin: "Italy & Turkey",
-      desc: "Precision-calibrated natural stone tiles crafted to provide seamless spatial continuity across interior floors, bathrooms, and exterior living spaces. Available in interlocking French patterns, large-format rectangles, and modular squares with dependable natural foot traction.",
-      category: "Natural Calibrated Formats",
-      thickness: "French Pattern Sets · 12\"x24\" · 1/2\" Calibrated",
+      desc: "Precision-finished natural stone tiles crafted to provide seamless spatial continuity across interior floors, bathrooms, and exterior living spaces. Available in interlocking French patterns, large-format rectangles, and modular squares with dependable natural foot traction.",
+      category: "Natural Stone Formats",
+      thickness: "French Pattern Sets · 12\"x24\" · 1.2 cm",
       finishes: "Tumbled, Brushed, Honed, Pillowed Edge",
       availability: "Crated Pallets In Stock",
       apps: "Master Shower Enclosures · Foyer Flooring · Covered Loggias",
@@ -190,11 +190,17 @@
     },
   };
 
+  function wpAsset(path) {
+    return window.GranTradeWP && typeof window.GranTradeWP.asset === "function"
+      ? window.GranTradeWP.asset(path)
+      : path;
+  }
+
   function openLiquidModal(familyKey) {
     const data = stoneData[familyKey];
     if (!data || !modal) return;
 
-    if (modalImg) modalImg.src = data.img;
+    if (modalImg) modalImg.src = wpAsset(data.img);
     if (modalTitle) modalTitle.textContent = data.title;
     if (modalGeology) modalGeology.textContent = data.geology;
     if (modalOrigin) modalOrigin.textContent = data.origin;

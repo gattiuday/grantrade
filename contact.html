@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
+  <script>if ("scrollRestoration" in history) history.scrollRestoration = "manual";</script>
   <title>Contact & Yard Hours | Gran Trade Inc. · Carlstadt, NJ</title>
   <meta name="description" content="Contact Gran Trade Inc. in Carlstadt, NJ. Warehouse hours, phone directory, driving directions, and wholesale trade inquiries." />
 
@@ -13,11 +14,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
   <!-- CSS Split 5 Ways -->
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/pages.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/base.css?v=20261110k" />
+  <link rel="stylesheet" href="css/layout.css?v=20261110k" />
+  <link rel="stylesheet" href="css/components.css?v=20261110k" />
+  <link rel="stylesheet" href="css/pages.css?v=20261110k" />
+  <link rel="stylesheet" href="css/responsive.css?v=20261110k" />
 </head>
 <body>
 
@@ -69,10 +70,16 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Connect With Us</span>
-        <h1>Visit or contact our Carlstadt facility</h1>
+        <h1>Visit or contact our facility</h1>
         <p class="lead">
-          Direct wholesale support for stone fabricators, commercial contractors, interior designers, and homeowners.
+          Direct wholesale supplier for stone fabricators, commercial contractors, interior designers
         </p>
+      </div>
+
+      <div class="contact-mobile-actions" aria-label="Quick Contact Actions">
+        <a href="tel:2014381888" class="btn btn-secondary">Call Yard</a>
+        <a href="https://maps.google.com/?q=178+Commerce+Road+Carlstadt+NJ+07072" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Directions</a>
+        <a href="#inquiryFormCard" class="btn btn-primary">Send Inquiry</a>
       </div>
 
       <div class="contact-split">
@@ -131,14 +138,23 @@
             <p style="font-size:1.05rem; font-weight:600; color:var(--ink); margin-bottom:0.35rem;">
               Gran Trade Inc.
             </p>
-            <p style="margin-bottom:1.25rem;">
+            <p style="margin-bottom:1.15rem;">
               178 Commerce Road<br/>
               Carlstadt, NJ 07072<br/>
               Bergen County, New Jersey
             </p>
-            <p style="font-size:0.88rem; color:var(--ink-2); margin-bottom:1.5rem; line-height:1.5;">
-              Conveniently located off Paterson Plank Road, just minutes from the New Jersey Turnpike (Exit 16W), Route 3, and Route 17. Ample parking and designated A-frame truck loading bays.
-            </p>
+            <div class="contact-map-frame">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3018.856040817609!2d-74.06393312346007!3d40.83112563031437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f8f3a4864b1f%3A0x6d95a20c3f75bdad!2sGran%20Trade%20Inc.!5e0!3m2!1sen!2sus!4v1794348581842!5m2!1sen!2sus"
+                title="Gran Trade Inc. Carlstadt Warehouse Live Map"
+                width="100%"
+                height="300"
+                style="border:0; display:block;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+              ></iframe>
+            </div>
             <a href="https://maps.google.com/?q=178+Commerce+Road+Carlstadt+NJ+07072" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-block">
               Open in Google Maps &rarr;
             </a>
@@ -157,26 +173,36 @@
                 <div style="display:flex; flex-direction:column; gap:0.25rem; margin-top:0.2rem;">
                   <a href="tel:2014389339" class="phone-link">(201) 438-9339</a>
                   <a href="tel:2014388126" class="phone-link">(201) 438-8126</a>
-                  <a href="tel:2014381898" class="phone-link">(201) 438-1898</a>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">Fax</div>
+                <span class="phone-link" style="cursor:default;">(201) 438-1898</span>
+              </div>
+              <div style="margin-top:0.5rem;">
+                <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">Direct Sales Emails</div>
+                <div style="display:flex; flex-direction:column; gap:0.25rem; margin-top:0.2rem;">
+                  <a href="mailto:grantrade@gmail.com" class="phone-link" style="font-size:0.95rem;">grantrade@gmail.com</a>
+                  <a href="mailto:sales.grantrade@gmail.com" class="phone-link" style="font-size:0.95rem;">sales.grantrade@gmail.com</a>
                 </div>
               </div>
               <div style="margin-top:0.5rem;">
-                <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">Direct Sales Email</div>
-                <a href="mailto:sales.grantrade@gmail.com" class="phone-link" style="font-size:0.95rem;">sales.grantrade@gmail.com</a>
+                <div style="font-size:0.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">Follow &amp; Reviews</div>
+                <div id="contactSocialMount"></div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- RIGHT: Wholesale & Warehouse Inquiry Form -->
-        <div class="contact-form-card">
+        <div id="inquiryFormCard" class="contact-form-card">
           <span class="eyebrow">Wholesale Inquiry</span>
           <h2 style="font-size:1.85rem; margin-bottom:0.5rem;">Send a warehouse inquiry</h2>
-          <p style="margin-bottom:2rem; font-size:0.92rem; color:var(--ink-2);">
+          <p style="margin-bottom:1.5rem; font-size:0.92rem; color:var(--ink-2);">
             Need to confirm slab lot numbers, place a trade bundle hold, or arrange crane staging for your client walkthrough? Reach our warehouse team directly.
           </p>
 
-          <form id="inquiryForm" action="https://formsubmit.co/sales.grantrade@gmail.com" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <form id="inquiryForm" action="https://formsubmit.co/grantrade@gmail.com" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="_subject" id="formSubject" value="Wholesale Stone Inquiry — Gran Trade Inc." />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
@@ -187,24 +213,25 @@
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="fullName">Full Name *</label>
-                <input class="form-input" type="text" id="fullName" name="fullName" required placeholder="John Doe" />
+                <input class="form-input" type="text" id="fullName" name="fullName" required />
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="companyName">Company / Fabricator Name</label>
-                <input class="form-input" type="text" id="companyName" name="companyName" placeholder="Granite Studio / Homeowner" />
+                <input class="form-input" type="text" id="companyName" name="companyName" />
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="email">Email Address *</label>
-                <input class="form-input" type="email" id="email" name="email" required placeholder="john@example.com" />
+                <input class="form-input" type="email" id="email" name="email" required />
+                <small class="form-helper-note">Genuine email required for reply.</small>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="phone">Phone Number *</label>
-                <input class="form-input" type="tel" id="phone" name="phone" required placeholder="(201) 555-0123" />
+                <input class="form-input" type="tel" id="phone" name="phone" required />
               </div>
             </div>
 
@@ -221,13 +248,15 @@
 
             <div class="form-group">
               <label class="form-label" for="stonesOfInterest">Stones of Interest / Bundle Numbers</label>
-              <input class="form-input" type="text" id="stonesOfInterest" name="stonesOfInterest" placeholder="e.g. Aquamarine Quartzite, Taj Mahal 3cm, GT 001" />
+              <input class="form-input" type="text" id="stonesOfInterest" name="stonesOfInterest" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="message">Project Details / Inquiry Message *</label>
-              <textarea class="form-textarea" id="message" name="message" required placeholder="Please provide estimated square footage, number of slabs needed, or preferred date for warehouse visit..."></textarea>
+              <textarea class="form-textarea" id="message" name="message" maxlength="3000" required></textarea>
             </div>
+
+            <div id="inquiryFormError" role="alert" style="display:none; background:#fcf0f1; border:1px solid #d63638; color:#8a2424; padding:0.75rem 1rem; border-radius:var(--radius-sm); font-size:0.88rem; margin-bottom:1rem;"></div>
 
             <button type="submit" class="btn btn-primary btn-block">Send Warehouse Inquiry</button>
 
@@ -279,12 +308,14 @@
       <div class="footer-col">
         <h4>Stone Families</h4>
         <ul class="footer-links">
-          <li><a href="collections.html">Gran Trade Quartz</a></li>
-          <li><a href="collections.html">Natural Granite</a></li>
-          <li><a href="collections.html">Fine Marble</a></li>
-          <li><a href="collections.html">Exotic Quartzite</a></li>
-          <li><a href="collections.html">Civic Monuments</a></li>
-          <li><a href="collections.html">Soapstone & Tile</a></li>
+          <li><a href="collections.html?category=quartzite">Quartzite</a></li>
+          <li><a href="collections.html?category=quartz">Quartz</a></li>
+          <li><a href="collections.html?category=granite">Granite</a></li>
+          <li><a href="collections.html?category=marble">Marble</a></li>
+          <li><a href="collections.html?category=monuments">Monuments</a></li>
+          <li><a href="collections.html?category=soapstone">Soapstone</a></li>
+          <li><a href="collections.html?category=semi">Semi Precious</a></li>
+          <li><a href="collections.html?category=tile">Tiles</a></li>
         </ul>
       </div>
 
@@ -295,6 +326,9 @@
         </div>
         <div class="footer-contact-item">
           <a href="tel:2014381888">(201) 438-1888</a>
+        </div>
+        <div class="footer-contact-item">
+          <a href="mailto:grantrade@gmail.com">grantrade@gmail.com</a>
         </div>
         <div class="footer-contact-item">
           <a href="mailto:sales.grantrade@gmail.com">sales.grantrade@gmail.com</a>
@@ -316,44 +350,75 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/favorites.js"></script>
+  <script src="js/nav.js?v=20261110k"></script>
+  <script src="js/favorites.js?v=20261110k"></script>
+  <script src="js/contact-guard.js?v=20261110k"></script>
   <script>
     (function() {
       const form = document.getElementById("inquiryForm");
       if (!form) return;
 
-      const TARGET_EMAIL = "sales.grantrade@gmail.com";
+      const guard = window.GranTradeContactGuard;
+      const TARGET_EMAIL = "grantrade@gmail.com";
+      const errorBox = document.getElementById("inquiryFormError");
+      const formLoadedAt = Date.now();
+
+      function showError(msg) {
+        if (!errorBox) return;
+        errorBox.textContent = msg;
+        errorBox.style.display = "block";
+      }
+
+      function clearError() {
+        if (!errorBox) return;
+        errorBox.textContent = "";
+        errorBox.style.display = "none";
+      }
 
       // 1. Auto pre-fill from URL parameters (e.g., ?stone=...&gt=...&type=...)
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const paramStone = urlParams.get("stone");
-        const paramGt = urlParams.get("gt");
-        const paramType = urlParams.get("type");
+      guard.prefillFromQuery();
 
-        if (paramStone) {
-          const stoneInput = document.getElementById("stonesOfInterest");
-          if (stoneInput) {
-            stoneInput.value = paramGt ? `${paramStone} (${paramGt})` : paramStone;
-          }
-          const typeSelect = document.getElementById("inquiryType");
-          if (typeSelect) {
-            typeSelect.value = "hold";
-          }
-        } else if (paramType) {
-          const typeSelect = document.getElementById("inquiryType");
-          if (typeSelect && Array.from(typeSelect.options).some(o => o.value === paramType)) {
-            typeSelect.value = paramType;
-          }
-        }
-      } catch (_) {}
-
-      // 2. Submit handler: Dispatches to sales.grantrade@gmail.com + DB sync
+      // 2. Submit handler: Genuine email verification + dispatches to grantrade@gmail.com + DB sync
       form.addEventListener("submit", async function(e) {
         e.preventDefault();
+        clearError();
+        const botField = (form.querySelector("input[name='bot-field']")?.value || "").trim();
+        if (botField) return;
+
+        if (Date.now() - formLoadedAt < 2000) {
+          showError("Submission was sent too quickly. Please wait a moment and submit again.");
+          return;
+        }
+
+        const typeSelect = document.getElementById("inquiryType");
+        const typeLabel = typeSelect ? typeSelect.selectedOptions[0]?.text : "Wholesale Stone Inquiry";
+
+        const payload = {
+          name: document.getElementById("fullName").value.trim().slice(0, 120),
+          company: (document.getElementById("companyName").value.trim() || "Individual / Homeowner").slice(0, 160),
+          email: document.getElementById("email").value.trim().slice(0, 160),
+          phone: document.getElementById("phone").value.trim().slice(0, 40),
+          role: typeSelect ? typeSelect.value : "general",
+          roleLabel: typeLabel,
+          stone: (document.getElementById("stonesOfInterest").value.trim() || "Full Catalog Inquiry").slice(0, 200),
+          message: document.getElementById("message").value.trim().slice(0, 3000),
+          timestamp: new Date().toLocaleString("en-US", { timeZone: "America/New_York" }) + " ET"
+        };
+
+        const emailCheck = guard.validateGenuineEmail(payload.email);
+        if (!emailCheck.ok) {
+          showError(emailCheck.reason);
+          document.getElementById("email")?.focus();
+          return;
+        }
+        payload.email = emailCheck.email;
+
+        if ([payload.name, payload.company, payload.email, payload.phone, payload.stone, payload.message].some(guard.hasUnsafePayload)) {
+          showError("Your submission contains blocked HTML/script syntax. Please enter plain text only.");
+          return;
+        }
+
         const submitBtn = form.querySelector("button[type='submit']");
-        const originalText = submitBtn ? submitBtn.textContent : "Send Warehouse Inquiry";
         if (submitBtn) {
           submitBtn.disabled = true;
           submitBtn.innerHTML = `
@@ -364,21 +429,6 @@
           `;
         }
 
-        const typeSelect = document.getElementById("inquiryType");
-        const typeLabel = typeSelect ? typeSelect.selectedOptions[0]?.text : "Wholesale Stone Inquiry";
-
-        const payload = {
-          name: document.getElementById("fullName").value.trim(),
-          company: document.getElementById("companyName").value.trim() || "Individual / Homeowner",
-          email: document.getElementById("email").value.trim(),
-          phone: document.getElementById("phone").value.trim(),
-          role: typeSelect ? typeSelect.value : "general",
-          roleLabel: typeLabel,
-          stone: document.getElementById("stonesOfInterest").value.trim() || "Full Catalog Inquiry",
-          message: document.getElementById("message").value.trim(),
-          timestamp: new Date().toLocaleString("en-US", { timeZone: "America/New_York" }) + " ET"
-        };
-
         // Update hidden subject for form routing
         const subjectEl = document.getElementById("formSubject");
         if (subjectEl) {
@@ -388,7 +438,7 @@
         // 1. Dispatch real email via FormSubmit AJAX service
         let emailSuccess = false;
         try {
-          const emailResponse = await fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
+          const emailResponse = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(TARGET_EMAIL)}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -397,7 +447,6 @@
             body: JSON.stringify({
               _subject: `Wholesale Stone Inquiry: ${payload.stone} — ${payload.name}`,
               _template: "table",
-              _captcha: "false",
               _replyto: payload.email,
               "Customer Name": payload.name,
               "Company / Fabricator": payload.company,
@@ -425,33 +474,21 @@
         } catch (_) {}
 
         // 3. Render professional confirmation screen with instant mailto fallback
-        const mailtoSub = encodeURIComponent(`Stone Inquiry: ${payload.stone} — ${payload.name}`);
-        const mailtoBody = encodeURIComponent(
-          `Hello Gran Trade Sales Team,\n\nI have submitted the following inquiry through your website:\n\n` +
-          `• Full Name: ${payload.name}\n` +
-          `• Company: ${payload.company}\n` +
-          `• Email: ${payload.email}\n` +
-          `• Phone: ${payload.phone}\n` +
-          `• Inquiry Type: ${payload.roleLabel}\n` +
-          `• Stone(s) of Interest: ${payload.stone}\n\n` +
-          `Project Details:\n${payload.message}\n\n` +
-          `Submitted: ${payload.timestamp}\n`
-        );
-        const directMailtoUrl = `mailto:${TARGET_EMAIL}?subject=${mailtoSub}&body=${mailtoBody}`;
+        const directMailtoUrl = guard.buildMailtoUrl(TARGET_EMAIL, payload);
 
         form.innerHTML = `
           <div style="background:var(--teal-light); border:1px solid var(--teal); border-radius:var(--radius-md); padding:2.25rem 2rem; text-align:center;">
             <svg style="width:52px; height:52px; color:var(--teal); margin:0 auto 1.25rem; display:block;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span class="eyebrow" style="color:var(--teal); margin-bottom:0.25rem;">Email Dispatched to Sales</span>
-            <h3 style="font-family:var(--font-serif); font-size:1.65rem; margin-bottom:0.5rem; color:var(--ink);">Inquiry Emailed Successfully</h3>
+            <span class="eyebrow" style="color:var(--teal); margin-bottom:0.25rem;">${emailSuccess ? "Email Dispatched to Sales" : "Inquiry Prepared"}</span>
+            <h3 style="font-family:var(--font-serif); font-size:1.65rem; margin-bottom:0.5rem; color:var(--ink);">Inquiry Received</h3>
             <p style="color:var(--ink-2); font-size:0.95rem; max-width:480px; margin:0 auto 1.5rem; line-height:1.55;">
-              Thank you, <strong>${payload.name}</strong>. Your project details regarding <em>${payload.stone}</em> have been delivered directly to our sales coordinators at <strong>${TARGET_EMAIL}</strong>. We will review sequence lots and follow up with you promptly.
+              Thank you, <strong>${guard.escapeHtml(payload.name)}</strong>. Your project details regarding <em>${guard.escapeHtml(payload.stone)}</em> have been delivered directly to our sales coordinators at <strong>${guard.escapeHtml(TARGET_EMAIL)}</strong>. Replies go to <strong>${guard.escapeHtml(payload.email)}</strong>.
             </p>
             <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap; margin-top:1.25rem;">
               <a href="collections.html" class="btn btn-primary">Browse More Slabs &rarr;</a>
-              <a href="${directMailtoUrl}" class="btn btn-secondary">Open in Email Client</a>
+              <a href="${guard.escapeHtml(directMailtoUrl)}" class="btn btn-secondary">Open in Email Client</a>
             </div>
           </div>
         `;

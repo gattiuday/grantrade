@@ -8,8 +8,15 @@
 
   const STORAGE_KEY = "grantrade_homepage_content";
 
+  function wpAsset(path) {
+    return window.GranTradeWP && typeof window.GranTradeWP.asset === "function"
+      ? window.GranTradeWP.asset(path)
+      : path;
+  }
+
   async function loadHomepageContent() {
     let data = null;
+    const isWP = Boolean(window.GranTradeWP && window.GranTradeWP.isWordPress);
 
     // 1. Check local storage for recent edits from Web File Manager
     try {
@@ -19,10 +26,12 @@
       }
     } catch (_) {}
 
-    // 2. Fallback to data/homepage.json if no local overrides
-    if (!data) {
+    // 2. Fallback to data/homepage.json in static mode (WordPress renders via Customizer/PHP)
+    if (!data && !isWP) {
       try {
-        const res = await fetch("data/homepage.json");
+        const hpUrl = wpAsset("data/homepage.json");
+        const sep = hpUrl.includes("?") ? "&" : "?";
+        const res = await fetch(`${hpUrl}${sep}_ts=${Date.now()}`, { cache: "no-store" });
         if (res.ok) {
           data = await res.json();
         }
@@ -47,7 +56,7 @@
       if (heroLead && d.hero.lead) heroLead.textContent = d.hero.lead;
 
       const heroBg = document.querySelector("img.hero-bg");
-      if (heroBg && d.hero.bgImage) heroBg.src = d.hero.bgImage;
+      if (heroBg && d.hero.bgImage) heroBg.src = wpAsset(d.hero.bgImage);
 
       const metricItems = document.querySelectorAll(".hero-metrics .metric-item");
       if (metricItems[0] && d.hero.metric1Val) {
@@ -73,7 +82,7 @@
       if (slabSub && d.featuredSlab.sub) slabSub.textContent = d.featuredSlab.sub;
 
       const slabImg = document.getElementById("heroSlabImg");
-      if (slabImg && d.featuredSlab.image) slabImg.src = d.featuredSlab.image;
+      if (slabImg && d.featuredSlab.image) slabImg.src = wpAsset(d.featuredSlab.image);
     }
 
     // Material Taxonomy Header
@@ -110,7 +119,7 @@
       if (appLead && d.applied.lead) appLead.textContent = d.applied.lead;
 
       const appImg = document.querySelector(".applied-media img");
-      if (appImg && d.applied.image) appImg.src = d.applied.image;
+      if (appImg && d.applied.image) appImg.src = wpAsset(d.applied.image);
 
       const appItems = document.querySelectorAll(".applied-features .applied-item");
       if (appItems[0] && d.applied.fabricatorsDesc) {
@@ -141,9 +150,23 @@
     loadHomepageContent();
   }
 
+  window.addEventListener("storage", function (e) {
+    if (e.key === STORAGE_KEY) {
+      loadHomepageContent();
+    }
+  });
+
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) {
+      loadHomepageContent();
+    }
+  });
+
   // Export helper for preview
   window.GranTradeHomepageLoader = {
     reload: loadHomepageContent,
+    refresh: loadHomepageContent,
     apply: applyHomepageContent
   };
 })();
+

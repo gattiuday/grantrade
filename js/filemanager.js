@@ -10,29 +10,42 @@
   // Initial Built-in Website Asset & Code Manifest
   const DEFAULT_FILES = [
     // Web Pages (Directly editable from File Manager)
-    { id: "f_index", name: "index.html", path: "/", size: 54120, type: "text/html", url: "index.html", modified: "2026-11-03" },
-    { id: "f_about", name: "about.html", path: "/", size: 13046, type: "text/html", url: "about.html", modified: "2026-11-03" },
-    { id: "f_colls", name: "collections.html", path: "/", size: 24604, type: "text/html", url: "collections.html", modified: "2026-11-03" },
-    { id: "f_show", name: "showroom.html", path: "/", size: 10809, type: "text/html", url: "showroom.html", modified: "2026-11-03" },
-    { id: "f_contact", name: "contact.html", path: "/", size: 22629, type: "text/html", url: "contact.html", modified: "2026-11-03" },
-    { id: "f_admin", name: "admin.html", path: "/", size: 26174, type: "text/html", url: "admin.html", modified: "2026-11-03" },
-    { id: "f_fm", name: "filemanager.html", path: "/", size: 19500, type: "text/html", url: "filemanager.html", modified: "2026-11-03" },
+    { id: "f_index", name: "index.html", path: "/", size: 54120, type: "text/html", url: "index.html", modified: "2026-11-10" },
+    { id: "f_about", name: "about.html", path: "/", size: 13046, type: "text/html", url: "about.html", modified: "2026-11-10" },
+    { id: "f_colls", name: "collections.html", path: "/", size: 24604, type: "text/html", url: "collections.html", modified: "2026-11-10" },
+    { id: "f_slab", name: "slab.html", path: "/", size: 32500, type: "text/html", url: "slab.html", modified: "2026-11-10" },
+    { id: "f_show", name: "showroom.html", path: "/", size: 10809, type: "text/html", url: "showroom.html", modified: "2026-11-10" },
+    { id: "f_contact", name: "contact.html", path: "/", size: 22629, type: "text/html", url: "contact.html", modified: "2026-11-10" },
+    { id: "f_admin", name: "admin.html", path: "/", size: 26174, type: "text/html", url: "admin.html", modified: "2026-11-10" },
+    { id: "f_fm", name: "filemanager.html", path: "/", size: 19500, type: "text/html", url: "filemanager.html", modified: "2026-11-10" },
 
     // Data Files
-    { id: "f_hp_json", name: "homepage.json", path: "/data", size: 4120, type: "application/json", url: "data/homepage.json", modified: "2026-11-03" },
-    { id: "f14", name: "products.json", path: "/data", size: 42662, type: "application/json", url: "data/products.json", modified: "2026-11-03" },
+    { id: "f_hp_json", name: "homepage.json", path: "/data", size: 4120, type: "application/json", url: "data/homepage.json", modified: "2026-11-10" },
+    { id: "f14", name: "products.json", path: "/data", size: 42662, type: "application/json", url: "data/products.json", modified: "2026-11-10" },
 
     // Stylesheets
-    { id: "f_css_base", name: "base.css", path: "/css", size: 7600, type: "text/css", url: "css/base.css", modified: "2026-11-03" },
-    { id: "f_css_layout", name: "layout.css", path: "/css", size: 9200, type: "text/css", url: "css/layout.css", modified: "2026-11-03" },
-    { id: "f_css_components", name: "components.css", path: "/css", size: 14500, type: "text/css", url: "css/components.css", modified: "2026-11-03" },
-    { id: "f_css_pages", name: "pages.css", path: "/css", size: 18400, type: "text/css", url: "css/pages.css", modified: "2026-11-03" },
-    { id: "f_css_fm", name: "filemanager.css", path: "/css", size: 14200, type: "text/css", url: "css/filemanager.css", modified: "2026-11-03" },
+    { id: "f_css_base", name: "base.css", path: "/css", size: 7600, type: "text/css", url: "css/base.css", modified: "2026-11-10" },
+    { id: "f_css_layout", name: "layout.css", path: "/css", size: 9200, type: "text/css", url: "css/layout.css", modified: "2026-11-10" },
+    { id: "f_css_components", name: "components.css", path: "/css", size: 14500, type: "text/css", url: "css/components.css", modified: "2026-11-10" },
+    { id: "f_css_pages", name: "pages.css", path: "/css", size: 18400, type: "text/css", url: "css/pages.css", modified: "2026-11-10" },
+    { id: "f_css_responsive", name: "responsive.css", path: "/css", size: 14200, type: "text/css", url: "css/responsive.css", modified: "2026-11-10" },
+    { id: "f_css_admin", name: "admin.css", path: "/css", size: 9800, type: "text/css", url: "css/admin.css", modified: "2026-11-10" },
+    { id: "f_css_fm", name: "filemanager.css", path: "/css", size: 14200, type: "text/css", url: "css/filemanager.css", modified: "2026-11-10" },
 
     // Core Scripts
-    { id: "f_js_hp", name: "homepage-loader.js", path: "/js", size: 3800, type: "application/javascript", url: "js/homepage-loader.js", modified: "2026-11-03" },
-    { id: "f_js_fm", name: "filemanager.js", path: "/js", size: 28800, type: "application/javascript", url: "js/filemanager.js", modified: "2026-11-03" },
-    { id: "f_js_nav", name: "nav.js", path: "/js", size: 4200, type: "application/javascript", url: "js/nav.js", modified: "2026-11-03" },
+    { id: "f_js_catalog", name: "stone-catalog-data.js", path: "/js", size: 48200, type: "application/javascript", url: "js/stone-catalog-data.js", modified: "2026-11-10" },
+    { id: "f_js_filters", name: "filters.js", path: "/js", size: 28400, type: "application/javascript", url: "js/filters.js", modified: "2026-11-10" },
+    { id: "f_js_tabs", name: "tabs.js", path: "/js", size: 2600, type: "application/javascript", url: "js/tabs.js", modified: "2026-11-10" },
+    { id: "f_js_slab", name: "slab-detail.js", path: "/js", size: 22100, type: "application/javascript", url: "js/slab-detail.js", modified: "2026-11-10" },
+    { id: "f_js_hp", name: "homepage-loader.js", path: "/js", size: 3800, type: "application/javascript", url: "js/homepage-loader.js", modified: "2026-11-10" },
+    { id: "f_js_types", name: "stone-types.js", path: "/js", size: 9400, type: "application/javascript", url: "js/stone-types.js", modified: "2026-11-10" },
+    { id: "f_js_viewer", name: "viewer.js", path: "/js", size: 5800, type: "application/javascript", url: "js/viewer.js", modified: "2026-11-10" },
+    { id: "f_js_fav", name: "favorites.js", path: "/js", size: 7100, type: "application/javascript", url: "js/favorites.js", modified: "2026-11-10" },
+    { id: "f_js_wp", name: "wp-compat.js", path: "/js", size: 3900, type: "application/javascript", url: "js/wp-compat.js", modified: "2026-11-10" },
+    { id: "f_js_admin", name: "admin.js", path: "/js", size: 24600, type: "application/javascript", url: "js/admin.js", modified: "2026-11-10" },
+    { id: "f_js_fm", name: "filemanager.js", path: "/js", size: 28800, type: "application/javascript", url: "js/filemanager.js", modified: "2026-11-10" },
+    { id: "f_js_sb", name: "supabase-client.js", path: "/js", size: 9800, type: "application/javascript", url: "js/supabase-client.js", modified: "2026-11-10" },
+    { id: "f_js_nav", name: "nav.js", path: "/js", size: 4200, type: "application/javascript", url: "js/nav.js", modified: "2026-11-10" },
 
     // Assets: Brand & Images
     { id: "f1", name: "aquamarine-slab-1.jpg", path: "/assets/images", size: 897579, type: "image/jpeg", url: "assets/images/aquamarine-slab-1.jpg", modified: "2026-11-03" },
@@ -51,59 +64,126 @@
 
     // Documentation
     { id: "f15", name: "DEPLOYMENT.md", path: "/docs", size: 6800, type: "text/markdown", url: "docs/DEPLOYMENT.md", modified: "2026-11-03" },
-    { id: "f16", name: "FILE_MANAGER.md", path: "/docs", size: 9200, type: "text/markdown", url: "docs/FILE_MANAGER.md", modified: "2026-11-03" }
+    { id: "f16", name: "FILE_MANAGER.md", path: "/docs", size: 9200, type: "text/markdown", url: "docs/FILE_MANAGER.md", modified: "2026-11-03" },
+    { id: "f17", name: "WORDPRESS.md", path: "/docs", size: 5400, type: "text/markdown", url: "docs/WORDPRESS.md", modified: "2026-11-10" }
   ];
 
   const STORAGE_KEY = "grantrade_fm_files";
   const DIRECTORIES_KEY = "grantrade_fm_dirs";
   const HOMEPAGE_STORAGE_KEY = "grantrade_homepage_content";
+  const FM_STATE_KEY = "grantrade_fm_ui_state";
+  const BASE_DIRS = ["/", "/assets/images", "/assets/images/stone-types", "/data", "/css", "/js", "/docs", "/uploads"];
 
   let files = [];
-  let customDirs = ["/", "/assets/images", "/assets/images/stone-types", "/data", "/css", "/js", "/docs", "/uploads"];
+  let customDirs = [...BASE_DIRS];
   let currentDirectory = "/";
   let searchQuery = "";
   let viewMode = "grid"; // "grid" | "list"
   let currentPreviewFile = null;
+  let isRefreshing = false;
 
   // DOM Elements Cache
   let breadcrumbsEl, fileGridEl, fileTableBodyEl, fileTableWrapEl, sidebarTreeEl;
-  let searchInput, viewGridBtn, viewListBtn, fileInput, dropOverlay;
+  let searchInput, viewGridBtn, viewListBtn, fileInput, dropOverlay, refreshBtn;
   let previewModal, previewImg, previewEditor, previewTitle, previewMeta, previewDownloadBtn, previewCopyBtn, previewSaveBtn;
   let totalFilesStatEl, totalSizeStatEl;
+  let sidebarEl, sidebarToggleBtn, sidebarScrimEl;
 
   // Homepage Editor Modal Elements
   let homepageModal;
 
-  function loadState() {
+  function loadUiState() {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        const existingIds = new Set(parsed.map((x) => x.id));
-        DEFAULT_FILES.forEach((df) => {
-          if (!existingIds.has(df.id)) {
-            parsed.push(df);
-          }
-        });
-        files = parsed;
-      } else {
-        files = [...DEFAULT_FILES];
+      const raw = sessionStorage.getItem(FM_STATE_KEY);
+      if (!raw) return;
+      const st = JSON.parse(raw);
+      if (st && typeof st.dir === "string" && customDirs.includes(st.dir)) {
+        currentDirectory = st.dir;
       }
-      saveState();
+      if (st && (st.view === "grid" || st.view === "list")) {
+        viewMode = st.view;
+      }
+      if (st && typeof st.search === "string") {
+        searchQuery = st.search;
+      }
+    } catch (_) {}
+  }
 
+  function saveUiState() {
+    try {
+      sessionStorage.setItem(
+        FM_STATE_KEY,
+        JSON.stringify({ dir: currentDirectory, view: viewMode, search: searchQuery })
+      );
+    } catch (_) {}
+  }
+
+  function loadState() {
+    const defaultById = new Map(DEFAULT_FILES.map((df) => [df.id, df]));
+    try {
       const savedDirs = localStorage.getItem(DIRECTORIES_KEY);
       if (savedDirs) {
         const parsedDirs = JSON.parse(savedDirs);
-        customDirs = Array.from(new Set([...customDirs, ...parsedDirs]));
+        customDirs = Array.from(new Set([...BASE_DIRS, ...parsedDirs]));
+      } else {
+        customDirs = [...BASE_DIRS];
       }
+
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const kept = [];
+        const seenIds = new Set();
+
+        parsed.forEach((entry) => {
+          if (!entry || !entry.id) return;
+          if (defaultById.has(entry.id)) {
+            const def = defaultById.get(entry.id);
+            kept.push(
+              entry.dirty
+                ? Object.assign({}, def, entry)
+                : Object.assign({}, def, { content: undefined, dirty: false })
+            );
+            seenIds.add(entry.id);
+          } else {
+            // Skip orphaned temporary blob URLs from expired sessions
+            if (typeof entry.url === "string" && entry.url.indexOf("blob:") === 0 && !entry.content) {
+              return;
+            }
+            kept.push(entry);
+            seenIds.add(entry.id);
+          }
+        });
+
+        DEFAULT_FILES.forEach((df) => {
+          if (!seenIds.has(df.id)) {
+            kept.push(Object.assign({}, df));
+          }
+        });
+
+        files = kept;
+      } else {
+        files = DEFAULT_FILES.map((df) => Object.assign({}, df));
+      }
+      saveState();
     } catch (_) {
-      files = [...DEFAULT_FILES];
+      files = DEFAULT_FILES.map((df) => Object.assign({}, df));
+      customDirs = [...BASE_DIRS];
     }
   }
 
   function saveState() {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
+      const serializableFiles = files.map((f) => {
+        const isBuiltin = DEFAULT_FILES.some((df) => df.id === f.id);
+        if (isBuiltin && !f.dirty) {
+          const clone = Object.assign({}, f);
+          delete clone.content;
+          return clone;
+        }
+        return f;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(serializableFiles));
       localStorage.setItem(DIRECTORIES_KEY, JSON.stringify(customDirs));
     } catch (_) {}
   }
@@ -329,6 +409,15 @@
   }
 
   // ---------------- File Ingestion (Upload) ----------------
+  function readFileAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ""));
+      reader.onerror = () => reject(reader.error || new Error("Read failed"));
+      reader.readAsDataURL(file);
+    });
+  }
+
   async function handleFilesUpload(fileList) {
     for (const file of Array.from(fileList)) {
       let publicUrl = "";
@@ -344,7 +433,15 @@
       }
 
       if (!publicUrl) {
-        publicUrl = URL.createObjectURL(file);
+        if (file.type.startsWith("image/") && file.size <= 2500000) {
+          try {
+            publicUrl = await readFileAsDataUrl(file);
+          } catch (_) {
+            publicUrl = URL.createObjectURL(file);
+          }
+        } else {
+          publicUrl = URL.createObjectURL(file);
+        }
       }
 
       let fileContent = "";
@@ -362,7 +459,8 @@
         type: file.type || "application/octet-stream",
         url: publicUrl,
         modified: new Date().toISOString().split("T")[0],
-        content: fileContent
+        content: fileContent,
+        dirty: Boolean(fileContent)
       };
 
       files.unshift(newFileObj);
@@ -392,17 +490,22 @@
       previewEditor.style.display = "block";
       if (previewSaveBtn) previewSaveBtn.style.display = "inline-flex";
 
-      // If text content is not cached, fetch live content
-      if (!f.content && f.url) {
+      // If text content is not customized, always fetch latest live content
+      if ((!f.dirty || !f.content) && f.url) {
         previewEditor.value = "/* Loading live file content... */";
-        fetch(f.url)
-          .then((r) => r.text())
+        const bust = f.url.includes("?") ? `&_ts=${Date.now()}` : `?_ts=${Date.now()}`;
+        fetch(f.url + bust, { cache: "no-store" })
+          .then((r) => {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.text();
+          })
           .then((text) => {
             f.content = text;
+            f.size = new Blob([text]).size;
             previewEditor.value = text;
           })
           .catch(() => {
-            previewEditor.value = `/* Binary or media file: ${f.name} */\n/* Size: ${formatBytes(f.size)} */`;
+            previewEditor.value = f.content || `/* Binary or media file: ${f.name} */\n/* Size: ${formatBytes(f.size)} */`;
           });
       } else {
         previewEditor.value = f.content || "";
@@ -421,6 +524,7 @@
     if (!currentPreviewFile || !previewEditor) return;
     const newContent = previewEditor.value;
     currentPreviewFile.content = newContent;
+    currentPreviewFile.dirty = true;
     currentPreviewFile.size = new Blob([newContent]).size;
     currentPreviewFile.modified = new Date().toISOString().split("T")[0];
 
@@ -552,7 +656,7 @@
 
     // Featured Slab
     setVal("hpEditSlabTitle", hpData.featuredSlab?.title || "Aquamarine Quartzite");
-    setVal("hpEditSlabSub", hpData.featuredSlab?.sub || "GT-4008 · LOT #59108 · 2 cm / 3 cm");
+    setVal("hpEditSlabSub", hpData.featuredSlab?.sub || "LOT #59108 · 3 cm");
     setVal("hpEditSlabImage", hpData.featuredSlab?.image || "assets/images/aquamarine-slab-1.jpg");
 
     // Why Gran Trade (4 Pillars)
@@ -719,10 +823,84 @@
     URL.revokeObjectURL(url);
   }
 
-  // ---------------- Initialization ----------------
+  function scrollFmTop() {
+    try {
+      const htmlEl = document.documentElement;
+      const prevBehavior = htmlEl.style.scrollBehavior;
+      htmlEl.style.scrollBehavior = "auto";
+      window.scrollTo(0, 0);
+      htmlEl.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
+      const mainPane = document.getElementById("fmMainPane");
+      if (mainPane) mainPane.scrollTop = 0;
+      htmlEl.style.scrollBehavior = prevBehavior;
+    } catch (_) {}
+  }
+
+  if (typeof global.history !== "undefined" && "scrollRestoration" in global.history) {
+    try {
+      global.history.scrollRestoration = "manual";
+    } catch (_) {}
+  }
+
+  // ---------------- Initialization & Refresh ----------------
+  async function refreshFiles() {
+    if (isRefreshing) return;
+    isRefreshing = true;
+    scrollFmTop();
+
+    const btnTextEl = refreshBtn ? refreshBtn.querySelector("span") : null;
+    if (refreshBtn) refreshBtn.disabled = true;
+    if (btnTextEl) btnTextEl.textContent = "Refreshing...";
+    else if (refreshBtn) refreshBtn.textContent = "Refreshing...";
+
+    try {
+      loadState();
+      if (!customDirs.includes(currentDirectory)) {
+        currentDirectory = "/";
+      }
+
+      if (window.GranTradeDB && typeof window.GranTradeDB.listMedia === "function" && window.GranTradeDB.isConnected()) {
+        try {
+          const remoteFiles = await window.GranTradeDB.listMedia();
+          if (Array.isArray(remoteFiles)) {
+            const byName = new Set(files.map((x) => `${x.path}::${x.name}`));
+            remoteFiles.forEach((rf) => {
+              if (!rf || !rf.name) return;
+              const key = `/uploads::${rf.name}`;
+              if (!byName.has(key)) {
+                files.unshift({
+                  id: "sb_" + (rf.id || rf.name),
+                  name: rf.name,
+                  path: "/uploads",
+                  size: (rf.metadata && rf.metadata.size) || 0,
+                  type: (rf.metadata && rf.metadata.mimetype) || "application/octet-stream",
+                  url: rf.publicUrl || "",
+                  modified: (rf.updated_at || new Date().toISOString()).split("T")[0],
+                });
+                byName.add(key);
+              }
+            });
+          }
+        } catch (err) {
+          console.warn("Media refresh cloud sync skipped:", err);
+        }
+      }
+
+      saveState();
+      renderFiles();
+    } finally {
+      isRefreshing = false;
+      if (refreshBtn) refreshBtn.disabled = false;
+      if (btnTextEl) btnTextEl.textContent = "Refresh";
+      else if (refreshBtn) refreshBtn.textContent = "Refresh";
+    }
+  }
+
   function init(options) {
     options = options || {};
     loadState();
+    loadUiState();
 
     breadcrumbsEl = document.getElementById(options.breadcrumbsId || "fmBreadcrumbs");
     fileGridEl = document.getElementById(options.fileGridId || "fmFileGrid");
@@ -733,6 +911,7 @@
     searchInput = document.getElementById(options.searchInputId || "fmSearchInput");
     viewGridBtn = document.getElementById(options.viewGridBtnId || "fmViewGridBtn");
     viewListBtn = document.getElementById(options.viewListBtnId || "fmViewListBtn");
+    refreshBtn = document.getElementById(options.refreshBtnId || "fmRefreshBtn");
     fileInput = document.getElementById(options.fileInputId || "fmFileInput");
     dropOverlay = document.getElementById(options.dropOverlayId || "fmDropOverlay");
 
@@ -748,10 +927,41 @@
     totalFilesStatEl = document.getElementById("fmTotalFilesStat");
     totalSizeStatEl = document.getElementById("fmTotalSizeStat");
 
+    // Apply restored search and view mode UI
+    if (searchInput && searchQuery) searchInput.value = searchQuery;
+    if (viewGridBtn && viewListBtn) {
+      viewGridBtn.classList.toggle("active", viewMode === "grid");
+      viewListBtn.classList.toggle("active", viewMode === "list");
+    }
+
+    // Mobile/tablet directory drawer toggle
+    sidebarEl = document.getElementById(options.sidebarId || "fmSidebar") || (sidebarTreeEl ? sidebarTreeEl.closest(".fm-sidebar") : null);
+    sidebarToggleBtn = document.getElementById(options.sidebarToggleBtnId || "fmSidebarToggleBtn");
+    sidebarScrimEl = document.getElementById(options.sidebarScrimId || "fmSidebarScrim");
+
+    function setSidebarOpen(open) {
+      if (!sidebarEl) return;
+      sidebarEl.classList.toggle("open", open);
+      if (sidebarScrimEl) sidebarScrimEl.classList.toggle("open", open);
+      if (sidebarToggleBtn) sidebarToggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    if (sidebarToggleBtn && sidebarEl && !sidebarToggleBtn.dataset.bound) {
+      sidebarToggleBtn.dataset.bound = "true";
+      sidebarToggleBtn.addEventListener("click", () => {
+        setSidebarOpen(!sidebarEl.classList.contains("open"));
+      });
+    }
+    if (sidebarScrimEl && !sidebarScrimEl.dataset.bound) {
+      sidebarScrimEl.dataset.bound = "true";
+      sidebarScrimEl.addEventListener("click", () => setSidebarOpen(false));
+    }
+
     // Search input listener
     if (searchInput) {
       searchInput.addEventListener("input", (e) => {
         searchQuery = e.target.value.trim();
+        saveUiState();
         renderFiles();
       });
     }
@@ -762,6 +972,7 @@
         viewMode = "grid";
         viewGridBtn.classList.add("active");
         if (viewListBtn) viewListBtn.classList.remove("active");
+        saveUiState();
         renderFiles();
       });
     }
@@ -770,6 +981,7 @@
         viewMode = "list";
         viewListBtn.classList.add("active");
         if (viewGridBtn) viewGridBtn.classList.remove("active");
+        saveUiState();
         renderFiles();
       });
     }
@@ -826,19 +1038,46 @@
       if (e.key === "Escape") {
         if (previewModal && previewModal.classList.contains("active")) closePreview();
         if (homepageModal && homepageModal.classList.contains("active")) closeHomepageEditor();
+        if (sidebarEl && sidebarEl.classList.contains("open")) {
+          sidebarEl.classList.remove("open");
+          if (sidebarScrimEl) sidebarScrimEl.classList.remove("open");
+          if (sidebarToggleBtn) sidebarToggleBtn.setAttribute("aria-expanded", "false");
+        }
       }
     });
 
+    window.addEventListener("storage", (e) => {
+      if (e.key === STORAGE_KEY || e.key === DIRECTORIES_KEY) {
+        loadState();
+        renderFiles();
+      }
+    });
+
+    window.addEventListener("beforeunload", scrollFmTop);
+    window.addEventListener("pageshow", () => {
+      scrollFmTop();
+      requestAnimationFrame(scrollFmTop);
+    });
+
     renderFiles();
+    scrollFmTop();
   }
 
   // Public API
   global.GranTradeFileManager = {
     init: init,
     render: renderFiles,
+    refresh: refreshFiles,
     setDirectory: function (dir) {
       currentDirectory = dir;
+      saveUiState();
+      if (sidebarEl && sidebarEl.classList.contains("open")) {
+        sidebarEl.classList.remove("open");
+        if (sidebarScrimEl) sidebarScrimEl.classList.remove("open");
+        if (sidebarToggleBtn) sidebarToggleBtn.setAttribute("aria-expanded", "false");
+      }
       renderFiles();
+      scrollFmTop();
     },
     openPreview: openPreview,
     closePreview: closePreview,

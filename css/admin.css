@@ -395,6 +395,46 @@
   }
 }
 
+.admin-mobile-bar {
+  display: none;
+}
+
+.admin-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-menu-toggle svg {
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+}
+
+.admin-scrim {
+  position: fixed;
+  inset: 0;
+  background: var(--modal-scrim);
+  z-index: 250;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.admin-scrim.open {
+  opacity: 1;
+  visibility: visible;
+}
+
 .admin-modal-footer {
   padding: 1.25rem 1.75rem;
   border-top: 1px solid var(--line);
@@ -403,5 +443,83 @@
   justify-content: flex-end;
   gap: 0.75rem;
   background: var(--bg-2);
+}
+
+@media (max-width: 960px) {
+  .admin-shell {
+    flex-direction: column;
+  }
+
+  .admin-mobile-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    gap: 0.75rem;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    height: 100dvh;
+    width: min(280px, 85vw);
+    z-index: 300;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+  }
+
+  .admin-sidebar.open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .admin-pane {
+    padding: 1.25rem;
+  }
+
+  .nav-item {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-pane {
+    padding: 1rem;
+  }
+
+  .admin-input,
+  .admin-select,
+  .admin-textarea {
+    font-size: 16px;
+    min-height: 44px;
+  }
+
+  #stoneSearchInput,
+  #stoneCatFilter {
+    max-width: 100% !important;
+    width: 100%;
+  }
+
+  .admin-modal {
+    padding: 0.75rem;
+  }
+
+  .admin-modal-body {
+    padding: 1.25rem;
+  }
+
+  .admin-modal-footer {
+    padding: 1rem 1.25rem;
+    flex-wrap: wrap;
+  }
 }
 

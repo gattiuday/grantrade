@@ -8,26 +8,32 @@
 
   const VIEW_LABELS = ["Slab view", "Close-up detail", "Installed view"];
 
+  function wpAsset(path) {
+    return window.GranTradeWP && typeof window.GranTradeWP.asset === "function"
+      ? window.GranTradeWP.asset(path)
+      : path;
+  }
+
   // Default featured stone references by category
   const FEATURED_STONES = {
     all: "quartzite",
     quartz: {
       name: "Calacatta Alps",
-      cat: "Gran Trade Quartz",
+      cat: "Quartz",
       desc: "Engineered quartz with crystalline alpine grey veining over clean porcelain white.",
       img: "assets/images/stone-types/quartz.jpg",
       room: "assets/images/stone-types/quartz.jpg",
     },
     granite: {
       name: "Absolute Black Polished",
-      cat: "Natural Granite",
+      cat: "Granite",
       desc: "Deep, dense igneous granite with mirror-like polish and unmatched durability.",
       img: "assets/images/stone-types/granite.jpg",
       room: "assets/images/stone-types/granite.jpg",
     },
     marble: {
       name: "Bianco Carrara",
-      cat: "Fine Marble",
+      cat: "Marble",
       desc: "Classic Italian metamorphic marble with delicate feathery veining.",
       img: "assets/images/stone-types/marble.jpg",
       room: "assets/images/stone-types/marble.jpg",
@@ -41,28 +47,28 @@
     },
     quartzite: {
       name: "Aquamarine Quartzite",
-      cat: "Exotic Quartzite",
+      cat: "Quartzite",
       desc: "Signature exotic Brazilian slab surging with oceanic teal-green crystalline currents.",
       img: "assets/images/aquamarine-slab-1.jpg",
       room: "assets/images/aquamarine-slab-2.jpg",
     },
     semi: {
       name: "Semi Precious Stone – Blue Agate",
-      cat: "Semi Precious Stone",
+      cat: "Semi Precious",
       desc: "Rare hand-composed mosaic of genuine blue agate geodes bound in optical resin.",
       img: "assets/images/stone-types/semi-precious.jpg",
       room: "assets/images/stone-types/semi-precious.jpg",
     },
     soapstone: {
       name: "Graphite Soapstone",
-      cat: "Natural Soapstone",
+      cat: "Soapstone",
       desc: "Silky matte charcoal soapstone impervious to kitchen acids, oils, and high heat.",
       img: "assets/images/stone-types/soapstone.jpg",
       room: "assets/images/stone-types/soapstone.jpg",
     },
     tile: {
       name: "Travertino Classico",
-      cat: "Architectural Tile",
+      cat: "Tiles",
       desc: "Classic Roman travertine tiles celebrating warm natural cavities and earth tones.",
       img: "assets/images/stone-types/tile.jpg",
       room: "assets/images/stone-types/tile.jpg",
@@ -90,9 +96,9 @@
 
       // Swap image source based on view mode
       if (currentView === 2 && currentStone.room) {
-        imgEl.src = currentStone.room;
+        imgEl.src = wpAsset(currentStone.room);
       } else {
-        imgEl.src = currentStone.img;
+        imgEl.src = wpAsset(currentStone.img);
       }
 
       // Handle close-up zoom transform & cursor state

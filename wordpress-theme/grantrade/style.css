@@ -1,0 +1,131 @@
+/*
+Theme Name: Gran Trade Inc.
+Theme URI: https://github.com/gattiuday/grantrade
+Author: Gran Trade Inc.
+Author URI: https://grantradeinc.com
+Description: Custom responsive wholesale stone & slab showroom WordPress theme for Gran Trade Inc. (Carlstadt, NJ). Includes 50+ searchable stone catalog, interactive slab zoom/pan inspector, favorites drawer, live ET yard hours status, Stone Slabs CPT, and native WP inquiry capture.
+Version: 1.1.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: grantrade
+Tags: custom-logo, custom-menu, featured-images, full-width-template, block-styles, wide-blocks
+*/
+
+/* WordPress Core & Block Editor Integration Helpers */
+.wp-content {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.wp-content > * + * {
+  margin-top: 1.15rem;
+}
+
+.wp-content h2,
+.wp-content h3,
+.wp-content h4 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.wp-content ul,
+.wp-content ol {
+  padding-left: 1.5rem;
+}
+
+.wp-content img {
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+.alignwide {
+  max-width: min(1280px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alignfull {
+  width: 100%;
+  max-width: 100%;
+}
+
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+  background-color: var(--surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  clip: auto !important;
+  clip-path: none;
+  color: var(--ink);
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000;
+}
+
+/* WordPress 600px mobile admin-bar scroll safety */
+@media screen and (max-width: 600px) {
+  body.admin-bar .site-header {
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* Elementor & WPForms Theme Harmonization */
+.gt-elementor-content {
+  width: 100%;
+}
+
+.wpforms-container .wpforms-field-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+
+.wpforms-container input[type="text"],
+.wpforms-container input[type="email"],
+.wpforms-container input[type="tel"],
+.wpforms-container select,
+.wpforms-container textarea {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  padding: 0.7rem 0.9rem;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.wpforms-container .wpforms-submit {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 0.85rem 1.75rem !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+}
+
+

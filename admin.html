@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
+  <script>if ("scrollRestoration" in history) history.scrollRestoration = "manual";</script>
   <title>Admin Portal & File Manager — Gran Trade Inc.</title>
   <meta name="robots" content="noindex, nofollow" />
 
@@ -13,10 +14,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/base.css?v=20261020b" />
-  <link rel="stylesheet" href="css/components.css?v=20261020b" />
-  <link rel="stylesheet" href="css/admin.css?v=20261020b" />
-  <link rel="stylesheet" href="css/filemanager.css?v=20261020b" />
+  <link rel="stylesheet" href="css/base.css?v=20261110k" />
+  <link rel="stylesheet" href="css/components.css?v=20261110k" />
+  <link rel="stylesheet" href="css/admin.css?v=20261110k" />
+  <link rel="stylesheet" href="css/filemanager.css?v=20261110k" />
 
   <!-- Supabase JS Library (Cloud Database & Storage) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -51,9 +52,10 @@
 
   <!-- ================= MAIN ADMIN APP SHELL ================= -->
   <div class="admin-shell">
+    <div id="adminScrim" class="admin-scrim" aria-hidden="true"></div>
 
     <!-- Sidebar Navigation -->
-    <aside class="admin-sidebar">
+    <aside id="adminSidebar" class="admin-sidebar">
       <div class="sidebar-header">
         <a href="admin.html" class="sidebar-brand">
           <svg style="width:20px; height:20px; color:var(--accent);" fill="currentColor" viewBox="0 0 24 24">
@@ -107,15 +109,30 @@
 
     <!-- Main Content Area -->
     <main class="admin-main">
+      <!-- Mobile / Tablet Admin Bar -->
+      <div class="admin-mobile-bar">
+        <a href="admin.html" class="sidebar-brand">
+          <svg style="width:20px; height:20px; color:var(--accent);" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span>Gran Trade OS</span>
+        </a>
+        <button id="adminMenuBtn" class="admin-menu-toggle" type="button" aria-label="Toggle admin menu" aria-expanded="false">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+      </div>
 
       <!-- ================= PANE 1: INVENTORY CATALOG (ONLINE EDITOR) ================= -->
       <section id="paneInventory" class="admin-pane active">
         <div class="pane-header-bar">
           <div>
             <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.25rem;">Wholesale Inventory Catalog</h2>
-            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Manage GT numbers, lot codes, calibrated dimensions, and stone specifications.</p>
+            <p style="color:var(--muted); font-size:0.85rem; margin:0;">Manage GT numbers, lot codes, 3 cm dimensions, custom color tags, and stone specifications.</p>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button id="btnRefreshInventory" class="btn btn-sm btn-secondary" type="button" title="Refresh inventory table and saved changes">Refresh</button>
             <button id="btnExportJson" class="btn btn-sm btn-secondary" type="button">Download JSON</button>
             <button id="btnSyncCloud" class="btn btn-sm btn-secondary" type="button">Sync to Cloud DB</button>
             <button id="btnNewStone" class="btn btn-sm btn-primary" type="button">+ Add New Slab</button>
@@ -125,17 +142,17 @@
         <!-- Search & Category Filters -->
         <div class="pane-header-bar" style="background:var(--surface); padding:1rem; border-radius:var(--radius-md); border:1px solid var(--line);">
           <div class="search-filter-row" style="flex:1;">
-            <input type="search" id="stoneSearchInput" class="admin-input" placeholder="Search slabs by stone name, GT#, lot#, or origin..." style="max-width:360px;" />
+            <input type="search" id="stoneSearchInput" class="admin-input" placeholder="Search slabs by stone name, GT#, lot#, color tag, or origin..." style="max-width:380px;" />
             <select id="stoneCatFilter" class="admin-select" style="max-width:200px;">
               <option value="all">All Stone Families</option>
-              <option value="quartzite">Exotic Quartzite</option>
-              <option value="quartz">Gran Trade Quartz</option>
-              <option value="granite">Natural Granite</option>
-              <option value="marble">Fine Marble</option>
+              <option value="quartzite">Quartzite</option>
+              <option value="quartz">Quartz</option>
+              <option value="granite">Granite</option>
+              <option value="marble">Marble</option>
               <option value="monuments">Monuments</option>
-              <option value="semi">Semi Precious</option>
               <option value="soapstone">Soapstone</option>
-              <option value="tile">Tile</option>
+              <option value="semi">Semi Precious</option>
+              <option value="tile">Tiles</option>
             </select>
           </div>
         </div>
@@ -149,6 +166,7 @@
                 <th>GT Number</th>
                 <th>Lot Number</th>
                 <th>Thickness</th>
+                <th>Color Tags</th>
                 <th>Dimensions</th>
                 <th style="text-align:right;">Actions</th>
               </tr>
@@ -179,6 +197,7 @@
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
               <span>Fullscreen App &rarr;</span>
             </a>
+            <button id="btnRefreshMedia" type="button" class="btn btn-sm btn-secondary" title="Refresh file manager & directories" onclick="window.GranTradeAdmin && window.GranTradeAdmin.refreshMedia ? window.GranTradeAdmin.refreshMedia() : (window.GranTradeFileManager && window.GranTradeFileManager.refresh && window.GranTradeFileManager.refresh())">Refresh</button>
             <button type="button" class="btn btn-sm btn-secondary" onclick="window.GranTradeFileManager && window.GranTradeFileManager.createFolder()">+ New Folder</button>
             <button type="button" class="btn btn-sm btn-primary" onclick="window.GranTradeFileManager && window.GranTradeFileManager.triggerUpload()">+ Upload Files</button>
           </div>
@@ -186,7 +205,13 @@
 
         <!-- Embedded Explorer Toolbar -->
         <div class="fm-toolbar" style="border-radius:var(--radius-md) var(--radius-md) 0 0; border:1px solid var(--line); border-bottom:none;">
-          <div id="fmBreadcrumbs" class="fm-breadcrumbs"></div>
+          <div style="display:flex; align-items:center; gap:0.5rem; min-width:0; flex:1 1 auto;">
+            <button type="button" id="fmSidebarToggleBtn" class="fm-dir-toggle" aria-label="Toggle folders menu" aria-expanded="false">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+              <span>Folders</span>
+            </button>
+            <div id="fmBreadcrumbs" class="fm-breadcrumbs"></div>
+          </div>
           <div class="fm-toolbar-controls">
             <div class="fm-search-box">
               <svg class="fm-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
@@ -206,7 +231,8 @@
 
         <!-- Embedded Workspace -->
         <div class="fm-workspace" style="border:1px solid var(--line); border-radius:0 0 var(--radius-md) var(--radius-md); min-height:480px; max-height:560px; background:var(--surface);">
-          <aside class="fm-sidebar" style="height:auto;">
+          <div id="fmSidebarScrim" class="fm-sidebar-scrim" aria-hidden="true"></div>
+          <aside id="fmSidebar" class="fm-sidebar" style="height:auto;">
             <div class="fm-sidebar-section">
               <div class="fm-sidebar-title">Directories</div>
               <ul id="fmSidebarTree" class="fm-tree-list"></ul>
@@ -256,6 +282,9 @@
           <div>
             <h2 style="font-family:var(--font-serif); font-size:1.6rem; margin-bottom:0.25rem;">Wholesale Inquiries & Holds</h2>
             <p style="color:var(--muted); font-size:0.85rem; margin:0;">Incoming leads, fabricator bundle holds, and yard walkthrough requests.</p>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button id="btnRefreshLeads" class="btn btn-sm btn-secondary" type="button" title="Refresh inquiries and holds">Refresh</button>
           </div>
         </div>
 
@@ -341,14 +370,14 @@
             <div>
               <label for="fieldCategory" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Stone Family *</label>
               <select id="fieldCategory" class="admin-select">
-                <option value="quartzite">Exotic Quartzite</option>
-                <option value="quartz">Gran Trade Quartz</option>
-                <option value="granite">Natural Granite</option>
-                <option value="marble">Fine Marble</option>
+                <option value="quartzite">Quartzite</option>
+                <option value="quartz">Quartz</option>
+                <option value="granite">Granite</option>
+                <option value="marble">Marble</option>
                 <option value="monuments">Monuments</option>
-                <option value="semi">Semi Precious</option>
                 <option value="soapstone">Soapstone</option>
-                <option value="tile">Tile</option>
+                <option value="semi">Semi Precious</option>
+                <option value="tile">Tiles</option>
               </select>
             </div>
           </div>
@@ -381,11 +410,30 @@
           <div class="form-grid-2">
             <div>
               <label for="fieldThickness" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Thickness</label>
-              <input type="text" id="fieldThickness" class="admin-input" placeholder="e.g. 2 cm · 3 cm Calibrated" />
+              <input type="text" id="fieldThickness" class="admin-input" placeholder="e.g. 3 cm" />
             </div>
             <div>
               <label for="fieldSize" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Slab Dimensions</label>
               <input type="text" id="fieldSize" class="admin-input" placeholder="e.g. 128&quot; × 76&quot; · 67.5 sq. ft." />
+            </div>
+          </div>
+
+          <div>
+            <label for="fieldColors" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.3rem;">Custom Color Tags (comma-separated for search &amp; filter)</label>
+            <input type="text" id="fieldColors" class="admin-input" placeholder="e.g. blue, emerald, oceanic teal, gold" />
+            <div id="adminColorPresets" style="display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:0.45rem;">
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="white">White</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="grey">Grey</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="black">Black</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="blue">Blue</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="green">Green</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="gold">Gold</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="cream">Cream</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="brown">Brown</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="red">Red</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="emerald">Emerald</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="teal">Teal</button>
+              <button type="button" class="btn btn-sm btn-secondary" data-color-preset="taupe">Taupe</button>
             </div>
           </div>
 
@@ -643,10 +691,10 @@
   </div>
 
   <!-- Scripts -->
-  <script src="js/stone-catalog-data.js"></script>
-  <script src="js/supabase-client.js"></script>
-  <script src="js/filemanager.js"></script>
-  <script src="js/admin.js"></script>
+  <script src="js/stone-catalog-data.js?v=20261110k"></script>
+  <script src="js/supabase-client.js?v=20261110k"></script>
+  <script src="js/filemanager.js?v=20261110k"></script>
+  <script src="js/admin.js?v=20261110k"></script>
 </body>
 </html>
 

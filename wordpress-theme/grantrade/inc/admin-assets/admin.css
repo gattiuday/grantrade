@@ -1,0 +1,339 @@
+/**
+ * Gran Trade WordPress Admin Portal Styles
+ */
+.gt-admin-wrap {
+  max-width: 1320px;
+  margin-top: 16px;
+}
+
+.gt-admin-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-left: 4px solid #8c6d46;
+  border-radius: 6px;
+  padding: 18px 22px;
+  margin-bottom: 18px;
+}
+
+.gt-admin-hero h1 {
+  margin: 0 0 4px;
+  font-size: 21px;
+  line-height: 1.3;
+  padding: 0;
+}
+
+.gt-admin-hero p {
+  margin: 0;
+  color: #50575e;
+}
+
+.gt-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gt-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.gt-kpi-card {
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+
+.gt-kpi-card .gt-kpi-val {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1d2327;
+  line-height: 1.15;
+}
+
+.gt-kpi-card .gt-kpi-lbl {
+  margin-top: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #646970;
+}
+
+.gt-kpi-card a {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.gt-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.gt-card {
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+}
+
+.gt-card h2,
+.gt-card h3 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.gt-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.gt-quick-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid #dcdcde;
+  border-radius: 5px;
+  background: #f9f9fa;
+  text-decoration: none;
+  color: #1d2327;
+  font-weight: 600;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.gt-quick-link:hover {
+  border-color: #8c6d46;
+  background: #fffdf9;
+  color: #1d2327;
+}
+
+.gt-quick-link .dashicons {
+  color: #8c6d46;
+}
+
+/* Media Picker Controls inside Metaboxes */
+.gt-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.gt-meta-full {
+  grid-column: 1 / -1;
+}
+
+.gt-meta-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #1d2327;
+}
+
+.gt-meta-field input[type="text"],
+.gt-meta-field input[type="url"],
+.gt-meta-field select,
+.gt-meta-field textarea {
+  width: 100%;
+  max-width: 100%;
+}
+
+.gt-meta-hint {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #646970;
+}
+
+.gt-media-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gt-media-row input {
+  flex: 1 1 220px;
+}
+
+.gt-media-preview {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gt-media-preview img {
+  width: 78px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #dcdcde;
+  background: #f6f7f7;
+}
+
+.gt-media-preview.is-empty img {
+  display: none;
+}
+
+/* Preset Color Chips */
+.gt-preset-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.gt-preset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: 1px solid #c3c4c7;
+  border-radius: 999px;
+  background: #f6f7f7;
+  color: #2c3338;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.gt-preset-chip:hover {
+  border-color: #8c6d46;
+}
+
+.gt-preset-chip.is-active {
+  background: #8c6d46;
+  border-color: #8c6d46;
+  color: #fff;
+}
+
+.gt-color-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Table Badges & Thumbnails */
+.gt-thumb-img {
+  width: 52px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #dcdcde;
+  display: block;
+}
+
+.gt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+  border: 1px solid #dcdcde;
+  background: #f6f7f7;
+  color: #2c3338;
+}
+
+.gt-badge-ok {
+  background: #edfaef;
+  border-color: #68de7c;
+  color: #005c12;
+}
+
+.gt-badge-warn {
+  background: #fcf0f1;
+  border-color: #f86368;
+  color: #8a2424;
+}
+
+.gt-badge-role {
+  background: #f5efe6;
+  border-color: #d6c3a5;
+  color: #5c4321;
+}
+
+.gt-color-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* File Manager & Code Editor */
+.gt-fm-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.gt-fm-breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.gt-fm-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(380px, 1.35fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.gt-fm-list-table td,
+.gt-fm-list-table th {
+  vertical-align: middle;
+}
+
+.gt-fm-code-wrap .CodeMirror {
+  height: 520px;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.gt-snippet-wrap .CodeMirror {
+  height: 230px;
+  border: 1px solid #c3c4c7;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.gt-fm-img-preview {
+  max-width: 100%;
+  max-height: 360px;
+  border-radius: 4px;
+  border: 1px solid #dcdcde;
+  display: block;
+  margin-bottom: 12px;
+  background: #f6f7f7;
+}
+
+@media (max-width: 960px) {
+  .gt-meta-grid,
+  .gt-fm-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

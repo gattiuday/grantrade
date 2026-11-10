@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Open Source Web File Manager — Gran Trade Inc.</title>
+  <script>if ("scrollRestoration" in history) history.scrollRestoration = "manual";</script>
   <meta name="robots" content="noindex, nofollow" />
 
   <!-- Fonts & Design Tokens -->
@@ -11,11 +12,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/variables.css" />
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/admin.css" />
-  <link rel="stylesheet" href="css/filemanager.css" />
+  <link rel="stylesheet" href="css/base.css?v=20261110k" />
+  <link rel="stylesheet" href="css/components.css?v=20261110k" />
+  <link rel="stylesheet" href="css/admin.css?v=20261110k" />
+  <link rel="stylesheet" href="css/filemanager.css?v=20261110k" />
 </head>
 <body class="admin-body">
 
@@ -68,8 +68,14 @@
 
     <!-- Explorer Toolbar & Breadcrumbs -->
     <div class="fm-toolbar">
-      <div id="fmBreadcrumbs" class="fm-breadcrumbs">
-        <!-- Rendered via JS -->
+      <div style="display:flex; align-items:center; gap:0.5rem; min-width:0; flex:1 1 auto;">
+        <button type="button" id="fmSidebarToggleBtn" class="fm-dir-toggle" aria-label="Toggle folders menu" aria-expanded="false">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+          <span>Folders</span>
+        </button>
+        <div id="fmBreadcrumbs" class="fm-breadcrumbs">
+          <!-- Rendered via JS -->
+        </div>
       </div>
 
       <div class="fm-toolbar-controls">
@@ -86,6 +92,11 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
           </button>
         </div>
+
+        <button type="button" id="fmRefreshBtn" class="btn btn-sm btn-secondary" title="Refresh files and folders" onclick="window.GranTradeFileManager && window.GranTradeFileManager.refresh()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" /></svg>
+          <span>Refresh</span>
+        </button>
 
         <button type="button" class="btn btn-sm" style="background:var(--accent); color:#fff; display:inline-flex; align-items:center; gap:0.35rem;" onclick="window.GranTradeFileManager.openHomepageEditor()">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
@@ -108,9 +119,10 @@
 
     <!-- Workspace: Split Layout -->
     <div class="fm-workspace">
+      <div id="fmSidebarScrim" class="fm-sidebar-scrim" aria-hidden="true"></div>
 
       <!-- Left Sidebar: Directories -->
-      <aside class="fm-sidebar">
+      <aside id="fmSidebar" class="fm-sidebar">
         <div class="fm-sidebar-section">
           <div class="fm-sidebar-title">Directories</div>
           <ul id="fmSidebarTree" class="fm-tree-list">
@@ -435,8 +447,8 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-client.js"></script>
-  <script src="js/filemanager.js"></script>
+  <script src="js/supabase-client.js?v=20261110k"></script>
+  <script src="js/filemanager.js?v=20261110k"></script>
   <script>
     (function () {
       "use strict";
