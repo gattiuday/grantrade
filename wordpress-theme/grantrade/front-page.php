@@ -351,7 +351,7 @@ get_header();
           <div class="why-card">
             <div class="why-num">02</div>
             <h3>Fully customizable choice</h3>
-            <p>Pick from 60+ curated natural and engineered stone options — a range tailored to diverse architectural styles, high-traffic commercial spaces, and custom homes.</p>
+            <p>Pick from curated natural and engineered stone options — a range tailored to diverse architectural styles, high-traffic commercial spaces, and custom homes.</p>
           </div>
           <div class="why-card">
             <div class="why-num">03</div>

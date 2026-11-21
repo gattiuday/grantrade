@@ -24,19 +24,13 @@ On theme activation (`after_switch_theme`), the theme automatically:
 
 ## 2. Managing Content & Inventory in WordPress
 
-### Customizer Settings (**Appearance -> Customize -> Gran Trade — Warehouse & Hero**)
-Update without touching code:
-- Hero tagline badge, main headline, and lead paragraph
-- Warehouse street address, city/state/ZIP, phone number, sales email, and hours strip
-- **Stone Catalog Source**:
-  - **Built-in 50 Stones + WordPress Stone Slabs** (default): keeps all 50 built-in slabs live immediately and merges any slabs added in WordPress Admin.
-  - **WordPress Stone Slabs CPT Only**: displays only slabs published under **Stone Slabs** in WordPress Admin.
-
-### Adding or Editing Slabs (**Stone Slabs -> Add New**)
+### Managing Slabs in WordPress (**Stone Slabs -> Add New**)
+- Each slab is managed natively in WordPress Admin.
+- The public catalog dynamically displays only published stone slabs.
 - Title: Stone name (e.g., *Taj Mahal Quartzite*)
 - Featured Image: Picture 1 (Full Slab A-Frame view)
 - Description / Excerpt: Architectural & geological overview
-- **Stone Families**: Select category (`Exotic Quartzite`, `Fine Marble`, etc.)
+- **Stone Families**: Select category (`Quartzite`, `Marble`, `Granite`, etc.)
 - **Gran Trade Slab Specifications** meta box: GT Number, Lot Number, Calibrated Thickness, Net Slab Dimensions, Surface Finish, Quarry Origin, Material Type, Filter Colors, Applications, Close-Up Picture 2 URL, and In-Stock flag.
 
 ### Contact Form & Yard Inquiries (**Yard Inquiries**)

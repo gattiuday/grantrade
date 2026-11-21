@@ -47,7 +47,6 @@ function grantrade_enqueue_assets()
 	wp_enqueue_script('grantrade-catalog-data', $theme_uri . '/js/stone-catalog-data.js', array(), $ver, true);
 	wp_enqueue_script('grantrade-wp-compat', $theme_uri . '/js/wp-compat.js', array('grantrade-catalog-data'), $ver, true);
 
-	$catalog_mode = grantrade_get_option('gt_catalog_mode', 'wp_only');
 	wp_localize_script(
 		'grantrade-wp-compat',
 		'GRAN_TRADE_ENV',
@@ -59,7 +58,7 @@ function grantrade_enqueue_assets()
 			'nonce' => wp_create_nonce('grantrade_inquiry_nonce'),
 			'salesEmail' => grantrade_get_option('gt_sales_email', 'sales.grantrade@gmail.com'),
 			'inquiryEmail' => grantrade_get_option('gt_inquiry_email', 'grantrade@gmail.com'),
-			'replaceBuiltinCatalog' => ('wp_only' === $catalog_mode),
+			'replaceBuiltinCatalog' => true,
 			'wpStones' => grantrade_get_wp_stones(),
 			'customColors' => get_option('gt_custom_color_swatches', array()),
 			'pages' => array(

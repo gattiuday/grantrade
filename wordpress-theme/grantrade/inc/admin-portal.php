@@ -394,29 +394,19 @@ function grantrade_render_admin_overview_page() {
 
 		<div class="gt-card-grid">
 			<div class="gt-card">
-				<h2><?php esc_html_e( 'Built-In 50-Stone Catalog Importer', 'grantrade' ); ?></h2>
+				<h2><?php esc_html_e( 'Stone Slabs Inventory', 'grantrade' ); ?></h2>
 				<p>
-					<?php esc_html_e( 'Import the built-in 50 stone slabs (Quartz, Quartzite, Granite, Marble, Monuments, Soapstone, Semi Precious, Tiles) as real editable WordPress Stone Slabs with GT#, Lot#, Dimensions, Color Tags, and attached Pictures. Existing slugs are skipped safely.', 'grantrade' ); ?>
+					<?php esc_html_e( 'Manage your live inventory directly using WordPress Stone Slabs. Each slab includes GT#, Lot#, dimensions, finish, origin, color filters, and dual photos (full slab & close-up).', 'grantrade' ); ?>
 				</p>
 				<p>
-					<strong><?php esc_html_e( 'Current Catalog Mode:', 'grantrade' ); ?></strong>
-					<code><?php echo esc_html( 'wp_only' === $mode ? 'WordPress Stone Slabs Only (wp_only)' : 'Built-in 50 Stones + WordPress Slabs (merge)' ); ?></code>
+					<strong><?php esc_html_e( 'Catalog Engine:', 'grantrade' ); ?></strong>
+					<code><?php esc_html_e( 'WordPress Stone Slabs CPT (Native)', 'grantrade' ); ?></code>
 				</p>
-				<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" id="gtImportBuiltinForm" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-					<input type="hidden" name="action" value="grantrade_import_builtin_stones" />
-					<?php wp_nonce_field( 'grantrade_import_builtin' ); ?>
-					<input type="hidden" name="builtin_stones_json" id="gtBuiltinStonesJson" value="" />
-					<button type="submit" class="button button-primary"><?php esc_html_e( 'Import Built-in 50 Stones into WordPress', 'grantrade' ); ?></button>
-					<a href="<?php echo esc_url( $export_json_url ); ?>" class="button button-secondary"><?php esc_html_e( 'Download WP Slabs JSON', 'grantrade' ); ?></a>
-				</form>
-				<script>
-					document.getElementById('gtImportBuiltinForm').addEventListener('submit', function () {
-						var field = document.getElementById('gtBuiltinStonesJson');
-						if (field && window.GRAN_TRADE_CATALOG && Array.isArray(window.GRAN_TRADE_CATALOG.all)) {
-							field.value = JSON.stringify(window.GRAN_TRADE_CATALOG.all);
-						}
-					});
-				</script>
+				<div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:15px;">
+					<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=gt_slab' ) ); ?>" class="button button-primary"><?php esc_html_e( '+ Add New Stone Slab', 'grantrade' ); ?></a>
+					<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=gt_slab' ) ); ?>" class="button button-secondary"><?php esc_html_e( 'View All Slabs', 'grantrade' ); ?></a>
+					<a href="<?php echo esc_url( $export_json_url ); ?>" class="button button-secondary"><?php esc_html_e( 'Download Slabs JSON', 'grantrade' ); ?></a>
+				</div>
 			</div>
 
 			<div class="gt-card">
@@ -528,13 +518,10 @@ function grantrade_render_settings_page() {
 			<table class="form-table" role="presentation">
 				<tbody>
 					<tr>
-						<th scope="row"><label for="gt_catalog_mode"><?php esc_html_e( 'Stone Catalog Source', 'grantrade' ); ?></label></th>
+						<th scope="row"><?php esc_html_e( 'Stone Catalog Source', 'grantrade' ); ?></th>
 						<td>
-							<select id="gt_catalog_mode" name="gt_catalog_mode">
-								<option value="merge" <?php selected( $catalog_mode, 'merge' ); ?>><?php esc_html_e( 'Built-in 50 Stones + WordPress Stone Slabs', 'grantrade' ); ?></option>
-								<option value="wp_only" <?php selected( $catalog_mode, 'wp_only' ); ?>><?php esc_html_e( 'WordPress Stone Slabs CPT Only', 'grantrade' ); ?></option>
-							</select>
-							<p class="description"><?php esc_html_e( 'Choose "WordPress Stone Slabs CPT Only" after importing slabs if you want the public catalog controlled 100% by WordPress posts.', 'grantrade' ); ?></p>
+							<code><?php esc_html_e( 'WordPress Stone Slabs (Native CPT)', 'grantrade' ); ?></code>
+							<p class="description"><?php esc_html_e( 'Your public catalog is populated 100% from published Stone Slabs in WordPress.', 'grantrade' ); ?></p>
 						</td>
 					</tr>
 					<?php foreach ( $fields as $key => $meta ) : ?>

@@ -115,25 +115,7 @@ function grantrade_customize_register( $wp_customize ) {
 		);
 	}
 
-	$wp_customize->add_setting(
-		'gt_catalog_mode',
-		array(
-			'default'           => 'wp_only',
-			'sanitize_callback' => 'sanitize_key',
-		)
-	);
-	$wp_customize->add_control(
-		'gt_catalog_mode',
-		array(
-			'label'   => __( 'Stone Catalog Source', 'grantrade' ),
-			'section' => 'grantrade_warehouse',
-			'type'    => 'select',
-			'choices' => array(
-				'merge'   => __( 'Built-in 50 Stones + WordPress Stone Slabs', 'grantrade' ),
-				'wp_only' => __( 'WordPress Stone Slabs CPT Only', 'grantrade' ),
-			),
-		)
-	);
+
 }
 add_action( 'customize_register', 'grantrade_customize_register' );
 

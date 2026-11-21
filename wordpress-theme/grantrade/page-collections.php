@@ -17,20 +17,19 @@ $coll_lead     = grantrade_get_page_field( $gt_page_id, '_gt_page_lead', '' );
 $search_ph     = grantrade_get_page_field( $gt_page_id, '_gt_page_search_ph', 'Filter by stone variety, GT reference, lot code, quarry origin, 3 cm, or custom color tag...' );
 $phone_display = grantrade_get_option( 'gt_phone_display', '(201) 438-1888' );
 $phone_raw     = grantrade_get_option( 'gt_phone_raw', '2014381888' );
-$catalog_mode  = grantrade_get_option( 'gt_catalog_mode', 'wp_only' );
 $wp_stones     = function_exists( 'grantrade_get_wp_stones' ) ? grantrade_get_wp_stones() : array();
 $tab_counts    = array(
-	'all'       => 'wp_only' === $catalog_mode ? count( $wp_stones ) : 50,
-	'quartzite' => 'wp_only' === $catalog_mode ? 0 : 8,
-	'quartz'    => 'wp_only' === $catalog_mode ? 0 : 11,
-	'granite'   => 'wp_only' === $catalog_mode ? 0 : 11,
-	'marble'    => 'wp_only' === $catalog_mode ? 0 : 11,
-	'monuments' => 'wp_only' === $catalog_mode ? 0 : 5,
-	'soapstone' => 'wp_only' === $catalog_mode ? 0 : 2,
-	'semi'      => 'wp_only' === $catalog_mode ? 0 : 1,
-	'tile'      => 'wp_only' === $catalog_mode ? 0 : 1,
+	'all'       => count( $wp_stones ),
+	'quartzite' => 0,
+	'quartz'    => 0,
+	'granite'   => 0,
+	'marble'    => 0,
+	'monuments' => 0,
+	'soapstone' => 0,
+	'semi'      => 0,
+	'tile'      => 0,
 );
-if ( 'wp_only' === $catalog_mode && ! empty( $wp_stones ) ) {
+if ( ! empty( $wp_stones ) ) {
 	foreach ( $wp_stones as $ws ) {
 		$cat_key = $ws['category'] ?? '';
 		if ( isset( $tab_counts[ $cat_key ] ) ) {
