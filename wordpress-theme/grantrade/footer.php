@@ -66,7 +66,6 @@ $sales_email   = grantrade_get_option( 'gt_sales_email', 'sales.grantrade@gmail.
             <li><a href="<?php echo esc_url( $colls_url ); ?>"><?php esc_html_e( 'Collections', 'grantrade' ); ?></a></li>
             <li><a href="<?php echo esc_url( grantrade_get_page_url( 'showroom' ) ); ?>"><?php esc_html_e( 'Showroom & Yard', 'grantrade' ); ?></a></li>
             <li><a href="<?php echo esc_url( $contact_url ); ?>"><?php esc_html_e( 'Contact Us', 'grantrade' ); ?></a></li>
-            <li><a href="<?php echo esc_url( admin_url() ); ?>" style="opacity:0.75;"><?php esc_html_e( 'WP Admin', 'grantrade' ); ?> &rarr;</a></li>
           </ul>
           <?php
         }
