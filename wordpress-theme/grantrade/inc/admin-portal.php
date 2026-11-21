@@ -69,8 +69,8 @@ add_action( 'wp_footer', 'grantrade_output_custom_footer_js', 98 );
  */
 function grantrade_register_admin_menus() {
 	add_menu_page(
-		__( 'Gran Trade Admin Portal', 'grantrade' ),
-		__( 'Gran Trade', 'grantrade' ),
+		__( 'G Portal — Gran Trade Control Center', 'grantrade' ),
+		__( 'G Portal', 'grantrade' ),
 		'manage_options',
 		'grantrade-admin',
 		'grantrade_render_admin_overview_page',
@@ -252,7 +252,7 @@ function grantrade_render_admin_overview_page() {
 
 		<div class="gt-admin-hero">
 			<div>
-				<h1><?php esc_html_e( 'Gran Trade WordPress Control Center', 'grantrade' ); ?></h1>
+				<h1><?php esc_html_e( 'G Portal Control Center', 'grantrade' ); ?></h1>
 				<p><?php esc_html_e( 'Manage pages, stone slab inventory, picture uploads, plugins, core theme files, and custom CSS & JS directly from WordPress.', 'grantrade' ); ?></p>
 			</div>
 			<div class="gt-hero-actions">

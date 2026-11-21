@@ -108,11 +108,12 @@ function grantrade_register_post_types() {
 		'gt_slab',
 		array(
 			'labels'        => array(
-				'name'          => __( 'Stone Slabs', 'grantrade' ),
-				'singular_name' => __( 'Stone Slab', 'grantrade' ),
-				'add_new_item'  => __( 'Add New Stone Slab', 'grantrade' ),
-				'edit_item'     => __( 'Edit Stone Slab', 'grantrade' ),
-				'menu_name'     => __( 'Stone Slabs', 'grantrade' ),
+				'name'          => __( 'Inventory', 'grantrade' ),
+				'singular_name' => __( 'Slab', 'grantrade' ),
+				'add_new_item'  => __( 'Add New Slab', 'grantrade' ),
+				'edit_item'     => __( 'Edit Slab', 'grantrade' ),
+				'menu_name'     => __( 'Inventory', 'grantrade' ),
+				'all_items'     => __( 'All Inventory', 'grantrade' ),
 			),
 			'public'        => true,
 			'has_archive'   => false,
@@ -128,9 +129,10 @@ function grantrade_register_post_types() {
 		'gt_inquiry',
 		array(
 			'labels'       => array(
-				'name'          => __( 'Yard Inquiries', 'grantrade' ),
-				'singular_name' => __( 'Yard Inquiry', 'grantrade' ),
-				'menu_name'     => __( 'Yard Inquiries', 'grantrade' ),
+				'name'          => __( 'Forms', 'grantrade' ),
+				'singular_name' => __( 'Form Submission', 'grantrade' ),
+				'menu_name'     => __( 'Forms', 'grantrade' ),
+				'all_items'     => __( 'All Form Submissions', 'grantrade' ),
 			),
 			'public'       => false,
 			'show_ui'      => true,
