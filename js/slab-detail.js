@@ -622,20 +622,20 @@
           ? catalog.hasGtNumber(rel)
           : !["granite", "quartzite", "marble"].includes(String(rel.category || "").toLowerCase()))
       );
-      const relMeta = relShowGt ? `${rel.gtNumber} · ${rel.lotNumber}` : rel.lotNumber;
+      const relMeta = relShowGt ? `${escapeHtml(String(rel.gtNumber))} · ${escapeHtml(String(rel.lotNumber || ""))}` : escapeHtml(String(rel.lotNumber || ""));
 
       const card = document.createElement("article");
       card.className = "slab-card";
       card.innerHTML = `
         <div class="sc-media">
-          ${relShowGt ? `<span class="cat-badge">${rel.gtNumber}</span>` : ""}
-          <img src="${relImg}" alt="${rel.name}" loading="lazy" onerror="this.onerror=null; this.src='${relFallback}';" />
+          ${relShowGt ? `<span class="cat-badge">${escapeHtml(String(rel.gtNumber))}</span>` : ""}
+          <img src="${relImg}" alt="${escapeHtml(rel.name)}" loading="lazy" onerror="this.onerror=null; this.src='${relFallback}';" />
         </div>
         <div class="sc-body">
-          <h3 class="sc-title">${rel.name}</h3>
+          <h3 class="sc-title">${escapeHtml(rel.name)}</h3>
           <div class="sc-meta">${relMeta}</div>
-          <p class="sc-desc">${rel.description}</p>
-          <div class="sc-specs"><span class="spec-pill">${String(rel.thickness || "3 cm").replace(/\b2\s*cm\s*·\s*3\s*cm/gi, "3 cm").replace(/\bcalibrated\b/gi, "").trim()}</span><span class="spec-pill">${(rel.size || "").split("·")[0].trim()}</span></div>
+          <p class="sc-desc">${escapeHtml(rel.description)}</p>
+          <div class="sc-specs"><span class="spec-pill">${escapeHtml(String(rel.thickness || "3 cm").replace(/\b2\s*cm\s*·\s*3\s*cm/gi, "3 cm").replace(/\bcalibrated\b/gi, "").trim())}</span><span class="spec-pill">${escapeHtml((rel.size || "").split("·")[0].trim())}</span></div>
           <div style="margin-top:1rem;">
             <a href="${relUrl}" class="btn btn-sm btn-primary btn-block">Inspect Slab Details &rarr;</a>
           </div>

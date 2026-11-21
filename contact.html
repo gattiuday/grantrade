@@ -9,8 +9,10 @@
   <meta name="description" content="Contact Gran Trade Inc. in Carlstadt, NJ. Warehouse hours, phone directory, driving directions, and wholesale trade inquiries." />
   <link rel="icon" href="assets/images/logo-icon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/images/logo.png" type="image/png" />
+  <link rel="canonical" href="https://grantradeinc.com/contact.html" />
 
   <!-- Open Graph / Social -->
+  <meta property="og:site_name" content="Gran Trade Inc." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://grantradeinc.com/contact.html" />
   <meta property="og:title" content="Contact & Yard Hours | Gran Trade Inc. · Carlstadt, NJ" />
@@ -218,7 +220,7 @@
           <form id="inquiryForm" action="https://formsubmit.co/grantrade@gmail.com" method="POST" data-netlify="true" netlify-honeypot="bot-field">
             <input type="hidden" name="_subject" id="formSubject" value="Wholesale Stone Inquiry — Gran Trade Inc." />
             <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://grantradeinc.com/contact.html?sent=1" />
             <input type="hidden" name="form-name" value="wholesale-inquiry" />
             <div style="display:none;" aria-hidden="true">
               <label>Don’t fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
@@ -301,7 +303,7 @@
       <div class="footer-brand">
         <picture>
           <source srcset="assets/images/logo-white.png" media="(prefers-color-scheme: dark)" />
-          <img src="assets/images/logo.png" alt="Gran Trade Inc." style="height:38px; width:auto; margin-bottom:1.25rem; display:block;" />
+          <img src="assets/images/logo.png" alt="Gran Trade Inc." style="height:38px; width:auto; margin-bottom:1.25rem; display:block;" loading="lazy" />
         </picture>
         <p>Wholesale natural and engineered stone slabs, tile, and monuments imported directly from premier quarries and stocked in Carlstadt, New Jersey.</p>
       </div>
@@ -507,6 +509,37 @@
         `;
       });
     })();
+  </script>
+
+  <!-- LocalBusiness Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Gran Trade Inc.",
+    "description": "Premier wholesale importer and distributor of natural and engineered stone slabs, tile, and monuments in Carlstadt, New Jersey.",
+    "url": "https://grantradeinc.com/",
+    "logo": "https://grantradeinc.com/assets/images/logo.png",
+    "telephone": "+12014381888",
+    "email": "grantrade@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "178 Commerce Road",
+      "addressLocality": "Carlstadt",
+      "addressRegion": "NJ",
+      "postalCode": "07072",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.8311256,
+      "longitude": -74.0639331
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:30", "closes": "16:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "13:00" }
+    ]
+  }
   </script>
 </body>
 </html>
