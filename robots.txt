@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /admin.html
+Disallow: /filemanager.html
+
+# Allow all public pages
+Allow: /
+
+Sitemap: https://grantradeinc.com/sitemap.xml

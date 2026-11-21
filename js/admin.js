@@ -6,7 +6,9 @@
   "use strict";
 
   const AUTH_KEY = "grantrade_admin_auth";
-  const DEFAULT_PASS = "grantrade2026";
+  // SHA-256 of the admin passcode — never store the plaintext password in source.
+  // To change the password: python3 -c "import hashlib; print(hashlib.sha256(b'newpassword').hexdigest())"
+  const PASS_HASH = "f7d7a34fe11d2f53aab26cb4d816f84626082ed9665fc448ccc6ab76a2973c3b";
   const ACTIVE_PANE_KEY = "grantrade_admin_active_pane";
   const FILTER_SEARCH_KEY = "grantrade_admin_search";
   const FILTER_CAT_KEY = "grantrade_admin_cat";
@@ -121,17 +123,27 @@
     }
   }
 
+  async function hashPasscode(raw) {
+    const encoded = new TextEncoder().encode(raw);
+    const buf = await crypto.subtle.digest("SHA-256", encoded);
+    return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+  }
+
   if (authForm) {
     authForm.addEventListener("submit", function (e) {
       e.preventDefault();
       const entered = (authPass.value || "").trim();
-      if (entered === DEFAULT_PASS) {
-        sessionStorage.setItem(AUTH_KEY, "true");
-        if (authGate) authGate.style.display = "none";
-        initDashboard();
-      } else {
-        if (authError) authError.style.display = "block";
-      }
+      hashPasscode(entered).then(function (digest) {
+        if (digest === PASS_HASH) {
+          sessionStorage.setItem(AUTH_KEY, "true");
+          if (authGate) authGate.style.display = "none";
+          initDashboard();
+        } else {
+          if (authError) authError.style.display = "block";
+          if (authPass) authPass.value = "";
+          if (authPass) authPass.focus();
+        }
+      });
     });
   }
 
