@@ -80,8 +80,8 @@ function grantrade_register_admin_menus() {
 
 	add_submenu_page(
 		'grantrade-admin',
-		__( 'Overview & Importer', 'grantrade' ),
-		__( 'Overview & Importer', 'grantrade' ),
+		__( 'Overview & Dashboard', 'grantrade' ),
+		__( 'Overview & Dashboard', 'grantrade' ),
 		'manage_options',
 		'grantrade-admin',
 		'grantrade_render_admin_overview_page'
