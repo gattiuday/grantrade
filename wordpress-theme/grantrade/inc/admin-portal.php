@@ -573,8 +573,7 @@ function grantrade_handle_save_settings() {
 		}
 	}
 	if ( isset( $_POST['gt_catalog_mode'] ) ) {
-		$mode = sanitize_key( wp_unslash( $_POST['gt_catalog_mode'] ) );
-		set_theme_mod( 'gt_catalog_mode', in_array( $mode, array( 'merge', 'wp_only' ), true ) ? $mode : 'wp_only' );
+		set_theme_mod( 'gt_catalog_mode', 'wp_only' );
 	}
 
 	wp_safe_redirect( add_query_arg( array( 'page' => 'grantrade-settings', 'gt_notice' => 'settings_ok' ), admin_url( 'admin.php' ) ) );
