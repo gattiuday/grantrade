@@ -37,7 +37,7 @@ $phone_raw     = grantrade_get_option( 'gt_phone_raw', '2014381888' );
     .stage-prev { left: 1rem; }
     .stage-next { right: 1rem; }
     .post-stage { position: relative; background-color: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); min-height: 480px; display: flex; align-items: center; justify-content: center; }
-    .stage-single { width: 100%; height: 100%; position: relative; aspect-ratio: 16 / 11; max-height: 560px; overflow: hidden; cursor: zoom-in; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
+    .stage-single { width: 100%; height: 100%; position: relative; aspect-ratio: 16 / 11; max-height: 560px; overflow: hidden; cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
     .stage-single.is-zoomed { cursor: grab; touch-action: none; }
     .stage-single.grabbing { cursor: grabbing !important; }
     .stage-single img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: center center; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none; will-change: transform; }
@@ -151,22 +151,10 @@ $phone_raw     = grantrade_get_option( 'gt_phone_raw', '2014381888' );
 
       <div class="slab-hero-grid">
         <div class="slab-post-viewer">
-          <div id="mainStageSingle" class="post-stage stage-single" title="Drag to pan · Double-click to zoom · Scroll to zoom · Pinch on mobile">
+          <div id="mainStageSingle" class="post-stage stage-single" title="Double-click or tap for full screen view">
             <span id="stageTag" class="stage-tag">Picture 1 · Full Slab Upright View</span>
 
-            <div class="stage-controls-overlay" role="toolbar" aria-label="Image Zoom and Fullscreen Controls">
-              <button id="zoomInBtn" class="stage-ctrl-btn" type="button" title="Zoom In (+ / =)" aria-label="Zoom in">
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>
-                <span>Zoom In</span>
-              </button>
-              <button id="zoomOutBtn" class="stage-ctrl-btn" type="button" title="Zoom Out (-)" aria-label="Zoom out" disabled>
-                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M8 11h6"/></svg>
-                <span>Zoom Out</span>
-              </button>
-              <button id="zoomResetBtn" class="stage-ctrl-btn" type="button" title="Reset Zoom to 100% (0 / R)" aria-label="Reset zoom">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
-                <span id="zoomLevelText">100%</span>
-              </button>
+            <div class="stage-controls-overlay" role="toolbar" aria-label="Fullscreen Controls">
               <button id="fullscreenBtn" class="stage-ctrl-btn highlight" type="button" title="Full Screen View (Esc to exit)" aria-label="Toggle full screen">
                 <svg id="fsIconExpand" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
                 <svg id="fsIconCompress" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="display:none;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"/></svg>

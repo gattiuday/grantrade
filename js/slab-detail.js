@@ -307,19 +307,10 @@
       }
     });
 
-    stageSingle.addEventListener("wheel", (e) => {
-      if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
-      e.preventDefault();
-      const delta = e.deltaY;
-      const zoomDelta = -Math.sign(delta) * (Math.abs(delta) > 50 ? 0.3 : 0.18);
-      setZoomAt(zoomLevel + zoomDelta, e.clientX, e.clientY, true);
-    }, { passive: false });
-
     stageSingle.addEventListener("dblclick", (e) => {
       if (e.target.closest(".stage-controls-overlay") || e.target.closest(".stage-nav-arrow")) return;
       e.preventDefault();
-      if (zoomLevel > 1.01) resetZoom();
-      else setZoomAt(2.4, e.clientX, e.clientY, true);
+      toggleFullscreen();
     });
 
     stageSingle.addEventListener("touchstart", (e) => {
@@ -329,8 +320,7 @@
         const now = Date.now();
         if (now - lastTapTime < 320) {
           e.preventDefault();
-          if (zoomLevel > 1.01) resetZoom();
-          else setZoomAt(2.4, e.touches[0].clientX, e.touches[0].clientY, true);
+          toggleFullscreen();
           lastTapTime = 0;
           return;
         }
