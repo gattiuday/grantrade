@@ -200,7 +200,9 @@
     const data = stoneData[familyKey];
     if (!data || !modal) return;
 
-    if (modalImg) modalImg.src = wpAsset(data.img);
+    const activeRow = section.querySelector(`.liquid-stone-row[data-family="${familyKey}"]`);
+    const customImg = activeRow ? activeRow.getAttribute("data-card-img") : null;
+    if (modalImg) modalImg.src = customImg || wpAsset(data.img);
     if (modalTitle) modalTitle.textContent = data.title;
     if (modalGeology) modalGeology.textContent = data.geology;
     if (modalOrigin) modalOrigin.textContent = data.origin;

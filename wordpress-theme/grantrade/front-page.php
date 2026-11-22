@@ -240,14 +240,15 @@ get_header();
           );
 
           foreach ( $families as $item ) :
-            $cat_url = add_query_arg( 'category', $item['family'], $colls_url );
+            $cat_url  = add_query_arg( 'category', $item['family'], $colls_url );
+            $card_img = grantrade_get_page_image_url( $gt_page_id, '_gt_img_family_' . $item['family'], $item['img'] );
             ?>
-            <article class="liquid-stone-row" data-stone-type="<?php echo esc_attr( $item['type'] ); ?>" data-family="<?php echo esc_attr( $item['family'] ); ?>">
+            <article class="liquid-stone-row" data-stone-type="<?php echo esc_attr( $item['type'] ); ?>" data-family="<?php echo esc_attr( $item['family'] ); ?>" data-card-img="<?php echo esc_url( $card_img ); ?>">
               <div class="liquid-stone-media">
                 <div class="liquid-media-badges">
                   <span class="liquid-badge <?php echo esc_attr( $item['badge_cls'] ); ?>"><?php echo esc_html( $item['badge'] ); ?></span>
                 </div>
-                <img src="<?php echo esc_url( $theme_uri . '/' . $item['img'] ); ?>" alt="<?php echo esc_attr( $item['alt'] ); ?>" loading="lazy" />
+                <img src="<?php echo esc_url( $card_img ); ?>" alt="<?php echo esc_attr( $item['alt'] ); ?>" loading="lazy" />
                 <div class="liquid-card-glare"></div>
               </div>
               <div class="liquid-stone-info">
