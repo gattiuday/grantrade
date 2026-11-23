@@ -669,8 +669,8 @@
       const chip = document.createElement("span");
       chip.className = "active-filter-chip";
       chip.innerHTML = `
-        <span>${item.label}</span>
-        <button type="button" class="active-filter-remove" aria-label="Remove filter ${item.label}">&times;</button>
+        <span>${escapeHtml(item.label)}</span>
+        <button type="button" class="active-filter-remove" aria-label="Remove filter ${escapeHtml(item.label)}">&times;</button>
       `;
       chip.querySelector(".active-filter-remove").addEventListener("click", item.clear);
       activeChipsList.appendChild(chip);

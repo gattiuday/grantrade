@@ -121,6 +121,37 @@ function grantrade_register_admin_menus()
 add_action('admin_menu', 'grantrade_register_admin_menus');
 
 /**
+ * Streamline and clean the WordPress Admin Sidebar by hiding obsolete/bloat menus.
+ */
+function grantrade_cleanup_admin_sidebar()
+{
+	// Slugs of bloated or obsolete plugin menus to hide from sidebar
+	$bloat_menus = array(
+		'astra',
+		'astra-advanced',
+		'uae',
+		'divi_supreme',
+		'dsm_supreme_settings',
+		'toc',
+		'table-of-contents',
+		'smooth-scroll',
+		'maxmegamenu',
+		'ninja-forms',
+		'wpcf7',
+		'addtoany',
+		'font-awesome',
+		'wp_file_manager',
+		'file_manager_advanced_ui',
+		'wp-htaccess-editor',
+	);
+
+	foreach ($bloat_menus as $slug) {
+		remove_menu_page($slug);
+	}
+}
+add_action('admin_menu', 'grantrade_cleanup_admin_sidebar', 999);
+
+/**
  * Register Gran Trade Overview & Inquiries Dashboard Widget on `/wp-admin/index.php`.
  */
 function grantrade_register_dashboard_widget()

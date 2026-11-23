@@ -48,7 +48,7 @@ get_header();
       <?php else : ?>
         <div class="empty-box">
           <h3><?php esc_html_e( 'Nothing found here yet', 'grantrade' ); ?></h3>
-          <p><?php esc_html_e( 'Explore our 50+ curated stone slabs in the main catalog.', 'grantrade' ); ?></p>
+          <p><?php esc_html_e( 'Explore our 700+ curated stone slabs in the main catalog.', 'grantrade' ); ?></p>
           <a href="<?php echo esc_url( grantrade_get_page_url( 'collections' ) ); ?>" class="btn btn-primary"><?php esc_html_e( 'Browse Collections', 'grantrade' ); ?></a>
         </div>
       <?php endif; ?>

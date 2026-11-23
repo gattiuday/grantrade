@@ -86,7 +86,7 @@
   const stoneData = {
     quartzite: {
       title: "Quartzite",
-      geology: "Metamorphic Quartz Sandstone",
+      geology: "THE ART OF NATURAL QUARTZITE",
       origin: "Brazil (Bahia & Espirito Santo)",
       desc: "Pure recrystallized sandstone formed under colossal tectonic pressure. Quartzite pairs the ethereal luminescence and flowing movement of marble with exceptional natural mineral density. Completely impervious to red wine, citrus acids, and cutlery scratches.",
       category: "Natural Metamorphic",
@@ -99,7 +99,7 @@
     },
     marble: {
       title: "Marble",
-      geology: "Metamorphic Recrystallized Limestone",
+      geology: "TIMELESS MARBLE ELEGANCE",
       origin: "Italy (Carrara) & Greece",
       desc: "The enduring benchmark of classical and contemporary architectural prestige. Imported directly from the Apuan Alps of Tuscany, our natural marbles offer dramatic brecciated veining, subtle translucency, and consecutive sequence bundles for mirrored bookmatched layouts.",
       category: "Natural Metamorphic",
@@ -112,7 +112,7 @@
     },
     granite: {
       title: "Granite",
-      geology: "Igneous Intrusive Magma",
+      geology: "STRENGTH IN NATURAL STONE",
       origin: "Brazil, India & Norway",
       desc: "Pure volcanic fortitude formed by molten magma slowly crystallizing miles beneath the Earth's crust. Interlocking quartz, feldspar, and mica crystals produce unmatched structural strength, deep chromatic depth, and enduring resistance to heavy culinary preparation.",
       category: "Natural Igneous",
@@ -124,8 +124,8 @@
       catalogCategory: "granite",
     },
     quartz: {
-      title: "Quartz",
-      geology: "93% Pure Quartz Composite",
+      title: "Engineered Quartz",
+      geology: "REFINED ENGINEERED SURFACES",
       origin: "USA & Global Surfacing",
       desc: "Advanced architectural engineering tailored for modern family living and demanding commercial projects. Crafted from 93% pure crushed natural quartz bonded with high-grade polymers. Zero porosity ensures liquids and oils never penetrate, requiring zero sealing over its lifespan.",
       category: "Engineered Surfacing",
@@ -138,7 +138,7 @@
     },
     soapstone: {
       title: "Soapstone",
-      geology: "Metamorphic Steatite Talc Rock",
+      geology: "NATURAL BEAUTY, DISTINCTIVE CHARACTER",
       origin: "Brazil & Virginia, USA",
       desc: "An authentic artisanal heritage stone prized for its silky-smooth tactile touch. Soapstone is naturally non-porous and chemically inert, making it immune to lemon juice, vinegar, and household acids. Develops an organic, rich charcoal patina when seasoned with food-safe mineral oil.",
       category: "Natural Metamorphic",
@@ -150,8 +150,8 @@
       catalogCategory: "soapstone",
     },
     semi: {
-      title: "Semi Precious",
-      geology: "Handcrafted Natural Agate & Crystal Geode",
+      title: "Semi-Precious Stone",
+      geology: "THE RARE BEAUTY OF GEMSTONE",
       origin: "Brazil & Madagascar",
       desc: "The pinnacle of architectural opulence and lapidary craftsmanship. Skilled artisans hand-select and composite translucent slices of genuine natural agate, petrified wood, and crystal geode. Designed specifically for dramatic rear-illumination with LED light panels.",
       category: "Natural Gemstone Composite",
@@ -164,7 +164,7 @@
     },
     monuments: {
       title: "Monuments",
-      geology: "Certified Structural Granite",
+      geology: "CRAFTED FOR GENERATIONS",
       origin: "North America & India",
       desc: "Certified structural-grade natural granites quarried for multi-generational outdoor permanence. Dense, uniform crystalline matrix withstands severe Northeastern freeze-thaw cycles and weathering without surface degradation. Provides flawless contrast for precision laser etching and diamond engraving.",
       category: "Structural Granite",
@@ -176,8 +176,8 @@
       catalogCategory: "monuments",
     },
     tile: {
-      title: "Tiles",
-      geology: "Travertine & Natural Marble Formats",
+      title: "Natural Stone Tiles",
+      geology: "TIMELESS NATURAL FORMATS",
       origin: "Italy & Turkey",
       desc: "Precision-finished natural stone tiles crafted to provide seamless spatial continuity across interior floors, bathrooms, and exterior living spaces. Available in interlocking French patterns, large-format rectangles, and modular squares with dependable natural foot traction.",
       category: "Natural Stone Formats",

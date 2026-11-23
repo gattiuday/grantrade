@@ -31,9 +31,9 @@ $m1_val        = grantrade_get_page_field( $gt_page_id, '_gt_metric1_val', '20+'
 $m1_lbl        = grantrade_get_page_field( $gt_page_id, '_gt_metric1_lbl', 'Years importing stone' );
 $m2_val        = grantrade_get_page_field( $gt_page_id, '_gt_metric2_val', '1,000+' );
 $m2_lbl        = grantrade_get_page_field( $gt_page_id, '_gt_metric2_lbl', 'Trade customers served' );
-$tax_eyebrow   = grantrade_get_page_field( $gt_page_id, '_gt_tax_eyebrow', 'Wholesale Material Taxonomy' );
-$tax_heading   = grantrade_get_page_field( $gt_page_id, '_gt_tax_heading', 'The Types of Stone We Carry' );
-$tax_lead      = grantrade_get_page_field( $gt_page_id, '_gt_tax_lead', 'Direct from premier quarries across Brazil, Italy, India, and the United States to our Carlstadt, NJ warehouse. Scroll down through our vertical liquid flow catalog to inspect geological formation, natural veining, and architectural applications.' );
+$tax_eyebrow   = grantrade_get_page_field( $gt_page_id, '_gt_tax_eyebrow', 'OUR PREMIUM STONE COLLECTION' );
+$tax_heading   = grantrade_get_page_field( $gt_page_id, '_gt_tax_heading', 'Explore Our Stone Collections' );
+$tax_lead      = grantrade_get_page_field( $gt_page_id, '_gt_tax_lead', 'Sourced from renowned quarries across Brazil, Italy, India, and the United States, our carefully curated collection brings exceptional natural and engineered stone to our Carlstadt, New Jersey warehouse. Discover distinctive colors, elegant veining, and premium surfaces selected for residential, commercial, and architectural projects.' );
 $applied_img   = grantrade_get_page_image_url( $gt_page_id, '_gt_page_image2', 'assets/images/aquamarine-slab-2.jpg' );
 $applied_eye   = grantrade_get_page_field( $gt_page_id, '_gt_applied_eyebrow', 'From Slab to Space' );
 $applied_head  = grantrade_get_page_field( $gt_page_id, '_gt_applied_heading', 'Where our stone ends up' );
@@ -109,14 +109,13 @@ get_header();
               'origin'    => 'Brazil (Bahia & Espirito Santo)',
               'img'       => 'assets/images/stone-types/quartzite.jpg',
               'alt'       => 'Authentic Brazilian quartzite slab on warehouse A-frame',
-              'geology'   => 'Metamorphic Quartz Sandstone',
+              'geology'   => 'THE ART OF NATURAL QUARTZITE',
               'title'     => 'Quartzite',
-              'desc'      => 'Nature\'s ultimate metamorphic masterpiece. Born from pure quartz sandstone recrystallized under colossal tectonic pressure, quartzite pairs the ethereal crystalline luminescence of fine marble with extraordinary mineral density. Naturally impervious to etching from wine or citrus juices, knife scratches, and daily kitchen wear.',
+              'desc'      => 'Natural beauty with remarkable strength. Quartzite features distinctive veining, rich mineral patterns, and a refined appearance, making it an exceptional choice for kitchen islands, countertops, backsplashes, and statement walls.',
               'formats'   => '3 cm Bookmatched Consecutive Bundles',
               'textures'  => 'Polished Mirror · Leathered Satin · Honed Velvet',
               'apps'      => 'Waterfall Kitchen Islands · Backlit Feature Walls · Luxury Vanities',
-              'popular'   => 'Taj Mahal · Aquamarine Quartzite · Cristallo · Perla Venata',
-              'cta'       => 'Browse Quartzite →',
+              'cta'       => 'Explore Quartzite →',
             ),
             array(
               'family'    => 'marble',
@@ -126,14 +125,13 @@ get_header();
               'origin'    => 'Italy (Carrara) & Greece',
               'img'       => 'assets/images/stone-types/marble.jpg',
               'alt'       => 'Italian Arabescato Carrara marble slab with brecciated veining',
-              'geology'   => 'Metamorphic Recrystallized Limestone',
+              'geology'   => 'TIMELESS MARBLE ELEGANCE',
               'title'     => 'Marble',
-              'desc'      => 'The timeless benchmark of classical and contemporary luxury architecture. Quarried from the renowned Apuan Alps of Tuscany, imported natural marble showcases dramatic brecciated veining, subtle translucency, and cool tactile stone warmth. Consecutive sequence bundles enable mirrored bookmatched fireplace mantels and island showpieces.',
+              'desc'      => 'A timeless expression of luxury and sophistication. Our marble collection features elegant veining, distinctive patterns, and classic finishes that bring character to kitchens, bathrooms, fireplaces, and architectural interiors.',
               'formats'   => '3 cm Full Slabs',
               'textures'  => 'Polished High Gloss · Honed Matte · Satin Silk',
               'apps'      => 'Showcase Kitchen Islands · Master En-Suites · Fireplace Surrounds',
-              'popular'   => 'Arabescato · Calacatta Monet · Statuario · Carrara Gioia',
-              'cta'       => 'Browse Marble →',
+              'cta'       => 'Explore Marble →',
             ),
             array(
               'family'    => 'granite',
@@ -143,14 +141,13 @@ get_header();
               'origin'    => 'Brazil, India & Norway',
               'img'       => 'assets/images/stone-types/granite.jpg',
               'alt'       => 'Black Forest granite architectural installation',
-              'geology'   => 'Igneous Intrusive Magma',
+              'geology'   => 'STRENGTH IN NATURAL STONE',
               'title'     => 'Granite',
-              'desc'      => 'Pure volcanic fortitude formed by molten magma slowly crystallizing miles beneath the continental crust. Interlocked quartz, feldspar, and mica crystals produce unmatched structural strength, deep chromatic depth, and enduring resilience against heavy culinary prep, outdoor UV exposure, and all-weather cycles.',
+              'desc'      => 'Known for its strength, durability, and natural character, granite is an excellent choice for residential and commercial applications. Explore a variety of colors, textures, and patterns suitable for indoor and outdoor spaces.',
               'formats'   => '3 cm Heavy-Duty Slabs',
               'textures'  => 'Polished · Leathered Tactile · Flamed · Honed',
               'apps'      => 'Chef\'s Working Kitchens · Outdoor BBQ Islands · Commercial Bars',
-              'popular'   => 'Black Forest · Steel Grey · Blue Pearl · Titanium Black',
-              'cta'       => 'Browse Granite →',
+              'cta'       => 'Explore Granite →',
             ),
             array(
               'family'    => 'quartz',
@@ -160,14 +157,13 @@ get_header();
               'origin'    => 'USA & Global Surfacing',
               'img'       => 'assets/images/stone-types/quartz.jpg',
               'alt'       => 'Calacatta quartz countertop with mitered waterfall edge',
-              'geology'   => '93% Pure Quartz Composite',
-              'title'     => 'Quartz',
-              'desc'      => 'Advanced architectural surfacing engineered for contemporary family living and high-traffic commercial environments. Composed of 93% pure crushed natural quartz crystal fused with advanced polymer resins. Zero porosity ensures liquids and oils never penetrate, requiring zero sealing or chemical conditioning over its lifespan.',
+              'geology'   => 'REFINED ENGINEERED SURFACES',
+              'title'     => 'Engineered Quartz',
+              'desc'      => 'Contemporary design meets everyday practicality. Engineered quartz offers consistent patterns, a wide range of colors, and a nonporous surface that does not require routine sealing.',
               'formats'   => 'Jumbo Slabs (63" x 128") · 3 cm',
               'textures'  => 'High Polish Brilliant · Soft Touch Matte (Honed)',
               'apps'      => 'Modern Family Kitchens · Multi-Unit Developments · Hospitality Suites',
-              'popular'   => 'Calacatta Alps · Versilia · Calacatta Gold · Pure Arctic White',
-              'cta'       => 'Browse Quartz →',
+              'cta'       => 'Explore Quartz →',
             ),
             array(
               'family'    => 'soapstone',
@@ -177,14 +173,13 @@ get_header();
               'origin'    => 'Brazil & Virginia, USA',
               'img'       => 'assets/images/stone-types/soapstone.jpg',
               'alt'       => 'Soapstone matte artisanal kitchen surface with organic veining',
-              'geology'   => 'Metamorphic Steatite Talc Rock',
+              'geology'   => 'NATURAL BEAUTY, DISTINCTIVE CHARACTER',
               'title'     => 'Soapstone',
-              'desc'      => 'An authentic artisanal heritage stone prized for its silky, velvety tactile touch. Naturally non-porous and chemically inert, making it completely impervious to lemon juice, vinegar, red wine, and harsh acids without requiring sealers. Gradually develops an organic, rich charcoal patina when seasoned with food-safe mineral oil.',
+              'desc'      => 'Distinctive, understated, and naturally elegant. Soapstone is admired for its smooth feel, rich tones, and organic veining. Its unique appearance makes it a beautiful choice for kitchens, fireplaces, and custom interiors.',
               'formats'   => '3 cm Heavy Architectural Slabs',
               'textures'  => 'Honed Silky Matte',
               'apps'      => 'Artisanal & Farmhouse Kitchens · Fireplace Hearths · Chemistry Benches',
-              'popular'   => 'Churchill Soapstone · Barroca Black · Mariana Grey',
-              'cta'       => 'Browse Soapstone →',
+              'cta'       => 'Explore Soapstone →',
             ),
             array(
               'family'    => 'semi',
@@ -194,14 +189,13 @@ get_header();
               'origin'    => 'Brazil & Madagascar',
               'img'       => 'assets/images/stone-types/semi-precious.jpg',
               'alt'       => 'Illuminated blue agate semi precious stone architectural feature',
-              'geology'   => 'Handcrafted Natural Agate & Crystal Geode',
-              'title'     => 'Semi Precious',
-              'desc'      => 'The apex of architectural opulence and lapidary mastery. Skilled artisans hand-select and assemble individual cross-sections of genuine translucent agate, petrified wood, and crystal geode. Designed specifically for dramatic rear-illumination with LED light panels to produce glowing, jewel-like feature installations.',
+              'geology'   => 'THE RARE BEAUTY OF GEMSTONE',
+              'title'     => 'Semi-Precious Stone',
+              'desc'      => 'Make a statement with the extraordinary beauty of natural gemstones. Featuring agate, crystal, and other distinctive materials, these specialty surfaces create striking visual features, especially in backlit installations.',
               'formats'   => '2 cm Solid & Reinforced Composite Slabs',
               'textures'  => 'Mirror Polished Gemstone Surface',
               'apps'      => 'Backlit Luxury Cocktail Bars · Powder Room Statement Walls · VIP Foyers',
-              'popular'   => 'Blue Agate · Wild Agate · Amethyst · Crystal Quartz',
-              'cta'       => 'Browse Semi Precious →',
+              'cta'       => 'Explore Semi-Precious →',
             ),
             array(
               'family'    => 'monuments',
@@ -211,14 +205,13 @@ get_header();
               'origin'    => 'North America & India',
               'img'       => 'assets/images/stone-types/monuments.jpg',
               'alt'       => 'Wholesale structural granite blocks and monument blanks in distribution yard',
-              'geology'   => 'Certified Structural Granite',
+              'geology'   => 'CRAFTED FOR GENERATIONS',
               'title'     => 'Monuments',
-              'desc'      => 'Certified structural-grade natural granites quarried for multi-generational outdoor permanence. Dense, uniform crystalline matrix withstands severe Northeastern freeze-thaw cycles, heavy precipitation, and atmospheric weathering without surface degradation. Provides high contrast for diamond sandblasting and precision laser engraving.',
+              'desc'      => 'Quality granite products crafted for lasting memorials and outdoor applications. Our monument selection includes granite blanks, bases, dies, and slants in a variety of styles and finishes.',
               'formats'   => 'Custom Architectural Blanks · Bases · Dies · Slants',
               'textures'  => 'Polished Face · Rock Pitch · Thermal Stipple',
               'apps'      => 'Civic Memorials · Public Plazas · Architectural Historic Markers',
-              'popular'   => 'Barre Gray · Jet Black · American Black · GT Memorial Blanks',
-              'cta'       => 'Browse Monuments →',
+              'cta'       => 'Explore Monuments →',
             ),
             array(
               'family'    => 'tile',
@@ -228,14 +221,13 @@ get_header();
               'origin'    => 'Italy & Turkey',
               'img'       => 'assets/images/stone-types/tile.jpg',
               'alt'       => 'Seamless luxury Mediterranean villa French-pattern travertine stone tile flooring',
-              'geology'   => 'Travertine & Natural Marble Formats',
-              'title'     => 'Tiles',
-              'desc'      => 'Precision-finished natural stone tiles crafted to provide seamless aesthetic continuity across interior floors, bathrooms, and exterior living spaces. Available in interlocking French patterns, large-format rectangles, and modular squares. Tumbled, brushed, and honed textures deliver timeless warmth with safe foot traction.',
+              'geology'   => 'TIMELESS NATURAL FORMATS',
+              'title'     => 'Natural Stone Tiles',
+              'desc'      => 'Bring timeless elegance to floors, bathrooms, and outdoor living spaces with our natural stone tile collection. Available in a selection of patterns, sizes, and finishes to suit traditional and contemporary designs.',
               'formats'   => 'French Pattern Sets · 12"x24" · 24"x24" · 1.2 cm',
               'textures'  => 'Tumbled · Brushed · Honed · Pillowed Edge',
               'apps'      => 'Master Shower Enclosures · Foyer Flooring · Covered Loggias & Patios',
-              'popular'   => 'French Pattern Travertine · Honed Carrara Tile · Quartzite Pavers',
-              'cta'       => 'Browse Tiles →',
+              'cta'       => 'Explore Tiles →',
             ),
           );
 
@@ -271,10 +263,6 @@ get_header();
                     <span class="liquid-detail-label">Ideal Applications</span>
                     <span class="liquid-detail-value"><?php echo esc_html( $item['apps'] ); ?></span>
                   </div>
-                  <div class="liquid-detail-item">
-                    <span class="liquid-detail-label">Popular On The Racks</span>
-                    <span class="liquid-detail-value"><?php echo esc_html( $item['popular'] ); ?></span>
-                  </div>
                 </div>
                 <div class="liquid-stone-actions">
                   <a href="<?php echo esc_url( $cat_url ); ?>" class="btn btn-primary"><?php echo esc_html( $item['cta'] ); ?></a>
@@ -295,7 +283,7 @@ get_header();
             <img id="liquidModalImg" src="<?php echo esc_url( $theme_uri . '/assets/images/stone-types/quartzite.jpg' ); ?>" alt="Selected stone full slab preview" />
           </div>
           <div>
-            <span id="liquidModalGeology" class="liquid-geology">Metamorphic Quartz Sandstone</span>
+            <span id="liquidModalGeology" class="liquid-geology">THE ART OF NATURAL QUARTZITE</span>
             <h2 id="liquidModalTitle" style="font-family:var(--font-serif); font-size:2rem; margin-bottom:0.25rem;">Quartzite</h2>
             <div id="liquidModalOrigin" style="font-size:0.8rem; font-weight:600; color:var(--muted); margin-bottom:1rem;">Brazil (Bahia &amp; Espirito Santo)</div>
             <p id="liquidModalDesc" style="font-size:0.9rem; line-height:1.6; color:var(--ink-2); margin-bottom:1.25rem;">

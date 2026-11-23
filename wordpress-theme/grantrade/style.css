@@ -1,10 +1,10 @@
 /*
 Theme Name: Gran Trade Inc.
 Theme URI: https://github.com/gattiuday/grantrade
-Author: Gran Trade Inc.
-Author URI: https://grantradeinc.com
-Description: Custom responsive wholesale stone & slab showroom WordPress theme for Gran Trade Inc. (Carlstadt, NJ). Includes 50+ searchable stone catalog, interactive slab zoom/pan inspector, favorites drawer, live ET yard hours status, Stone Slabs CPT, and native WP inquiry capture.
-Version: 1.1.6
+Author: Uday Gatti — Fullstack Developer
+Author URI: https://github.com/gattiuday
+Description: Custom responsive wholesale stone & slab showroom WordPress theme developed by Uday Gatti, Fullstack Developer. Engineered for Gran Trade Inc. (Carlstadt, NJ) with high-performance responsive architecture, Stone Slabs CPT inventory engine, 700+ searchable stone catalog, interactive slab zoom/pan inspector, live ET yard hours status, and native WP inquiry capture.
+Version: 1.1.7
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -21,7 +21,7 @@ Tags: custom-logo, custom-menu, featured-images, full-width-template, block-styl
   color: var(--ink-2);
 }
 
-.wp-content > * + * {
+.wp-content>*+* {
   margin-top: 1.15rem;
 }
 
@@ -127,5 +127,3 @@ Tags: custom-logo, custom-menu, featured-images, full-width-template, block-styl
   font-weight: 600 !important;
   cursor: pointer;
 }
-
-

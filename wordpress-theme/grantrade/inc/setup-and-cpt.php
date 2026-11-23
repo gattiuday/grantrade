@@ -352,6 +352,7 @@ add_action( 'save_post_gt_slab', 'grantrade_save_slab_meta' );
  * Convert published gt_slab WordPress posts into catalog JSON objects.
  */
 function grantrade_get_wp_stones() {
+	// Query strictly published gt_slab WordPress posts only (no old portfolio items)
 	$posts = get_posts(
 		array(
 			'post_type'      => 'gt_slab',
@@ -366,23 +367,15 @@ function grantrade_get_wp_stones() {
 		return array();
 	}
 
-	$family_labels = array(
-		'quartzite' => 'Quartzite',
-		'quartz'    => 'Quartz',
-		'granite'   => 'Granite',
-		'marble'    => 'Marble',
-		'monuments' => 'Monuments',
-		'soapstone' => 'Soapstone',
-		'semi'      => 'Semi Precious',
-		'tile'      => 'Tiles',
-	);
+	$family_labels = grantrade_get_canonical_family_labels();
 
 	$stones = array();
 	foreach ( $posts as $post ) {
-		$terms      = get_the_terms( $post->ID, 'gt_family' );
-		$cat_slug   = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->slug : 'quartzite';
-		$cat_label  = $family_labels[ $cat_slug ] ?? ( ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : 'Natural Stone' );
-		$type_val   = get_post_meta( $post->ID, '_gt_type', true ) ?: ( 'quartz' === $cat_slug ? 'engineered' : 'natural' );
+		$terms     = get_the_terms( $post->ID, 'gt_family' );
+		$cat_slug  = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->slug : 'granite';
+		$cat_label = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : ( $family_labels[ $cat_slug ] ?? 'Granite' );
+		$is_quartz = ( false !== stripos( $cat_label, 'quartz' ) && false === stripos( $cat_label, 'quartzite' ) );
+		$type_val  = get_post_meta( $post->ID, '_gt_type', true ) ?: ( $is_quartz ? 'engineered' : 'natural' );
 		$colors_raw = get_post_meta( $post->ID, '_gt_colors', true );
 		$colors     = '' !== trim( (string) $colors_raw )
 			? array_values( array_filter( array_map( 'trim', preg_split( '/[,;|\/]+/', strtolower( $colors_raw ) ) ) ) )
@@ -462,14 +455,18 @@ add_action( 'wp_ajax_nopriv_grantrade_get_catalog', 'grantrade_ajax_get_catalog'
  */
 function grantrade_get_canonical_family_labels() {
 	return array(
-		'quartzite' => 'Quartzite',
-		'quartz'    => 'Quartz',
-		'granite'   => 'Granite',
-		'marble'    => 'Marble',
-		'monuments' => 'Monuments',
-		'soapstone' => 'Soapstone',
-		'semi'      => 'Semi Precious',
-		'tile'      => 'Tiles',
+		'quartzite'           => 'Quartzite',
+		'gran-trade-quartz'   => 'Gran Trade Quartz',
+		'quartz'              => 'Gran Trade Quartz',
+		'granite'             => 'Granite',
+		'marble'              => 'Marble',
+		'special-monuments'   => 'Monuments',
+		'monuments'           => 'Monuments',
+		'soapstone'           => 'Soapstone',
+		'semi-precious-stone' => 'Semi Precious Stone',
+		'semi'                => 'Semi Precious Stone',
+		'tiles'               => 'Tiles',
+		'tile'                => 'Tiles',
 	);
 }
 
@@ -562,6 +559,9 @@ function grantrade_on_activate() {
 
 		if ( $existing ) {
 			$created_ids[ $slug ] = $existing->ID;
+			if ( 'default' !== $info['template'] ) {
+				update_post_meta( $existing->ID, '_wp_page_template', $info['template'] );
+			}
 		} else {
 			$page_id = wp_insert_post(
 				array(
@@ -580,9 +580,16 @@ function grantrade_on_activate() {
 		}
 	}
 
-	if ( ! empty( $created_ids['home'] ) && 'page' !== get_option( 'show_on_front' ) ) {
+	if ( ! empty( $created_ids['home'] ) ) {
 		update_option( 'show_on_front', 'page' );
 		update_option( 'page_on_front', (int) $created_ids['home'] );
+	}
+
+	if ( ! empty( $created_ids['contact'] ) ) {
+		$curr_form_id = get_post_meta( $created_ids['contact'], '_gt_wpforms_id', true );
+		if ( empty( $curr_form_id ) ) {
+			update_post_meta( $created_ids['contact'], '_gt_wpforms_id', '367' );
+		}
 	}
 
 	// Create primary navigation menu if none is assigned yet.
@@ -611,6 +618,63 @@ function grantrade_on_activate() {
 			}
 			$locations            = is_array( $locations ) ? $locations : array();
 			$locations['primary'] = (int) $menu_id;
+			set_theme_mod( 'nav_menu_locations', $locations );
+		}
+	}
+
+	// Create Footer Explore menu if none assigned.
+	if ( empty( $locations['footer_explore'] ) ) {
+		$f_exp_name = 'Gran Trade Footer Explore';
+		$f_exp_obj  = wp_get_nav_menu_object( $f_exp_name );
+		$f_exp_id   = $f_exp_obj ? $f_exp_obj->term_id : wp_create_nav_menu( $f_exp_name );
+		if ( ! is_wp_error( $f_exp_id ) ) {
+			$items = wp_get_nav_menu_items( $f_exp_id );
+			if ( empty( $items ) ) {
+				foreach ( array( 'home', 'about', 'collections', 'showroom', 'contact' ) as $slug ) {
+					if ( ! empty( $created_ids[ $slug ] ) ) {
+						wp_update_nav_menu_item(
+							$f_exp_id,
+							0,
+							array(
+								'menu-item-object-id' => $created_ids[ $slug ],
+								'menu-item-object'    => 'page',
+								'menu-item-type'      => 'post_type',
+								'menu-item-status'    => 'publish',
+							)
+						);
+					}
+				}
+			}
+			$locations                   = is_array( $locations ) ? $locations : array();
+			$locations['footer_explore'] = (int) $f_exp_id;
+			set_theme_mod( 'nav_menu_locations', $locations );
+		}
+	}
+
+	// Create Footer Stone Families menu if none assigned.
+	if ( empty( $locations['footer_families'] ) ) {
+		$f_fam_name = 'Gran Trade Footer Stone Families';
+		$f_fam_obj  = wp_get_nav_menu_object( $f_fam_name );
+		$f_fam_id   = $f_fam_obj ? $f_fam_obj->term_id : wp_create_nav_menu( $f_fam_name );
+		if ( ! is_wp_error( $f_fam_id ) ) {
+			$items = wp_get_nav_menu_items( $f_fam_id );
+			if ( empty( $items ) ) {
+				$colls_url = grantrade_get_page_url( 'collections' );
+				foreach ( grantrade_get_canonical_family_labels() as $f_slug => $f_label ) {
+					wp_update_nav_menu_item(
+						$f_fam_id,
+						0,
+						array(
+							'menu-item-title'  => $f_label,
+							'menu-item-url'    => add_query_arg( 'category', $f_slug, $colls_url ),
+							'menu-item-type'   => 'custom',
+							'menu-item-status' => 'publish',
+						)
+					);
+				}
+			}
+			$locations                    = is_array( $locations ) ? $locations : array();
+			$locations['footer_families'] = (int) $f_fam_id;
 			set_theme_mod( 'nav_menu_locations', $locations );
 		}
 	}
